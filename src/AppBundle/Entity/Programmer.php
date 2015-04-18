@@ -1,0 +1,175 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Programmer
+ *
+ * @ORM\Table(name="battle_programmer")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProgrammerRepository")
+ */
+class Programmer
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nickname", type="string", length=100, unique=true)
+     */
+    private $nickname;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avatarNumber", type="integer")
+     */
+    private $avatarNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tagLine", type="string", length=255)
+     */
+    private $tagLine;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="powerLevel", type="integer")
+     */
+    private $powerLevel = 0;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nickname
+     *
+     * @param string $nickname
+     * @return Programmer
+     */
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    /**
+     * Get nickname
+     *
+     * @return string 
+     */
+    public function getNickname()
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * Set avatarNumber
+     *
+     * @param integer $avatarNumber
+     * @return Programmer
+     */
+    public function setAvatarNumber($avatarNumber)
+    {
+        $this->avatarNumber = $avatarNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get avatarNumber
+     *
+     * @return integer 
+     */
+    public function getAvatarNumber()
+    {
+        return $this->avatarNumber;
+    }
+
+    /**
+     * Set tagLine
+     *
+     * @param string $tagLine
+     * @return Programmer
+     */
+    public function setTagLine($tagLine)
+    {
+        $this->tagLine = $tagLine;
+
+        return $this;
+    }
+
+    /**
+     * Get tagLine
+     *
+     * @return string 
+     */
+    public function getTagLine()
+    {
+        return $this->tagLine;
+    }
+
+    /**
+     * Set powerLevel
+     *
+     * @param integer $powerLevel
+     * @return Programmer
+     */
+    public function setPowerLevel($powerLevel)
+    {
+        $this->powerLevel = $powerLevel;
+
+        return $this;
+    }
+
+    /**
+     * Get powerLevel
+     *
+     * @return integer 
+     */
+    public function getPowerLevel()
+    {
+        return $this->powerLevel;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param USer $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+}

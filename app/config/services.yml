@@ -4,6 +4,15 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    twig.battle_extension:
+        class: AppBundle\Twig\BattleExtension
+        tags:
+            - { name: twig.extension }
+
+    battle.battle_manager:
+        class: AppBundle\Battle\BattleManager
+        arguments: ['@doctrine.orm.entity_manager']
+
+    battle.power_manager:
+        class: AppBundle\Battle\PowerManager
+        arguments: ['@doctrine.orm.entity_manager']

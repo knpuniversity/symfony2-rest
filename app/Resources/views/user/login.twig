@@ -1,0 +1,22 @@
+{% extends "layout.twig" %}
+{% import '_macros.twig' as macros %}
+
+{% block content %}
+    <h1>Login</h1>
+
+    {% if error %}
+        {{ macros.print_errors([error]) }}
+    {% endif %}
+    
+        <form class="form-login" action="{{ path('security_login_check') }}" method="post">
+            <fieldset>
+                {{ macros.form_field('text', '_username', 'Email', last_username, 'foo@example.com') }}
+                {{ macros.form_field('password', '_password', 'Password', '', '') }}
+                <div class="form-group">
+                    <button type="submit" class="btn">Login</button>
+                    <a id="reg-btn" href="{{ path('user_register') }}">Register</a>
+                </div>
+            </fieldset>
+        </form>
+
+{% endblock %}

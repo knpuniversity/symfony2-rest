@@ -1,0 +1,22 @@
+{% extends "layout.twig" %}
+{% import '_macros.twig' as macros %}
+
+{% block content %}
+    <h1>Start Battling Projects!</h1>
+
+    {% if errors is defined %}
+        {{ macros.print_errors(errors) }}
+    {% endif %}
+
+        <form class="form-register" action="{{ path('user_register') }}" method="post">
+            <fieldset>
+                {{ macros.form_field('email', 'email', 'Email', user.email, 'foo@example.com') }}
+                {{ macros.form_field('text', 'username', 'Username', user.username, 'herocoder') }}
+                {{ macros.form_field('password', 'plainPassword', 'Password', user.plainPassword, '') }}
+                <div class="form-group">
+                    <button type="submit" class="btn">Battle</button>
+                    <a class="cancel-link" href="{{ path('homepage') }}">Cancel</a>
+                </div>
+            </fieldset>
+        </form>
+{% endblock %}

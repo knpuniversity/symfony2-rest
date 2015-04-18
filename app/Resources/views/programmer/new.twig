@@ -1,0 +1,48 @@
+{% extends "layout.twig" %}
+{% import '_macros.twig' as macros %}
+
+{% block content %}
+    <h1 id="create">Create a Programmer!</h1>
+
+    {% if errors is defined %}
+        {{ macros.print_errors(errors) }}
+    {% endif %}
+
+
+        <form action="{{ path('programmer_new_handle') }}" method="post">
+            <fieldset>
+                {{ macros.form_field('text', 'nickname', 'Nickname', programmer.nickname, 'SmilingCoder') }}
+                {{ macros.form_field('textarea', 'tagLine', 'Tag Line', programmer.tagLine, 'No, sleep, til coding') }}
+
+                <ul class="avatar-list js-selectable-tile">
+                    {% for i in 1..6 %}
+                        <li data-number="{{ i }}">
+                            <img src="{{ asset(i|avatar_path) }}" alt="Avatar{{ i }}" />
+                        </li>
+                    {% endfor %}
+                </ul>
+                <input type="hidden" class="js-selectable-target" name="avatarNumber" value="{{ programmer.avatarNumber }}" />
+
+                    <button type="submit" class="btn create-buttons">Compile!</button>
+                    <a class="cancel-link" href="{{ path('homepage') }}">Cancel</a>
+            </fieldset>
+        </form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(document).ready(function() {
+            $('.js-selectable-tile').on('click', 'li', function(e) {
+                e.preventDefault();
+
+                $(this).parent().find('li').removeClass('selected');
+                $(this).addClass('selected');
+
+                $('.js-selectable-target').val($(this).data('number'))
+            });
+        });
+    </script>
+{% endblock %}
