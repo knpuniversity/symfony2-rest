@@ -1,0 +1,42 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 85c8353..4cadae6 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -27,7 +27,7 @@ class ProgrammerController extends BaseController
+         $form = $this->handleRequest($request, $programmer);
+ 
+         if (!$form->isValid()) {
+-            return $this->createValidationErrorResponse($form);
++            $this->throwApiProblemValidationException($form);
+         }
+ 
+         $em = $this->getDoctrine()->getManager();
+@@ -107,7 +107,7 @@ class ProgrammerController extends BaseController
+ 
+         $form = $this->handleRequest($request, $programmer);
+         if (!$form->isValid()) {
+-            return $this->createValidationErrorResponse($form);
++            $this->throwApiProblemValidationException($form);
+         }
+ 
+         $em = $this->getDoctrine()->getManager();
+@@ -189,7 +189,7 @@ class ProgrammerController extends BaseController
+         return $errors;
+     }
+ 
+-    private function createValidationErrorResponse(FormInterface $form)
++    private function throwApiProblemValidationException(FormInterface $form)
+     {
+         $errors = $this->getErrorsFromForm($form);
+ 
+@@ -199,9 +199,6 @@ class ProgrammerController extends BaseController
+         );
+         $apiProblem->set('errors', $errors);
+ 
+-        $response = new JsonResponse($apiProblem->toArray(), $apiProblem->getStatusCode());
+-        $response->headers->set('Content-Type', 'application/problem+json');
+-
+-        return $response;
++        throw new ApiProblemException($apiProblem);
+     }
+ }

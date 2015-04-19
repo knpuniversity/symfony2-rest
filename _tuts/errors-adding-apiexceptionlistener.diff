@@ -1,0 +1,69 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 7b9173c..9abc12b 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -16,3 +16,8 @@ services:
+     battle.power_manager:
+         class: AppBundle\Battle\PowerManager
+         arguments: ['@doctrine.orm.entity_manager']
++
++    api_exception_listener:
++        class: AppBundle\EventListener\ApiExceptionListener
++        tags:
++            - { name: kernel.event_subscriber }
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+new file mode 100644
+index 0000000..2f1def0
+--- /dev/null
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -0,0 +1,37 @@
++<?php
++
++namespace AppBundle\EventListener;
++
++use AppBundle\Api\ApiProblemException;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++use Symfony\Component\HttpFoundation\JsonResponse;
++use Symfony\Component\HttpKernel\KernelEvents;
++use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
++
++class ApiExceptionListener implements EventSubscriberInterface
++{
++    public function onKernelException(GetResponseForExceptionEvent $event)
++    {
++        $e = $event->getException();
++
++        if (!$e instanceof ApiProblemException) {
++            return;
++        }
++
++        $response = new JsonResponse(
++            $e->getApiProblem()->toArray(),
++            $e->getApiProblem()->getStatusCode()
++        );
++        $response->headers->set('Content-Type', 'application/problem+json');
++
++        $event->setResponse($response);
++    }
++
++    public static function getSubscribedEvents()
++    {
++        return [
++            KernelEvents::EXCEPTION => 'onKernelException'
++        ];
++    }
++
++}
+\ No newline at end of file
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 06afce9..325dd38 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -155,7 +155,6 @@ EOF;
+         $response = $this->client->post('/api/programmers', [
+             'body' => $invalidBody
+         ]);
+-        $this->debugResponse($response);
+ 
+         $this->assertEquals(400, $response->getStatusCode());
+         $this->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');

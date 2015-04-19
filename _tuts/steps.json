@@ -189,7 +189,67 @@
             "id": "errors-getting-simple-working-errors",
             "name": "Errors: Getting simple, working errors",
             "description": null
+        },
+        {
+            "id": "errors-using-on-update-and-refactoring",
+            "name": "Errors: Using on update and refactoring",
+            "description": null
+        },
+        {
+            "id": "form-disable-csrf-protection",
+            "name": "Form: Disable csrf_protection",
+            "description": null
+        },
+        {
+            "id": "errors-standard-content-type",
+            "name": "Errors: Standard content-type",
+            "description": null
+        },
+        {
+            "id": "errors-standard-apiproblem-class",
+            "name": "Errors: Standard ApiProblem class",
+            "description": null
+        },
+        {
+            "id": "errors-apiproblem-type-constants",
+            "name": "Errors: ApiProblem type constants",
+            "description": null
+        },
+        {
+            "id": "errors-invalid-json-format",
+            "name": "Errors: Invalid JSON format",
+            "description": null
+        },
+        {
+            "id": "errors-apiproblem-constant-for-invalid-body-format",
+            "name": "Errors: ApiProblem constant for invalid_body_format",
+            "description": null
+        },
+        {
+            "id": "errors-create-apiproblemexception",
+            "name": "Errors: Create ApiProblemException",
+            "description": null
+        },
+        {
+            "id": "format-default-to-json-format",
+            "name": "Format: Default to json _format",
+            "description": null
+        },
+        {
+            "id": "errors-adding-apiexceptionlistener",
+            "name": "Errors: Adding ApiExceptionListener",
+            "description": null
+        },
+        {
+            "id": "errors-throw-apiproblemexception-on-validation-errors",
+            "name": "Errors: Throw ApiProblemException on validation errors",
+            "description": null
+        },
+        {
+            "id": "errors-handling-404-s",
+            "name": "Errors: Handling 404's",
+            "description": null
         }
     ],
-    "sha": "54cc6f02d295767214df0aba74b36f8ccbc209d2"
+    "sha": "328dc6847e2b19354ab8996427f10f54fe25fe57"
 }

@@ -1,0 +1,51 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index bd2fb3e..2eaa6a1 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -24,15 +24,7 @@ class ProgrammerController extends BaseController
+         $form = $this->handleRequest($request, $programmer);
+ 
+         if (!$form->isValid()) {
+-            $errors = $this->getErrorsFromForm($form);
+-
+-            $data = [
+-                'type' => 'validation_error',
+-                'title' => 'There was a validation error',
+-                'errors' => $errors
+-            ];
+-
+-            return new JsonResponse($data, 400);
++            return $this->createValidationErrorResponse($form);
+         }
+ 
+         $em = $this->getDoctrine()->getManager();
+@@ -110,7 +102,10 @@ class ProgrammerController extends BaseController
+             ));
+         }
+ 
+-        $this->handleRequest($request, $programmer);
++        $form = $this->handleRequest($request, $programmer);
++        if (!$form->isValid()) {
++            return $this->createValidationErrorResponse($form);
++        }
+ 
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($programmer);
+@@ -185,4 +180,17 @@ class ProgrammerController extends BaseController
+ 
+         return $errors;
+     }
++
++    private function createValidationErrorResponse(FormInterface $form)
++    {
++        $errors = $this->getErrorsFromForm($form);
++
++        $data = [
++            'type' => 'validation_error',
++            'title' => 'There was a validation error',
++            'errors' => $errors
++        ];
++
++        return new JsonResponse($data, 400);
++    }
+ }

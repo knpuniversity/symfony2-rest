@@ -1,0 +1,65 @@
+diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
+index fba2739..90bd6d0 100644
+--- a/src/AppBundle/Api/ApiProblem.php
++++ b/src/AppBundle/Api/ApiProblem.php
+@@ -56,4 +56,9 @@ class ApiProblem
+     {
+         return $this->statusCode;
+     }
++
++    public function getTitle()
++    {
++        return $this->title;
++    }
+ }
+diff --git a/src/AppBundle/Api/ApiProblemException.php b/src/AppBundle/Api/ApiProblemException.php
+new file mode 100644
+index 0000000..5512dd5
+--- /dev/null
++++ b/src/AppBundle/Api/ApiProblemException.php
+@@ -0,0 +1,24 @@
++<?php
++
++namespace AppBundle\Api;
++
++use Symfony\Component\HttpKernel\Exception\HttpException;
++
++class ApiProblemException extends HttpException
++{
++    private $apiProblem;
++
++    public function __construct(ApiProblem $apiProblem, \Exception $previous = null, array $headers = array(), $code = 0)
++    {
++        $this->apiProblem = $apiProblem;
++        $statusCode = $apiProblem->getStatusCode();
++        $message = $apiProblem->getTitle();
++
++        parent::__construct($statusCode, $message, $previous, $headers, $code);
++    }
++
++    public function getApiProblem()
++    {
++        return $this->apiProblem;
++    }
++}
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 2a0444b..85c8353 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -3,6 +3,7 @@
+ namespace AppBundle\Controller\Api;
+ 
+ use AppBundle\Api\ApiProblem;
++use AppBundle\Api\ApiProblemException;
+ use AppBundle\Controller\BaseController;
+ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
+@@ -147,7 +148,7 @@ class ProgrammerController extends BaseController
+         if ($data === null) {
+             $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+ 
+-            // now what?
++            throw new ApiProblemException($apiProblem);
+         }
+         $form = $this->createForm(new ProgrammerType(), $programmer, [
+             'is_edit' => $programmer->getId()

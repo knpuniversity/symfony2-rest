@@ -1,0 +1,12 @@
+diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
+index f47a1f7..284e2e6 100644
+--- a/src/AppBundle/Form/ProgrammerType.php
++++ b/src/AppBundle/Form/ProgrammerType.php
+@@ -24,6 +24,7 @@ class ProgrammerType extends AbstractType
+     {
+         $resolver->setDefaults(array(
+             'data_class' => 'AppBundle\Entity\Programmer',
++            'csrf_protection' => false,
+         ));
+         $resolver->setRequired('is_edit');
+     }

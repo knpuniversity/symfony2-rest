@@ -1,0 +1,10 @@
+diff --git a/app/config/routing.yml b/app/config/routing.yml
+index e4bfb2a..a37a6f9 100644
+--- a/app/config/routing.yml
++++ b/app/config/routing.yml
+@@ -5,3 +5,5 @@ app_web:
+ app_api:
+     resource: "@AppBundle/Controller/Api"
+     type:     annotation
++    defaults:
++        _format: json

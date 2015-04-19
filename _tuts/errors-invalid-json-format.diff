@@ -1,0 +1,49 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index ffc1618..c61e8ff 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormInterface;
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
++use Symfony\Component\HttpKernel\Exception\HttpException;
+ 
+ class ProgrammerController extends BaseController
+ {
+@@ -143,6 +144,9 @@ class ProgrammerController extends BaseController
+     private function handleRequest(Request $request, Programmer $programmer)
+     {
+         $data = json_decode($request->getContent(), true);
++        if ($data === null) {
++            throw new HttpException(400, 'Invalid JSON body!');
++        }
+         $form = $this->createForm(new ProgrammerType(), $programmer, [
+             'is_edit' => $programmer->getId()
+         ]);
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 9753d65..48581ec 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -142,4 +142,22 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertResponsePropertyDoesNotExists($response, 'errors.avatarNumber.');
+         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
+     }
++
++    public function testInvalidJson()
++    {
++        $invalidBody = <<<EOF
++{
++    "avatarNumber" : "2
++    "tagLine": "I'm from a test!"
++}
++EOF;
++
++        $response = $this->client->post('/api/programmers', [
++            'body' => $invalidBody
++        ]);
++        $this->debugResponse($response);
++
++        $this->assertEquals(400, $response->getStatusCode());
++    }
++
+ }

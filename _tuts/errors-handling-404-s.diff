@@ -1,0 +1,101 @@
+diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
+index 90bd6d0..df145e6 100644
+--- a/src/AppBundle/Api/ApiProblem.php
++++ b/src/AppBundle/Api/ApiProblem.php
+@@ -1,6 +1,7 @@
+ <?php
+ 
+ namespace AppBundle\Api;
++use Symfony\Component\HttpFoundation\Response;
+ 
+ /**
+  * A wrapper for holding data to be used for a application/problem+json response
+@@ -23,16 +24,25 @@ class ApiProblem
+ 
+     private $extraData = array();
+ 
+-    public function __construct($statusCode, $type)
++    public function __construct($statusCode, $type = null)
+     {
+         $this->statusCode = $statusCode;
+         $this->type = $type;
+ 
+-        if (!isset(self::$titles[$type])) {
+-            throw new \InvalidArgumentException('No title for type '.$type);
+-        }
++        if ($type === null) {
++            // no type? The default is about:blank and the title should
++            // be the standard status code message
++            $this->type = 'about:blank';
++            $this->title = isset(Response::$statusTexts[$statusCode])
++                ? Response::$statusTexts[$statusCode]
++                : 'Unknown status code :(';
++        } else {
++            if (!isset(self::$titles[$type])) {
++                throw new \InvalidArgumentException('No title for type '.$type);
++            }
+ 
+-        $this->title = self::$titles[$type];
++            $this->title = self::$titles[$type];
++        }
+     }
+ 
+     public function toArray()
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+index 2f1def0..a8ad42b 100644
+--- a/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -2,9 +2,11 @@
+ 
+ namespace AppBundle\EventListener;
+ 
++use AppBundle\Api\ApiProblem;
+ use AppBundle\Api\ApiProblemException;
+ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+ use Symfony\Component\HttpFoundation\JsonResponse;
++use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+ use Symfony\Component\HttpKernel\KernelEvents;
+ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+ 
+@@ -14,13 +16,19 @@ class ApiExceptionListener implements EventSubscriberInterface
+     {
+         $e = $event->getException();
+ 
+-        if (!$e instanceof ApiProblemException) {
+-            return;
++        if ($e instanceof ApiProblemException) {
++            $apiProblem = $e->getApiProblem();
++        } else {
++            $statusCode = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
++
++            $apiProblem = new ApiProblem(
++                $statusCode
++            );
+         }
+ 
+         $response = new JsonResponse(
+-            $e->getApiProblem()->toArray(),
+-            $e->getApiProblem()->getStatusCode()
++            $apiProblem->toArray(),
++            $apiProblem->getStatusCode()
+         );
+         $response->headers->set('Content-Type', 'application/problem+json');
+ 
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 325dd38..7359f0c 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -160,4 +160,13 @@ EOF;
+         $this->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
+     }
+ 
++    public function test404Exception()
++    {
++        $response = $this->client->get('/api/programmers/fake');
++
++        $this->assertEquals(404, $response->getStatusCode());
++        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
++        $this->assertResponsePropertyEquals($response, 'type', 'about:blank');
++        $this->assertResponsePropertyEquals($response, 'title', 'Not Found');
++    }
+ }
