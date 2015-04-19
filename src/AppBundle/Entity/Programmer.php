@@ -38,7 +38,7 @@ class Programmer
     /**
      * @var string
      *
-     * @ORM\Column(name="tagLine", type="string", length=255)
+     * @ORM\Column(name="tagLine", type="string", length=255, nullable=true)
      */
     private $tagLine;
 
