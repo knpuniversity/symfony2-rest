@@ -1,0 +1,31 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 6793a22..8bdef8c 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -3,6 +3,7 @@
+ namespace AppBundle\Controller\Api;
+ 
+ use AppBundle\Controller\BaseController;
++use AppBundle\Entity\Programmer;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Symfony\Component\HttpFoundation\Request;
+@@ -16,8 +17,16 @@ class ProgrammerController extends BaseController
+      */
+     public function newAction(Request $request)
+     {
+-        $data = $request->getContent();
++        $data = json_decode($request->getContent(), true);
+ 
+-        return new Response($data);
++        $programmer = new Programmer($data['nickname'], $data['avatarNumber']);
++        $programmer->setTagLine($data['tagLine']);
++        $programmer->setUser($this->findUserByUsername('weaverryan'));
++
++        $em = $this->getDoctrine()->getManager();
++        $em->persist($programmer);
++        $em->flush();
++
++        return new Response('It worked. Believe me - I\'m an API');
+     }
+ }

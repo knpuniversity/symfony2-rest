@@ -1,0 +1,21 @@
+diff --git a/testing.php b/testing.php
+new file mode 100644
+index 0000000..625932b
+--- /dev/null
++++ b/testing.php
+@@ -0,0 +1,15 @@
++<?php
++
++require __DIR__.'/vendor/autoload.php';
++
++$client = new \GuzzleHttp\Client([
++    'base_url' => 'http://localhost:9003',
++    'defaults' => [
++        'exceptions' => false
++    ]
++]);
++
++$response = $client->post('/api/programmers');
++
++echo $response;
++echo "\n\n";

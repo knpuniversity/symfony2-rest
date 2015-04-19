@@ -1,0 +1,35 @@
+{
+    "steps": [
+        {
+            "id": "start",
+            "name": "start",
+            "description": null
+        },
+        {
+            "id": "post-programmer-create-endpoint",
+            "name": "POST Programmer: Create endpoint",
+            "description": null
+        },
+        {
+            "id": "post-programmer-start-basic-test",
+            "name": "POST Programmer: Start basic test",
+            "description": null
+        },
+        {
+            "id": "post-programmer-update-test-with-post-data",
+            "name": "POST Programmer: Update test with POST data",
+            "description": null
+        },
+        {
+            "id": "post-programmer-dump-request-content",
+            "name": "POST Programmer: Dump request content",
+            "description": null
+        },
+        {
+            "id": "post-programmer-creating-and-saving-entity",
+            "name": "POST Programmer: Creating and saving entity",
+            "description": null
+        }
+    ],
+    "sha": "08bafa60d61747d168fcecf8fe1cf70de41f56e7"
+}

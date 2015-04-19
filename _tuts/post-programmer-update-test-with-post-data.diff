@@ -1,0 +1,22 @@
+diff --git a/testing.php b/testing.php
+index 625932b..b1a2b4b 100644
+--- a/testing.php
++++ b/testing.php
+@@ -9,7 +9,16 @@ $client = new \GuzzleHttp\Client([
+     ]
+ ]);
+ 
+-$response = $client->post('/api/programmers');
++$nickname = 'ObjectOrienter'.rand(0, 999);
++$data = array(
++    'nickname' => $nickname,
++    'avatarNumber' => 5,
++    'tagLine' => 'a test dev!'
++);
++
++$response = $client->post('/api/programmers', [
++    'body' => json_encode($data)
++]);
+ 
+ echo $response;
+ echo "\n\n";
