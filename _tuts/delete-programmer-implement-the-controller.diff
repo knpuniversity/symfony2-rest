@@ -1,0 +1,33 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index a037d75..f2071ee 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -100,6 +100,28 @@ class ProgrammerController extends BaseController
+         return $response;
+     }
+ 
++    /**
++     * @Route("/api/programmers/{nickname}")
++     * @Method("DELETE")
++     */
++    public function deleteAction($nickname)
++    {
++        $programmer = $this->getDoctrine()
++            ->getRepository('AppBundle:Programmer')
++            ->findOneByNickname($nickname);
++
++        if ($programmer) {
++            // debated point: should we 404 on an unknown nickname?
++            // or should we just return a nice 204 in all cases?
++            // we're doing the latter
++            $em = $this->getDoctrine()->getManager();
++            $em->remove($programmer);
++            $em->flush();
++        }
++
++        return new Response(null, 204);
++    }
++
+     private function handleRequest(Request $request, Programmer $programmer = null)
+     {
+         $data = json_decode($request->getContent(), true);

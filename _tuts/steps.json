@@ -134,7 +134,37 @@
             "id": "testing-list-and-show-tests",
             "name": "Testing: List and show tests",
             "description": null
+        },
+        {
+            "id": "put-programmer-write-the-test",
+            "name": "PUT Programmer: Write the test",
+            "description": null
+        },
+        {
+            "id": "put-programmer-create-put-endpoint",
+            "name": "PUT Programmer: Create PUT endpoint",
+            "description": null
+        },
+        {
+            "id": "put-programmer-refactor-the-form-update-code",
+            "name": "PUT Programmer: Refactor the \"form\" update code",
+            "description": null
+        },
+        {
+            "id": "put-programmer-using-disabled-to-make-nickname-non-mutable",
+            "name": "PUT Programmer: Using disabled to make nickname non-mutable",
+            "description": null
+        },
+        {
+            "id": "delete-programmer-writing-the-test",
+            "name": "DELETE Programmer: Writing the test",
+            "description": null
+        },
+        {
+            "id": "delete-programmer-implement-the-controller",
+            "name": "DELETE Programmer: Implement the controller",
+            "description": null
         }
     ],
-    "sha": "19d1466614daa1286b2cdcc01382e81fb98e1e36"
+    "sha": "b8b287510acdfdfc19e1beb18ee81dc0716a8ba7"
 }

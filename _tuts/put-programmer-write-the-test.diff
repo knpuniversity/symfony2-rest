@@ -1,0 +1,29 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 8cd5515..dfac2fa 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -65,4 +65,24 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertResponsePropertyIsArray($response, 'programmers');
+         $this->assertResponsePropertyCount($response, 'programmers', 2);
+     }
++
++    public function testPUTProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 5,
++            'tagLine' => 'foo',
++        ));
++
++        $data = array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 2,
++            'tagLine' => 'foo',
++        );
++        $response = $this->client->put('/api/programmers/CowboyCoder', [
++            'body' => json_encode($data)
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->assertResponsePropertyEquals($response, 'avatarNumber', 2);
++    }
+ }

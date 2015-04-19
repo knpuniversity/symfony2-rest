@@ -1,0 +1,63 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 45351d6..a037d75 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -103,7 +103,9 @@ class ProgrammerController extends BaseController
+     private function handleRequest(Request $request, Programmer $programmer = null)
+     {
+         $data = json_decode($request->getContent(), true);
+-        $form = $this->createForm(new ProgrammerType(), $programmer);
++        $form = $this->createForm(new ProgrammerType(), $programmer, [
++            'is_edit' => $programmer && $programmer->getId()
++        ]);
+         $form->submit($data);
+ 
+         /** @var Programmer $programmer */
+diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
+index 3b2b2a5..f47a1f7 100644
+--- a/src/AppBundle/Form/ProgrammerType.php
++++ b/src/AppBundle/Form/ProgrammerType.php
+@@ -11,7 +11,10 @@ class ProgrammerType extends AbstractType
+     public function buildForm(FormBuilderInterface $builder, array $options)
+     {
+         $builder
+-            ->add('nickname', 'text')
++            ->add('nickname', 'text', [
++                // readonly if we're in edit mode
++                'disabled' => $options['is_edit']
++            ])
+             ->add('avatarNumber', 'number')
+             ->add('tagLine', 'textarea')
+         ;
+@@ -20,8 +23,9 @@ class ProgrammerType extends AbstractType
+     public function setDefaultOptions(OptionsResolverInterface $resolver)
+     {
+         $resolver->setDefaults(array(
+-            'data_class' => 'AppBundle\Entity\Programmer'
++            'data_class' => 'AppBundle\Entity\Programmer',
+         ));
++        $resolver->setRequired('is_edit');
+     }
+ 
+     public function getName()
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index dfac2fa..776f534 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -75,7 +75,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         ));
+ 
+         $data = array(
+-            'nickname' => 'CowboyCoder',
++            'nickname' => 'CowgirlCoder',
+             'avatarNumber' => 2,
+             'tagLine' => 'foo',
+         );
+@@ -84,5 +84,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         ]);
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->assertResponsePropertyEquals($response, 'avatarNumber', 2);
++        // the nickname is immutable on edit
++        $this->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
+     }
+ }
