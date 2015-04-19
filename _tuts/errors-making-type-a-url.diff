@@ -1,0 +1,59 @@
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+index 39e7a2e..81dc142 100644
+--- a/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -50,8 +50,14 @@ class ApiExceptionListener implements EventSubscriberInterface
+             }
+         }
+ 
++        $data = $apiProblem->toArray();
++        // making type a URL, to a temporarily fake page
++        if ($data['type'] != 'about:blank') {
++            $data['type'] = 'http://localhost:8000/docs/errors#'.$data['type'];
++        }
++
+         $response = new JsonResponse(
+-            $apiProblem->toArray(),
++            $data,
+             $apiProblem->getStatusCode()
+         );
+         $response->headers->set('Content-Type', 'application/problem+json');
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index e08db3d..1d67c01 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -224,6 +224,21 @@ class ApiTestCase extends KernelTestCase
+         );
+     }
+ 
++    protected function assertResponsePropertyContains(ResponseInterface $response, $propertyPath, $expectedValue)
++    {
++        $actualPropertValue = $this->readResponseProperty($response, $propertyPath);
++        $this->assertContains(
++            $expectedValue,
++            $actualPropertValue,
++            sprintf(
++                'Property "%s": Expected to contain "%s" but response was "%s"',
++                $propertyPath,
++                $expectedValue,
++                var_export($actualPropertValue, true)
++            )
++        );
++    }
++
+     protected function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
+     {
+         $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 7a268a4..f843075 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -157,7 +157,7 @@ EOF;
+         ]);
+ 
+         $this->assertEquals(400, $response->getStatusCode());
+-        $this->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
++        $this->assertResponsePropertyContains($response, 'type', 'invalid_body_format');
+     }
+ 
+     public function test404Exception()

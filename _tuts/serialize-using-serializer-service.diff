@@ -1,0 +1,71 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 4cadae6..7ede356 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -34,8 +34,8 @@ class ProgrammerController extends BaseController
+         $em->persist($programmer);
+         $em->flush();
+ 
+-        $data = $this->serializeProgrammer($programmer);
+-        $response = new JsonResponse($data, 201);
++        $json = $this->serialize($programmer);
++        $response = new Response($json, 201);
+         $programmerUrl = $this->generateUrl(
+             'api_programmers_show',
+             ['nickname' => $programmer->getNickname()]
+@@ -62,9 +62,9 @@ class ProgrammerController extends BaseController
+             ));
+         }
+ 
+-        $data = $this->serializeProgrammer($programmer);
++        $json = $this->serialize($programmer);
+ 
+-        $response = new JsonResponse($data, 200);
++        $response = new Response($json, 200);
+ 
+         return $response;
+     }
+@@ -78,12 +78,9 @@ class ProgrammerController extends BaseController
+         $programmers = $this->getDoctrine()
+             ->getRepository('AppBundle:Programmer')
+             ->findAll();
+-        $data = array('programmers' => array());
+-        foreach ($programmers as $programmer) {
+-            $data['programmers'][] = $this->serializeProgrammer($programmer);
+-        }
++        $json = $this->serialize(['programmers' => $programmers]);
+ 
+-        $response = new JsonResponse($data, 200);
++        $response = new Response($json, 200);
+ 
+         return $response;
+     }
+@@ -114,8 +111,8 @@ class ProgrammerController extends BaseController
+         $em->persist($programmer);
+         $em->flush();
+ 
+-        $data = $this->serializeProgrammer($programmer);
+-        $response = new JsonResponse($data, 200);
++        $json = $this->serialize($programmer);
++        $response = new Response($json, 200);
+ 
+         return $response;
+     }
+@@ -163,14 +160,10 @@ class ProgrammerController extends BaseController
+         return $form;
+     }
+ 
+-    private function serializeProgrammer(Programmer $programmer)
++    private function serialize($data)
+     {
+-        return array(
+-            'nickname' => $programmer->getNickname(),
+-            'avatarNumber' => $programmer->getAvatarNumber(),
+-            'powerLevel' => $programmer->getPowerLevel(),
+-            'tagLine' => $programmer->getTagLine(),
+-        );
++        return $this->container->get('jms_serializer')
++            ->serialize($data, 'json');
+     }
+ 
+     private function getErrorsFromForm(FormInterface $form)

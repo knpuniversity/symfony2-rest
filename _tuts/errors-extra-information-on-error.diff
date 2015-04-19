@@ -1,0 +1,32 @@
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+index a8ad42b..f174367 100644
+--- a/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -24,6 +24,16 @@ class ApiExceptionListener implements EventSubscriberInterface
+             $apiProblem = new ApiProblem(
+                 $statusCode
+             );
++
++            /*
++             * If it's an HttpException message (e.g. for 404, 403),
++             * we'll say as a rule that the exception message is safe
++             * for the client. Otherwise, it could be some sensitive
++             * low-level exception, which should *not* be exposed
++             */
++            if ($e instanceof HttpExceptionInterface) {
++                $apiProblem->set('detail', $e->getMessage());
++            }
+         }
+ 
+         $response = new JsonResponse(
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 7359f0c..7a268a4 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -168,5 +168,6 @@ EOF;
+         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
+         $this->assertResponsePropertyEquals($response, 'type', 'about:blank');
+         $this->assertResponsePropertyEquals($response, 'title', 'Not Found');
++        $this->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
+     }
+ }

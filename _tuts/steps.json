@@ -249,7 +249,47 @@
             "id": "errors-handling-404-s",
             "name": "Errors: Handling 404's",
             "description": null
+        },
+        {
+            "id": "errors-extra-information-on-error",
+            "name": "Errors: Extra information on error",
+            "description": null
+        },
+        {
+            "id": "errors-big-exceptions-for-debug",
+            "name": "Errors: Big exceptions for debug",
+            "description": null
+        },
+        {
+            "id": "errors-making-type-a-url",
+            "name": "Errors: Making type a URL",
+            "description": null
+        },
+        {
+            "id": "serialize-installing-serializer",
+            "name": "Serialize: Installing serializer",
+            "description": null
+        },
+        {
+            "id": "serialize-using-serializer-service",
+            "name": "Serialize: Using serializer service",
+            "description": null
+        },
+        {
+            "id": "serialize-using-the-identical-naming-strategy",
+            "name": "Serialize: Using the Identical naming strategy",
+            "description": null
+        },
+        {
+            "id": "serialize-central-method-for-response-creation",
+            "name": "Serialize: Central method for response creation",
+            "description": null
+        },
+        {
+            "id": "serialize-fixing-null-values",
+            "name": "Serialize: Fixing null values",
+            "description": null
         }
     ],
-    "sha": "328dc6847e2b19354ab8996427f10f54fe25fe57"
+    "sha": "2493180aa94204b0882bcaf415fe36e8eb60dc09"
 }
