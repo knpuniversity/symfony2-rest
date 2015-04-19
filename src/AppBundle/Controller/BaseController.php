@@ -98,7 +98,7 @@ abstract class BaseController extends Controller
      */
     protected function getBattleManager()
     {
-        return $this->container['battle.battle_manager'];
+        return $this->container->get('battle.battle_manager');
     }
 
     /**

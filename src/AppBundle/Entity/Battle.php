@@ -56,6 +56,11 @@ class Battle
         $this->foughtAt = new \DateTime();
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function setBattleWonByProgrammer($notes)
     {
         $this->didProgrammerWin = true;
@@ -84,5 +89,18 @@ class Battle
         return $this->project;
     }
 
+    public function getDidProgrammerWin()
+    {
+        return $this->didProgrammerWin;
+    }
 
+    public function getFoughtAt()
+    {
+        return $this->foughtAt;
+    }
+
+    public function getNotes()
+    {
+        return $this->notes;
+    }
 }
