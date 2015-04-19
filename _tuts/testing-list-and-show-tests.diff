@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 2324f7c..abf3f83 100644
+index 2324f7c..4280ff4 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -32,7 +32,7 @@ index 2324f7c..abf3f83 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -150,6 +159,52 @@ class ApiTestCase extends KernelTestCase
+@@ -150,6 +159,62 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -69,7 +69,17 @@ index 2324f7c..abf3f83 100644
 +
 +    protected function assertResponsePropertyEquals(ResponseInterface $response, $propertyPath, $expectedValue)
 +    {
-+        $this->assertEquals($expectedValue, $this->readResponseProperty($response, $propertyPath));
++        $actual = $this->readResponseProperty($response, $propertyPath);
++        $this->assertEquals(
++            $expectedValue,
++            $actual,
++            sprintf(
++                'Property "%s": Expected "%s" but response was "%s"',
++                $propertyPath,
++                $expectedValue,
++                var_export($actual, true)
++            )
++        );
 +    }
 +
 +    protected function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
@@ -85,7 +95,7 @@ index 2324f7c..abf3f83 100644
      /**
       * @return EntityManager
       */
-@@ -158,4 +213,23 @@ class ApiTestCase extends KernelTestCase
+@@ -158,4 +223,23 @@ class ApiTestCase extends KernelTestCase
          return $this->getService('doctrine')
              ->getManager();
      }

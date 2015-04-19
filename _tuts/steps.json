@@ -164,7 +164,32 @@
             "id": "delete-programmer-implement-the-controller",
             "name": "DELETE Programmer: Implement the controller",
             "description": null
+        },
+        {
+            "id": "patch-programmer-write-the-test",
+            "name": "PATCH Programmer: Write the test",
+            "description": null
+        },
+        {
+            "id": "patch-programmer-adding-the-controller",
+            "name": "PATCH Programmer: Adding the controller",
+            "description": null
+        },
+        {
+            "id": "errors-write-test-for-missing-fields",
+            "name": "Errors: Write test for missing fields",
+            "description": null
+        },
+        {
+            "id": "errors-playing-with-validation-dumping",
+            "name": "Errors: Playing with validation - dumping",
+            "description": null
+        },
+        {
+            "id": "errors-getting-simple-working-errors",
+            "name": "Errors: Getting simple, working errors",
+            "description": null
         }
     ],
-    "sha": "b8b287510acdfdfc19e1beb18ee81dc0716a8ba7"
+    "sha": "54cc6f02d295767214df0aba74b36f8ccbc209d2"
 }

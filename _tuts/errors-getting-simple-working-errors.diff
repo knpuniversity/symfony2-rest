@@ -1,0 +1,65 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 66bc351..bd2fb3e 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -7,6 +7,7 @@ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
++use Symfony\Component\Form\FormInterface;
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+@@ -23,9 +24,15 @@ class ProgrammerController extends BaseController
+         $form = $this->handleRequest($request, $programmer);
+ 
+         if (!$form->isValid()) {
+-            header('Content-Type: cli');
+-            dump((string) $form->getErrors(true, false));die;
+-            die;
++            $errors = $this->getErrorsFromForm($form);
++
++            $data = [
++                'type' => 'validation_error',
++                'title' => 'There was a validation error',
++                'errors' => $errors
++            ];
++
++            return new JsonResponse($data, 400);
+         }
+ 
+         $em = $this->getDoctrine()->getManager();
+@@ -162,4 +169,20 @@ class ProgrammerController extends BaseController
+             'tagLine' => $programmer->getTagLine(),
+         );
+     }
++
++    private function getErrorsFromForm(FormInterface $form)
++    {
++        $errors = array();
++        foreach ($form->getErrors() as $error) {
++            $errors[] = $error->getMessage();
++        }
++
++        foreach ($form->all() as $childForm) {
++            if ($childForm instanceof FormInterface) {
++                $errors[$childForm->getName()] = $this->getErrorsFromForm($childForm);
++            }
++        }
++
++        return $errors;
++    }
+ }
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 7ba88dc..f0bde25 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -138,7 +138,7 @@ class ProgrammerControllerTest extends ApiTestCase
+             'errors',
+         ));
+         $this->assertResponsePropertyExists($response, 'errors.nickname');
+-        $this->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
++        $this->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
+         $this->assertResponsePropertyDoesNotExists($response, 'errors.avatarNumber.');
+     }
+ }

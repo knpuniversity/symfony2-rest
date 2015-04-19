@@ -1,0 +1,62 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index 4280ff4..5918397 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -190,6 +190,25 @@ class ApiTestCase extends KernelTestCase
+         }
+     }
+ 
++    protected function assertResponsePropertyExists(ResponseInterface $response, $propertyPath)
++    {
++        // this will blow up if the property doesn't exist
++        $this->readResponseProperty($response, $propertyPath);
++    }
++
++    protected function assertResponsePropertyDoesNotExists(ResponseInterface $response, $propertyPath)
++    {
++        try {
++            // this will blow up if the property doesn't exist
++            $this->readResponseProperty($response, $propertyPath);
++
++            $this->fail(sprintf('Property "%s" exists, but it should not', $propertyPath));
++        } catch (\Exception $e) {
++            // cool, it blew up
++            // but todo - could be more careful with this
++        }
++    }
++
+     protected function assertResponsePropertyEquals(ResponseInterface $response, $propertyPath, $expectedValue)
+     {
+         $actual = $this->readResponseProperty($response, $propertyPath);
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 5d51916..7ba88dc 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -118,4 +118,27 @@ class ProgrammerControllerTest extends ApiTestCase
+         $response = $this->client->delete('/api/programmers/UnitTester');
+         $this->assertEquals(204, $response->getStatusCode());
+     }
++
++    public function testValidationErrors()
++    {
++        $data = array(
++            'avatarNumber' => 2,
++            'tagLine' => 'I\'m from a test!'
++        );
++
++        // 1) Create a programmer resource
++        $response = $this->client->post('/api/programmers', [
++            'body' => json_encode($data)
++        ]);
++
++        $this->assertEquals(400, $response->getStatusCode());
++        $this->assertResponsePropertiesExist($response, array(
++            'type',
++            'title',
++            'errors',
++        ));
++        $this->assertResponsePropertyExists($response, 'errors.nickname');
++        $this->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
++        $this->assertResponsePropertyDoesNotExists($response, 'errors.avatarNumber.');
++    }
+ }

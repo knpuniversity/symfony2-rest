@@ -1,0 +1,31 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 316b98a..5d51916 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -88,6 +88,26 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
+     }
+ 
++    public function testPATCHProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 5,
++            'tagLine' => 'foo',
++            'powerLevel' => 4,
++        ));
++
++        $data = array(
++            'tagLine' => 'bar',
++        );
++        $response = $this->client->patch('/api/programmers/CowboyCoder', [
++            'body' => json_encode($data)
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->assertResponsePropertyEquals($response, 'avatarNumber', 5);
++        $this->assertResponsePropertyEquals($response, 'tagLine', 'bar');
++    }
++
+     public function testDELETEProgrammer()
+     {
+         $this->createProgrammer(array(

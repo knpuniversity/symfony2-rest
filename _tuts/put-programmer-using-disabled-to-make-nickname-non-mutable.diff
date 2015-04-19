@@ -1,9 +1,9 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 45351d6..a037d75 100644
+index 3891d71..3b12c61 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -103,7 +103,9 @@ class ProgrammerController extends BaseController
-     private function handleRequest(Request $request, Programmer $programmer = null)
+@@ -112,7 +112,9 @@ class ProgrammerController extends BaseController
+     private function handleRequest(Request $request, Programmer $programmer)
      {
          $data = json_decode($request->getContent(), true);
 -        $form = $this->createForm(new ProgrammerType(), $programmer);

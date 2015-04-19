@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 862ac38..45351d6 100644
+index 862ac38..3891d71 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -19,18 +19,7 @@ class ProgrammerController extends BaseController
+@@ -19,14 +19,8 @@ class ProgrammerController extends BaseController
       */
      public function newAction(Request $request)
      {
@@ -14,43 +14,40 @@ index 862ac38..45351d6 100644
 -        /** @var Programmer $programmer */
 -        $programmer = $form->getData();
 -        $programmer->setUser($this->findUserByUsername('weaverryan'));
--
--        $em = $this->getDoctrine()->getManager();
--        $em->persist($programmer);
--        $em->flush();
-+        $programmer = $this->handleRequest($request);
++        $programmer = new Programmer();
++        $this->handleRequest($request, $programmer);
  
-         $data = $this->serializeProgrammer($programmer);
-         $response = new JsonResponse($data, 201);
-@@ -103,6 +92,16 @@ class ProgrammerController extends BaseController
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($programmer);
+@@ -103,13 +97,7 @@ class ProgrammerController extends BaseController
              ));
          }
  
-+        $this->handleRequest($request, $programmer);
-+
-+        $data = $this->serializeProgrammer($programmer);
-+        $response = new JsonResponse($data, 200);
-+
-+        return $response;
-+    }
-+
-+    private function handleRequest(Request $request, Programmer $programmer = null)
-+    {
-         $data = json_decode($request->getContent(), true);
-         $form = $this->createForm(new ProgrammerType(), $programmer);
-         $form->submit($data);
-@@ -115,13 +114,9 @@ class ProgrammerController extends BaseController
-         $em->persist($programmer);
-         $em->flush();
- 
--        $data = $this->serializeProgrammer($programmer);
--        $response = new JsonResponse($data, 200);
+-        $data = json_decode($request->getContent(), true);
+-        $form = $this->createForm(new ProgrammerType(), $programmer);
+-        $form->submit($data);
 -
--        return $response;
-+        return $programmer;
+-        /** @var Programmer $programmer */
+-        $programmer = $form->getData();
+-        $programmer->setUser($this->findUserByUsername('weaverryan'));
++        $this->handleRequest($request, $programmer);
+ 
+         $em = $this->getDoctrine()->getManager();
+         $em->persist($programmer);
+@@ -121,6 +109,16 @@ class ProgrammerController extends BaseController
+         return $response;
      }
  
--
++    private function handleRequest(Request $request, Programmer $programmer)
++    {
++        $data = json_decode($request->getContent(), true);
++        $form = $this->createForm(new ProgrammerType(), $programmer);
++        $form->submit($data);
++
++        /** @var Programmer $programmer */
++        $programmer = $form->getData();
++        $programmer->setUser($this->findUserByUsername('weaverryan'));
++    }
+ 
      private function serializeProgrammer(Programmer $programmer)
      {
-         return array(
