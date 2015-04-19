@@ -33,6 +33,18 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         ));
     }
 
+    /**
+     * @return User
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findAny()
+    {
+        return $this->createQueryBuilder('u')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function loadUserByUsername($username)
     {
         $user = $this->findUserByUsername($username);
