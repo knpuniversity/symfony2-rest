@@ -21,11 +21,11 @@ index ffc1618..c61e8ff 100644
              'is_edit' => $programmer->getId()
          ]);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 9753d65..48581ec 100644
+index 1fe4673..ce1cacb 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -142,4 +142,22 @@ class ProgrammerControllerTest extends ApiTestCase
-         $this->assertResponsePropertyDoesNotExists($response, 'errors.avatarNumber.');
+         $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber.');
          $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
      }
 +

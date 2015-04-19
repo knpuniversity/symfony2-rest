@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index c6f49fb..e08db3d 100644
+index c6f49fb..f8ea2f7 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -190,6 +190,25 @@ class ApiTestCase extends KernelTestCase
@@ -12,7 +12,7 @@ index c6f49fb..e08db3d 100644
 +        $this->readResponseProperty($response, $propertyPath);
 +    }
 +
-+    protected function assertResponsePropertyDoesNotExists(ResponseInterface $response, $propertyPath)
++    protected function assertResponsePropertyDoesNotExist(ResponseInterface $response, $propertyPath)
 +    {
 +        try {
 +            // this will blow up if the property doesn't exist
@@ -29,7 +29,7 @@ index c6f49fb..e08db3d 100644
      {
          $actual = $this->readResponseProperty($response, $propertyPath);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 5d51916..7ba88dc 100644
+index 5d51916..abcc24a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -118,4 +118,27 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -57,6 +57,6 @@ index 5d51916..7ba88dc 100644
 +        ));
 +        $this->assertResponsePropertyExists($response, 'errors.nickname');
 +        $this->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
-+        $this->assertResponsePropertyDoesNotExists($response, 'errors.avatarNumber.');
++        $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber.');
 +    }
  }

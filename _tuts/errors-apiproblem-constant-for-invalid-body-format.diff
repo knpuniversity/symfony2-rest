@@ -31,7 +31,7 @@ index c61e8ff..2a0444b 100644
          $form = $this->createForm(new ProgrammerType(), $programmer, [
              'is_edit' => $programmer->getId()
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 48581ec..06afce9 100644
+index ce1cacb..910fde8 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -158,6 +158,7 @@ EOF;
