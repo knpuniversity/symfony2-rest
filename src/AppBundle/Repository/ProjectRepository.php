@@ -7,6 +7,10 @@ use AppBundle\Entity\Project;
 
 class ProjectRepository extends EntityRepository
 {
+    /**
+     * @param $name
+     * @return Project
+     */
     public function findOneByName($name)
     {
         return $this->findOneBy(array('name' => $name));
