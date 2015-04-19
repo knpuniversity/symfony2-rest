@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Web;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Entity\Programmer;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\Battle;
-
+use AppBundle\Controller\BaseController;
 
 class BattleController extends BaseController
 {
