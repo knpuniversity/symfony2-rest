@@ -9,7 +9,7 @@ class ProgrammerRepository extends EntityRepository
 {
     public function findAllForUser(User $user)
     {
-        return $this->find(array('user' => $user));
+        return $this->findBy(array('user' => $user));
     }
 
     public function findOneByNickname($nickname)
