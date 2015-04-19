@@ -55,6 +55,12 @@ class Programmer
      */
     private $user;
 
+    public function __construct($nickname = null, $avatarNumber = null)
+    {
+        $this->nickname = $nickname;
+        $this->avatarNumber = $avatarNumber;
+    }
+
     /**
      * Get id
      *
