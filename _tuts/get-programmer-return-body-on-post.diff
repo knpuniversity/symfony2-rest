@@ -1,0 +1,33 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index d0088e6..5a3f611 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -31,12 +31,14 @@ class ProgrammerController extends BaseController
+         $em->persist($programmer);
+         $em->flush();
+ 
+-        $response = new Response('It worked. Believe me - I\'m an API', 201);
++        $data = $this->serializeProgrammer($programmer);
++        $response = new Response(json_encode($data), 201);
+         $programmerUrl = $this->generateUrl(
+             'api_programmers_show',
+             ['nickname' => $programmer->getNickname()]
+         );
+         $response->headers->set('Location', $programmerUrl);
++        $response->headers->set('Content-Type', 'application/json');
+ 
+         return $response;
+     }
+diff --git a/testing.php b/testing.php
+index 49a7d2e..e4a79c2 100644
+--- a/testing.php
++++ b/testing.php
+@@ -20,6 +20,8 @@ $data = array(
+ $response = $client->post('/api/programmers', [
+     'body' => json_encode($data)
+ ]);
++echo $response;
++echo "\n\n";die;
+ 
+ $programmerUrl = $response->getHeader('Location');
+ 

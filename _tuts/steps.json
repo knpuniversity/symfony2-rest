@@ -29,7 +29,67 @@
             "id": "post-programmer-creating-and-saving-entity",
             "name": "POST Programmer: Creating and saving entity",
             "description": null
+        },
+        {
+            "id": "post-programmers-process-via-a-form",
+            "name": "POST Programmers: Process via a form",
+            "description": null
+        },
+        {
+            "id": "post-programmer-201-status-code",
+            "name": "POST Programmer: 201 status code",
+            "description": null
+        },
+        {
+            "id": "post-programmer-first-location-header",
+            "name": "POST Programmer: First Location header",
+            "description": null
+        },
+        {
+            "id": "get-programmer-hardcoded-show-page",
+            "name": "GET Programmer: Hardcoded show page",
+            "description": null
+        },
+        {
+            "id": "get-programmer-return-json-string-of-programmer",
+            "name": "GET Programmer: Return JSON string of Programmer",
+            "description": null
+        },
+        {
+            "id": "get-programmer-content-type",
+            "name": "GET Programmer: Content-type",
+            "description": null
+        },
+        {
+            "id": "get-programmer-throw-404",
+            "name": "GET Programmer: Throw 404",
+            "description": null
+        },
+        {
+            "id": "get-programmer-update-location-header",
+            "name": "GET Programmer: Update Location header",
+            "description": null
+        },
+        {
+            "id": "get-programmer-use-location-header-in-test",
+            "name": "GET Programmer: Use Location header in test",
+            "description": null
+        },
+        {
+            "id": "get-programmer-total-endpoint-for-programmers",
+            "name": "GET Programmer: Total endpoint for \/programmers",
+            "description": null
+        },
+        {
+            "id": "get-programmer-return-body-on-post",
+            "name": "GET Programmer: Return body on POST",
+            "description": null
+        },
+        {
+            "id": "get-programmer-use-jsonresponse",
+            "name": "GET Programmer: Use JsonResponse",
+            "description": null
         }
     ],
-    "sha": "08bafa60d61747d168fcecf8fe1cf70de41f56e7"
+    "sha": "c0f04b846a1f3a80723e20f9fa79c60fdf97885c"
 }

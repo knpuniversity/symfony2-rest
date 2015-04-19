@@ -1,0 +1,15 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index c46a078..346a373 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -52,6 +52,9 @@ class ProgrammerController extends BaseController
+             'tagLine' => $programmer->getTagLine(),
+         );
+ 
+-        return new Response(json_encode($data), 200);
++        $response = new Response(json_encode($data), 200);
++        $response->headers->set('Content-Type', 'application/json');
++
++        return $response;
+     }
+ }

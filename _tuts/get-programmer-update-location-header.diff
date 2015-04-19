@@ -1,0 +1,47 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 376e522..9db6fa5 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -23,6 +23,7 @@ class ProgrammerController extends BaseController
+         $form = $this->createForm(new ProgrammerType());
+         $form->submit($data);
+ 
++        /** @var Programmer $programmer */
+         $programmer = $form->getData();
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
+ 
+@@ -31,13 +32,17 @@ class ProgrammerController extends BaseController
+         $em->flush();
+ 
+         $response = new Response('It worked. Believe me - I\'m an API', 201);
+-        $response->headers->set('Location', '/some/programmer/url');
++        $programmerUrl = $this->generateUrl(
++            'api_programmers_show',
++            ['nickname' => $programmer->getNickname()]
++        );
++        $response->headers->set('Location', $programmerUrl);
+ 
+         return $response;
+     }
+ 
+     /**
+-     * @Route("/api/programmers/{nickname}")
++     * @Route("/api/programmers/{nickname}", name="api_programmers_show")
+      */
+     public function showAction($nickname)
+     {
+diff --git a/testing.php b/testing.php
+index 4bb509a..b17ec47 100644
+--- a/testing.php
++++ b/testing.php
+@@ -21,6 +21,10 @@ $response = $client->post('/api/programmers', [
+     'body' => json_encode($data)
+ ]);
+ 
++echo $response;
++echo "\n\n";
++die;
++
+ // 2) GET a programmer resource
+ $response = $client->get('/api/programmers/abcd'.$nickname);
+ 

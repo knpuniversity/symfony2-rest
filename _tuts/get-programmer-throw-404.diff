@@ -1,0 +1,31 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 346a373..376e522 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -45,6 +45,13 @@ class ProgrammerController extends BaseController
+             ->getRepository('AppBundle:Programmer')
+             ->findOneByNickname($nickname);
+ 
++        if (!$programmer) {
++            throw $this->createNotFoundException(sprintf(
++                'No programmer found with nickname "%s"',
++                $nickname
++            ));
++        }
++
+         $data = array(
+             'nickname' => $programmer->getNickname(),
+             'avatarNumber' => $programmer->getAvatarNumber(),
+diff --git a/testing.php b/testing.php
+index ba417c6..4bb509a 100644
+--- a/testing.php
++++ b/testing.php
+@@ -22,7 +22,7 @@ $response = $client->post('/api/programmers', [
+ ]);
+ 
+ // 2) GET a programmer resource
+-$response = $client->get('/api/programmers/'.$nickname);
++$response = $client->get('/api/programmers/abcd'.$nickname);
+ 
+ echo $response;
+ echo "\n\n";

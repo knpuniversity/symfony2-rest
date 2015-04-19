@@ -1,0 +1,15 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 98292d8..305b091 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -30,6 +30,9 @@ class ProgrammerController extends BaseController
+         $em->persist($programmer);
+         $em->flush();
+ 
+-        return new Response('It worked. Believe me - I\'m an API', 201);
++        $response = new Response('It worked. Believe me - I\'m an API', 201);
++        $response->headers->set('Location', '/some/programmer/url');
++
++        return $response;
+     }
+ }

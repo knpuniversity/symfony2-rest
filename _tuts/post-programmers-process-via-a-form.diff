@@ -1,0 +1,63 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 8bdef8c..7eb131b 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Api;
+ 
+ use AppBundle\Controller\BaseController;
+ use AppBundle\Entity\Programmer;
++use AppBundle\Form\ProgrammerType;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Symfony\Component\HttpFoundation\Request;
+@@ -19,8 +20,10 @@ class ProgrammerController extends BaseController
+     {
+         $data = json_decode($request->getContent(), true);
+ 
+-        $programmer = new Programmer($data['nickname'], $data['avatarNumber']);
+-        $programmer->setTagLine($data['tagLine']);
++        $form = $this->createForm(new ProgrammerType());
++        $form->submit($data);
++
++        $programmer = $form->getData();
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
+ 
+         $em = $this->getDoctrine()->getManager();
+diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
+new file mode 100644
+index 0000000..3b2b2a5
+--- /dev/null
++++ b/src/AppBundle/Form/ProgrammerType.php
+@@ -0,0 +1,31 @@
++<?php
++
++namespace AppBundle\Form;
++
++use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\FormBuilderInterface;
++use Symfony\Component\OptionsResolver\OptionsResolverInterface;
++
++class ProgrammerType extends AbstractType
++{
++    public function buildForm(FormBuilderInterface $builder, array $options)
++    {
++        $builder
++            ->add('nickname', 'text')
++            ->add('avatarNumber', 'number')
++            ->add('tagLine', 'textarea')
++        ;
++    }
++
++    public function setDefaultOptions(OptionsResolverInterface $resolver)
++    {
++        $resolver->setDefaults(array(
++            'data_class' => 'AppBundle\Entity\Programmer'
++        ));
++    }
++
++    public function getName()
++    {
++        return 'programmer';
++    }
++}
+\ No newline at end of file

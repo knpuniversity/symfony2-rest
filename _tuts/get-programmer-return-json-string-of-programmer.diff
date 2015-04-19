@@ -1,0 +1,23 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 68c797a..c46a078 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -41,6 +41,17 @@ class ProgrammerController extends BaseController
+      */
+     public function showAction($nickname)
+     {
+-        return new Response('Hello '.$nickname);
++        $programmer = $this->getDoctrine()
++            ->getRepository('AppBundle:Programmer')
++            ->findOneByNickname($nickname);
++
++        $data = array(
++            'nickname' => $programmer->getNickname(),
++            'avatarNumber' => $programmer->getAvatarNumber(),
++            'powerLevel' => $programmer->getPowerLevel(),
++            'tagLine' => $programmer->getTagLine(),
++        );
++
++        return new Response(json_encode($data), 200);
+     }
+ }

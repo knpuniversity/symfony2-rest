@@ -1,0 +1,19 @@
+diff --git a/testing.php b/testing.php
+index b17ec47..65189c4 100644
+--- a/testing.php
++++ b/testing.php
+@@ -21,12 +21,10 @@ $response = $client->post('/api/programmers', [
+     'body' => json_encode($data)
+ ]);
+ 
+-echo $response;
+-echo "\n\n";
+-die;
++$programmerUrl = $response->getHeader('Location');
+ 
+ // 2) GET a programmer resource
+-$response = $client->get('/api/programmers/abcd'.$nickname);
++$response = $client->get($programmerUrl);
+ 
+ echo $response;
+ echo "\n\n";
