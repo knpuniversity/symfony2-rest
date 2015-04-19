@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 34a8311..762a954 100644
+index 34a8311..93fd2a3 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,9 +2,11 @@
@@ -15,7 +15,7 @@ index 34a8311..762a954 100644
  {
      private static $staticClient;
  
-@@ -21,10 +23,26 @@ class ApiTestCase extends \PHPUnit_Framework_TestCase
+@@ -21,10 +23,34 @@ class ApiTestCase extends \PHPUnit_Framework_TestCase
                  'exceptions' => false
              ]
          ]);
@@ -28,6 +28,14 @@ index 34a8311..762a954 100644
          $this->client = self::$staticClient;
 +
 +        $this->purgeDatabase();
++    }
++
++    /**
++     * Clean up Kernel usage in this test.
++     */
++    protected function tearDown()
++    {
++        // purposefully not calling parent class, which shuts down the kernel
 +    }
 +
 +    private function purgeDatabase()

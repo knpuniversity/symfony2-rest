@@ -1,0 +1,156 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index 2324f7c..abf3f83 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Tests\Controller\Api;
+ 
++use AppBundle\Entity\Programmer;
+ use AppBundle\Entity\User;
+ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use Doctrine\ORM\EntityManager;
+@@ -12,6 +13,9 @@ use GuzzleHttp\Subscriber\History;
+ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ use Symfony\Component\Console\Output\ConsoleOutput;
+ use Symfony\Component\DomCrawler\Crawler;
++use Symfony\Component\PropertyAccess\Exception\AccessException;
++use Symfony\Component\PropertyAccess\PropertyAccess;
++use Symfony\Component\PropertyAccess\PropertyAccessor;
+ 
+ class ApiTestCase extends KernelTestCase
+ {
+@@ -29,6 +33,11 @@ class ApiTestCase extends KernelTestCase
+ 
+     private $output;
+ 
++    /**
++     * @var PropertyAccessor
++     */
++    private $accessor;
++
+     public static function setUpBeforeClass()
+     {
+         self::$staticClient = new Client([
+@@ -150,6 +159,52 @@ class ApiTestCase extends KernelTestCase
+         return $user;
+     }
+ 
++    protected function createProgrammer(array $data)
++    {
++        $data = array_merge(array(
++            'powerLevel' => rand(0, 10),
++        ), $data);
++
++        $accessor = PropertyAccess::createPropertyAccessor();
++        $programmer = new Programmer();
++        foreach ($data as $key => $value) {
++            $accessor->setValue($programmer, $key, $value);
++        }
++
++        $owner = $this->getEntityManager()
++            ->getRepository('AppBundle:User')
++            ->findAny();
++        $programmer->setUser($owner);
++
++        $this->getEntityManager()->persist($programmer);
++        $this->getEntityManager()->flush($programmer);
++
++        return $programmer;
++    }
++
++    protected function assertResponsePropertiesExist(ResponseInterface $response, array $expectedProperties)
++    {
++        foreach ($expectedProperties as $propertyPath) {
++            // this will blow up if the property doesn't exist
++            $this->readResponseProperty($response, $propertyPath);
++        }
++    }
++
++    protected function assertResponsePropertyEquals(ResponseInterface $response, $propertyPath, $expectedValue)
++    {
++        $this->assertEquals($expectedValue, $this->readResponseProperty($response, $propertyPath));
++    }
++
++    protected function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
++    {
++        $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
++    }
++
++    protected function assertResponsePropertyCount(ResponseInterface $response, $propertyPath, $expectedCount)
++    {
++        $this->assertCount((int) $expectedCount, $this->readResponseProperty($response, $propertyPath));
++    }
++
+     /**
+      * @return EntityManager
+      */
+@@ -158,4 +213,23 @@ class ApiTestCase extends KernelTestCase
+         return $this->getService('doctrine')
+             ->getManager();
+     }
++
++    protected function readResponseProperty(ResponseInterface $response, $propertyPath)
++    {
++        if ($this->accessor === null) {
++            $this->accessor = PropertyAccess::createPropertyAccessor();
++        }
++
++        $data = json_decode((string)$response->getBody());
++
++        try {
++            return $this->accessor->getValue($data, $propertyPath);
++        } catch (AccessException $e) {
++            throw new \Exception(sprintf(
++                'Error reading property "%s" from available keys (%s)',
++                $propertyPath,
++                implode(', ', array_keys(get_object_vars($data)))
++            ), 0, $e);
++        }
++    }
+ }
+\ No newline at end of file
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 206e688..8cd5515 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -30,4 +30,39 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertArrayHasKey('nickname', $data);
+         $this->assertEquals('ObjectOrienter', $data['nickname']);
+     }
++
++    public function testGETProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++
++        $response = $this->client->get('/api/programmers/UnitTester');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->assertResponsePropertiesExist($response, array(
++            'nickname',
++            'avatarNumber',
++            'powerLevel',
++            'tagLine'
++        ));
++        $this->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
++    }
++
++    public function testGETProgrammersCollection()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++        $this->createProgrammer(array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 5,
++        ));
++
++        $response = $this->client->get('/api/programmers');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->assertResponsePropertyIsArray($response, 'programmers');
++        $this->assertResponsePropertyCount($response, 'programmers', 2);
++    }
+ }

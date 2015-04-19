@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index da18b9f..3d1c463 100644
+index da18b9f..b774b2f 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -5,9 +5,8 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -13,8 +13,11 @@ index da18b9f..3d1c463 100644
              'avatarNumber' => 5,
              'tagLine' => 'a test dev!'
          );
-@@ -21,5 +20,6 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -19,7 +18,9 @@ class ProgrammerControllerTest extends ApiTestCase
+ 
+         $this->assertEquals(201, $response->getStatusCode());
          $this->assertTrue($response->hasHeader('Location'));
++        $this->assertEquals('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
          $data = json_decode($response->getBody(true), true);
          $this->assertArrayHasKey('nickname', $data);
 +        $this->assertEquals('ObjectOrienter', $data['nickname']);

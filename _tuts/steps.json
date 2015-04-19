@@ -129,7 +129,12 @@
             "id": "testing-create-weaverryan-user-before-test",
             "name": "Testing: Create weaverryan User before test",
             "description": null
+        },
+        {
+            "id": "testing-list-and-show-tests",
+            "name": "Testing: List and show tests",
+            "description": null
         }
     ],
-    "sha": "0c845e0280431d5408dc0d16466076cf312d9bfe"
+    "sha": "19d1466614daa1286b2cdcc01382e81fb98e1e36"
 }

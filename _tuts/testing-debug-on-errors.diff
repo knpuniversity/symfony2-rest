@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 762a954..eb87824 100644
+index 93fd2a3..4621ba4 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -3,14 +3,23 @@
@@ -36,8 +36,8 @@ index 762a954..eb87824 100644
  
          self::bootKernel();
      }
-@@ -34,6 +46,21 @@ class ApiTestCase extends KernelTestCase
-         $this->purgeDatabase();
+@@ -42,6 +54,21 @@ class ApiTestCase extends KernelTestCase
+         // purposefully not calling parent class, which shuts down the kernel
      }
  
 +    protected function onNotSuccessfulTest(Exception $e)
@@ -58,7 +58,7 @@ index 762a954..eb87824 100644
      private function purgeDatabase()
      {
          $purger = new ORMPurger($this->getService('doctrine.orm.default_entity_manager'));
-@@ -45,4 +72,48 @@ class ApiTestCase extends KernelTestCase
+@@ -53,4 +80,48 @@ class ApiTestCase extends KernelTestCase
          return self::$kernel->getContainer()
              ->get($id);
      }

@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 8e21d32..4c30599 100644
+index 11e2295..2324f7c 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,7 +2,9 @@
@@ -12,7 +12,7 @@ index 8e21d32..4c30599 100644
  use Exception;
  use GuzzleHttp\Client;
  use GuzzleHttp\Message\ResponseInterface;
-@@ -123,4 +125,29 @@ class ApiTestCase extends KernelTestCase
+@@ -131,4 +133,29 @@ class ApiTestCase extends KernelTestCase
  
          $this->output->writeln($string);
      }
@@ -44,7 +44,7 @@ index 8e21d32..4c30599 100644
  }
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 3d1c463..dcf5eef 100644
+index b774b2f..206e688 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -3,6 +3,13 @@ namespace AppBundle\Tests\Controller\Api;
