@@ -89,7 +89,47 @@
             "id": "get-programmer-use-jsonresponse",
             "name": "GET Programmer: Use JsonResponse",
             "description": null
+        },
+        {
+            "id": "behat-fill-in-phpunit-test",
+            "name": "Behat: Fill in PHPUnit test",
+            "description": null
+        },
+        {
+            "id": "behat-adding-asserts-to-phpunit-test",
+            "name": "Behat: Adding asserts to PHPUnit test",
+            "description": null
+        },
+        {
+            "id": "testing-base-apitestcase",
+            "name": "Testing: Base ApiTestCase",
+            "description": null
+        },
+        {
+            "id": "testing-asserting-specific-username",
+            "name": "Testing: Asserting specific username",
+            "description": null
+        },
+        {
+            "id": "testing-clear-data-between-tests",
+            "name": "Testing: Clear data between tests",
+            "description": null
+        },
+        {
+            "id": "testing-debug-on-errors",
+            "name": "Testing: Debug on errors",
+            "description": null
+        },
+        {
+            "id": "testing-pretty-errors",
+            "name": "Testing: Pretty errors",
+            "description": null
+        },
+        {
+            "id": "testing-create-weaverryan-user-before-test",
+            "name": "Testing: Create weaverryan User before test",
+            "description": null
         }
     ],
-    "sha": "c0f04b846a1f3a80723e20f9fa79c60fdf97885c"
+    "sha": "0c845e0280431d5408dc0d16466076cf312d9bfe"
 }

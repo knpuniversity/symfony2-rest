@@ -1,0 +1,69 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+new file mode 100644
+index 0000000..34a8311
+--- /dev/null
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -0,0 +1,30 @@
++<?php
++
++namespace AppBundle\Tests\Controller\Api;
++
++use GuzzleHttp\Client;
++
++class ApiTestCase extends \PHPUnit_Framework_TestCase
++{
++    private static $staticClient;
++
++    /**
++     * @var Client
++     */
++    protected $client;
++
++    public static function setUpBeforeClass()
++    {
++        self::$staticClient = new Client([
++            'base_url' => 'http://localhost:9003',
++            'defaults' => [
++                'exceptions' => false
++            ]
++        ]);
++    }
++
++    protected function setUp()
++    {
++        $this->client = self::$staticClient;
++    }
++}
+\ No newline at end of file
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index d372b23..da18b9f 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -1,17 +1,10 @@
+ <?php
+ namespace AppBundle\Tests\Controller\Api;
+ 
+-class ProgrammerControllerTest extends \PHPUnit_Framework_TestCase
++class ProgrammerControllerTest extends ApiTestCase
+ {
+     public function testPOST()
+     {
+-        $client = new \GuzzleHttp\Client([
+-            'base_url' => 'http://localhost:9003',
+-            'defaults' => [
+-                'exceptions' => false
+-            ]
+-        ]);
+-
+         $nickname = 'ObjectOrienter'.rand(0, 999);
+         $data = array(
+             'nickname' => $nickname,
+@@ -20,7 +13,7 @@ class ProgrammerControllerTest extends \PHPUnit_Framework_TestCase
+         );
+ 
+         // 1) Create a programmer resource
+-        $response = $client->post('/api/programmers', [
++        $response = $this->client->post('/api/programmers', [
+             'body' => json_encode($data)
+         ]);
+ 

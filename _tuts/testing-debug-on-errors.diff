@@ -1,0 +1,110 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index 762a954..eb87824 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -3,14 +3,23 @@
+ namespace AppBundle\Tests\Controller\Api;
+ 
+ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
++use Exception;
+ use GuzzleHttp\Client;
++use GuzzleHttp\Message\ResponseInterface;
++use GuzzleHttp\Subscriber\History;
+ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
++use Symfony\Component\DomCrawler\Crawler;
+ 
+ class ApiTestCase extends KernelTestCase
+ {
+     private static $staticClient;
+ 
+     /**
++     * @var History
++     */
++    private static $history;
++
++    /**
+      * @var Client
+      */
+     protected $client;
+@@ -23,6 +32,9 @@ class ApiTestCase extends KernelTestCase
+                 'exceptions' => false
+             ]
+         ]);
++        self::$history = new History();
++        self::$staticClient->getEmitter()
++            ->attach(self::$history);
+ 
+         self::bootKernel();
+     }
+@@ -34,6 +46,21 @@ class ApiTestCase extends KernelTestCase
+         $this->purgeDatabase();
+     }
+ 
++    protected function onNotSuccessfulTest(Exception $e)
++    {
++        if (self::$history && $lastResponse = self::$history->getLastResponse()) {
++            $lastRequest = self::$history->getLastRequest();
++
++            $this->printDebug('');
++            $this->printDebug('<error>Failure!</error> when making the following request:');
++            $this->printDebug(sprintf('<comment>%s</comment>: <info>%s</info>', $lastRequest->getMethod(), $lastRequest->getUrl())."\n");
++
++            $this->debugResponse($lastResponse);
++        }
++
++        throw $e;
++    }
++
+     private function purgeDatabase()
+     {
+         $purger = new ORMPurger($this->getService('doctrine.orm.default_entity_manager'));
+@@ -45,4 +72,48 @@ class ApiTestCase extends KernelTestCase
+         return self::$kernel->getContainer()
+             ->get($id);
+     }
++
++    protected function debugResponse(ResponseInterface $response)
++    {
++        $body = $response->getBody()->getContents();
++
++        $contentType = $response->getHeader('Content-Type');
++        if ($contentType == 'application/json' || strpos($contentType, '+json') !== false) {
++            $data = json_decode($body);
++            if ($data === null) {
++                // invalid JSON!
++                $this->printDebug($body);
++            } else {
++                // valid JSON, print it pretty
++                $this->printDebug(json_encode($data, JSON_PRETTY_PRINT));
++            }
++        } else {
++            // the response is HTML - see if we should print all of it or some of it
++            $isValidHtml = strpos($body, '</body>') !== false;
++
++            if ($isValidHtml) {
++                $this->printDebug('<error>Failure!</error> Below is a summary of the HTML response from the server.');
++
++                // finds the h1 and h2 tags and prints them only
++                $crawler = new Crawler($body);
++                $i = 1;
++                foreach ($crawler->filter('h1, h2')->extract(array('_text')) as $header) {
++                    $this->printDebug('');
++                    $this->printDebug(sprintf(
++                        '  <comment>%s)</comment> %s',
++                        $i,
++                        trim($header)
++                    ));
++                    $i++;
++                }
++            } else {
++                $this->printDebug($body);
++            }
++        }
++    }
++
++    protected function printDebug($string)
++    {
++        echo $string."\n";
++    }
+ }
+\ No newline at end of file

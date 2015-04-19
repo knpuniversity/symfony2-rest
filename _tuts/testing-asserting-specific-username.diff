@@ -1,0 +1,22 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index da18b9f..3d1c463 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -5,9 +5,8 @@ class ProgrammerControllerTest extends ApiTestCase
+ {
+     public function testPOST()
+     {
+-        $nickname = 'ObjectOrienter'.rand(0, 999);
+         $data = array(
+-            'nickname' => $nickname,
++            'nickname' => 'ObjectOrienter',
+             'avatarNumber' => 5,
+             'tagLine' => 'a test dev!'
+         );
+@@ -21,5 +20,6 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertTrue($response->hasHeader('Location'));
+         $data = json_decode($response->getBody(true), true);
+         $this->assertArrayHasKey('nickname', $data);
++        $this->assertEquals('ObjectOrienter', $data['nickname']);
+     }
+ }

@@ -1,0 +1,45 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index 34a8311..762a954 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -2,9 +2,11 @@
+ 
+ namespace AppBundle\Tests\Controller\Api;
+ 
++use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use GuzzleHttp\Client;
++use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ 
+-class ApiTestCase extends \PHPUnit_Framework_TestCase
++class ApiTestCase extends KernelTestCase
+ {
+     private static $staticClient;
+ 
+@@ -21,10 +23,26 @@ class ApiTestCase extends \PHPUnit_Framework_TestCase
+                 'exceptions' => false
+             ]
+         ]);
++
++        self::bootKernel();
+     }
+ 
+     protected function setUp()
+     {
+         $this->client = self::$staticClient;
++
++        $this->purgeDatabase();
++    }
++
++    private function purgeDatabase()
++    {
++        $purger = new ORMPurger($this->getService('doctrine.orm.default_entity_manager'));
++        $purger->purge();
++    }
++
++    protected function getService($id)
++    {
++        return self::$kernel->getContainer()
++            ->get($id);
+     }
+ }
+\ No newline at end of file
