@@ -19,7 +19,7 @@ index 39e7a2e..81dc142 100644
          );
          $response->headers->set('Content-Type', 'application/problem+json');
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 248c496..cede1bd 100644
+index 3843d8b..1f69c7a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -225,6 +225,21 @@ class ApiTestCase extends KernelTestCase

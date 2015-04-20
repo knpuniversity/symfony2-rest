@@ -1,12 +1,12 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 04e7310..248c496 100644
+index 04e7310..3843d8b 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -13,6 +13,7 @@ use GuzzleHttp\Subscriber\History;
  use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  use Symfony\Component\Console\Output\ConsoleOutput;
  use Symfony\Component\DomCrawler\Crawler;
-+use Symfony\Component\Process\Exception\RuntimeException;
++use Symfony\Component\PropertyAccess\Exception\RuntimeException;
  use Symfony\Component\PropertyAccess\Exception\AccessException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\PropertyAccessor;
