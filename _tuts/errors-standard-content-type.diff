@@ -14,13 +14,13 @@ index 2eaa6a1..560d49b 100644
      }
  }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index bf135d5..1fe4673 100644
+index 9791d18..2e061ca 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -140,5 +140,6 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->assertResponsePropertyExists($response, 'errors.nickname');
          $this->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
-         $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber.');
+         $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
 +        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
      }
  }

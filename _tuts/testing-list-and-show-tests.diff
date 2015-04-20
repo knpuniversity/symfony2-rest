@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 2324f7c..c6f49fb 100644
+index b28307e..04e7310 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -114,7 +114,7 @@ index 2324f7c..c6f49fb 100644
 +            // it could be a stdClass or an array of stdClass
 +            $values = is_array($data) ? $data : get_object_vars($data);
 +
-+            throw new \Exception(sprintf(
++            throw new AccessException(sprintf(
 +                'Error reading property "%s" from available keys (%s)',
 +                $propertyPath,
 +                implode(', ', array_keys($values))
