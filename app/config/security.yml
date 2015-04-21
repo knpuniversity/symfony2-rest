@@ -20,6 +20,7 @@ security:
                 path: security_logout
 
     access_control:
+        - { path: ^/_wdt|_profiler, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # allow anonymous API - if auth is needed, it's handled in the controller
