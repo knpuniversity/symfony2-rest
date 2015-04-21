@@ -289,7 +289,22 @@
             "id": "serialize-fixing-null-values",
             "name": "Serialize: Fixing null values",
             "description": null
+        },
+        {
+            "id": "serialize-whitelisting-properties",
+            "name": "Serialize: Whitelisting properties",
+            "description": null
+        },
+        {
+            "id": "auth-show-simple-decoderequestbodyintoparameters",
+            "name": "Auth: Show simple decodeRequestBodyIntoParameters",
+            "description": null
+        },
+        {
+            "id": "uth-token-token-validation",
+            "name": "uth Token: Token validation",
+            "description": null
         }
     ],
-    "sha": "61164d39b973da48cf3bed451781e45850989daf"
+    "sha": "53af49ec7fceff8a04caa2b0677468a4d1da7afa"
 }

@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 2eaa6a1..560d49b 100644
+index 3ab5b5b..4c433f9 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -191,6 +191,9 @@ class ProgrammerController extends BaseController
+@@ -193,6 +193,9 @@ class ProgrammerController extends BaseController
              'errors' => $errors
          ];
  

@@ -1,0 +1,53 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index fcd55cf..be89bb7 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -136,12 +136,7 @@ class ProgrammerController extends BaseController
+ 
+     private function handleRequest(Request $request, Programmer $programmer)
+     {
+-        $data = json_decode($request->getContent(), true);
+-        if ($data === null) {
+-            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+-
+-            throw new ApiProblemException($apiProblem);
+-        }
++        $data = $this->decodeRequestBody($request);
+         $form = $this->createForm(new ProgrammerType(), $programmer, [
+             'is_edit' => $programmer->getId()
+         ]);
+diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
+index d9e0fe9..c33656e 100644
+--- a/src/AppBundle/Controller/BaseController.php
++++ b/src/AppBundle/Controller/BaseController.php
+@@ -2,6 +2,8 @@
+ 
+ namespace AppBundle\Controller;
+ 
++use AppBundle\Api\ApiProblem;
++use AppBundle\Api\ApiProblemException;
+ use AppBundle\Repository\ProgrammerRepository;
+ use AppBundle\Repository\UserRepository;
+ use AppBundle\Repository\ProjectRepository;
+@@ -128,4 +130,21 @@ abstract class BaseController extends Controller
+ 
+         return $this->container->get('jms_serializer')->serialize($data, $format, $context);
+     }
++
++    protected function decodeRequestBody(Request $request)
++    {
++        // allow for a possibly empty body
++        if (!$request->getContent()) {
++            return array();
++        }
++
++        $data = json_decode($request->getContent(), true);
++        if ($data === null) {
++            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
++
++            throw new ApiProblemException($apiProblem);
++        }
++
++        return $data;
++    }
+ }

@@ -1,0 +1,63 @@
+diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
+index bd24303..f5d6fe6 100644
+--- a/src/AppBundle/Entity/Programmer.php
++++ b/src/AppBundle/Entity/Programmer.php
+@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
+ 
+ use Doctrine\ORM\Mapping as ORM;
+ use Symfony\Component\Validator\Constraints as Assert;
++use JMS\Serializer\Annotation as Serializer;
+ 
+ /**
+  * Programmer
+  *
+  * @ORM\Table(name="battle_programmer")
+  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProgrammerRepository")
++ * @Serializer\ExclusionPolicy("all")
+  */
+ class Programmer
+ {
+@@ -27,6 +29,7 @@ class Programmer
+      *
+      * @ORM\Column(name="nickname", type="string", length=100, unique=true)
+      * @Assert\NotBlank(message="Please enter a clever nickname")
++     * @Serializer\Expose
+      */
+     private $nickname;
+ 
+@@ -34,6 +37,7 @@ class Programmer
+      * @var integer
+      *
+      * @ORM\Column(name="avatarNumber", type="integer")
++     * @Serializer\Expose
+      */
+     private $avatarNumber;
+ 
+@@ -41,6 +45,7 @@ class Programmer
+      * @var string
+      *
+      * @ORM\Column(name="tagLine", type="string", length=255, nullable=true)
++     * @Serializer\Expose
+      */
+     private $tagLine;
+ 
+@@ -48,6 +53,7 @@ class Programmer
+      * @var integer
+      *
+      * @ORM\Column(name="powerLevel", type="integer")
++     * @Serializer\Expose
+      */
+     private $powerLevel = 0;
+ 
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 2773994..484eec3 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -46,6 +46,7 @@ class ProgrammerControllerTest extends ApiTestCase
+             'powerLevel',
+             'tagLine'
+         ));
++        $this->assertResponsePropertyDoesNotExist($response, 'user');
+         $this->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
+     }
+ 
