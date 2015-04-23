@@ -301,10 +301,10 @@
             "description": null
         },
         {
-            "id": "uth-token-token-validation",
-            "name": "uth Token: Token validation",
+            "id": "auth-token-token-validation",
+            "name": "Auth Token: Token validation",
             "description": null
         }
     ],
-    "sha": "779525f8d90806be6ca3d98c06785785d7b7c150"
+    "sha": "7399aaac7d1798d04fe723a8f57d57524d0427be"
 }
