@@ -31,7 +31,7 @@ index 376e522..9db6fa5 100644
      public function showAction($nickname)
      {
 diff --git a/testing.php b/testing.php
-index 4bb509a..b17ec47 100644
+index 8fb6898..ed4f9cb 100644
 --- a/testing.php
 +++ b/testing.php
 @@ -21,6 +21,10 @@ $response = $client->post('/api/programmers', [

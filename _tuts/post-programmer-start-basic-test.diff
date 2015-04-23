@@ -1,6 +1,6 @@
 diff --git a/testing.php b/testing.php
 new file mode 100644
-index 0000000..625932b
+index 0000000..2e05cdd
 --- /dev/null
 +++ b/testing.php
 @@ -0,0 +1,15 @@
@@ -9,7 +9,7 @@ index 0000000..625932b
 +require __DIR__.'/vendor/autoload.php';
 +
 +$client = new \GuzzleHttp\Client([
-+    'base_url' => 'http://localhost:9003',
++    'base_url' => 'http://localhost:8000',
 +    'defaults' => [
 +        'exceptions' => false
 +    ]

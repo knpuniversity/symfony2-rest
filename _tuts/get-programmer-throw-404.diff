@@ -17,7 +17,7 @@ index 346a373..376e522 100644
              'nickname' => $programmer->getNickname(),
              'avatarNumber' => $programmer->getAvatarNumber(),
 diff --git a/testing.php b/testing.php
-index ba417c6..4bb509a 100644
+index b9dbd1d..8fb6898 100644
 --- a/testing.php
 +++ b/testing.php
 @@ -22,7 +22,7 @@ $response = $client->post('/api/programmers', [
