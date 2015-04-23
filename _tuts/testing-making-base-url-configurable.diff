@@ -1,0 +1,33 @@
+diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
+index 2b41503..6090fdd 100644
+--- a/app/phpunit.xml.dist
++++ b/app/phpunit.xml.dist
+@@ -15,11 +15,9 @@
+         </testsuite>
+     </testsuites>
+ 
+-    <!--
+     <php>
+-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
++        <env name="TEST_BASE_URL" value="http://localhost:8000" />
+     </php>
+-    -->
+ 
+     <filter>
+         <whitelist>
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index c2fb3bc..eabc961 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -41,8 +41,10 @@ class ApiTestCase extends KernelTestCase
+ 
+     public static function setUpBeforeClass()
+     {
++        $baseUrl = getenv('TEST_BASE_URL');
++        var_dump($baseUrl);
+         self::$staticClient = new Client([
+-            'base_url' => 'http://localhost:8000',
++            'base_url' => $baseUrl,
+             'defaults' => [
+                 'exceptions' => false
+             ]

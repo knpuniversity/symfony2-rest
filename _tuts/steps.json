@@ -136,6 +136,11 @@
             "description": null
         },
         {
+            "id": "testing-making-base-url-configurable",
+            "name": "Testing: Making base url configurable",
+            "description": null
+        },
+        {
             "id": "put-programmer-write-the-test",
             "name": "PUT Programmer: Write the test",
             "description": null
@@ -306,5 +311,5 @@
             "description": null
         }
     ],
-    "sha": "19f2094d84781e26010c05fde242e6f871db6b91"
+    "sha": "161d9cc425945d83e540d4090220d16277587782"
 }

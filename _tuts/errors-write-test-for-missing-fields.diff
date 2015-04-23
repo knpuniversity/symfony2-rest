@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index c2fb3bc..caa367f 100644
+index eabc961..533098c 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -14,6 +14,7 @@ use GuzzleHttp\Subscriber\History;
@@ -10,7 +10,7 @@ index c2fb3bc..caa367f 100644
  use Symfony\Component\PropertyAccess\Exception\AccessException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\PropertyAccessor;
-@@ -192,6 +193,25 @@ class ApiTestCase extends KernelTestCase
+@@ -194,6 +195,25 @@ class ApiTestCase extends KernelTestCase
          }
      }
  
