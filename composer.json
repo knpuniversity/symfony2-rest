@@ -6,6 +6,9 @@
         "psr-0": {
             "": "src/",
             "SymfonyStandard": "app/"
+        },
+        "psr-4": {
+            "App\\Behat\\": "features/"
         }
     },
     "require": {

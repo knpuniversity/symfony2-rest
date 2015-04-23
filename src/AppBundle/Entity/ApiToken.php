@@ -76,4 +76,15 @@ class ApiToken
     {
         return $this->createdAt;
     }
+
+    /**
+     * Sets the token - used in testing, should just be set automatically
+     *
+     * @param string $token
+     * @internal
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
 }

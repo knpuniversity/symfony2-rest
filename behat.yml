@@ -1,0 +1,15 @@
+default:
+    suites:
+        default:
+            paths:    [ %paths.base%/features/web ]
+            contexts:
+                - App\Behat\web\WebFeatureContext
+                - App\Behat\web\ProjectContext
+    extensions:
+        Behat\MinkExtension:
+            base_url:  'http://localhost:9000'
+            sessions:
+                default:
+                    goutte: ~
+                selenium_session:
+                    selenium2: ~
