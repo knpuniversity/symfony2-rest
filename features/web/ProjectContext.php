@@ -24,82 +24,11 @@ class ProjectContext implements SnippetAcceptingContext
     private $lastBattle;
 
     /**
-     * @Given /^the user "([^"]*)" exists$/
-     */
-    public function theUserExists($username)
-    {
-        $this->thereIsAUserWithPassword($username, 'foo');
-    }
-
-    /**
      * @Given /^there is a user "([^"]*)" with password "([^"]*)"$/
      */
     public function thereIsAUserWithPassword($username, $password)
     {
         $this->createUser($username.'@foo.com', $password, $username);
-    }
-
-    /**
-     * @Given /^the following programmers exist:$/
-     */
-    public function theFollowingProgrammersExist(TableNode $table)
-    {
-        foreach ($table->getHash() as $row) {
-            $nickname = $row['nickname'];
-            unset($row['nickname']);
-
-            $this->createProgrammer($nickname, null, $row);
-        }
-    }
-
-    /**
-     * @Given /^there is a programmer called "([^"]*)"$/
-     */
-    public function thereIsAProgrammerCalled($name)
-    {
-        $this->createProgrammer($name);
-    }
-
-    /**
-     * @Given /^"([^"]*)" has an authentication token "([^"]*)"$/
-     */
-    public function hasAnAuthenticationToken($username, $tokenString)
-    {
-        $user = $this->getUserRepository()->findUserByUsername($username);
-        if (!$user) {
-            throw new \Exception(sprintf('Cannot find user '.$username));
-        }
-
-        $token = new ApiToken($user->getId());
-        $token->setNotes('Behat testing!');
-        $token->setToken($tokenString);
-
-        $this->getEntityManager()->persist($token);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @Given /^there is a project called "([^"]*)"$/
-     */
-    public function createProject($name)
-    {
-        $project = new Project();
-        $project->setName($name);
-        $project->setDifficultyLevel(rand(1, 10));
-
-        $this->getEntityManager()->persist($project);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @Given /^there has been a battle between "([^"]*)" and "([^"]*)"$/
-     */
-    public function thereHasBeenABattleBetweenAnd($programmerName, $projectName)
-    {
-        $programmer = $this->getProgrammerRepository()->findOneByNickname($programmerName);
-        $project = $this->getProjectRepository()->findOneByName($projectName);
-
-        $this->lastBattle = $this->getBattleManager()->battle($programmer, $project);
     }
 
     /**
@@ -170,6 +99,16 @@ class ProjectContext implements SnippetAcceptingContext
         return $programmer;
     }
 
+    public function createProject($name)
+    {
+        $project = new Project();
+        $project->setName($name);
+        $project->setDifficultyLevel(rand(1, 10));
+
+        $this->getEntityManager()->persist($project);
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @return \AppBundle\Battle\BattleManager
      */
@@ -199,19 +138,10 @@ class ProjectContext implements SnippetAcceptingContext
     /**
      * @return \AppBundle\Repository\UserRepository
      */
-    public function getUserRepository()
+    private function getUserRepository()
     {
         return $this->getEntityManager()
             ->getRepository('AppBundle:User');
-    }
-
-    /**
-     * @return \AppBundle\Repository\ApiTokenRepository
-     */
-    public function getApiTokenRepository()
-    {
-        return $this->getEntityManager()
-            ->getRepository('AppBundle:ApiToken');
     }
 
     /**
