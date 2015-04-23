@@ -11,10 +11,10 @@ index 5755b06..411948e 100644
  
          if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 diff --git a/composer.json b/composer.json
-index 4c87da5..7fe743e 100644
+index 9fe58c9..1cae1b7 100644
 --- a/composer.json
 +++ b/composer.json
-@@ -21,7 +21,8 @@
+@@ -24,7 +24,8 @@
          "sensio/distribution-bundle": "~3.0,>=3.0.12",
          "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
          "incenteev/composer-parameter-handler": "~2.0",

@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index a3f9d0e..40dcb2d 100644
+index b558ef7..5ee5458 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -27,7 +27,7 @@ class ProgrammerController extends BaseController
+@@ -28,7 +28,7 @@ class ProgrammerController extends BaseController
          $form = $this->handleRequest($request, $programmer);
  
          if (!$form->isValid()) {
@@ -11,7 +11,7 @@ index a3f9d0e..40dcb2d 100644
          }
  
          $em = $this->getDoctrine()->getManager();
-@@ -107,7 +107,7 @@ class ProgrammerController extends BaseController
+@@ -108,7 +108,7 @@ class ProgrammerController extends BaseController
  
          $form = $this->handleRequest($request, $programmer);
          if (!$form->isValid()) {
@@ -20,7 +20,7 @@ index a3f9d0e..40dcb2d 100644
          }
  
          $em = $this->getDoctrine()->getManager();
-@@ -191,7 +191,7 @@ class ProgrammerController extends BaseController
+@@ -192,7 +192,7 @@ class ProgrammerController extends BaseController
          return $errors;
      }
  
@@ -29,7 +29,7 @@ index a3f9d0e..40dcb2d 100644
      {
          $errors = $this->getErrorsFromForm($form);
  
-@@ -201,9 +201,6 @@ class ProgrammerController extends BaseController
+@@ -202,9 +202,6 @@ class ProgrammerController extends BaseController
          );
          $apiProblem->set('errors', $errors);
  

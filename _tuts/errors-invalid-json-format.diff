@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 3688fe9..15f80d1 100644
+index 6b9f856..7dbae23 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormInterface;
+@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormInterface;
  use Symfony\Component\HttpFoundation\JsonResponse;
  use Symfony\Component\HttpFoundation\Request;
  use Symfony\Component\HttpFoundation\Response;
@@ -10,16 +10,17 @@ index 3688fe9..15f80d1 100644
  
  class ProgrammerController extends BaseController
  {
-@@ -143,6 +144,9 @@ class ProgrammerController extends BaseController
+@@ -144,6 +145,10 @@ class ProgrammerController extends BaseController
      private function handleRequest(Request $request, Programmer $programmer)
      {
          $data = json_decode($request->getContent(), true);
 +        if ($data === null) {
 +            throw new HttpException(400, 'Invalid JSON body!');
 +        }
-         $form = $this->createForm(new ProgrammerType(), $programmer, [
-             'is_edit' => $programmer->getId()
-         ]);
++
+         $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
+         $form = $this->createForm($type, $programmer);
+         $clearMissing = $request->getMethod() != 'PATCH';
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index ae01e99..6a5d85d 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php

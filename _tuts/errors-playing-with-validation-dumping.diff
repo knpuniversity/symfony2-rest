@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 0bb0c34..66bc351 100644
+index 017bb1b..58bc1df 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -20,7 +20,13 @@ class ProgrammerController extends BaseController
+@@ -21,7 +21,13 @@ class ProgrammerController extends BaseController
      public function newAction(Request $request)
      {
          $programmer = new Programmer();

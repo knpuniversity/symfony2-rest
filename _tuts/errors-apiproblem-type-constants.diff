@@ -35,7 +35,7 @@ index 618df9f..2aa72a7 100644
  
      public function toArray()
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index b54fc6f..3688fe9 100644
+index 3f4bf8f..6b9f856 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -190,8 +190,7 @@ class ProgrammerController extends BaseController

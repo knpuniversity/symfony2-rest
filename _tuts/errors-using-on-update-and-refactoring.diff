@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 37ea98a..3ab5b5b 100644
+index 85a8892..4ca2ddd 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -24,15 +24,7 @@ class ProgrammerController extends BaseController
+@@ -25,15 +25,7 @@ class ProgrammerController extends BaseController
          $form = $this->handleRequest($request, $programmer);
  
          if (!$form->isValid()) {
@@ -19,7 +19,7 @@ index 37ea98a..3ab5b5b 100644
          }
  
          $em = $this->getDoctrine()->getManager();
-@@ -110,7 +102,10 @@ class ProgrammerController extends BaseController
+@@ -111,7 +103,10 @@ class ProgrammerController extends BaseController
              ));
          }
  

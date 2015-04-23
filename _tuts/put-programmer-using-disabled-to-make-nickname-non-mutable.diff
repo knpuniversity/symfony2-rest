@@ -1,20 +1,27 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 3891d71..3b12c61 100644
+index 3891d71..fd1b3e4 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -112,7 +112,9 @@ class ProgrammerController extends BaseController
+@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
+ use AppBundle\Controller\BaseController;
+ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
++use AppBundle\Form\UpdateProgrammerType;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Symfony\Component\HttpFoundation\JsonResponse;
+@@ -112,7 +113,8 @@ class ProgrammerController extends BaseController
      private function handleRequest(Request $request, Programmer $programmer)
      {
          $data = json_decode($request->getContent(), true);
 -        $form = $this->createForm(new ProgrammerType(), $programmer);
-+        $form = $this->createForm(new ProgrammerType(), $programmer, [
-+            'is_edit' => $programmer && $programmer->getId()
-+        ]);
++        $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
++        $form = $this->createForm($type, $programmer);
          $form->submit($data);
  
          /** @var Programmer $programmer */
 diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
-index 3b2b2a5..f47a1f7 100644
+index 3b2b2a5..07362ce 100644
 --- a/src/AppBundle/Form/ProgrammerType.php
 +++ b/src/AppBundle/Form/ProgrammerType.php
 @@ -11,7 +11,10 @@ class ProgrammerType extends AbstractType
@@ -29,17 +36,46 @@ index 3b2b2a5..f47a1f7 100644
              ->add('avatarNumber', 'number')
              ->add('tagLine', 'textarea')
          ;
-@@ -20,8 +23,9 @@ class ProgrammerType extends AbstractType
+@@ -20,7 +23,8 @@ class ProgrammerType extends AbstractType
      public function setDefaultOptions(OptionsResolverInterface $resolver)
      {
          $resolver->setDefaults(array(
 -            'data_class' => 'AppBundle\Entity\Programmer'
 +            'data_class' => 'AppBundle\Entity\Programmer',
++            'is_edit' => false,
          ));
-+        $resolver->setRequired('is_edit');
      }
  
-     public function getName()
+diff --git a/src/AppBundle/Form/UpdateProgrammerType.php b/src/AppBundle/Form/UpdateProgrammerType.php
+new file mode 100644
+index 0000000..964a00e
+--- /dev/null
++++ b/src/AppBundle/Form/UpdateProgrammerType.php
+@@ -0,0 +1,23 @@
++<?php
++
++namespace AppBundle\Form;
++
++use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\FormBuilderInterface;
++use Symfony\Component\OptionsResolver\OptionsResolverInterface;
++
++class UpdateProgrammerType extends ProgrammerType
++{
++    public function setDefaultOptions(OptionsResolverInterface $resolver)
++    {
++        parent::setDefaultOptions($resolver);
++
++        // override this!
++        $resolver->setDefaults(['is_edit' => true]);
++    }
++
++    public function getName()
++    {
++        return 'programmer_edit';
++    }
++}
+\ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index 6075900..f6febe5 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php

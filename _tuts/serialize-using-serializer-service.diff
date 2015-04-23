@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 40dcb2d..14ad72a 100644
+index 5ee5458..78885d2 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -34,8 +34,8 @@ class ProgrammerController extends BaseController
+@@ -35,8 +35,8 @@ class ProgrammerController extends BaseController
          $em->persist($programmer);
          $em->flush();
  
@@ -13,7 +13,7 @@ index 40dcb2d..14ad72a 100644
          $programmerUrl = $this->generateUrl(
              'api_programmers_show',
              ['nickname' => $programmer->getNickname()]
-@@ -62,9 +62,9 @@ class ProgrammerController extends BaseController
+@@ -63,9 +63,9 @@ class ProgrammerController extends BaseController
              ));
          }
  
@@ -25,7 +25,7 @@ index 40dcb2d..14ad72a 100644
  
          return $response;
      }
-@@ -78,12 +78,9 @@ class ProgrammerController extends BaseController
+@@ -79,12 +79,9 @@ class ProgrammerController extends BaseController
          $programmers = $this->getDoctrine()
              ->getRepository('AppBundle:Programmer')
              ->findAll();
@@ -40,7 +40,7 @@ index 40dcb2d..14ad72a 100644
  
          return $response;
      }
-@@ -114,8 +111,8 @@ class ProgrammerController extends BaseController
+@@ -115,8 +112,8 @@ class ProgrammerController extends BaseController
          $em->persist($programmer);
          $em->flush();
  
@@ -51,7 +51,7 @@ index 40dcb2d..14ad72a 100644
  
          return $response;
      }
-@@ -163,14 +160,10 @@ class ProgrammerController extends BaseController
+@@ -164,14 +161,10 @@ class ProgrammerController extends BaseController
          return $form;
      }
  
