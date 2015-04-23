@@ -1,13 +1,14 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 93fd2a3..053e773 100644
+index 93fd2a3..a1e6572 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-@@ -3,14 +3,23 @@
+@@ -3,14 +3,24 @@
  namespace AppBundle\Tests\Controller\Api;
  
  use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 +use Exception;
  use GuzzleHttp\Client;
++use GuzzleHttp\Message\AbstractMessage;
 +use GuzzleHttp\Message\ResponseInterface;
 +use GuzzleHttp\Subscriber\History;
  use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -26,7 +27,7 @@ index 93fd2a3..053e773 100644
       * @var Client
       */
      protected $client;
-@@ -23,6 +32,9 @@ class ApiTestCase extends KernelTestCase
+@@ -23,6 +33,9 @@ class ApiTestCase extends KernelTestCase
                  'exceptions' => false
              ]
          ]);
@@ -36,7 +37,7 @@ index 93fd2a3..053e773 100644
  
          self::bootKernel();
      }
-@@ -42,6 +54,21 @@ class ApiTestCase extends KernelTestCase
+@@ -42,6 +55,21 @@ class ApiTestCase extends KernelTestCase
          // purposefully not calling parent class, which shuts down the kernel
      }
  
@@ -58,13 +59,14 @@ index 93fd2a3..053e773 100644
      private function purgeDatabase()
      {
          $purger = new ORMPurger($this->getService('doctrine.orm.default_entity_manager'));
-@@ -53,4 +80,48 @@ class ApiTestCase extends KernelTestCase
+@@ -53,4 +81,49 @@ class ApiTestCase extends KernelTestCase
          return self::$kernel->getContainer()
              ->get($id);
      }
 +
 +    protected function debugResponse(ResponseInterface $response)
 +    {
++        $this->printDebug(AbstractMessage::getStartLineAndHeaders($response));
 +        $body = (string) $response->getBody();
 +
 +        $contentType = $response->getHeader('Content-Type');

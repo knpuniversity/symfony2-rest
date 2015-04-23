@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 053e773..7d1d9aa 100644
+index a1e6572..c6349f1 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
+@@ -9,6 +9,7 @@ use GuzzleHttp\Message\AbstractMessage;
  use GuzzleHttp\Message\ResponseInterface;
  use GuzzleHttp\Subscriber\History;
  use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -10,7 +10,7 @@ index 053e773..7d1d9aa 100644
  use Symfony\Component\DomCrawler\Crawler;
  
  class ApiTestCase extends KernelTestCase
-@@ -24,6 +25,8 @@ class ApiTestCase extends KernelTestCase
+@@ -25,6 +26,8 @@ class ApiTestCase extends KernelTestCase
       */
      protected $client;
  
@@ -19,7 +19,7 @@ index 053e773..7d1d9aa 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -122,6 +125,10 @@ class ApiTestCase extends KernelTestCase
+@@ -124,6 +127,10 @@ class ApiTestCase extends KernelTestCase
  
      protected function printDebug($string)
      {

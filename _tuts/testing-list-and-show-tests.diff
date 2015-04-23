@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index b28307e..04e7310 100644
+index 8131f63..c9b1f27 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -10,7 +10,7 @@ index b28307e..04e7310 100644
  use AppBundle\Entity\User;
  use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use Doctrine\ORM\EntityManager;
-@@ -12,6 +13,9 @@ use GuzzleHttp\Subscriber\History;
+@@ -13,6 +14,9 @@ use GuzzleHttp\Subscriber\History;
  use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  use Symfony\Component\Console\Output\ConsoleOutput;
  use Symfony\Component\DomCrawler\Crawler;
@@ -20,7 +20,7 @@ index b28307e..04e7310 100644
  
  class ApiTestCase extends KernelTestCase
  {
-@@ -29,6 +33,11 @@ class ApiTestCase extends KernelTestCase
+@@ -30,6 +34,11 @@ class ApiTestCase extends KernelTestCase
  
      private $output;
  
@@ -32,7 +32,7 @@ index b28307e..04e7310 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -150,6 +159,62 @@ class ApiTestCase extends KernelTestCase
+@@ -152,6 +161,62 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -95,7 +95,7 @@ index b28307e..04e7310 100644
      /**
       * @return EntityManager
       */
-@@ -158,4 +223,26 @@ class ApiTestCase extends KernelTestCase
+@@ -160,4 +225,33 @@ class ApiTestCase extends KernelTestCase
          return $this->getService('doctrine')
              ->getManager();
      }
@@ -107,6 +107,13 @@ index b28307e..04e7310 100644
 +        }
 +
 +        $data = json_decode((string)$response->getBody());
++
++        if ($data === null) {
++            throw new \Exception(sprintf(
++                'Cannot read property "%s" - the response is invalid (is it HTML?)',
++                $propertyPath
++            ));
++        }
 +
 +        try {
 +            return $this->accessor->getValue($data, $propertyPath);
@@ -124,10 +131,10 @@ index b28307e..04e7310 100644
  }
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 206e688..8cd5515 100644
+index 206e688..3b1d684 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -30,4 +30,39 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -30,4 +30,40 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->assertArrayHasKey('nickname', $data);
          $this->assertEquals('ObjectOrienter', $data['nickname']);
      }
@@ -165,5 +172,6 @@ index 206e688..8cd5515 100644
 +        $this->assertEquals(200, $response->getStatusCode());
 +        $this->assertResponsePropertyIsArray($response, 'programmers');
 +        $this->assertResponsePropertyCount($response, 'programmers', 2);
++        $this->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
 +    }
  }

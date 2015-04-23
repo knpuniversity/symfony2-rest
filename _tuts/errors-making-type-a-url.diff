@@ -19,10 +19,10 @@ index 39e7a2e..81dc142 100644
          );
          $response->headers->set('Content-Type', 'application/problem+json');
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 3843d8b..1f69c7a 100644
+index 053499e..11002bb 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-@@ -225,6 +225,21 @@ class ApiTestCase extends KernelTestCase
+@@ -227,6 +227,21 @@ class ApiTestCase extends KernelTestCase
          );
      }
  
@@ -45,10 +45,10 @@ index 3843d8b..1f69c7a 100644
      {
          $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 323271b..2773994 100644
+index 739d36a..dc0def9 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -157,7 +157,7 @@ EOF;
+@@ -158,7 +158,7 @@ EOF;
          ]);
  
          $this->assertEquals(400, $response->getStatusCode());

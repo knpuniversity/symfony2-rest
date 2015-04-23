@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 7d1d9aa..b28307e 100644
+index c6349f1..8131f63 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,7 +2,9 @@
@@ -11,8 +11,8 @@ index 7d1d9aa..b28307e 100644
 +use Doctrine\ORM\EntityManager;
  use Exception;
  use GuzzleHttp\Client;
- use GuzzleHttp\Message\ResponseInterface;
-@@ -131,4 +133,29 @@ class ApiTestCase extends KernelTestCase
+ use GuzzleHttp\Message\AbstractMessage;
+@@ -133,4 +135,29 @@ class ApiTestCase extends KernelTestCase
  
          $this->output->writeln($string);
      }

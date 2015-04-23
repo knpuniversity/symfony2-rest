@@ -1,10 +1,10 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 8cd5515..dfac2fa 100644
+index 3b1d684..6075900 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -65,4 +65,24 @@ class ProgrammerControllerTest extends ApiTestCase
-         $this->assertResponsePropertyIsArray($response, 'programmers');
+@@ -66,4 +66,24 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->assertResponsePropertyCount($response, 'programmers', 2);
+         $this->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
      }
 +
 +    public function testPUTProgrammer()

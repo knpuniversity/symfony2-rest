@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 04e7310..3843d8b 100644
+index c9b1f27..053499e 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-@@ -13,6 +13,7 @@ use GuzzleHttp\Subscriber\History;
+@@ -14,6 +14,7 @@ use GuzzleHttp\Subscriber\History;
  use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  use Symfony\Component\Console\Output\ConsoleOutput;
  use Symfony\Component\DomCrawler\Crawler;
@@ -10,7 +10,7 @@ index 04e7310..3843d8b 100644
  use Symfony\Component\PropertyAccess\Exception\AccessException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\PropertyAccessor;
-@@ -190,6 +191,25 @@ class ApiTestCase extends KernelTestCase
+@@ -192,6 +193,25 @@ class ApiTestCase extends KernelTestCase
          }
      }
  
@@ -37,10 +37,10 @@ index 04e7310..3843d8b 100644
      {
          $actual = $this->readResponseProperty($response, $propertyPath);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 5d51916..3d44fa2 100644
+index f35be8f..140a79f 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -118,4 +118,27 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -119,4 +119,27 @@ class ProgrammerControllerTest extends ApiTestCase
          $response = $this->client->delete('/api/programmers/UnitTester');
          $this->assertEquals(204, $response->getStatusCode());
      }

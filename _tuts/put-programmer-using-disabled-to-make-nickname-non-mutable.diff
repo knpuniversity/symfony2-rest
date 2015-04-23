@@ -41,10 +41,10 @@ index 3b2b2a5..f47a1f7 100644
  
      public function getName()
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index dfac2fa..776f534 100644
+index 6075900..f6febe5 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -75,7 +75,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -76,7 +76,7 @@ class ProgrammerControllerTest extends ApiTestCase
          ));
  
          $data = array(
@@ -53,7 +53,7 @@ index dfac2fa..776f534 100644
              'avatarNumber' => 2,
              'tagLine' => 'foo',
          );
-@@ -84,5 +84,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -85,5 +85,7 @@ class ProgrammerControllerTest extends ApiTestCase
          ]);
          $this->assertEquals(200, $response->getStatusCode());
          $this->assertResponsePropertyEquals($response, 'avatarNumber', 2);
