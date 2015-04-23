@@ -1,26 +1,37 @@
-diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
-index b6716e6..4d8d143 100644
---- a/app/phpunit.xml.dist
-+++ b/app/phpunit.xml.dist
-@@ -16,7 +16,7 @@
-     </testsuites>
+diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+index 0cd03fe..6b2ce8d 100644
+--- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+@@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use Doctrine\ORM\EntityManager;
+ use Exception;
+ use GuzzleHttp\Client;
++use GuzzleHttp\Event\BeforeEvent;
+ use GuzzleHttp\Message\AbstractMessage;
+ use GuzzleHttp\Message\ResponseInterface;
+ use GuzzleHttp\Subscriber\History;
+@@ -52,6 +53,15 @@ class ApiTestCase extends KernelTestCase
+         self::$staticClient->getEmitter()
+             ->attach(self::$history);
  
-     <php>
--        <env name="TEST_BASE_URL" value="http://localhost:8000/app_test.php" />
-+        <env name="TEST_BASE_URL" value="http://localhost:8000/app_test.php/" />
-     </php>
++        // guaranteeing that /app_test.php is prefixed to all URLs
++        self::$staticClient->getEmitter()
++            ->on('before', function(BeforeEvent $event) {
++                $path = $event->getRequest()->getPath();
++                if (strpos($path, '/api') === 0) {
++                    $event->getRequest()->setPath('/app_test.php'.$path);
++                }
++            });
++
+         self::bootKernel();
+     }
  
-     <filter>
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 4c4b0c7..0419a5e 100644
+index 4c4b0c7..0a6bca7 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -19,14 +19,13 @@ class ProgrammerControllerTest extends ApiTestCase
-         );
- 
-         // 1) Create a programmer resource
--        $response = $this->client->post('/api/programmers', [
-+        $response = $this->client->post('api/programmers', [
+@@ -22,11 +22,10 @@ class ProgrammerControllerTest extends ApiTestCase
+         $response = $this->client->post('/api/programmers', [
              'body' => json_encode($data)
          ]);
 -        $this->printLastRequestUrl();
@@ -32,24 +43,6 @@ index 4c4b0c7..0419a5e 100644
          $data = json_decode($response->getBody(true), true);
          $this->assertArrayHasKey('nickname', $data);
          $this->assertEquals('ObjectOrienter', $data['nickname']);
-@@ -39,7 +38,7 @@ class ProgrammerControllerTest extends ApiTestCase
-             'avatarNumber' => 3,
-         ));
- 
--        $response = $this->client->get('/api/programmers/UnitTester');
-+        $response = $this->client->get('api/programmers/UnitTester');
-         $this->assertEquals(200, $response->getStatusCode());
-         $this->assertResponsePropertiesExist($response, array(
-             'nickname',
-@@ -61,7 +60,7 @@ class ProgrammerControllerTest extends ApiTestCase
-             'avatarNumber' => 5,
-         ));
- 
--        $response = $this->client->get('/api/programmers');
-+        $response = $this->client->get('api/programmers');
-         $this->assertEquals(200, $response->getStatusCode());
-         $this->assertResponsePropertyIsArray($response, 'programmers');
-         $this->assertResponsePropertyCount($response, 'programmers', 2);
 diff --git a/web/app_test.php b/web/app_test.php
 index 503a56d..0bed2d7 100644
 --- a/web/app_test.php

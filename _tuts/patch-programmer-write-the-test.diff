@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index d476c08..a907486 100644
+index 1e2ad79..b1f5b03 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -89,6 +89,26 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -18,7 +18,7 @@ index d476c08..a907486 100644
 +        $data = array(
 +            'tagLine' => 'bar',
 +        );
-+        $response = $this->client->patch('api/programmers/CowboyCoder', [
++        $response = $this->client->patch('/api/programmers/CowboyCoder', [
 +            'body' => json_encode($data)
 +        ]);
 +        $this->assertEquals(200, $response->getStatusCode());

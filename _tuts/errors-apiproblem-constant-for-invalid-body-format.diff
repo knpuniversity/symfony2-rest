@@ -31,7 +31,7 @@ index 7dbae23..34c66cd 100644
  
          $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index cfc2d56..d7e34f0 100644
+index 33f68a4..e1dd877 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -159,6 +159,7 @@ EOF;
