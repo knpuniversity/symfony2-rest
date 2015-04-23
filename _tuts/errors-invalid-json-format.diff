@@ -22,7 +22,7 @@ index 6b9f856..7dbae23 100644
          $form = $this->createForm($type, $programmer);
          $clearMissing = $request->getMethod() != 'PATCH';
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index ae01e99..6a5d85d 100644
+index 8fc2e77..2f76029 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -143,4 +143,22 @@ class ProgrammerControllerTest extends ApiTestCase

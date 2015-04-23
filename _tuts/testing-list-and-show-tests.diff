@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index f52b6f8..c2fb3bc 100644
+index c46e1d1..e95a81f 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -32,7 +32,7 @@ index f52b6f8..c2fb3bc 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -152,6 +161,62 @@ class ApiTestCase extends KernelTestCase
+@@ -162,6 +171,62 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -95,7 +95,7 @@ index f52b6f8..c2fb3bc 100644
      /**
       * @return EntityManager
       */
-@@ -160,4 +225,33 @@ class ApiTestCase extends KernelTestCase
+@@ -170,4 +235,33 @@ class ApiTestCase extends KernelTestCase
          return $this->getService('doctrine')
              ->getManager();
      }

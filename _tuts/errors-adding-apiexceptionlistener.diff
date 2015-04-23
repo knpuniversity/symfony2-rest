@@ -56,7 +56,7 @@ index 0000000..2f1def0
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 0f20bcd..21860c7 100644
+index a47eea4..809db74 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -156,7 +156,6 @@ EOF;

@@ -141,6 +141,16 @@
             "description": null
         },
         {
+            "id": "testing-hitting-app-test-php-and-debugging",
+            "name": "Testing: Hitting app_test.php and debugging",
+            "description": null
+        },
+        {
+            "id": "testing-removing-leading",
+            "name": "Testing: Removing leading \/",
+            "description": null
+        },
+        {
             "id": "put-programmer-write-the-test",
             "name": "PUT Programmer: Write the test",
             "description": null
@@ -311,5 +321,5 @@
             "description": null
         }
     ],
-    "sha": "161d9cc425945d83e540d4090220d16277587782"
+    "sha": "135e3f9a1f9c61cb21ee405e164b76b2abc6fe3e"
 }

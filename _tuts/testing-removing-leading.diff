@@ -1,0 +1,63 @@
+diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
+index b6716e6..4d8d143 100644
+--- a/app/phpunit.xml.dist
++++ b/app/phpunit.xml.dist
+@@ -16,7 +16,7 @@
+     </testsuites>
+ 
+     <php>
+-        <env name="TEST_BASE_URL" value="http://localhost:8000/app_test.php" />
++        <env name="TEST_BASE_URL" value="http://localhost:8000/app_test.php/" />
+     </php>
+ 
+     <filter>
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 4c4b0c7..0419a5e 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -19,14 +19,13 @@ class ProgrammerControllerTest extends ApiTestCase
+         );
+ 
+         // 1) Create a programmer resource
+-        $response = $this->client->post('/api/programmers', [
++        $response = $this->client->post('api/programmers', [
+             'body' => json_encode($data)
+         ]);
+-        $this->printLastRequestUrl();
+ 
+         $this->assertEquals(201, $response->getStatusCode());
+         $this->assertTrue($response->hasHeader('Location'));
+-        $this->assertEquals('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
++        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
+         $data = json_decode($response->getBody(true), true);
+         $this->assertArrayHasKey('nickname', $data);
+         $this->assertEquals('ObjectOrienter', $data['nickname']);
+@@ -39,7 +38,7 @@ class ProgrammerControllerTest extends ApiTestCase
+             'avatarNumber' => 3,
+         ));
+ 
+-        $response = $this->client->get('/api/programmers/UnitTester');
++        $response = $this->client->get('api/programmers/UnitTester');
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->assertResponsePropertiesExist($response, array(
+             'nickname',
+@@ -61,7 +60,7 @@ class ProgrammerControllerTest extends ApiTestCase
+             'avatarNumber' => 5,
+         ));
+ 
+-        $response = $this->client->get('/api/programmers');
++        $response = $this->client->get('api/programmers');
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->assertResponsePropertyIsArray($response, 'programmers');
+         $this->assertResponsePropertyCount($response, 'programmers', 2);
+diff --git a/web/app_test.php b/web/app_test.php
+index 503a56d..0bed2d7 100644
+--- a/web/app_test.php
++++ b/web/app_test.php
+@@ -1,5 +1,5 @@
+ <?php
+-die('working?');
++
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\Debug\Debug;
+ 

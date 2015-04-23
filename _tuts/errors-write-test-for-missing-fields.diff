@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index eabc961..533098c 100644
+index 0cd03fe..62e66eb 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -14,6 +14,7 @@ use GuzzleHttp\Subscriber\History;
@@ -10,7 +10,7 @@ index eabc961..533098c 100644
  use Symfony\Component\PropertyAccess\Exception\AccessException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\PropertyAccessor;
-@@ -194,6 +195,25 @@ class ApiTestCase extends KernelTestCase
+@@ -203,6 +204,25 @@ class ApiTestCase extends KernelTestCase
          }
      }
  
@@ -37,7 +37,7 @@ index eabc961..533098c 100644
      {
          $actual = $this->readResponseProperty($response, $propertyPath);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index f35be8f..140a79f 100644
+index a5093e9..1bfd0c5 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -119,4 +119,27 @@ class ProgrammerControllerTest extends ApiTestCase

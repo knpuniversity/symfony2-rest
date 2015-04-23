@@ -82,7 +82,7 @@ index 2f1def0..a8ad42b 100644
          $response->headers->set('Content-Type', 'application/problem+json');
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 21860c7..a3e7e58 100644
+index 809db74..ef5e351 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -161,4 +161,13 @@ EOF;

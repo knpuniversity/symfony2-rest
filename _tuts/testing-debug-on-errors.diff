@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index cc2dfde..bc82d69 100644
+index cc2dfde..e99156a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -3,14 +3,24 @@
@@ -37,18 +37,17 @@ index cc2dfde..bc82d69 100644
  
          self::bootKernel();
      }
-@@ -42,6 +55,21 @@ class ApiTestCase extends KernelTestCase
+@@ -42,6 +55,20 @@ class ApiTestCase extends KernelTestCase
          // purposefully not calling parent class, which shuts down the kernel
      }
  
 +    protected function onNotSuccessfulTest(Exception $e)
 +    {
 +        if (self::$history && $lastResponse = self::$history->getLastResponse()) {
-+            $lastRequest = self::$history->getLastRequest();
-+
 +            $this->printDebug('');
 +            $this->printDebug('<error>Failure!</error> when making the following request:');
-+            $this->printDebug(sprintf('<comment>%s</comment>: <info>%s</info>', $lastRequest->getMethod(), $lastRequest->getUrl())."\n");
++            $this->printLastRequestUrl();
++            $this->printDebug('');
 +
 +            $this->debugResponse($lastResponse);
 +        }
@@ -59,10 +58,21 @@ index cc2dfde..bc82d69 100644
      private function purgeDatabase()
      {
          $purger = new ORMPurger($this->getService('doctrine.orm.default_entity_manager'));
-@@ -53,4 +81,49 @@ class ApiTestCase extends KernelTestCase
+@@ -53,4 +80,60 @@ class ApiTestCase extends KernelTestCase
          return self::$kernel->getContainer()
              ->get($id);
      }
++
++    protected function printLastRequestUrl()
++    {
++        $lastRequest = self::$history->getLastRequest();
++
++        if ($lastRequest) {
++            $this->printDebug(sprintf('<comment>%s</comment>: <info>%s</info>', $lastRequest->getMethod(), $lastRequest->getUrl()));
++        } else {
++            $this->printDebug('No request was made.');
++        }
++    }
 +
 +    protected function debugResponse(ResponseInterface $response)
 +    {
