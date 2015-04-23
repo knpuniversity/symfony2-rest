@@ -91,13 +91,13 @@
             "description": null
         },
         {
-            "id": "behat-fill-in-phpunit-test",
-            "name": "Behat: Fill in PHPUnit test",
+            "id": "testing-fill-in-phpunit-test",
+            "name": "Testing: Fill in PHPUnit test",
             "description": null
         },
         {
-            "id": "behat-adding-asserts-to-phpunit-test",
-            "name": "Behat: Adding asserts to PHPUnit test",
+            "id": "testing-adding-asserts-to-phpunit-test",
+            "name": "Testing: Adding asserts to PHPUnit test",
             "description": null
         },
         {
@@ -306,5 +306,5 @@
             "description": null
         }
     ],
-    "sha": "ae16188dec4e66b7c048d3e0c41db53bcde84d3f"
+    "sha": "85547f20481d8e6cdc034926a9196c2968dfe7a1"
 }
