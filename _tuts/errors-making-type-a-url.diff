@@ -45,7 +45,7 @@ index 62e66eb..8467115 100644
      {
          $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 67abf9b..4b1f2b9 100644
+index b12d0b7..38367d6 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -158,7 +158,7 @@ EOF;

@@ -77,7 +77,7 @@ index 0000000..964a00e
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 8dbf567..bd365e2 100644
+index 7f1dc0e..f2f58ea 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -76,7 +76,7 @@ class ProgrammerControllerTest extends ApiTestCase

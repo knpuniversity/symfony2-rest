@@ -50,7 +50,7 @@ index bd24303..f5d6fe6 100644
      private $powerLevel = 0;
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 4b1f2b9..3dd505c 100644
+index 38367d6..0dee73f 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -46,6 +46,7 @@ class ProgrammerControllerTest extends ApiTestCase

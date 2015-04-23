@@ -20,7 +20,7 @@ index a8ad42b..f174367 100644
  
          $response = new JsonResponse(
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index ef5e351..67abf9b 100644
+index 21a8b8f..b12d0b7 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -169,5 +169,6 @@ EOF;

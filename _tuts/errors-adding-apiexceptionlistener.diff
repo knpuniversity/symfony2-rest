@@ -56,11 +56,11 @@ index 0000000..2f1def0
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index a47eea4..809db74 100644
+index d7e34f0..bd7b7b2 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -156,7 +156,6 @@ EOF;
-         $response = $this->client->post('/api/programmers', [
+         $response = $this->client->post('api/programmers', [
              'body' => $invalidBody
          ]);
 -        $this->debugResponse($response);
