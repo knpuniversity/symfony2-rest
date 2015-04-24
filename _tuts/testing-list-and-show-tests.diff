@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index c46e1d1..e95a81f 100644
+index 7c198d5..94c2fde 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -10,8 +10,8 @@ index c46e1d1..e95a81f 100644
  use AppBundle\Entity\User;
  use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use Doctrine\ORM\EntityManager;
-@@ -13,6 +14,9 @@ use GuzzleHttp\Subscriber\History;
- use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+@@ -14,6 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ use Symfony\Component\Console\Helper\FormatterHelper;
  use Symfony\Component\Console\Output\ConsoleOutput;
  use Symfony\Component\DomCrawler\Crawler;
 +use Symfony\Component\PropertyAccess\Exception\AccessException;
@@ -20,11 +20,12 @@ index c46e1d1..e95a81f 100644
  
  class ApiTestCase extends KernelTestCase
  {
-@@ -30,6 +34,11 @@ class ApiTestCase extends KernelTestCase
- 
-     private $output;
+@@ -39,6 +43,12 @@ class ApiTestCase extends KernelTestCase
+      */
+     private $formatterHelper;
  
 +    /**
++     *
 +     * @var PropertyAccessor
 +     */
 +    private $accessor;
@@ -32,7 +33,7 @@ index c46e1d1..e95a81f 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -162,6 +171,62 @@ class ApiTestCase extends KernelTestCase
+@@ -224,6 +234,62 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -95,7 +96,7 @@ index c46e1d1..e95a81f 100644
      /**
       * @return EntityManager
       */
-@@ -170,4 +235,33 @@ class ApiTestCase extends KernelTestCase
+@@ -232,4 +298,33 @@ class ApiTestCase extends KernelTestCase
          return $this->getService('doctrine')
              ->getManager();
      }
@@ -129,7 +130,6 @@ index c46e1d1..e95a81f 100644
 +        }
 +    }
  }
-\ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index 206e688..3b1d684 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php

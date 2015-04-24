@@ -1,16 +1,16 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 6b2ce8d..017b515 100644
+index b03f476..c44d04d 100644
 --- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
 +++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-@@ -15,6 +15,7 @@ use GuzzleHttp\Subscriber\History;
- use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ use Symfony\Component\Console\Helper\FormatterHelper;
  use Symfony\Component\Console\Output\ConsoleOutput;
  use Symfony\Component\DomCrawler\Crawler;
 +use Symfony\Component\PropertyAccess\Exception\RuntimeException;
  use Symfony\Component\PropertyAccess\Exception\AccessException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\PropertyAccessor;
-@@ -213,6 +214,25 @@ class ApiTestCase extends KernelTestCase
+@@ -276,6 +277,25 @@ class ApiTestCase extends KernelTestCase
          }
      }
  
