@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index cc3702b..5967295 100644
+index 415c2f2..bf3d5a1 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -22,9 +22,16 @@ class ProgrammerController extends BaseController
@@ -20,21 +20,21 @@ index cc3702b..5967295 100644
  
          $em = $this->getDoctrine()->getManager();
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index 3172a24..bd24303 100644
+index 2406613..a141395 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
-@@ -3,6 +3,7 @@
- namespace AppBundle\Entity;
+@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
  
  use Doctrine\ORM\Mapping as ORM;
+ use JMS\Serializer\Annotation as Serializer;
 +use Symfony\Component\Validator\Constraints as Assert;
  
  /**
   * Programmer
-@@ -25,6 +26,7 @@ class Programmer
-      * @var string
+@@ -29,6 +30,7 @@ class Programmer
       *
       * @ORM\Column(name="nickname", type="string", length=100, unique=true)
+      * @Serializer\Expose
 +     * @Assert\NotBlank(message="Please enter a clever nickname")
       */
      private $nickname;

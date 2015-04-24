@@ -51,7 +51,7 @@ index 0000000..618df9f
 +    }
 +}
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index b996786..2a6414a 100644
+index 4be7f2f..9f82f54 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -2,6 +2,7 @@
@@ -62,7 +62,7 @@ index b996786..2a6414a 100644
  use AppBundle\Controller\BaseController;
  use AppBundle\Entity\Programmer;
  use AppBundle\Form\ProgrammerType;
-@@ -186,13 +187,14 @@ class ProgrammerController extends BaseController
+@@ -168,13 +169,14 @@ class ProgrammerController extends BaseController
      {
          $errors = $this->getErrorsFromForm($form);
  

@@ -45,10 +45,10 @@ index c44d04d..f555d6d 100644
      {
          $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 57c4394..1b2d0c7 100644
+index e5dc7d1..12de1d8 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -158,7 +158,7 @@ EOF;
+@@ -159,7 +159,7 @@ EOF;
          ]);
  
          $this->assertEquals(400, $response->getStatusCode());

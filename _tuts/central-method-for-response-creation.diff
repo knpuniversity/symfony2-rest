@@ -1,0 +1,89 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 23fe4f4..415c2f2 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -31,8 +31,7 @@ class ProgrammerController extends BaseController
+         $em->persist($programmer);
+         $em->flush();
+ 
+-        $json = $this->serialize($programmer);
+-        $response = new Response($json, 201);
++        $response = $this->createApiResponse($programmer, 201);
+         $programmerUrl = $this->generateUrl(
+             'api_programmers_show',
+             ['nickname' => $programmer->getNickname()]
+@@ -59,9 +58,7 @@ class ProgrammerController extends BaseController
+             ));
+         }
+ 
+-        $json = $this->serialize($programmer);
+-
+-        $response = new Response($json, 200);
++        $response = $this->createApiResponse($programmer, 200);
+ 
+         return $response;
+     }
+@@ -75,9 +72,8 @@ class ProgrammerController extends BaseController
+         $programmers = $this->getDoctrine()
+             ->getRepository('AppBundle:Programmer')
+             ->findAll();
+-        $json = $this->serialize(['programmers' => $programmers]);
+ 
+-        $response = new Response($json, 200);
++        $response = $this->createApiResponse(['programmers' => $programmers], 200);
+ 
+         return $response;
+     }
+@@ -106,8 +102,7 @@ class ProgrammerController extends BaseController
+         $em->persist($programmer);
+         $em->flush();
+ 
+-        $json = $this->serialize($programmer);
+-        $response = new Response($json, 200);
++        $response = $this->createApiResponse($programmer, 200);
+ 
+         return $response;
+     }
+@@ -141,10 +136,4 @@ class ProgrammerController extends BaseController
+         $clearMissing = $request->getMethod() != 'PATCH';
+         $form->submit($data, $clearMissing);
+     }
+-
+-    private function serialize($data)
+-    {
+-        return $this->container->get('jms_serializer')
+-            ->serialize($data, 'json');
+-    }
+ }
+diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
+index b7935b5..9fc91f2 100644
+--- a/src/AppBundle/Controller/BaseController.php
++++ b/src/AppBundle/Controller/BaseController.php
+@@ -8,6 +8,7 @@ use AppBundle\Repository\ProjectRepository;
+ use AppBundle\Repository\BattleRepository;
+ use AppBundle\Repository\ApiTokenRepository;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
++use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+ use Symfony\Component\HttpFoundation\Request;
+ use AppBundle\Entity\User;
+@@ -109,4 +110,19 @@ abstract class BaseController extends Controller
+         return $this->getDoctrine()
+             ->getRepository('AppBundle:ApiToken');
+     }
++
++    protected function createApiResponse($data, $statusCode = 200)
++    {
++        $json = $this->serialize($data);
++
++        return new Response($json, $statusCode, array(
++            'Content-Type' => 'application/json'
++        ));
++    }
++
++    protected function serialize($data, $format = 'json')
++    {
++        return $this->container->get('jms_serializer')
++            ->serialize($data, $format);
++    }
+ }

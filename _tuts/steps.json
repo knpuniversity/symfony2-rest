@@ -191,6 +191,36 @@
             "description": null
         },
         {
+            "id": "serialize-installing-serializer",
+            "name": "Serialize: Installing serializer",
+            "description": null
+        },
+        {
+            "id": "serialize-using-serializer-service",
+            "name": "Serialize: Using serializer service",
+            "description": null
+        },
+        {
+            "id": "serialize-using-the-identical-naming-strategy",
+            "name": "Serialize: Using the Identical naming strategy",
+            "description": null
+        },
+        {
+            "id": "central-method-for-response-creation",
+            "name": "Central method for response creation",
+            "description": null
+        },
+        {
+            "id": "serialize-fixing-null-values",
+            "name": "Serialize: Fixing null values",
+            "description": null
+        },
+        {
+            "id": "serialize-whitelisting-properties",
+            "name": "Serialize: Whitelisting properties",
+            "description": null
+        },
+        {
             "id": "errors-write-test-for-missing-fields",
             "name": "Errors: Write test for missing fields",
             "description": null
@@ -291,5 +321,5 @@
             "description": null
         }
     ],
-    "sha": "b08c8c07162d5a18e12fa0f0e8ede1d05a2702a2"
+    "sha": "70b39e7e75be36ef6b2f4ebd30854f1687a9ab7e"
 }

@@ -82,10 +82,10 @@ index 2f1def0..a8ad42b 100644
          $response->headers->set('Content-Type', 'application/problem+json');
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index d78b8d1..8e73c84 100644
+index 94aacb9..457834e 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -161,4 +161,13 @@ EOF;
+@@ -162,4 +162,13 @@ EOF;
          $this->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
      }
  

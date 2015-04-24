@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 3a2a8d4..8b7debe 100644
+index b4d5c40..2356516 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -13,6 +13,7 @@ use Symfony\Component\Form\FormInterface;
@@ -10,7 +10,7 @@ index 3a2a8d4..8b7debe 100644
  
  class ProgrammerController extends BaseController
  {
-@@ -150,6 +151,9 @@ class ProgrammerController extends BaseController
+@@ -142,6 +143,9 @@ class ProgrammerController extends BaseController
      private function processForm(Request $request, FormInterface $form)
      {
          $data = json_decode($request->getContent(), true);
@@ -21,10 +21,10 @@ index 3a2a8d4..8b7debe 100644
          $clearMissing = $request->getMethod() != 'PATCH';
          $form->submit($data, $clearMissing);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index bcbb35e..33f68a4 100644
+index 34d5a3d..813b4f2 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -143,4 +143,22 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -144,4 +144,22 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
          $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
      }

@@ -16,10 +16,10 @@ index 2aa72a7..fba2739 100644
  
      private $statusCode;
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 8b7debe..430ae25 100644
+index 2356516..0e65f68 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -152,7 +152,9 @@ class ProgrammerController extends BaseController
+@@ -144,7 +144,9 @@ class ProgrammerController extends BaseController
      {
          $data = json_decode($request->getContent(), true);
          if ($data === null) {
@@ -31,10 +31,10 @@ index 8b7debe..430ae25 100644
  
          $clearMissing = $request->getMethod() != 'PATCH';
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 33f68a4..e1dd877 100644
+index 813b4f2..682818e 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -159,6 +159,7 @@ EOF;
+@@ -160,6 +160,7 @@ EOF;
          $this->debugResponse($response);
  
          $this->assertEquals(400, $response->getStatusCode());
