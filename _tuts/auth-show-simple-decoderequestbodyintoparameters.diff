@@ -1,10 +1,10 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index be14c40..a063b55 100644
+index 2226c02..146ab0b 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -137,13 +137,7 @@ class ProgrammerController extends BaseController
+@@ -143,12 +143,7 @@ class ProgrammerController extends BaseController
  
-     private function handleRequest(Request $request, Programmer $programmer)
+     private function processForm(Request $request, FormInterface $form)
      {
 -        $data = json_decode($request->getContent(), true);
 -        if ($data === null) {
@@ -12,11 +12,10 @@ index be14c40..a063b55 100644
 -
 -            throw new ApiProblemException($apiProblem);
 -        }
--
 +        $data = $this->decodeRequestBody($request);
-         $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
-         $form = $this->createForm($type, $programmer);
+ 
          $clearMissing = $request->getMethod() != 'PATCH';
+         $form->submit($data, $clearMissing);
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
 index d9e0fe9..c33656e 100644
 --- a/src/AppBundle/Controller/BaseController.php

@@ -1,17 +1,9 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 58bc1df..85a8892 100644
+index 5967295..ac97e0f 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -8,6 +8,7 @@ use AppBundle\Form\ProgrammerType;
- use AppBundle\Form\UpdateProgrammerType;
- use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
- use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-+use Symfony\Component\Form\FormInterface;
- use Symfony\Component\HttpFoundation\JsonResponse;
- use Symfony\Component\HttpFoundation\Request;
- use Symfony\Component\HttpFoundation\Response;
-@@ -24,9 +25,15 @@ class ProgrammerController extends BaseController
-         $form = $this->handleRequest($request, $programmer);
+@@ -27,9 +27,15 @@ class ProgrammerController extends BaseController
+         $this->processForm($request, $form);
  
          if (!$form->isValid()) {
 -            header('Content-Type: cli');
@@ -28,8 +20,8 @@ index 58bc1df..85a8892 100644
 +            return new JsonResponse($data, 400);
          }
  
-         $em = $this->getDoctrine()->getManager();
-@@ -162,4 +169,22 @@ class ProgrammerController extends BaseController
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
+@@ -161,4 +167,22 @@ class ProgrammerController extends BaseController
              'tagLine' => $programmer->getTagLine(),
          );
      }

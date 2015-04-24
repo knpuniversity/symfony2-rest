@@ -43,7 +43,7 @@ index 0000000..5512dd5
 +    }
 +}
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 34c66cd..b558ef7 100644
+index 430ae25..85fc558 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -3,6 +3,7 @@
@@ -54,7 +54,7 @@ index 34c66cd..b558ef7 100644
  use AppBundle\Controller\BaseController;
  use AppBundle\Entity\Programmer;
  use AppBundle\Form\ProgrammerType;
-@@ -148,7 +149,7 @@ class ProgrammerController extends BaseController
+@@ -154,7 +155,7 @@ class ProgrammerController extends BaseController
          if ($data === null) {
              $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
  
@@ -62,4 +62,4 @@ index 34c66cd..b558ef7 100644
 +            throw new ApiProblemException($apiProblem);
          }
  
-         $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
+         $clearMissing = $request->getMethod() != 'PATCH';

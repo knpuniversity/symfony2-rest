@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index fd1b3e4..b958e13 100644
+index dac97f0..0340b87 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -110,6 +110,28 @@ class ProgrammerController extends BaseController
+@@ -115,6 +115,28 @@ class ProgrammerController extends BaseController
          return $response;
      }
  
@@ -28,6 +28,6 @@ index fd1b3e4..b958e13 100644
 +        return new Response(null, 204);
 +    }
 +
-     private function handleRequest(Request $request, Programmer $programmer)
+     private function processForm(Request $request, FormInterface $form)
      {
          $data = json_decode($request->getContent(), true);

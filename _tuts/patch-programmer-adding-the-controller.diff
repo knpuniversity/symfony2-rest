@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index b958e13..017bb1b 100644
+index 0340b87..cc3702b 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -83,7 +83,7 @@ class ProgrammerController extends BaseController
+@@ -87,7 +87,7 @@ class ProgrammerController extends BaseController
  
      /**
       * @Route("/api/programmers/{nickname}")
@@ -11,13 +11,14 @@ index b958e13..017bb1b 100644
       */
      public function updateAction($nickname, Request $request)
      {
-@@ -137,7 +137,8 @@ class ProgrammerController extends BaseController
+@@ -140,7 +140,9 @@ class ProgrammerController extends BaseController
+     private function processForm(Request $request, FormInterface $form)
+     {
          $data = json_decode($request->getContent(), true);
-         $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
-         $form = $this->createForm($type, $programmer);
 -        $form->submit($data);
++
 +        $clearMissing = $request->getMethod() != 'PATCH';
 +        $form->submit($data, $clearMissing);
+     }
  
-         /** @var Programmer $programmer */
-         $programmer = $form->getData();
+     private function serializeProgrammer(Programmer $programmer)

@@ -1,8 +1,16 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 862ac38..3891d71 100644
+index 862ac38..8115f56 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -19,14 +19,8 @@ class ProgrammerController extends BaseController
+@@ -7,6 +7,7 @@ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
++use Symfony\Component\Form\FormInterface;
+ use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+@@ -19,13 +20,10 @@ class ProgrammerController extends BaseController
       */
      public function newAction(Request $request)
      {
@@ -10,43 +18,38 @@ index 862ac38..3891d71 100644
 -
 -        $form = $this->createForm(new ProgrammerType());
 -        $form->submit($data);
--
++        $programmer = new Programmer();
++        $form = $this->createForm(new ProgrammerType(), $programmer);
++        $this->processForm($request, $form);
+ 
 -        /** @var Programmer $programmer */
 -        $programmer = $form->getData();
--        $programmer->setUser($this->findUserByUsername('weaverryan'));
-+        $programmer = new Programmer();
-+        $this->handleRequest($request, $programmer);
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
  
          $em = $this->getDoctrine()->getManager();
-         $em->persist($programmer);
-@@ -103,13 +97,7 @@ class ProgrammerController extends BaseController
+@@ -103,13 +101,8 @@ class ProgrammerController extends BaseController
              ));
          }
  
 -        $data = json_decode($request->getContent(), true);
--        $form = $this->createForm(new ProgrammerType(), $programmer);
+         $form = $this->createForm(new ProgrammerType(), $programmer);
 -        $form->submit($data);
 -
 -        /** @var Programmer $programmer */
 -        $programmer = $form->getData();
 -        $programmer->setUser($this->findUserByUsername('weaverryan'));
-+        $this->handleRequest($request, $programmer);
++        $this->processForm($request, $form);
  
          $em = $this->getDoctrine()->getManager();
          $em->persist($programmer);
-@@ -121,6 +109,16 @@ class ProgrammerController extends BaseController
+@@ -121,6 +114,11 @@ class ProgrammerController extends BaseController
          return $response;
      }
  
-+    private function handleRequest(Request $request, Programmer $programmer)
++    private function processForm(Request $request, FormInterface $form)
 +    {
 +        $data = json_decode($request->getContent(), true);
-+        $form = $this->createForm(new ProgrammerType(), $programmer);
 +        $form->submit($data);
-+
-+        /** @var Programmer $programmer */
-+        $programmer = $form->getData();
-+        $programmer->setUser($this->findUserByUsername('weaverryan'));
 +    }
  
      private function serializeProgrammer(Programmer $programmer)

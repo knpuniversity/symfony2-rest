@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 6b9f856..7dbae23 100644
+index 3a2a8d4..8b7debe 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -13,6 +13,7 @@ use Symfony\Component\Form\FormInterface;
@@ -10,17 +10,16 @@ index 6b9f856..7dbae23 100644
  
  class ProgrammerController extends BaseController
  {
-@@ -144,6 +145,10 @@ class ProgrammerController extends BaseController
-     private function handleRequest(Request $request, Programmer $programmer)
+@@ -150,6 +151,9 @@ class ProgrammerController extends BaseController
+     private function processForm(Request $request, FormInterface $form)
      {
          $data = json_decode($request->getContent(), true);
 +        if ($data === null) {
 +            throw new HttpException(400, 'Invalid JSON body!');
 +        }
-+
-         $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
-         $form = $this->createForm($type, $programmer);
+ 
          $clearMissing = $request->getMethod() != 'PATCH';
+         $form->submit($data, $clearMissing);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index bcbb35e..33f68a4 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php

@@ -1,9 +1,18 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index b558ef7..5ee5458 100644
+index 85fc558..7965992 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -28,7 +28,7 @@ class ProgrammerController extends BaseController
-         $form = $this->handleRequest($request, $programmer);
+@@ -30,7 +30,7 @@ class ProgrammerController extends BaseController
+         $this->processForm($request, $form);
+ 
+         if (!$form->isValid()) {
+-            return $this->createValidationErrorResponse($form);
++            $this->throwApiProblemValidationException($form);
+         }
+ 
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
+@@ -114,7 +114,7 @@ class ProgrammerController extends BaseController
+         $this->processForm($request, $form);
  
          if (!$form->isValid()) {
 -            return $this->createValidationErrorResponse($form);
@@ -11,16 +20,7 @@ index b558ef7..5ee5458 100644
          }
  
          $em = $this->getDoctrine()->getManager();
-@@ -108,7 +108,7 @@ class ProgrammerController extends BaseController
- 
-         $form = $this->handleRequest($request, $programmer);
-         if (!$form->isValid()) {
--            return $this->createValidationErrorResponse($form);
-+            $this->throwApiProblemValidationException($form);
-         }
- 
-         $em = $this->getDoctrine()->getManager();
-@@ -192,7 +192,7 @@ class ProgrammerController extends BaseController
+@@ -190,7 +190,7 @@ class ProgrammerController extends BaseController
          return $errors;
      }
  
@@ -29,7 +29,7 @@ index b558ef7..5ee5458 100644
      {
          $errors = $this->getErrorsFromForm($form);
  
-@@ -202,9 +202,6 @@ class ProgrammerController extends BaseController
+@@ -200,9 +200,6 @@ class ProgrammerController extends BaseController
          );
          $apiProblem->set('errors', $errors);
  

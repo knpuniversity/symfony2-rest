@@ -16,10 +16,10 @@ index 2aa72a7..fba2739 100644
  
      private $statusCode;
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 7dbae23..34c66cd 100644
+index 8b7debe..430ae25 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -146,7 +146,9 @@ class ProgrammerController extends BaseController
+@@ -152,7 +152,9 @@ class ProgrammerController extends BaseController
      {
          $data = json_decode($request->getContent(), true);
          if ($data === null) {
@@ -29,7 +29,7 @@ index 7dbae23..34c66cd 100644
 +            // now what?
          }
  
-         $type = $programmer && $programmer->getId() ? new UpdateProgrammerType() : new ProgrammerType();
+         $clearMissing = $request->getMethod() != 'PATCH';
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index 33f68a4..e1dd877 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php

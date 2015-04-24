@@ -1,31 +1,24 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 017bb1b..58bc1df 100644
+index cc3702b..5967295 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -21,7 +21,13 @@ class ProgrammerController extends BaseController
+@@ -22,9 +22,16 @@ class ProgrammerController extends BaseController
      public function newAction(Request $request)
      {
          $programmer = new Programmer();
--        $this->handleRequest($request, $programmer);
-+        $form = $this->handleRequest($request, $programmer);
 +
+         $form = $this->createForm(new ProgrammerType(), $programmer);
+         $this->processForm($request, $form);
+ 
 +        if (!$form->isValid()) {
 +            header('Content-Type: cli');
 +            dump((string) $form->getErrors(true, false));die;
 +            die;
 +        }
++
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
  
          $em = $this->getDoctrine()->getManager();
-         $em->persist($programmer);
-@@ -143,6 +149,8 @@ class ProgrammerController extends BaseController
-         /** @var Programmer $programmer */
-         $programmer = $form->getData();
-         $programmer->setUser($this->findUserByUsername('weaverryan'));
-+
-+        return $form;
-     }
- 
-     private function serializeProgrammer(Programmer $programmer)
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
 index 3172a24..bd24303 100644
 --- a/src/AppBundle/Entity/Programmer.php

@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 78885d2..be14c40 100644
+index aac2d7c..2226c02 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -35,8 +35,7 @@ class ProgrammerController extends BaseController
+@@ -39,8 +39,7 @@ class ProgrammerController extends BaseController
          $em->persist($programmer);
          $em->flush();
  
@@ -12,7 +12,7 @@ index 78885d2..be14c40 100644
          $programmerUrl = $this->generateUrl(
              'api_programmers_show',
              ['nickname' => $programmer->getNickname()]
-@@ -63,9 +62,7 @@ class ProgrammerController extends BaseController
+@@ -67,9 +66,7 @@ class ProgrammerController extends BaseController
              ));
          }
  
@@ -23,7 +23,7 @@ index 78885d2..be14c40 100644
  
          return $response;
      }
-@@ -79,9 +76,8 @@ class ProgrammerController extends BaseController
+@@ -83,9 +80,8 @@ class ProgrammerController extends BaseController
          $programmers = $this->getDoctrine()
              ->getRepository('AppBundle:Programmer')
              ->findAll();
@@ -34,7 +34,7 @@ index 78885d2..be14c40 100644
  
          return $response;
      }
-@@ -112,8 +108,7 @@ class ProgrammerController extends BaseController
+@@ -118,8 +114,7 @@ class ProgrammerController extends BaseController
          $em->persist($programmer);
          $em->flush();
  
@@ -44,8 +44,8 @@ index 78885d2..be14c40 100644
  
          return $response;
      }
-@@ -161,12 +156,6 @@ class ProgrammerController extends BaseController
-         return $form;
+@@ -159,12 +154,6 @@ class ProgrammerController extends BaseController
+         $form->submit($data, $clearMissing);
      }
  
 -    private function serialize($data)
