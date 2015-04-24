@@ -281,36 +281,6 @@
             "description": null
         },
         {
-            "id": "serialize-installing-serializer",
-            "name": "Serialize: Installing serializer",
-            "description": null
-        },
-        {
-            "id": "serialize-using-serializer-service",
-            "name": "Serialize: Using serializer service",
-            "description": null
-        },
-        {
-            "id": "serialize-using-the-identical-naming-strategy",
-            "name": "Serialize: Using the Identical naming strategy",
-            "description": null
-        },
-        {
-            "id": "serialize-central-method-for-response-creation",
-            "name": "Serialize: Central method for response creation",
-            "description": null
-        },
-        {
-            "id": "serialize-fixing-null-values",
-            "name": "Serialize: Fixing null values",
-            "description": null
-        },
-        {
-            "id": "serialize-whitelisting-properties",
-            "name": "Serialize: Whitelisting properties",
-            "description": null
-        },
-        {
             "id": "auth-show-simple-decoderequestbodyintoparameters",
             "name": "Auth: Show simple decodeRequestBodyIntoParameters",
             "description": null
