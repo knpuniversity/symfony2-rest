@@ -9,8 +9,7 @@
             <tr>
                 <th>Programmer</th>
                 <th>Project</th>
-                <th>Result</th>
-                <th>Date</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -34,9 +33,6 @@
                         >
                             <i class="fa fa-thumbs-{{ battle.didProgrammerWin ? 'up' : 'down' }}"></i>
                         </a>
-                    </td>
-                    <td>
-                        {{ battle.foughtAt|date('Y-m-d') }}
                     </td>
                 </tr>
             {% endfor %}
