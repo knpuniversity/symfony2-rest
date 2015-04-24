@@ -5,7 +5,13 @@
     <h1>Login</h1>
 
     {% if error %}
-        {{ macros.print_errors([error]) }}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-dismissable alert-danger">
+                    {{ error.messageKey|trans(error.messageData) }}
+                </div>
+            </div>
+        </div>
     {% endif %}
     
         <form class="form-login" action="{{ path('security_login_check') }}" method="post">
