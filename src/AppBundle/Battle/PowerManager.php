@@ -62,8 +62,8 @@ class PowerManager
     {
         // vary the power change between 3 and 7
         $powerChange = rand(3, 7);
-        // have a 1/3 chance that the change will be negative (and then make the negatives smaller)
-        $powerChange = (rand(0, 2) == 2) ? (floor($powerChange/2) * -1) : $powerChange;
+        // have a 1/4 chance that the change will be negative (and then make the negatives smaller)
+        $powerChange = (rand(0, 3) == 3) ? (floor($powerChange/2) * -1) : $powerChange;
 
         $programmer->setPowerLevel($programmer->getPowerLevel() + $powerChange);
         $this->em->persist($programmer);
