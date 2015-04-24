@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 2226c02..146ab0b 100644
+index 7965992..53345be 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -143,12 +143,7 @@ class ProgrammerController extends BaseController
+@@ -151,12 +151,7 @@ class ProgrammerController extends BaseController
  
      private function processForm(Request $request, FormInterface $form)
      {
@@ -17,7 +17,7 @@ index 2226c02..146ab0b 100644
          $clearMissing = $request->getMethod() != 'PATCH';
          $form->submit($data, $clearMissing);
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index d9e0fe9..c33656e 100644
+index b7935b5..3f3c054 100644
 --- a/src/AppBundle/Controller/BaseController.php
 +++ b/src/AppBundle/Controller/BaseController.php
 @@ -2,6 +2,8 @@
@@ -29,9 +29,9 @@ index d9e0fe9..c33656e 100644
  use AppBundle\Repository\ProgrammerRepository;
  use AppBundle\Repository\UserRepository;
  use AppBundle\Repository\ProjectRepository;
-@@ -128,4 +130,21 @@ abstract class BaseController extends Controller
- 
-         return $this->container->get('jms_serializer')->serialize($data, $format, $context);
+@@ -109,4 +111,21 @@ abstract class BaseController extends Controller
+         return $this->getDoctrine()
+             ->getRepository('AppBundle:ApiToken');
      }
 +
 +    protected function decodeRequestBody(Request $request)
