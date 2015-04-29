@@ -1,0 +1,32 @@
+title:  Building a RESTful API in Symfony Episode 1
+summary: |
+    Making RESTful APIs is hard. That's why we built an entire [REST series](http://knpuniversity.com/screencast/rest)
+    around understanding the most important concepts.
+    
+    In this series, we get to work: by building the same APIin the REST
+    series, but leveraging all the amazing tools and libraries of the Symfony
+    framework. If terminology like representations, resources, and hypermedia
+    are new to you, start with the [REST series](http://knpuniversity.com/screencast/rest)
+    and then come back.
+
+    In Episode 1, we'll start quick with:
+
+    * Build your first functional POST endpoint
+    * Decoding the Request body
+    * Using forms to handle incoming data
+    * Writing tests for your API
+    * Handling data "seeding" for your tests
+    * GET, PUT, DELETE and PATCH endpoints
+    * Using the JMS Serializer
+
+illustration: rest.png
+hasVideoDownload: 0
+tuts_hero:
+    start_step: "start"
+    finish_step: "Serialize: Whitelisting properties"
+
+chapters:
+    post:
+        is_finished: false
+    post-json-body:
+        is_finished: false

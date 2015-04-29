@@ -1,0 +1,149 @@
+# POST To Create
+
+Well hey guys! I've wanted to write this series for *years*, and now that
+it's here, I'm *pumped*! That's because even though building an API can be
+really tough, the system we're about to build feels simple, really a bit
+beautiful.
+
+We have another REST series on the site where we build the API in Silex and
+spend time learning the fundamental concepts of REST, like resources, representations,
+what status codes to return, what headers to set, how to format your JSON
+and a few other buzzwords like hypermedia, HATEOAS and idempotency.
+
+But in this series, I'll assume you have a basic grasp of this stuff and
+we'll get straight to work. If you're confused by a term, head back to
+this series to fill in your knowledge.
+
+## The Project
+
+Ok, I've got the "start" directory for the project downloaded, I've configured
+`parameters.yml` and I've already run `composer install`. So let's launch
+the built-in web server:
+
+```bash
+php app/console server:start
+```
+
+Hey, it's Code Battles! This is the same project we built in Silex for the
+other REST series. It already has a web interface - we're going to build
+the API. To login, make sure you have a database with some fixtures:
+
+```bash
+php app/console doctrine:database:create
+php app/console doctrine:schema:create
+php app/console doctrine:fixtures:load
+```
+
+Now login with a fixtures user: `weaverryan` and my very secure password
+`foo`.
+
+## The Code Battles Web Interface
+
+Ok, let me give you a quick 60-second tour, so we actually understand the
+API we'll build.
+
+The first resource is a programmer, and we start by creating one. Give it
+a name, a clever tag line, choose one of the avatars and compile! Next, a
+programmer has energy, and you can change that by powering them up. Sometimes
+good things happen that give you power, sometimes bad things happen. Isn't
+that just like life...
+
+With some power, you can start a battle. These are projects, and projects
+are the second resource. And when you select one, it creates our third resource:
+a battle. Our programmer killed it! Each battle is between a programmer resource
+and a project resource. On the homepage, you can see a list of all the battles.
+
+## POST to /api/programmers
+
+So where do we start with the API? Well, other than logging in - which we'll
+talk about later - the first thing we do on the web is create the programmer.
+That's where we should start. Building an API is no different than building
+for the web: you need to step back and *think* about your user-flow and build
+things piece-by-piece in that order.
+
+Open up `app/config/routing.yml`. I'm using annotation routing, and it's
+loading from all of my web controllers, which I organized into `Controller/Web`
+directory, because I knew that I was going to build an API. Now we can create
+an `Api` directory next to it.
+
+In `routing.yml`, I'm also going to split the directories into 2 imports.
+Trust me - this will come in handy later. The first will load the `Web/`
+directory and the second will load from `Api/`:
+
+CODE TODO
+
+Now create the new `ProgrammerController` - and make it extend Symfony's
+`Controller` like normal:
+
+CODE TODO
+
+Our first endpoint will be for *creating* Programmers, so let's start with
+`public function newAction()`. Above it, setup the `@Route` annotation with
+the URL `/api/programmers`. Let's also make it only respond to `POST` requests:
+
+CODE TODO
+
+### URL Structures and HTTP Methods
+
+Ok, we just made 2 interesting architectural decisions:
+
+First, we're going to start all our API URI's with `/api`. That's opinionated,
+and RESTfully speaking, it's wrong. REST says that if we want to return an
+HTML *or* JSON representation of a programmer resource, we should have just
+*one* URI - like `/programmers/HappyCoderCat`. This one URI should be able
+to return both formats based on a header the client sends.
+
+If you want to do this, awesome - go for it! But it's not easy to do, and
+I'm not sure it's worth it. That's why we've separated the `Web` and `Api`
+stuff into different controllers and URIs. Now we can focus *just* on getting
+our API right.
+
+Second, to create a new resource, you should send a POST request to that
+resource's collection URI - so `/api/programmers`. If you're curious why,
+watch our other screencast and learn about idempotency. And, in REST, you
+can make your URLs look however you want. But in practice, we're going to
+use a really consistent pattern. Because even though you can make your URLs
+super weird you probably shouldn't.
+
+### "Testing" the POST Endpoint
+
+Let's return a new `Response` from the controller: Let's do this!
+
+TODO CODE!
+
+Ok, so the easy days of just refreshing our browser to try this out are gone:
+we can't POST here directly in a browser. Now, a lot of people use Postman
+or something like it to test their API. And while it's great, I think there's
+a better way.
+
+For now, create a new file - `testing.php` - right at the root of the project.
+Inside, require Composer's autoloader:
+
+TODO CODE
+
+We're going to use the [Guzzle](http://guzzle.readthedocs.org) library to
+hit our new endpoint and make sure it's working. I already installed it into
+the project - so go directly to `$client = new Client([])` and pass it some
+configuration:
+
+TODO CODE
+
+The first is `base_url` set to `localhost:8000`. Next, pass it a `defaults`
+key - these are options that'll be passed, by default, to each request.
+Set one option - `exceptions` - to `false`. Normally, if our server returns
+a 400 or 500 status code, Guzzle blows up with an Exception. This makes it
+act normal - it'll return a Response *always*. Trust me, that's nice!
+
+Now make the request - `$response = $client->post('/api/programmers')`. Echo
+the `$response` - it's an object, but has a really pretty `__toString` method
+on it:
+
+TODO CODE
+
+Try it by hitting this file from the command line:
+
+```bash
+php testing.php
+```
+
+Ok, let's fill in the guts and make this work!
