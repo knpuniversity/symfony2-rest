@@ -1,16 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 376e522..9db6fa5 100644
+index da688a2..973464a 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -23,6 +23,7 @@ class ProgrammerController extends BaseController
-         $form = $this->createForm(new ProgrammerType());
-         $form->submit($data);
- 
-+        /** @var Programmer $programmer */
-         $programmer = $form->getData();
-         $programmer->setUser($this->findUserByUsername('weaverryan'));
- 
-@@ -31,13 +32,17 @@ class ProgrammerController extends BaseController
+@@ -31,13 +31,17 @@ class ProgrammerController extends BaseController
          $em->flush();
  
          $response = new Response('It worked. Believe me - I\'m an API', 201);

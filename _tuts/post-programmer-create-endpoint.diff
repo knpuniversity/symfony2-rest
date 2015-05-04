@@ -14,7 +14,7 @@ index 8eadc31..e4bfb2a 100644
      type:     annotation
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
 new file mode 100644
-index 0000000..d267e04
+index 0000000..b61c76b
 --- /dev/null
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -0,0 +1,20 @@
@@ -35,6 +35,6 @@ index 0000000..d267e04
 +     */
 +    public function newAction()
 +    {
-+        return new Response('hello world');
++        return new Response('Let\'s do this!');
 +    }
 +}

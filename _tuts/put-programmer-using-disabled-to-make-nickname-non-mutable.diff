@@ -20,7 +20,7 @@ index 8115f56..dac97f0 100644
  
          $em = $this->getDoctrine()->getManager();
 diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
-index 3b2b2a5..07362ce 100644
+index 60a85c3..0d1cd85 100644
 --- a/src/AppBundle/Form/ProgrammerType.php
 +++ b/src/AppBundle/Form/ProgrammerType.php
 @@ -11,7 +11,10 @@ class ProgrammerType extends AbstractType
@@ -32,10 +32,10 @@ index 3b2b2a5..07362ce 100644
 +                // readonly if we're in edit mode
 +                'disabled' => $options['is_edit']
 +            ])
-             ->add('avatarNumber', 'number')
-             ->add('tagLine', 'textarea')
-         ;
-@@ -20,7 +23,8 @@ class ProgrammerType extends AbstractType
+             ->add('avatarNumber', 'choice', [
+                 'choices' => [
+                     // the key is the value that will be set
+@@ -32,7 +35,8 @@ class ProgrammerType extends AbstractType
      public function setDefaultOptions(OptionsResolverInterface $resolver)
      {
          $resolver->setDefaults(array(
