@@ -1,14 +1,15 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index dda6c71..81396c3 100644
+index dda6c71..c63535b 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -35,4 +35,12 @@ class ProgrammerController extends BaseController
+@@ -35,4 +35,13 @@ class ProgrammerController extends BaseController
  
          return $response;
      }
 +
 +    /**
 +     * @Route("/api/programmers/{nickname}")
++     * @Method("GET")
 +     */
 +    public function showAction($nickname)
 +    {

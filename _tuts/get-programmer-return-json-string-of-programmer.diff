@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 81396c3..70d43b3 100644
+index c63535b..0e7fe65 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -41,6 +41,17 @@ class ProgrammerController extends BaseController
+@@ -42,6 +42,17 @@ class ProgrammerController extends BaseController
       */
      public function showAction($nickname)
      {

@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 973464a..aa81a9e 100644
+index af76b06..00301ac 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -56,16 +56,40 @@ class ProgrammerController extends BaseController
+@@ -57,16 +57,41 @@ class ProgrammerController extends BaseController
              ));
          }
  
@@ -13,15 +13,16 @@ index 973464a..aa81a9e 100644
 -            'tagLine' => $programmer->getTagLine(),
 -        );
 +        $data = $this->serializeProgrammer($programmer);
-+
-+        $response = new Response(json_encode($data), 200);
-+        $response->headers->set('Content-Type', 'application/json');
-+
-+        return $response;
-+    }
+ 
+         $response = new Response(json_encode($data), 200);
+         $response->headers->set('Content-Type', 'application/json');
+ 
+         return $response;
+     }
 +
 +    /**
 +     * @Route("/api/programmers")
++     * @Method("GET")
 +     */
 +    public function listAction()
 +    {
@@ -32,12 +33,12 @@ index 973464a..aa81a9e 100644
 +        foreach ($programmers as $programmer) {
 +            $data['programmers'][] = $this->serializeProgrammer($programmer);
 +        }
- 
-         $response = new Response(json_encode($data), 200);
-         $response->headers->set('Content-Type', 'application/json');
- 
-         return $response;
-     }
++
++        $response = new Response(json_encode($data), 200);
++        $response->headers->set('Content-Type', 'application/json');
++
++        return $response;
++    }
 +
 +    private function serializeProgrammer(Programmer $programmer)
 +    {
