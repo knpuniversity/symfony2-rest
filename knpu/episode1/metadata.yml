@@ -30,3 +30,11 @@ chapters:
         is_finished: false
     post-json-body:
         is_finished: false
+    form-post:
+        is_finished: false
+    get-one:
+        is_finished: false
+    tightening-up-response:
+        is_finished: false
+    get-collection:
+        is_finished: false
