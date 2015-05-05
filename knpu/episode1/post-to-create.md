@@ -26,7 +26,7 @@ php app/console server:start
 ```
 
 Hey, it's Code Battles! This is the same awesome project we built in Silex 
-for the other REST series. It already has a slick web interface - ao we're 
+for the other REST series. It already has a slick web interface - so we're 
 going to build the API. To make sure we can login, let's create the database 
 and load the fixtures:
 
@@ -54,7 +54,7 @@ With some power, you can start a battle. These are projects, and projects
 are the second resource. And when you select one, it creates our third resource:
 a battle. Our programmer killed it! Each battle is between one programmer resource
 and one project resource. On the homepage, you can see a list of all the battles our
-programmer has bravely fought battles.
+programmer has bravely fought.
 
 ## POST to /api/programmers
 
