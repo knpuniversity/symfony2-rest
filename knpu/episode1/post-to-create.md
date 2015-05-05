@@ -1,18 +1,19 @@
 # POST To Create
 
 Well hey guys! I've wanted to write this series for *years*, and now that
-it's here, I'm *pumped*! That's because even though building an API can be
-really tough, the system we're about to build feels simple, really a bit
+it's here, I'm so *pumped*! That's because even though building an API can be
+really tough, the system we're about to build feels simple, and really a bit
 beautiful.
 
 We have another REST series on the site where we build the API in Silex and
-spend time learning the fundamental concepts of REST, like resources, representations,
+learn the short list of REST concepts like resources, representations,
 what status codes to return, what headers to set, how to format your JSON
-and a few other buzzwords like hypermedia, HATEOAS and idempotency.
+and a few other buzzwords like hypermedia, HATEOAS and of course, don't forget
+about our favorite: idempotency.
 
 But in this series, I'll assume you have a basic grasp of this stuff and
 we'll get straight to work. If you're confused by a term, head back to
-this series to fill in your knowledge.
+that series to fill in any gaps.
 
 ## The Project
 
@@ -24,9 +25,10 @@ the built-in web server:
 php app/console server:start
 ```
 
-Hey, it's Code Battles! This is the same project we built in Silex for the
-other REST series. It already has a web interface - we're going to build
-the API. To login, make sure you have a database with some fixtures:
+Hey, it's Code Battles! This is the same awesome project we built in Silex 
+for the other REST series. It already has a slick web interface - ao we're 
+going to build the API. To make sure we can login, let's create the database 
+and load the fixtures:
 
 ```bash
 php app/console doctrine:database:create
@@ -34,24 +36,25 @@ php app/console doctrine:schema:create
 php app/console doctrine:fixtures:load
 ```
 
-Now login with a fixtures user: `weaverryan` and my very secure password
+Now login with a fixtures user: `weaverryan` and the very secure password
 `foo`.
 
 ## The Code Battles Web Interface
 
-Ok, let me give you a quick 60-second tour, so we actually understand the
-API we'll build.
+To understand the API we're going to build, let me give you a quick 60-second tour.
+And please keep your hands and arms inside the project at all times.
 
 The first resource is a programmer, and we start by creating one. Give it
 a name, a clever tag line, choose one of the avatars and compile! Next, a
 programmer has energy, and you can change that by powering them up. Sometimes
-good things happen that give you power, sometimes bad things happen. Isn't
-that just like life...
+good things happen that give you power, sometimes bad things happen -- like a
+case of the Mondays.
 
 With some power, you can start a battle. These are projects, and projects
 are the second resource. And when you select one, it creates our third resource:
-a battle. Our programmer killed it! Each battle is between a programmer resource
-and a project resource. On the homepage, you can see a list of all the battles.
+a battle. Our programmer killed it! Each battle is between one programmer resource
+and one project resource. On the homepage, you can see a list of all the battles our
+programmer has bravely fought battles.
 
 ## POST to /api/programmers
 
@@ -61,14 +64,12 @@ That's where we should start. Building an API is no different than building
 for the web: you need to step back and *think* about your user-flow and build
 things piece-by-piece in that order.
 
-Open up `app/config/routing.yml`. I'm using annotation routing, and it's
-loading from all of my web controllers, which I organized into `Controller/Web`
-directory, because I knew that I was going to build an API. Now we can create
-an `Api` directory next to it.
+Open up `app/config/routing.yml`. I'm loading annotation routes from a `Controller/Web`
+sub-directory. I put all my web stuff there because now I can create an `Api` directory
+right next it and keep things organized.
 
-In `routing.yml`, I'm also going to split the directories into 2 imports.
-Trust me - this will come in handy later. The first will load the `Web/`
-directory and the second will load from `Api/`:
+In `routing.yml`, I'll keep two separate route imports: one for `Web/` and I'll
+add a new one for `Api/`. Trust me - this will come in handy later:
 
 CODE TODO
 
@@ -98,16 +99,16 @@ I'm not sure it's worth it. That's why we've separated the `Web` and `Api`
 stuff into different controllers and URIs. Now we can focus *just* on getting
 our API right.
 
-Second, to create a new resource, you should send a POST request to that
-resource's collection URI - so `/api/programmers`. If you're curious why,
-watch our other screencast and learn about idempotency. And, in REST, you
-can make your URLs look however you want. But in practice, we're going to
-use a really consistent pattern. Because even though you can make your URLs
+The second architectural decision we made was to create a new resource 
+by sending a POST request to that resource's collection URI - so `/api/programmers`. 
+If you're curious why, watch our other screencast and learn about idempotency. 
+And, in REST, you can make your URLs look however you want. But in practice, we're going to
+use a very consistent pattern. Because even though you can make your URLs
 super weird you probably shouldn't.
 
 ### "Testing" the POST Endpoint
 
-Let's return a new `Response` from the controller: Let's do this!
+We'll return a new `Response` from the controller: Let's do this!
 
 TODO CODE!
 
