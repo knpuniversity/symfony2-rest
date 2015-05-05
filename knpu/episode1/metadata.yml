@@ -19,7 +19,7 @@ summary: |
     * GET, PUT, DELETE and PATCH endpoints
     * Using the JMS Serializer
 
-illustration: rest.png
+illustration: rest-sf.png
 hasVideoDownload: 0
 tuts_hero:
     start_step: "start"
