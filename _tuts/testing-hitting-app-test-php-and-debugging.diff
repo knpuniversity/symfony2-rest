@@ -24,10 +24,10 @@ index 6090fdd..b6716e6 100644
  
      <filter>
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 3b1d684..4c4b0c7 100644
+index 3e17d8a..283e2d1 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -22,6 +22,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -24,6 +24,7 @@ class ProgrammerControllerTest extends ApiTestCase
          $response = $this->client->post('/api/programmers', [
              'body' => json_encode($data)
          ]);

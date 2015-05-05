@@ -1,9 +1,9 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index cc2dfde..72ff59d 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 2ab8101..52eb3da 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -3,18 +3,35 @@
- namespace AppBundle\Tests\Controller\Api;
+ namespace AppBundle\Test;
  
  use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 +use Exception;

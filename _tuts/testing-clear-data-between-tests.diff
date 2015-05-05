@@ -1,10 +1,10 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 9a04e01..cc2dfde 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 4a52a5c..2ab8101 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -2,9 +2,11 @@
  
- namespace AppBundle\Tests\Controller\Api;
+ namespace AppBundle\Test;
  
 +use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use GuzzleHttp\Client;

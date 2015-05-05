@@ -1,7 +1,7 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 72ff59d..9b17bfb 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
+index 52eb3da..e42b726 100644
+--- a/resources/ApiTestCase.php
++++ b/resources/ApiTestCase.php
 @@ -28,6 +28,11 @@ class ApiTestCase extends KernelTestCase
      protected $client;
  

@@ -21,10 +21,10 @@ index b4d5c40..2356516 100644
          $clearMissing = $request->getMethod() != 'PATCH';
          $form->submit($data, $clearMissing);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 34d5a3d..813b4f2 100644
+index 924c14f..3562f83 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -144,4 +144,22 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -146,4 +146,22 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
          $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
      }

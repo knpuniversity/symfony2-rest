@@ -1,7 +1,7 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index d866b34..b03f476 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
+index 904447e..1a5908b 100644
+--- a/resources/ApiTestCase.php
++++ b/resources/ApiTestCase.php
 @@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use Doctrine\ORM\EntityManager;
  use Exception;
@@ -27,10 +27,10 @@ index d866b34..b03f476 100644
      }
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 4c4b0c7..0a6bca7 100644
+index 283e2d1..50ac71d 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -22,11 +22,10 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -24,11 +24,10 @@ class ProgrammerControllerTest extends ApiTestCase
          $response = $this->client->post('/api/programmers', [
              'body' => json_encode($data)
          ]);
@@ -40,9 +40,9 @@ index 4c4b0c7..0a6bca7 100644
          $this->assertTrue($response->hasHeader('Location'));
 -        $this->assertEquals('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
 +        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
-         $data = json_decode($response->getBody(true), true);
-         $this->assertArrayHasKey('nickname', $data);
-         $this->assertEquals('ObjectOrienter', $data['nickname']);
+         $finishedData = json_decode($response->getBody(true), true);
+         $this->assertArrayHasKey('nickname', $finishedData);
+         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
 diff --git a/web/app_test.php b/web/app_test.php
 index 503a56d..0bed2d7 100644
 --- a/web/app_test.php

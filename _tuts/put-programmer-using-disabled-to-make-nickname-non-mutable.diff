@@ -76,10 +76,10 @@ index 0000000..964a00e
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index b83a15e..44ce843 100644
+index 970e40b..69ca592 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -76,7 +76,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -78,7 +78,7 @@ class ProgrammerControllerTest extends ApiTestCase
          ));
  
          $data = array(
@@ -88,7 +88,7 @@ index b83a15e..44ce843 100644
              'avatarNumber' => 2,
              'tagLine' => 'foo',
          );
-@@ -85,5 +85,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -87,5 +87,7 @@ class ProgrammerControllerTest extends ApiTestCase
          ]);
          $this->assertEquals(200, $response->getStatusCode());
          $this->assertResponsePropertyEquals($response, 'avatarNumber', 2);

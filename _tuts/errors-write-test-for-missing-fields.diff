@@ -1,7 +1,7 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index b03f476..c44d04d 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
+index 1a5908b..7f5650b 100644
+--- a/resources/ApiTestCase.php
++++ b/resources/ApiTestCase.php
 @@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  use Symfony\Component\Console\Helper\FormatterHelper;
  use Symfony\Component\Console\Output\ConsoleOutput;
@@ -37,10 +37,10 @@ index b03f476..c44d04d 100644
      {
          $actual = $this->readResponseProperty($response, $propertyPath);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 59d79dd..27d7783 100644
+index c29dbe4..7b486fb 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -120,4 +120,27 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -122,4 +122,27 @@ class ProgrammerControllerTest extends ApiTestCase
          $response = $this->client->delete('/api/programmers/UnitTester');
          $this->assertEquals(204, $response->getStatusCode());
      }

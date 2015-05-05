@@ -1,27 +1,7 @@
-diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
-index 39e7a2e..81dc142 100644
---- a/src/AppBundle/EventListener/ApiExceptionListener.php
-+++ b/src/AppBundle/EventListener/ApiExceptionListener.php
-@@ -50,8 +50,14 @@ class ApiExceptionListener implements EventSubscriberInterface
-             }
-         }
- 
-+        $data = $apiProblem->toArray();
-+        // making type a URL, to a temporarily fake page
-+        if ($data['type'] != 'about:blank') {
-+            $data['type'] = 'http://localhost:8000/docs/errors#'.$data['type'];
-+        }
-+
-         $response = new JsonResponse(
--            $apiProblem->toArray(),
-+            $data,
-             $apiProblem->getStatusCode()
-         );
-         $response->headers->set('Content-Type', 'application/problem+json');
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index c44d04d..f555d6d 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
+index 7f5650b..e6714e0 100644
+--- a/resources/ApiTestCase.php
++++ b/resources/ApiTestCase.php
 @@ -311,6 +311,21 @@ class ApiTestCase extends KernelTestCase
          );
      }
@@ -44,11 +24,31 @@ index c44d04d..f555d6d 100644
      protected function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
      {
          $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+index 39e7a2e..81dc142 100644
+--- a/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -50,8 +50,14 @@ class ApiExceptionListener implements EventSubscriberInterface
+             }
+         }
+ 
++        $data = $apiProblem->toArray();
++        // making type a URL, to a temporarily fake page
++        if ($data['type'] != 'about:blank') {
++            $data['type'] = 'http://localhost:8000/docs/errors#'.$data['type'];
++        }
++
+         $response = new JsonResponse(
+-            $apiProblem->toArray(),
++            $data,
+             $apiProblem->getStatusCode()
+         );
+         $response->headers->set('Content-Type', 'application/problem+json');
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index e5dc7d1..12de1d8 100644
+index 74eb6b8..59155b7 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -159,7 +159,7 @@ EOF;
+@@ -161,7 +161,7 @@ EOF;
          ]);
  
          $this->assertEquals(400, $response->getStatusCode());

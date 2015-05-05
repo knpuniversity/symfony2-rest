@@ -1,12 +1,12 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
 new file mode 100644
-index 0000000..9a04e01
+index 0000000..4a52a5c
 --- /dev/null
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -0,0 +1,30 @@
 +<?php
 +
-+namespace AppBundle\Tests\Controller\Api;
++namespace AppBundle\Test;
 +
 +use GuzzleHttp\Client;
 +
@@ -36,14 +36,16 @@ index 0000000..9a04e01
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 0e1a80c..da18b9f 100644
+index 055957e..dd5102d 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -1,17 +1,10 @@
+@@ -1,17 +1,12 @@
  <?php
  namespace AppBundle\Tests\Controller\Api;
  
 -class ProgrammerControllerTest extends \PHPUnit_Framework_TestCase
++use AppBundle\Test\ApiTestCase;
++
 +class ProgrammerControllerTest extends ApiTestCase
  {
      public function testPOST()
@@ -58,7 +60,7 @@ index 0e1a80c..da18b9f 100644
          $nickname = 'ObjectOrienter'.rand(0, 999);
          $data = array(
              'nickname' => $nickname,
-@@ -20,7 +13,7 @@ class ProgrammerControllerTest extends \PHPUnit_Framework_TestCase
+@@ -20,7 +15,7 @@ class ProgrammerControllerTest extends \PHPUnit_Framework_TestCase
          );
  
          // 1) Create a programmer resource

@@ -20,10 +20,10 @@ index a8ad42b..f174367 100644
  
          $response = new JsonResponse(
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 457834e..e5dc7d1 100644
+index 22560e4..74eb6b8 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -170,5 +170,6 @@ EOF;
+@@ -172,5 +172,6 @@ EOF;
          $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
          $this->assertResponsePropertyEquals($response, 'type', 'about:blank');
          $this->assertResponsePropertyEquals($response, 'title', 'Not Found');

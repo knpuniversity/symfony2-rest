@@ -1,10 +1,10 @@
-diff --git a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-index 7c198d5..94c2fde 100644
---- a/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
-+++ b/src/AppBundle/Tests/Controller/Api/ApiTestCase.php
+diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
+index 91b66c4..93da4b2 100644
+--- a/resources/ApiTestCase.php
++++ b/resources/ApiTestCase.php
 @@ -2,6 +2,7 @@
  
- namespace AppBundle\Tests\Controller\Api;
+ namespace AppBundle\Test;
  
 +use AppBundle\Entity\Programmer;
  use AppBundle\Entity\User;
@@ -131,12 +131,12 @@ index 7c198d5..94c2fde 100644
 +    }
  }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 206e688..3b1d684 100644
+index 165e8c6..3e17d8a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -30,4 +30,40 @@ class ProgrammerControllerTest extends ApiTestCase
-         $this->assertArrayHasKey('nickname', $data);
-         $this->assertEquals('ObjectOrienter', $data['nickname']);
+@@ -32,4 +32,40 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertArrayHasKey('nickname', $finishedData);
+         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
      }
 +
 +    public function testGETProgrammer()
