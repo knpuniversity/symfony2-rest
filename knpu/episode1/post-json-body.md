@@ -5,7 +5,7 @@ can send that data as JSON, XML, form-encoded or any insane format you dream
 up, you'll probably want your clients to send JSON... unless you work for
 the banking or insurance industry. They love XML.
 
-For the JSON, we can design it to have any keys. But since or Programmer
+For the JSON, we can design it to have any keys. But since our Programmer
 entity has the properties `nickname`, `avatarNumber` and `tagLine`, let's
 use those:
 
@@ -15,7 +15,7 @@ These don't have to be the same, but it makes life easier if you can manage it.
 
 Back in `testing.php`, create a `$nickname` - but make it a little bit random:
 this has a unique index in the database and I don't want everything to blow
-up if I run the file twice. And then make a `$data` array and put everything
+up if I run the file twice. Make a `$data` array and put everything
 in it. The `avatarNumber` is *which* built-in avatar you want - it's a number
 from 1 to 6. And add a `tagLine`:
 
@@ -38,7 +38,7 @@ things are working, just return the POST'd body right back in the response:
 
 TODO CODE
 
-So the client is sending a JSON string and our response is just sending that
+The client is sending a JSON string and our response is just sending that
 right back. Try it!
 
 ```bash
@@ -46,7 +46,7 @@ php testing.php
 ```
 
 Hey, that's prefect! We get a 200 status code response and its content is
-the JSON we sent it.
+the JSON we sent it. Time to pack it up and call it a day. Just kidding.
 
 ## Create the Programmer
 
@@ -67,8 +67,8 @@ TODO CODE
 
 The only tricky part is that the `Programmer` has a relationship to the `User`
 that created it, and this is a required relationship. On the web, I'm logged
-in, so it sets my `User` object here when I create a `Programmer`. But our
-API doesn't have any authentication yet - it's all anonymous.
+in, so that controller sets my `User` object on this when I create a `Programmer`. 
+But our API doesn't have any authentication yet - it's all anonymous.
 
 We'll add authentication later. Right now, we need a workaround. Update the
 controller to extend `BaseController` - that's something *I* created right
