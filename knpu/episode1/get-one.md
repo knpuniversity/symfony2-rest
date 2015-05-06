@@ -3,7 +3,7 @@
 Creating a programmer check! Next let's add the endpoint to return a single
 programmer. Add a `public function showAction()`. And even though it *technically*
 could be anything we dream up, the URL for this will follow a predictable
-pattern: `/api/programmers/` and then identifier. This might be an `{id}`,
+pattern: `/api/programmers/` and then some identifier. This might be an `{id}`,
 but for us each programmer has a unique `nickname`, so we'll use that instead.
 Don't forget the `@Method("GET")`:
 
