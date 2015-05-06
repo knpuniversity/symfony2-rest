@@ -8,7 +8,7 @@ First, we're returning JSON, but the Response `Content-Type` is still advertisin
 that we're returning `text/html`. That's a bummer, and will probably confuse some
 clients, like jQuery's AJAX function.
 
-It's easy to fix anyways: set `new Response` to a `$response variable
+It's easy to fix anyways: set `new Response` to a `$response` variable
 like we did earlier and call `$response->headers->set()` with `Content-Type`
 and `application/json`:
 
