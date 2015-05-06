@@ -1,16 +1,16 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index b61c76b..6793a22 100644
+index c5a0d5c..e9f7ca4 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
- use AppBundle\Controller\BaseController;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 +use Symfony\Component\HttpFoundation\Request;
  use Symfony\Component\HttpFoundation\Response;
  
- class ProgrammerController extends BaseController
-@@ -13,8 +14,10 @@ class ProgrammerController extends BaseController
+ class ProgrammerController extends Controller
+@@ -13,8 +14,10 @@ class ProgrammerController extends Controller
       * @Route("/api/programmers")
       * @Method("POST")
       */

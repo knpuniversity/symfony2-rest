@@ -1,16 +1,25 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 6793a22..8bdef8c 100644
+index e9f7ca4..8bdef8c 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -3,6 +3,7 @@
+@@ -2,13 +2,14 @@
+ 
  namespace AppBundle\Controller\Api;
  
- use AppBundle\Controller\BaseController;
+-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
++use AppBundle\Controller\BaseController;
 +use AppBundle\Entity\Programmer;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
  use Symfony\Component\HttpFoundation\Request;
-@@ -16,8 +17,16 @@ class ProgrammerController extends BaseController
+ use Symfony\Component\HttpFoundation\Response;
+ 
+-class ProgrammerController extends Controller
++class ProgrammerController extends BaseController
+ {
+     /**
+      * @Route("/api/programmers")
+@@ -16,8 +17,16 @@ class ProgrammerController extends Controller
       */
      public function newAction(Request $request)
      {

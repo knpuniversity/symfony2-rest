@@ -14,7 +14,7 @@ index 8eadc31..e4bfb2a 100644
      type:     annotation
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
 new file mode 100644
-index 0000000..b61c76b
+index 0000000..c5a0d5c
 --- /dev/null
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -0,0 +1,20 @@
@@ -22,12 +22,12 @@ index 0000000..b61c76b
 +
 +namespace AppBundle\Controller\Api;
 +
-+use AppBundle\Controller\BaseController;
++use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 +use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 +use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 +use Symfony\Component\HttpFoundation\Response;
 +
-+class ProgrammerController extends BaseController
++class ProgrammerController extends Controller
 +{
 +    /**
 +     * @Route("/api/programmers")
