@@ -5,10 +5,10 @@ This endpoint is missing two teeny-tiny details.
 ## Setting Content-Type: application/json
 
 First, we're returning JSON, but the Response `Content-Type` is still advertising
-that we're returning `text/html`. That's a bummer, and will can confuse some
+that we're returning `text/html`. That's a bummer, and will probably confuse some
 clients, like jQuery's AJAX function.
 
-And it's easy to fix anyways: set `new Response` to a `$response variable
+It's easy to fix anyways: set `new Response` to a `$response variable
 like we did earlier and call `$response->headers->set()` with `Content-Type`
 and `application/json`:
 
@@ -40,7 +40,7 @@ php testing.php
 ```
 
 Woh! That exploded! This is Symfony's HTML exception page. It *is* our 404
-error, but it's in HTML instead of JSON. Why? Internally, Symfony's has a
+error, but it's in HTML instead of JSON. Why? Internally, Symfony has a
 request format, which defaults to `html`. If you change that to `json`, you'll
 get JSON errors. If you're curious about this, google for `Symfony request _format`.
 
@@ -58,7 +58,7 @@ First, give the GET endpoint route a name - `api_programmers_show`:
 
 [[[ code('658aea2c07') ]]]
 
-Copy that, call `$this->generateUrl()`, pass it `api_programmer_show`
+Copy that, call `$this->generateUrl()`, pass it `api_programmers_show`
 and the array with the `nickname` key set to the nickname of this new
 Programmer. Then just set this on the `Location` header... instead of our
 invented URL:
@@ -85,7 +85,7 @@ that Programmer.
 
 ## Use the Location Header
 
-In fact, we can use this and get rid of the hardcoded URL in `testing.php`.
+Heck, we can even use this and get rid of the hardcoded URL in `testing.php`.
 Set `$programmerUrl` to `$response->getHeader('Location')`. Pop that in to
 the next `get()` call:
 
@@ -101,4 +101,4 @@ Try it one last time:
 php testing.php
 ```
 
-That looks great.
+That looks great!
