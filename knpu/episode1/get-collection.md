@@ -7,7 +7,7 @@ of cake. Start with `public function listAction()`. For the URI, use
 [[[ code('0ed0a4d8dc') ]]]
 
 So, the URI you POST to when creating a resource - `/api/programmers` -
-will be the same as that you'll GET to fetch a collection of programmer
+will be the same as the one you'll GET to fetch a collection of programmer
 resources. And yes, you can filter and paginate this list - all stuff we'll
 do later on.
 
@@ -42,9 +42,10 @@ there:
 
 Why? You can structure your JSON however you want, but by putting the collection
 inside a key, we have room for more root keys later like maybe `count` or
-`offset` for pagination. Second, your out JSON should always be an object,
-not an array. So, curly braces instead of square braces. If you have square
-braces, you're vulnerable to something called JSON Hijacking.
+`offset` for pagination. Second, your outer JSON should always be an object,
+not an array. So, curly braces instead of square brackets. If you have square
+brackets, you're vulnerable to something called JSON Hijacking. While not as bad
+as a car hijacking is something you want to avoid.
 
 ## Turning the Programmers into JSON
 
@@ -54,14 +55,14 @@ so just copy that:
 
 [[[ code('d7f7cb0a15') ]]]
 
-That ought to do it. Update `testing.php` to another call - out to
+That ought to do it. Update `testing.php` to make another call out to
 `/api/programmers`. Let's see what that looks like:
 
 ```bash
 php testing.php
 ```
 
-Woh, ok! We've got a database full of programmers. Creating a new endpoint
+Woh, ok! We've got a database full of programmers. NERDS! Creating a new endpoint
 is getting easier - that trend will continue.
 
 ## Returning JSON on Create
@@ -69,7 +70,7 @@ is getting easier - that trend will continue.
 Remember how we're returning a super-reassuring text message from our POST
 endpoint? Well, you *can* do this, but usually, you'll return the resource
 you just created. That's easy now - so let's do it. Just, `$data = $this->serializeProgrammer()`.
-Then just `json_encode()` that in the Response. And don't forget to set the
+Then `json_encode()` that in the Response. And don't forget to set the
 `Content-Type` header:
 
 [[[ code('d7feec0fcd') ]]]
@@ -99,8 +100,8 @@ it does that for you:
 [[[ code('cd1f608d3d') ]]]
 
 API consistency is king, and this is just one less spot for me to mess up
-and forget to set that header. Let's go down and update the other spots,
-which is pretty much a copy-and-paste operation - just make sure you keep
+and forget to set that header. Make sure you update the other spots,
+which is pretty much a copy-and-paste operation - be careful to keep
 the right status code.
 
 Take out the extra `die()` statement in `testing.php` and let's try this

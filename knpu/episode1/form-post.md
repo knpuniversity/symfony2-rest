@@ -2,14 +2,15 @@
 
 So what's different between this API controller and one that handles
 an HTML form submit? Really, not much. The biggest difference is that an
-HTML form sends us POST parameters and an API sends us a JSON body. But once
+HTML form sends us POST parameters and an API sends us a JSON string. But once
 we decode the JSON, both give us an array of submitted data. Then, everything
 is the same: create a Programmer object and update it with the submitted
-data. And you know who does this kind of work really well? Symfony forms.
+data. And you know who does this kind of work really well? Bernhard Schussek errr
+Symfony forms!
 
 Create a new directory called `Form/` and inside of that, a new class called
-`ProgrammerType`. And I'll quickly make this into a form type by extending
-`AbstractType` and implementing the `getName()` method - just to return,
+`ProgrammerType`. I'll quickly make this into a form type by extending
+`AbstractType` and implementing the `getName()` method - just return,
 how about, `programmer`.
 
 Now, override the two methods we *really* care about - `setDefaultOptions()`
@@ -40,7 +41,8 @@ a number from 1 to 6. So we *could* use the `number` type. But instead, use
 ### Using the choice Type in an API
 
 Why `choice` instead of `number` or `text`? Because it has built-in validation.
-If the client sends something other than 1 through 6, validation will fail.
+If the client acts a fool and sends something other than 1 through 6, validation 
+will fail.
 
 **TIP** To control this message, set the `invalid_message` option on the field.
 
@@ -49,14 +51,14 @@ For the API, we only care about the keys in that array: 1-6. The labels, like
 up as the text in the drop-down. But in an API, they do nothing and could
 be set to anything.
 
-Finish with an easy field: `tagLine` and make it a `textarea`, which in an
-API context, does the exact same thing as a `text` type:
+Finish with an easy field: `tagLine` and make it a `textarea`, which for an
+API, does the exact same thing as a `text` type:
 
 [[[ code('edcac6dba0') ]]]
 
 So, there's our form.
 Can you tell this form is being used in an API? Nope! So yes, you *can* re-use
-forms for your API and web interface.
+forms for your API and web interface. Sharing is caring!
 
 ## Using the Form
 
@@ -84,7 +86,8 @@ And that's all the code you need! So let's try it:
 php testing.php
 ```
 
-Yep! The server seems confident that still worked.
+Yep! The server seems confident that still worked. That's all
+I need to hear!
 
 ## Creating a Resource? 201 Status Code
 
@@ -119,4 +122,4 @@ Try it once more:
 php testing.php
 ```
 
-We're on a roll!
+Just like butter, we're on a roll!
