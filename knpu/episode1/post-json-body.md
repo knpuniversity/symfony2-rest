@@ -7,9 +7,7 @@ the banking or insurance industry. They love XML.
 
 For the JSON, we can design it to have any keys. But since our Programmer
 entity has the properties `nickname`, `avatarNumber` and `tagLine`, let's
-use those:
-
-TODO CODE
+use those.
 
 These don't have to be the same, but it makes life easier if you can manage it.
 
@@ -19,24 +17,24 @@ up if I run the file twice. Make a `$data` array and put everything
 in it. The `avatarNumber` is *which* built-in avatar you want - it's a number
 from 1 to 6. And add a `tagLine`:
 
-TODO CODE
+[[[ code('c915117b0b') ]]]
 
 To send this data, add an options array to `post`. It has a key called `body`,
 and it's literally the raw string you want to send. So we need to `json_encode($data)`:
 
-TODO CODE
+[[[ code('f5428f6c99') ]]]
 
 ## Reading the Request Body
 
 This looks good - so let's move to our controller. To *read* the data the
 client is sending, we'll need the `Request` object. So add that as an argument:
 
-TODO CODE
+[[[ code('e3c4b11427') ]]]
 
 To get the JSON string, say `$body = $request->getContent()`. And to prove
 things are working, just return the POST'd body right back in the response:
 
-TODO CODE
+[[[ code('74934ecfd9') ]]]
 
 The client is sending a JSON string and our response is just sending that
 right back. Try it!
@@ -53,7 +51,7 @@ the JSON we sent it. Time to pack it up and call it a day. Just kidding.
 Now that we've got the JSON, creating a `Programmer` is ridiculously simple.
 First, `json_decode` the `$body` into an array:
 
-TODO CODE!
+[[[ code('4b0df0eef5') ]]]
 
 For now, we'll trust the JSON string has a valid structure. And the second
 argument to `json_decode` makes sure we get an array, not a `stdClass` object.
@@ -63,7 +61,7 @@ and pass it `$data['nickname']` and `$data['avatarNumber']` - I gave this
 entity class a `__construct()` function with a few optional arguments. Now,
 `$programmer->setTagLine($data['tagLine'])`:
 
-TODO CODE
+[[[ code('ce36894f4c') ]]]
 
 The only tricky part is that the `Programmer` has a relationship to the `User`
 that created it, and this is a required relationship. On the web, I'm logged
@@ -75,7 +73,7 @@ controller to extend `BaseController` - that's something *I* created right
 in `AppBundle/Controller` that just has some handy shortcut methods. This
 will let me say `$programmer->setUser($this->findUserByUsername('weaverryan'))`:
 
-TODO CODE
+[[[ code('467b910f14') ]]]
 
 So we're cheating big time... for now. At least while developing, that user
 exists because it's in our fixtures. I'm not proud of this, but I promise
@@ -83,13 +81,13 @@ it'll get fixed later.
 
 Finish things off by persisting and flushing the Programmer:
 
-TODO CODE
+[[[ code('10c3975d70') ]]]
 
 Enjoy this easy stuff... while it lasts. For the `Response`, what should we
 return? Ah, let's worry about that later - return a reassuring message, like
 `It worked. Believe me, I'm an API!`:
 
-TODO CODE
+[[[ code('1138d9b2b4') ]]]
 
 The whole flow is there, so go back and hit the script again:
 

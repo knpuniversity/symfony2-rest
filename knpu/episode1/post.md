@@ -71,18 +71,18 @@ right next it and keep things organized.
 In `routing.yml`, I'll keep two separate route imports: one for `Web/` and I'll
 add a new one for `Api/`. Trust me - this will come in handy later:
 
-CODE TODO
+[[[ code('9f34d08ba9') ]]]
 
 Now create the new `ProgrammerController` - and make it extend Symfony's
 `Controller` like normal:
 
-CODE TODO
+[[[ code('c419a9544e') ]]]
 
 Our first endpoint will be for *creating* Programmers, so let's start with
 `public function newAction()`. Above it, setup the `@Route` annotation with
 the URL `/api/programmers`. Let's also make it only respond to `POST` requests:
 
-CODE TODO
+[[[ code('9bff631b62') ]]]
 
 ### URL Structures and HTTP Methods
 
@@ -110,7 +110,7 @@ super weird you probably shouldn't.
 
 We'll return a new `Response` from the controller: Let's do this!
 
-TODO CODE!
+[[[ code('ab233ae24b') ]]]
 
 Ok, so the easy days of just refreshing our browser to try this out are gone:
 we can't POST here directly in a browser. Now, a lot of people use Postman
@@ -120,14 +120,14 @@ a better way.
 For now, create a new file - `testing.php` - right at the root of the project.
 Inside, require Composer's autoloader:
 
-TODO CODE
+[[[ code('2f869af994') ]]]
 
 We're going to use the [Guzzle](http://guzzle.readthedocs.org) library to
 hit our new endpoint and make sure it's working. I already installed it into
 the project - so go directly to `$client = new Client([])` and pass it some
 configuration:
 
-TODO CODE
+[[[ code('8eb7e0227d') ]]]
 
 The first is `base_url` set to `localhost:8000`. Next, pass it a `defaults`
 key - these are options that'll be passed, by default, to each request.
@@ -139,7 +139,7 @@ Now make the request - `$response = $client->post('/api/programmers')`. Echo
 the `$response` - it's an object, but has a really pretty `__toString` method
 on it:
 
-TODO CODE
+[[[ code('e65cc196c7') ]]]
 
 Try it by hitting this file from the command line:
 
