@@ -46,7 +46,6 @@ chapters:
         is_finished: false
     mad-test-debugging:
         is_finished: false
-
     list-show-tests:
         is_finished: false
     test-base-url:
