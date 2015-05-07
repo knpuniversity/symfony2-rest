@@ -1,5 +1,5 @@
 diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index 91b66c4..93da4b2 100644
+index 93f0073..613bbcc 100644
 --- a/resources/ApiTestCase.php
 +++ b/resources/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -20,7 +20,7 @@ index 91b66c4..93da4b2 100644
  
  class ApiTestCase extends KernelTestCase
  {
-@@ -39,6 +43,12 @@ class ApiTestCase extends KernelTestCase
+@@ -34,6 +38,12 @@ class ApiTestCase extends KernelTestCase
       */
      private $formatterHelper;
  
@@ -33,7 +33,7 @@ index 91b66c4..93da4b2 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -224,6 +234,62 @@ class ApiTestCase extends KernelTestCase
+@@ -215,6 +225,62 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -96,7 +96,7 @@ index 91b66c4..93da4b2 100644
      /**
       * @return EntityManager
       */
-@@ -232,4 +298,33 @@ class ApiTestCase extends KernelTestCase
+@@ -223,4 +289,33 @@ class ApiTestCase extends KernelTestCase
          return $this->getService('doctrine')
              ->getManager();
      }

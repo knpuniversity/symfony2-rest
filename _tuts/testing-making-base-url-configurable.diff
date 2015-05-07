@@ -16,10 +16,10 @@ index 2b41503..6090fdd 100644
      <filter>
          <whitelist>
 diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index 93da4b2..904447e 100644
+index 613bbcc..c951f57 100644
 --- a/resources/ApiTestCase.php
 +++ b/resources/ApiTestCase.php
-@@ -51,8 +51,9 @@ class ApiTestCase extends KernelTestCase
+@@ -46,8 +46,9 @@ class ApiTestCase extends KernelTestCase
  
      public static function setUpBeforeClass()
      {

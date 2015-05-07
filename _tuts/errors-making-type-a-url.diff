@@ -1,8 +1,8 @@
 diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index 7f5650b..e6714e0 100644
+index b17a9f2..70e66cd 100644
 --- a/resources/ApiTestCase.php
 +++ b/resources/ApiTestCase.php
-@@ -311,6 +311,21 @@ class ApiTestCase extends KernelTestCase
+@@ -302,6 +302,21 @@ class ApiTestCase extends KernelTestCase
          );
      }
  
