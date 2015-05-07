@@ -46,3 +46,16 @@ chapters:
         is_finished: false
     mad-test-debugging:
         is_finished: false
+
+    list-show-tests:
+        is_finished: false
+    test-base-url:
+        is_finished: false
+    put-programmer:
+        is_finished: false
+    delete-programmer:
+        is_finished: false
+    patch-programmer:
+        is_finished: false
+    serializer:
+        is_finished: false
