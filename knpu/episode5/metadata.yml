@@ -1,0 +1,28 @@
+title:  "Symfony RESTful API: Hypermedia, Links & Bonuses (Episode 5)"
+summary: |
+    After 4 episodes, we've somehow avoided the hottest buzzwords in REST:
+    Hypermedia and HATEOAS. These can make your API awesome, or could bring
+    you to your knees with fuzzy details, missing best practices and complexity.
+    Let's make our API awesome:
+
+    * Linking to Resources (and Hypermedia)
+    * POSTing related resource ids (EntityToIdTransformer)
+    * VirtualPropertys and Form property_paths
+    * HATEOAS
+    * Handling a Collection resource update
+
+    The REST of the Symfony Series:
+    
+    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
+    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+
+illustration: rest-sf.png
+hasVideoDownload: 0
+# tuts_hero:
+#     start_step: "Serialize: Whitelisting properties"
+#     finish_step: "Errors: Making type a URL"
+
+chapters: []

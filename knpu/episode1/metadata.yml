@@ -1,13 +1,11 @@
-title:  Building a RESTful API in Symfony Episode 1
-summary: |
-    Making RESTful APIs is hard. That's why we built an entire [REST series](http://knpuniversity.com/screencast/rest)
-    around understanding the most important concepts.
-    
-    In this series, we get to work: by building the same APIin the REST
-    series, but leveraging all the amazing tools and libraries of the Symfony
-    framework. If terminology like representations, resources, and hypermedia
-    are new to you, start with the [REST series](http://knpuniversity.com/screencast/rest)
-    and then come back.
+title:  Symfony RESTful API: Episode 1
+summary: |    
+    In this series, we get to work: by building the same API in the
+    [REST series](http://knpuniversity.com/screencast/rest), but leveraging
+    all the amazing tools and libraries of the Symfony framework. If terminology
+    like representations, resources, and hypermedia are new to you, start
+    with the [REST series](http://knpuniversity.com/screencast/rest) and
+    then come back. And get ready to get your (API) mind blown.
 
     In Episode 1, we'll start quick with:
 
@@ -18,6 +16,14 @@ summary: |
     * Handling data "seeding" for your tests
     * GET, PUT, DELETE and PATCH endpoints
     * Using the JMS Serializer
+
+    The REST of the Symfony Series:
+    
+    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
+    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf.png
 hasVideoDownload: 0

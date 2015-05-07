@@ -1,0 +1,29 @@
+title:  Symfony RESTful API: Basics++ (Episode 3)
+summary: |
+    The [basics](http://knpuniversity.com/screencast/symfony-rest), check!
+    [Errors](http://knpuniversity.com/screencast/symfony-rest), double check!
+    Now let's get back to some *core* API concepts and take things up a level.
+
+    * API Documentation and sandbox (NelmioApiDocBundle)
+    * Making fields non-mutable
+    * Setting the "request format" to JSON
+    * Returning a proper Collection resource format
+    * Pagination
+    * Filtering
+    * Adding a custom serializer subscriber
+
+    The REST of the Symfony Series:
+    
+    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
+    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+
+illustration: rest-sf.png
+hasVideoDownload: 0
+# tuts_hero:
+#     start_step: "Serialize: Whitelisting properties"
+#     finish_step: "Errors: Making type a URL"
+
+chapters: []

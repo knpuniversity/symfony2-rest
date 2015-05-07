@@ -1,0 +1,33 @@
+title:  Symfony RESTful API: Errors (Episode 2)
+summary: |
+    In [episode 1](http://knpuniversity.com/screencast/symfony-rest), we
+    added our basic endpoints *with* some nice tests (yes!).
+    
+    Now, we turn to a *huge* part of APIs: handling and returning consistent
+    errors. Seriously, this is more important than you might think - which
+    is why we're covering this in episode 2.
+
+    So, let's handle errors, and let's do it gracefully:
+
+    * Handling Form Validation errors and response
+    * Disabling csrf_protection
+    * Introducing the api-problem JSON format
+    * Exception Listener!
+    * Consistent errors *everywhere*: 404's, 500's, oh my!
+    * Handling "extra fields" in your form
+
+    The REST of the Symfony Series:
+    
+    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
+    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+
+illustration: rest-sf.png
+hasVideoDownload: 0
+tuts_hero:
+    start_step: "Serialize: Whitelisting properties"
+    finish_step: "Errors: Making type a URL"
+
+chapters: []
