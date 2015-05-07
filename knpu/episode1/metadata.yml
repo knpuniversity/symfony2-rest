@@ -38,3 +38,11 @@ chapters:
         is_finished: false
     get-collection:
         is_finished: false
+    first-test:
+        is_finished: false
+    test-code-reuse:
+        is_finished: false
+    tests-clear-data:
+        is_finished: false
+    mad-test-debugging:
+        is_finished: false
