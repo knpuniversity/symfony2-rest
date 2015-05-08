@@ -1,7 +1,7 @@
 # Add a Test!
 
 This `testing.php` file is basically already a test... except it's missing
-the most important part: the ability to blow up and tell us if something
+the most important part: the ability to start shouting when something
 breaks.
 
 To test our API, we'll use PHPUnit! Yes! Awesome! I'm excited because even
@@ -15,7 +15,7 @@ we tested with Behat. Both are great, and really the same under the surface.
 
 Create a `Tests` directory inside `AppBundle`. Now mimic your directory structure.
 So, add a `Controller` directory, then an `API` directory, and finish it with
-a new PHPUnit test class for my `ProgrammerController` class. Be a good programmer
+a new PHPUnit test class for `ProgrammerController`. Be a good programmer
 and fill in the right namespace. All these directories: technically unnecessary.
 But now we've got a sane setup.
 
@@ -33,7 +33,7 @@ it into `testPOST`:
 [[[ code('7cff58981b') ]]]
 
 Ok cool. No asserts yet - but let's see if it blows up. I already installed
-PHPUnit into this project, so run `php bin/phunit -c app` then the path to
+PHPUnit into this project, so run `php bin/phpunit -c app` then the path to
 the test:
 
 ```bash
@@ -49,7 +49,7 @@ that the expected `201` equals `$response->getStatusCode()`:
 
 [[[ code('845afe22ef') ]]]
 
-Second: what response header should we also send back after creating a resource?
+Second: what response header should we send back whenever we create a resource?
 Location! Right now, just `assertTrue` that `$response->hasHeader('Location')`.
 Soon, we'll assert the actual value.
 
