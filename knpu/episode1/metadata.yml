@@ -42,11 +42,11 @@ chapters:
         is_free: true
         video_key: z34rv0afxk
     get-one:
-        is_finished: false
+        video_key: s9xdkhrrl3
     tightening-up-response:
-        is_finished: false
+        video_key: 2nckk1m101
     get-collection:
-        is_finished: false
+        video_key: dwxs1sf36y
     first-test:
         is_finished: false
     test-code-reuse:
