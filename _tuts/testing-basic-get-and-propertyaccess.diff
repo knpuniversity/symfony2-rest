@@ -1,0 +1,77 @@
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 91b66c4..a1ba882 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Test;
+ 
++use AppBundle\Entity\Programmer;
+ use AppBundle\Entity\User;
+ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use Doctrine\ORM\EntityManager;
+@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ use Symfony\Component\Console\Helper\FormatterHelper;
+ use Symfony\Component\Console\Output\ConsoleOutput;
+ use Symfony\Component\DomCrawler\Crawler;
++use Symfony\Component\PropertyAccess\PropertyAccess;
+ 
+ class ApiTestCase extends KernelTestCase
+ {
+@@ -224,6 +226,29 @@ class ApiTestCase extends KernelTestCase
+         return $user;
+     }
+ 
++    protected function createProgrammer(array $data)
++    {
++        $data = array_merge(array(
++            'powerLevel' => rand(0, 10),
++        ), $data);
++
++        $accessor = PropertyAccess::createPropertyAccessor();
++        $programmer = new Programmer();
++        foreach ($data as $key => $value) {
++            $accessor->setValue($programmer, $key, $value);
++        }
++
++        $owner = $this->getEntityManager()
++            ->getRepository('AppBundle:User')
++            ->findAny();
++        $programmer->setUser($owner);
++
++        $this->getEntityManager()->persist($programmer);
++        $this->getEntityManager()->flush($programmer);
++
++        return $programmer;
++    }
++
+     /**
+      * @return EntityManager
+      */
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 165e8c6..e2a0c5f 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -32,4 +32,22 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertArrayHasKey('nickname', $finishedData);
+         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
+     }
++
++    public function testGETProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++
++        $response = $this->client->get('/api/programmers/UnitTester');
++        $this->assertEquals(200, $response->getStatusCode());
++        $data = $response->json();
++        $this->assertEquals(array(
++            'nickname',
++            'avatarNumber',
++            'powerLevel',
++            'tagLine'
++        ), array_keys($data));
++    }
+ }

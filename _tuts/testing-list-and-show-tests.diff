@@ -1,24 +1,18 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 91b66c4..7636f91 100644
+index a1ba882..7636f91 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
-@@ -3,6 +3,7 @@
+@@ -2,8 +2,8 @@
+ 
  namespace AppBundle\Test;
  
+-use AppBundle\Entity\Programmer;
  use AppBundle\Entity\User;
 +use AppBundle\Entity\Programmer;
  use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use Doctrine\ORM\EntityManager;
  use Exception;
-@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
- use Symfony\Component\Console\Helper\FormatterHelper;
- use Symfony\Component\Console\Output\ConsoleOutput;
- use Symfony\Component\DomCrawler\Crawler;
-+use Symfony\Component\PropertyAccess\PropertyAccess;
- 
- class ApiTestCase extends KernelTestCase
- {
-@@ -39,6 +41,8 @@ class ApiTestCase extends KernelTestCase
+@@ -41,6 +41,8 @@ class ApiTestCase extends KernelTestCase
       */
      private $formatterHelper;
  
@@ -27,34 +21,10 @@ index 91b66c4..7636f91 100644
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -224,6 +228,41 @@ class ApiTestCase extends KernelTestCase
-         return $user;
+@@ -250,6 +252,18 @@ class ApiTestCase extends KernelTestCase
      }
  
-+    protected function createProgrammer(array $data)
-+    {
-+        $data = array_merge(array(
-+            'powerLevel' => rand(0, 10),
-+        ), $data);
-+
-+        $accessor = PropertyAccess::createPropertyAccessor();
-+        $programmer = new Programmer();
-+        foreach ($data as $key => $value) {
-+            $accessor->setValue($programmer, $key, $value);
-+        }
-+
-+        $owner = $this->getEntityManager()
-+            ->getRepository('AppBundle:User')
-+            ->findAny();
-+        $programmer->setUser($owner);
-+
-+        $this->getEntityManager()->persist($programmer);
-+        $this->getEntityManager()->flush($programmer);
-+
-+        return $programmer;
-+    }
-+
-+    /**
+     /**
 +     * @return ResponseAsserter
 +     */
 +    protected function asserter()
@@ -66,9 +36,10 @@ index 91b66c4..7636f91 100644
 +        return $this->responseAsserter;
 +    }
 +
-     /**
++    /**
       * @return EntityManager
       */
+     protected function getEntityManager()
 diff --git a/src/AppBundle/Test/ResponseAsserter.php b/src/AppBundle/Test/ResponseAsserter.php
 new file mode 100644
 index 0000000..628bc17
@@ -256,28 +227,21 @@ index 0000000..628bc17
 +    }
 +}
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 165e8c6..6d7b9cf 100644
+index e2a0c5f..6d7b9cf 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -32,4 +32,40 @@ class ProgrammerControllerTest extends ApiTestCase
-         $this->assertArrayHasKey('nickname', $finishedData);
-         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
-     }
-+
-+    public function testGETProgrammer()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'UnitTester',
-+            'avatarNumber' => 3,
-+        ));
-+
-+        $response = $this->client->get('/api/programmers/UnitTester');
-+        $this->assertEquals(200, $response->getStatusCode());
+@@ -42,12 +42,30 @@ class ProgrammerControllerTest extends ApiTestCase
+ 
+         $response = $this->client->get('/api/programmers/UnitTester');
+         $this->assertEquals(200, $response->getStatusCode());
+-        $data = $response->json();
+-        $this->assertEquals(array(
 +        $this->asserter()->assertResponsePropertiesExist($response, array(
-+            'nickname',
-+            'avatarNumber',
-+            'powerLevel',
-+            'tagLine'
+             'nickname',
+             'avatarNumber',
+             'powerLevel',
+             'tagLine'
+-        ), array_keys($data));
 +        ));
 +        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
 +    }
@@ -298,5 +262,5 @@ index 165e8c6..6d7b9cf 100644
 +        $this->asserter()->assertResponsePropertyIsArray($response, 'programmers');
 +        $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
 +        $this->asserter()->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
-+    }
+     }
  }

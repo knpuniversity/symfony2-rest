@@ -131,6 +131,11 @@
             "description": null
         },
         {
+            "id": "testing-basic-get-and-propertyaccess",
+            "name": "Testing: Basic GET and PropertyAccess",
+            "description": null
+        },
+        {
             "id": "testing-list-and-show-tests",
             "name": "Testing: List and show tests",
             "description": null
@@ -321,5 +326,5 @@
             "description": null
         }
     ],
-    "sha": "fa9b51b726ab11af96132755260ac63e02b516da"
+    "sha": "69a4e79149d13bddfb79432304315a239e0a10ee"
 }
