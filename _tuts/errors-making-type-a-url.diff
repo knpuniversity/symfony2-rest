@@ -1,29 +1,3 @@
-diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index b17a9f2..70e66cd 100644
---- a/resources/ApiTestCase.php
-+++ b/resources/ApiTestCase.php
-@@ -302,6 +302,21 @@ class ApiTestCase extends KernelTestCase
-         );
-     }
- 
-+    protected function assertResponsePropertyContains(ResponseInterface $response, $propertyPath, $expectedValue)
-+    {
-+        $actualPropertValue = $this->readResponseProperty($response, $propertyPath);
-+        $this->assertContains(
-+            $expectedValue,
-+            $actualPropertValue,
-+            sprintf(
-+                'Property "%s": Expected to contain "%s" but response was "%s"',
-+                $propertyPath,
-+                $expectedValue,
-+                var_export($actualPropertValue, true)
-+            )
-+        );
-+    }
-+
-     protected function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
-     {
-         $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
 diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
 index 39e7a2e..81dc142 100644
 --- a/src/AppBundle/EventListener/ApiExceptionListener.php
@@ -45,15 +19,15 @@ index 39e7a2e..81dc142 100644
          );
          $response->headers->set('Content-Type', 'application/problem+json');
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 74eb6b8..59155b7 100644
+index 16fd713..330118e 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -161,7 +161,7 @@ EOF;
+@@ -160,7 +160,7 @@ EOF;
          ]);
  
          $this->assertEquals(400, $response->getStatusCode());
--        $this->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
-+        $this->assertResponsePropertyContains($response, 'type', 'invalid_body_format');
+-        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
++        $this->asserter()->assertResponsePropertyContains($response, 'type', 'invalid_body_format');
      }
  
      public function test404Exception()

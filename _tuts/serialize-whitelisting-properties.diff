@@ -57,15 +57,3 @@ index 3172a24..2406613 100644
       */
      private $powerLevel = 0;
  
-diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 2db304d..c29dbe4 100644
---- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-+++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -49,6 +49,7 @@ class ProgrammerControllerTest extends ApiTestCase
-             'tagLine'
-         ));
-         $this->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
-+        $this->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
-     }
- 
-     public function testGETProgrammersCollection()

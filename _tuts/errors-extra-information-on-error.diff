@@ -20,13 +20,13 @@ index a8ad42b..f174367 100644
  
          $response = new JsonResponse(
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 22560e4..74eb6b8 100644
+index b22658b..16fd713 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -172,5 +172,6 @@ EOF;
+@@ -171,5 +171,6 @@ EOF;
          $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
-         $this->assertResponsePropertyEquals($response, 'type', 'about:blank');
-         $this->assertResponsePropertyEquals($response, 'title', 'Not Found');
-+        $this->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
+         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
+         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
++        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
      }
  }

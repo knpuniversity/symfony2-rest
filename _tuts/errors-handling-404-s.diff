@@ -82,11 +82,11 @@ index 2f1def0..a8ad42b 100644
          $response->headers->set('Content-Type', 'application/problem+json');
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index fd9f2d7..22560e4 100644
+index 808c2f6..b22658b 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -164,4 +164,13 @@ EOF;
-         $this->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
+@@ -163,4 +163,13 @@ EOF;
+         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
      }
  
 +    public function test404Exception()
@@ -95,7 +95,7 @@ index fd9f2d7..22560e4 100644
 +
 +        $this->assertEquals(404, $response->getStatusCode());
 +        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
-+        $this->assertResponsePropertyEquals($response, 'type', 'about:blank');
-+        $this->assertResponsePropertyEquals($response, 'title', 'Not Found');
++        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
++        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
 +    }
  }

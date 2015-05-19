@@ -45,15 +45,15 @@ index bf3d5a1..3325bbf 100644
 +    }
  }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 7b486fb..ebfc9d3 100644
+index a694205..56cded0 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -142,7 +142,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -141,7 +141,7 @@ class ProgrammerControllerTest extends ApiTestCase
              'errors',
          ));
-         $this->assertResponsePropertyExists($response, 'errors.nickname');
--        $this->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
-+        $this->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
-         $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
+         $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
+-        $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
++        $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
+         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
      }
  }

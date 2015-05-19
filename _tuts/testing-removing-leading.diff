@@ -1,7 +1,7 @@
-diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index c951f57..624ffca 100644
---- a/resources/ApiTestCase.php
-+++ b/resources/ApiTestCase.php
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index f87e5ac..fc8fabf 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use Doctrine\ORM\EntityManager;
  use Exception;
@@ -10,7 +10,7 @@ index c951f57..624ffca 100644
  use GuzzleHttp\Message\AbstractMessage;
  use GuzzleHttp\Message\ResponseInterface;
  use GuzzleHttp\Subscriber\History;
-@@ -57,6 +58,15 @@ class ApiTestCase extends KernelTestCase
+@@ -56,6 +57,15 @@ class ApiTestCase extends KernelTestCase
          self::$staticClient->getEmitter()
              ->attach(self::$history);
  
@@ -27,7 +27,7 @@ index c951f57..624ffca 100644
      }
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 283e2d1..50ac71d 100644
+index 1be5b70..1db7e1a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -24,11 +24,10 @@ class ProgrammerControllerTest extends ApiTestCase

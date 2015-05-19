@@ -76,7 +76,7 @@ index 0000000..964a00e
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 970e40b..69ca592 100644
+index 62270c7..4bf53f0 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -78,7 +78,7 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -91,8 +91,8 @@ index 970e40b..69ca592 100644
 @@ -87,5 +87,7 @@ class ProgrammerControllerTest extends ApiTestCase
          ]);
          $this->assertEquals(200, $response->getStatusCode());
-         $this->assertResponsePropertyEquals($response, 'avatarNumber', 2);
+         $this->asserter()->assertResponsePropertyEquals($response, 'avatarNumber', 2);
 +        // the nickname is immutable on edit
-+        $this->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
++        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
      }
  }

@@ -1,10 +1,10 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 69ca592..4b9b12a 100644
+index 4bf53f0..f6084f1 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -90,4 +90,15 @@ class ProgrammerControllerTest extends ApiTestCase
          // the nickname is immutable on edit
-         $this->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
+         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
      }
 +
 +    public function testDELETEProgrammer()

@@ -1,7 +1,7 @@
-diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index 52eb3da..93f0073 100644
---- a/resources/ApiTestCase.php
-+++ b/resources/ApiTestCase.php
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index e42b726..91b66c4 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -2,7 +2,9 @@
  
  namespace AppBundle\Test;
@@ -12,7 +12,7 @@ index 52eb3da..93f0073 100644
  use Exception;
  use GuzzleHttp\Client;
  use GuzzleHttp\Message\AbstractMessage;
-@@ -196,4 +198,29 @@ class ApiTestCase extends KernelTestCase
+@@ -205,4 +207,29 @@ class ApiTestCase extends KernelTestCase
  
          $this->printDebug($output);
      }

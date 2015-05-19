@@ -1,46 +1,8 @@
-diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index 624ffca..b17a9f2 100644
---- a/resources/ApiTestCase.php
-+++ b/resources/ApiTestCase.php
-@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
- use Symfony\Component\Console\Helper\FormatterHelper;
- use Symfony\Component\Console\Output\ConsoleOutput;
- use Symfony\Component\DomCrawler\Crawler;
-+use Symfony\Component\PropertyAccess\Exception\RuntimeException;
- use Symfony\Component\PropertyAccess\Exception\AccessException;
- use Symfony\Component\PropertyAccess\PropertyAccess;
- use Symfony\Component\PropertyAccess\PropertyAccessor;
-@@ -267,6 +268,25 @@ class ApiTestCase extends KernelTestCase
-         }
-     }
- 
-+    protected function assertResponsePropertyExists(ResponseInterface $response, $propertyPath)
-+    {
-+        // this will blow up if the property doesn't exist
-+        $this->readResponseProperty($response, $propertyPath);
-+    }
-+
-+    protected function assertResponsePropertyDoesNotExist(ResponseInterface $response, $propertyPath)
-+    {
-+        try {
-+            // this will blow up if the property doesn't exist
-+            $this->readResponseProperty($response, $propertyPath);
-+
-+            $this->fail(sprintf('Property "%s" exists, but it should not', $propertyPath));
-+        } catch (RuntimeException $e) {
-+            // cool, it blew up
-+            // this catches all errors (but only errors) fro, the PropertyAccess component
-+        }
-+    }
-+
-     protected function assertResponsePropertyEquals(ResponseInterface $response, $propertyPath, $expectedValue)
-     {
-         $actual = $this->readResponseProperty($response, $propertyPath);
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index c29dbe4..7b486fb 100644
+index db77ca8..a694205 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -122,4 +122,27 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -121,4 +121,27 @@ class ProgrammerControllerTest extends ApiTestCase
          $response = $this->client->delete('/api/programmers/UnitTester');
          $this->assertEquals(204, $response->getStatusCode());
      }
@@ -58,13 +20,13 @@ index c29dbe4..7b486fb 100644
 +        ]);
 +
 +        $this->assertEquals(400, $response->getStatusCode());
-+        $this->assertResponsePropertiesExist($response, array(
++        $this->asserter()->assertResponsePropertiesExist($response, array(
 +            'type',
 +            'title',
 +            'errors',
 +        ));
-+        $this->assertResponsePropertyExists($response, 'errors.nickname');
-+        $this->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
-+        $this->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
++        $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
++        $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname', 'Please enter a clever nickname');
++        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
 +    }
  }

@@ -1,39 +1,33 @@
-diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index 93f0073..613bbcc 100644
---- a/resources/ApiTestCase.php
-+++ b/resources/ApiTestCase.php
-@@ -2,6 +2,7 @@
- 
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 91b66c4..7636f91 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
+@@ -3,6 +3,7 @@
  namespace AppBundle\Test;
  
-+use AppBundle\Entity\Programmer;
  use AppBundle\Entity\User;
++use AppBundle\Entity\Programmer;
  use Doctrine\Common\DataFixtures\Purger\ORMPurger;
  use Doctrine\ORM\EntityManager;
-@@ -14,6 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ use Exception;
+@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  use Symfony\Component\Console\Helper\FormatterHelper;
  use Symfony\Component\Console\Output\ConsoleOutput;
  use Symfony\Component\DomCrawler\Crawler;
-+use Symfony\Component\PropertyAccess\Exception\AccessException;
 +use Symfony\Component\PropertyAccess\PropertyAccess;
-+use Symfony\Component\PropertyAccess\PropertyAccessor;
  
  class ApiTestCase extends KernelTestCase
  {
-@@ -34,6 +38,12 @@ class ApiTestCase extends KernelTestCase
+@@ -39,6 +41,8 @@ class ApiTestCase extends KernelTestCase
       */
      private $formatterHelper;
  
-+    /**
-+     *
-+     * @var PropertyAccessor
-+     */
-+    private $accessor;
++    private $responseAsserter;
 +
      public static function setUpBeforeClass()
      {
          self::$staticClient = new Client([
-@@ -215,6 +225,62 @@ class ApiTestCase extends KernelTestCase
+@@ -224,6 +228,41 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -60,7 +54,55 @@ index 93f0073..613bbcc 100644
 +        return $programmer;
 +    }
 +
-+    protected function assertResponsePropertiesExist(ResponseInterface $response, array $expectedProperties)
++    /**
++     * @return ResponseAsserter
++     */
++    protected function asserter()
++    {
++        if ($this->responseAsserter === null) {
++            $this->responseAsserter = new ResponseAsserter();
++        }
++
++        return $this->responseAsserter;
++    }
++
+     /**
+      * @return EntityManager
+      */
+diff --git a/src/AppBundle/Test/ResponseAsserter.php b/src/AppBundle/Test/ResponseAsserter.php
+new file mode 100644
+index 0000000..628bc17
+--- /dev/null
++++ b/src/AppBundle/Test/ResponseAsserter.php
+@@ -0,0 +1,180 @@
++<?php
++
++namespace AppBundle\Test;
++
++use GuzzleHttp\Message\ResponseInterface;
++use Symfony\Component\PropertyAccess\Exception\RuntimeException;
++use Symfony\Component\PropertyAccess\PropertyAccess;
++use Symfony\Component\PropertyAccess\Exception\AccessException;
++use Symfony\Component\PropertyAccess\PropertyAccessor;
++
++/**
++ * Helper class to assert different conditions on Guzzle responses
++ */
++class ResponseAsserter extends \PHPUnit_Framework_Assert
++{
++    /**
++     * @var PropertyAccessor
++     */
++    private $accessor;
++
++    /**
++     * Asserts the array of property names are in the JSON response
++     *
++     * @param ResponseInterface $response
++     * @param array $expectedProperties
++     * @throws \Exception
++     */
++    public function assertResponsePropertiesExist(ResponseInterface $response, array $expectedProperties)
 +    {
 +        foreach ($expectedProperties as $propertyPath) {
 +            // this will blow up if the property doesn't exist
@@ -68,7 +110,48 @@ index 93f0073..613bbcc 100644
 +        }
 +    }
 +
-+    protected function assertResponsePropertyEquals(ResponseInterface $response, $propertyPath, $expectedValue)
++    /**
++     * Asserts the specific propertyPath is in the JSON response
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @throws \Exception
++     */
++    public function assertResponsePropertyExists(ResponseInterface $response, $propertyPath)
++    {
++        // this will blow up if the property doesn't exist
++        $this->readResponseProperty($response, $propertyPath);
++    }
++
++    /**
++     * Asserts the given property path does *not* exist
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @throws \Exception
++     */
++    public function assertResponsePropertyDoesNotExist(ResponseInterface $response, $propertyPath)
++    {
++        try {
++            // this will blow up if the property doesn't exist
++            $this->readResponseProperty($response, $propertyPath);
++
++            $this->fail(sprintf('Property "%s" exists, but it should not', $propertyPath));
++        } catch (RuntimeException $e) {
++            // cool, it blew up
++            // this catches all errors (but only errors) from the PropertyAccess component
++        }
++    }
++
++    /**
++     * Asserts the response JSON property equals the given value
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @param mixed $expectedValue
++     * @throws \Exception
++     */
++    public function assertResponsePropertyEquals(ResponseInterface $response, $propertyPath, $expectedValue)
 +    {
 +        $actual = $this->readResponseProperty($response, $propertyPath);
 +        $this->assertEquals(
@@ -83,25 +166,67 @@ index 93f0073..613bbcc 100644
 +        );
 +    }
 +
-+    protected function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
++    /**
++     * Asserts the response property is an array
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @throws \Exception
++     */
++    public function assertResponsePropertyIsArray(ResponseInterface $response, $propertyPath)
 +    {
 +        $this->assertInternalType('array', $this->readResponseProperty($response, $propertyPath));
 +    }
 +
-+    protected function assertResponsePropertyCount(ResponseInterface $response, $propertyPath, $expectedCount)
++    /**
++     * Asserts the given response property (probably an array) has the expected "count"
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @param integer $expectedCount
++     * @throws \Exception
++     */
++    public function assertResponsePropertyCount(ResponseInterface $response, $propertyPath, $expectedCount)
 +    {
-+        $this->assertCount((int) $expectedCount, $this->readResponseProperty($response, $propertyPath));
++        $this->assertCount((int)$expectedCount, $this->readResponseProperty($response, $propertyPath));
 +    }
 +
-     /**
-      * @return EntityManager
-      */
-@@ -223,4 +289,33 @@ class ApiTestCase extends KernelTestCase
-         return $this->getService('doctrine')
-             ->getManager();
-     }
++    /**
++     * Asserts the specific response property contains the given value
++     *
++     * e.g. "Hello world!" contains "world"
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @param mixed $expectedValue
++     * @throws \Exception
++     */
++    public function assertResponsePropertyContains(ResponseInterface $response, $propertyPath, $expectedValue)
++    {
++        $actualPropertyValue = $this->readResponseProperty($response, $propertyPath);
++        $this->assertContains(
++            $expectedValue,
++            $actualPropertyValue,
++            sprintf(
++                'Property "%s": Expected to contain "%s" but response was "%s"',
++                $propertyPath,
++                $expectedValue,
++                var_export($actualPropertyValue, true)
++            )
++        );
++    }
 +
-+    protected function readResponseProperty(ResponseInterface $response, $propertyPath)
++    /**
++     * Reads a JSON response property and returns the value
++     *
++     * This will explode if the value does not exist
++     *
++     * @param ResponseInterface $response
++     * @param string $propertyPath e.g. firstName, battles[0].programmer.username
++     * @return mixed
++     * @throws \Exception
++     */
++    public function readResponseProperty(ResponseInterface $response, $propertyPath)
 +    {
 +        if ($this->accessor === null) {
 +            $this->accessor = PropertyAccess::createPropertyAccessor();
@@ -129,9 +254,9 @@ index 93f0073..613bbcc 100644
 +            ), 0, $e);
 +        }
 +    }
- }
++}
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 165e8c6..3e17d8a 100644
+index 165e8c6..6d7b9cf 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -32,4 +32,40 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -148,13 +273,13 @@ index 165e8c6..3e17d8a 100644
 +
 +        $response = $this->client->get('/api/programmers/UnitTester');
 +        $this->assertEquals(200, $response->getStatusCode());
-+        $this->assertResponsePropertiesExist($response, array(
++        $this->asserter()->assertResponsePropertiesExist($response, array(
 +            'nickname',
 +            'avatarNumber',
 +            'powerLevel',
 +            'tagLine'
 +        ));
-+        $this->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
++        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
 +    }
 +
 +    public function testGETProgrammersCollection()
@@ -170,8 +295,8 @@ index 165e8c6..3e17d8a 100644
 +
 +        $response = $this->client->get('/api/programmers');
 +        $this->assertEquals(200, $response->getStatusCode());
-+        $this->assertResponsePropertyIsArray($response, 'programmers');
-+        $this->assertResponsePropertyCount($response, 'programmers', 2);
-+        $this->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
++        $this->asserter()->assertResponsePropertyIsArray($response, 'programmers');
++        $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
++        $this->asserter()->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
 +    }
  }
