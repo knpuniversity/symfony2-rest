@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 91b66c4..a1ba882 100644
+index b329c67..bfdd329 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -18,7 +18,7 @@ index 91b66c4..a1ba882 100644
  
  class ApiTestCase extends KernelTestCase
  {
-@@ -224,6 +226,29 @@ class ApiTestCase extends KernelTestCase
+@@ -224,6 +226,27 @@ class ApiTestCase extends KernelTestCase
          return $user;
      }
  
@@ -26,6 +26,9 @@ index 91b66c4..a1ba882 100644
 +    {
 +        $data = array_merge(array(
 +            'powerLevel' => rand(0, 10),
++            'user' => $this->getEntityManager()
++                ->getRepository('AppBundle:User')
++                ->findAny()
 +        ), $data);
 +
 +        $accessor = PropertyAccess::createPropertyAccessor();
@@ -34,13 +37,8 @@ index 91b66c4..a1ba882 100644
 +            $accessor->setValue($programmer, $key, $value);
 +        }
 +
-+        $owner = $this->getEntityManager()
-+            ->getRepository('AppBundle:User')
-+            ->findAny();
-+        $programmer->setUser($owner);
-+
 +        $this->getEntityManager()->persist($programmer);
-+        $this->getEntityManager()->flush($programmer);
++        $this->getEntityManager()->flush();
 +
 +        return $programmer;
 +    }

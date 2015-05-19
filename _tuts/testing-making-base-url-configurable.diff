@@ -16,7 +16,7 @@ index 2b41503..6090fdd 100644
      <filter>
          <whitelist>
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 7636f91..f87e5ac 100644
+index 79be098..15578cb 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -45,8 +45,9 @@ class ApiTestCase extends KernelTestCase
