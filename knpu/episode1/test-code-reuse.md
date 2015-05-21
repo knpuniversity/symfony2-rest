@@ -29,7 +29,7 @@ use in the sub-classes. Then, override `setup()` and say
 
 [[[ code('753edbfce9') ]]]
 
-So `setupBeforeClass()` will make sure the `Client` is created just once
+`setupBeforeClass()` will make sure the `Client` is created just once
 and `setup()` puts that onto a non-static property, just because I like non-static
 things a bit better. Oh, and if we *did* need to do any clean up resetting
 of the Client, we could do that in `setup()` or `tearDown()`.
@@ -37,7 +37,7 @@ of the Client, we could do that in `setup()` or `tearDown()`.
 ## Extend the Base Class
 
 Back in the actual test class, get rid of the `$client` code and simply reference
-`$this->client`. Oh, and don't forget to extend `ApiTestCase` like I just
+`$this->client`. Ooooo, and don't forget to extend `ApiTestCase` like I just
 did:
 
 [[[ code('0c1d4558ab') ]]]
@@ -48,4 +48,4 @@ Make sure we didn't break anything:
 php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
-Still green!
+Hey, still green!

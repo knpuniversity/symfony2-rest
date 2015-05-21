@@ -51,7 +51,7 @@ The kernel is the heart of Symfony, and booting it basically just makes the
 service container available.
 
 Add the `tearDown()` method... and do nothing. What!? This is important.
-I'm adding a comment about why - but I'll explain in a second:
+I'm adding a comment about why - I'll explain in a second:
 
 [[[ code('c14a7a3d7e') ]]]
 
@@ -65,7 +65,7 @@ our test classes fetch services from the container. To do that, return
 The whole point of that `KernelTestCase` base class is to set and boot that
 static `$kernel` property which has the container on it. Now normally, the
 base class actually shuts down the kernel in `tearDown()`. What I'm doing -
-on purpose - is booting the kernel and so creating the container just once
+on purpose - is booting the kernel and creating the container just once
 per my whole test suite.
 
 That'll make things faster, though in theory it could cause issues or even

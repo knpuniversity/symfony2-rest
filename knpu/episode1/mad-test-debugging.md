@@ -16,13 +16,11 @@ First, check out `onNotSuccessfulTest()`:
 If you have a method with this name, PHPUnit calls it whenever a test fails.
 I'm using it to print out the last response so we can see what just happened.
 
-I also added a few other nice things, like `printLastRequestUrl()`. So if
-you want to see what the raw request looks like you're sending, you can call
-this:
+I also added a few other nice things, like `printLastRequestUrl()`.
 
 [[[ code('ac1a060c5a') ]]]
 
-Use `debugResponse()` if you want to see what a Response looks like:
+Next up is `debugResponse()` use it if you want to see what a Response looks like:
 
 [[[ code('d2abc9dad1') ]]]
 
@@ -71,13 +69,13 @@ This means we can say `$this->output->writeln()` and pass it the `$string`:
 
 [[[ code('6ab4843e77') ]]]
 
-I'm coloring some things already, so let's see the pretty! Re-run the test:
+I'm coloring some things already, so let's see this beautiful art! Re-run the test:
 
 ```bash
 php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
-And hey! That error is hard to miss!
+Hey! That error is hard to miss!
 
 ## Seeing the Exception Stacktrace!
 
