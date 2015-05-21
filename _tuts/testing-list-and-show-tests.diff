@@ -1,17 +1,7 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index bfdd329..79be098 100644
+index 5924693..6a0e3be 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
-@@ -2,8 +2,8 @@
- 
- namespace AppBundle\Test;
- 
--use AppBundle\Entity\Programmer;
- use AppBundle\Entity\User;
-+use AppBundle\Entity\Programmer;
- use Doctrine\Common\DataFixtures\Purger\ORMPurger;
- use Doctrine\ORM\EntityManager;
- use Exception;
 @@ -41,6 +41,8 @@ class ApiTestCase extends KernelTestCase
       */
      private $formatterHelper;
