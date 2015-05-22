@@ -48,13 +48,13 @@ chapters:
     get-collection:
         video_key: dwxs1sf36y
     first-test:
-        is_finished: false
+        video_key: q3l8rg2cnl
     test-code-reuse:
-        is_finished: false
+        video_key: nv5ep70agx
     tests-clear-data:
-        is_finished: false
+        video_key: ejpc6p14qx
     mad-test-debugging:
-        is_finished: false
+        video_key: 4r4tvldnn2
     property-access-fixtures:
         is_finished: false
     response-asserter:
