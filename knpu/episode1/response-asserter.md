@@ -131,3 +131,10 @@ TODO CODE
 And that's the super-power of the PropertyAccess component: it lets you walk
 down through the response data. This is really fun, give this a try:
 
+```bash
+phpunit -c app --filter testGETProgrammersCollection src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+```
+
+We're still passing. If you change that to `CowboyCoder2`, we get that really
+clear failure message and the dumped JSON response right above it. We're
+dangerous. Change that test back to pass.
