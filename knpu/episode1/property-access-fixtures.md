@@ -1,6 +1,6 @@
 # Test Fixtures and the PropertyAccess Component
 
-Hi big error! Now that I can see you, I can fix you! Remember, back in
+Howdy big error! Now that I can see you, I can fix you! Remember, back in
 `ProgrammerController`, we're *always* assuming there's a `weaverryan` user
 in the database:
 
