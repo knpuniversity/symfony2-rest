@@ -55,8 +55,11 @@ chapters:
         is_finished: false
     mad-test-debugging:
         is_finished: false
-    list-show-tests:
+    property-access-fixtures:
         is_finished: false
+    response-asserter:
+        is_finished: false
+
     test-base-url:
         is_finished: false
     put-programmer:
