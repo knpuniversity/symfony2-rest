@@ -37,7 +37,7 @@ Finish by returning it:
 Now let's use this! Instead of having Guzzle decode the JSON for us, we can
 just say `$this->asserter()->responsePropertiesExist()` and pass it the
 `$response` we want it to look at and the array of properties that should
-exist in the JSON:
+exist in its JSON:
 
 [[[ code('3b193ec404') ]]]
 
@@ -46,7 +46,7 @@ over each property and reads their value using the `PropertyAccess` component.
 And it *is* still just using `json_decode` internally. It's just an easier
 way to look into the JSON response.
 
-Let's double-check that it all works:
+Since we're responsible coders, let's assert that it all works:
 
 ```bash
 phpunit -c app src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
@@ -64,8 +64,8 @@ Run that!
 phpunit -c app src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 ```
 
-And *that* passes. When things pass on the first try it kinda scares me, so
-let's assert `UnitTester2` and see it fail.
+And *that* passes. Nothing scares me more than when things are green on the first try, 
+... well that and snakes on a plane. So, let's assert `UnitTester2` and see it fail.
 
 ```bash
 phpunit -c app src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
@@ -81,21 +81,21 @@ And like *all* failures, it prints out the raw response above this.
 
 Our testing setup is, well, pretty sweet. So testing the GET collection endpoint
 should be easy. Create a `testGETProgrammersCollection()` method. Grab the
-`createProgrammer()` code from above, but paste it twice and add a new `CowboyCoder`:
+`createProgrammer()` code from above, but paste it twice to create a new `CowboyCoder`:
 
 CODE TODO
 
-Now grab the line that makes the request and asserts the status code. Update
+Now grab the lines that makes the request and asserts the status code. Update
 the URL to just `/api/programmers`. No assertions yet, but let's make sure
-it doesn't blow up yet:
+it doesn't blow up:
 
 ```bash
 phpunit -c app src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 ```
 
-Great! Ok, so what do we want to assert? Think about how the endpoint works:
-we're returning an associative array with a `programmers` key and *that*
-actually holds the collection of programmers:
+Great! Ok, so what do we want to assert? I don't know what do you want to assert?
+Think about how the endpoint works: we're returning an associative array 
+with a `programmers` key and *that* actually holds the collection of programmers:
 
 CODE TODO
 
@@ -116,7 +116,7 @@ run this test:
 phpunit -c app --filter testGETProgrammersCollection src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 ```
 
-Yep - one little dot and still passing. 
+Yep - one little dot and the PHPUnit gnomes are pleased.
 
 ## Deep Assertions with Property Path
 
@@ -129,5 +129,5 @@ And this should be `CowboyCoder`:
 TODO CODE
 
 And that's the super-power of the PropertyAccess component: it lets you walk
-down through the response data. Give this a try:
+down through the response data. This is really fun, give this a try:
 
