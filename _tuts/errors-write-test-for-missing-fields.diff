@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index db77ca8..a694205 100644
+index efa3da6..7b17190 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -121,4 +121,27 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -122,4 +122,27 @@ class ProgrammerControllerTest extends ApiTestCase
          $response = $this->client->delete('/api/programmers/UnitTester');
          $this->assertEquals(204, $response->getStatusCode());
      }

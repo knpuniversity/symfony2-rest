@@ -19,10 +19,10 @@ index 39e7a2e..81dc142 100644
          );
          $response->headers->set('Content-Type', 'application/problem+json');
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 16fd713..330118e 100644
+index fc6afa6..f8ee6f1 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -160,7 +160,7 @@ EOF;
+@@ -161,7 +161,7 @@ EOF;
          ]);
  
          $this->assertEquals(400, $response->getStatusCode());

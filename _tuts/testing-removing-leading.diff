@@ -27,14 +27,10 @@ index 191ec88..4e6a885 100644
      }
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 1be5b70..1db7e1a 100644
+index 55fec0e..4d75809 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -24,11 +24,10 @@ class ProgrammerControllerTest extends ApiTestCase
-         $response = $this->client->post('/api/programmers', [
-             'body' => json_encode($data)
-         ]);
--        $this->printLastRequestUrl();
+@@ -27,7 +27,7 @@ class ProgrammerControllerTest extends ApiTestCase
  
          $this->assertEquals(201, $response->getStatusCode());
          $this->assertTrue($response->hasHeader('Location'));

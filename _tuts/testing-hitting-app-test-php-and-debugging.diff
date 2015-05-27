@@ -24,17 +24,17 @@ index 6090fdd..b6716e6 100644
  
      <filter>
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 6d7b9cf..1be5b70 100644
+index 6d7b9cf..55fec0e 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -24,6 +24,7 @@ class ProgrammerControllerTest extends ApiTestCase
-         $response = $this->client->post('/api/programmers', [
-             'body' => json_encode($data)
-         ]);
-+        $this->printLastRequestUrl();
+@@ -63,6 +63,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         ));
  
-         $this->assertEquals(201, $response->getStatusCode());
-         $this->assertTrue($response->hasHeader('Location'));
+         $response = $this->client->get('/api/programmers');
++        $this->printLastRequestUrl();
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyIsArray($response, 'programmers');
+         $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
 diff --git a/web/app_test.php b/web/app_test.php
 new file mode 100644
 index 0000000..503a56d

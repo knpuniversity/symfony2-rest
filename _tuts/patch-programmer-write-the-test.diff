@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index f6084f1..db77ca8 100644
+index fbea60c..efa3da6 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -91,6 +91,26 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -92,6 +92,26 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
      }
  
