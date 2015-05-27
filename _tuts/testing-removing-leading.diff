@@ -1,3 +1,16 @@
+diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
+index b6716e6..6090fdd 100644
+--- a/app/phpunit.xml.dist
++++ b/app/phpunit.xml.dist
+@@ -16,7 +16,7 @@
+     </testsuites>
+ 
+     <php>
+-        <env name="TEST_BASE_URL" value="http://localhost:8000/app_test.php" />
++        <env name="TEST_BASE_URL" value="http://localhost:8000" />
+     </php>
+ 
+     <filter>
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
 index 191ec88..4e6a885 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
