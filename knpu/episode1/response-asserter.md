@@ -137,4 +137,4 @@ phpunit -c app --filter testGETProgrammersCollection src/AppBundle/Tests/Control
 
 We're still passing. If you change that to `CowboyCoder2`, we get that really
 clear failure message and the dumped JSON response right above it. We're
-dangerous. Change that test back to pass.
+dangerous. Change that test back so it passes.
