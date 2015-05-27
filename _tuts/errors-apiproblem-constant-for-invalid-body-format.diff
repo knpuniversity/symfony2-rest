@@ -31,10 +31,10 @@ index 2356516..0e65f68 100644
  
          $clearMissing = $request->getMethod() != 'PATCH';
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 1ebdbd1..df79117 100644
+index 2dd7ce3..dd1776c 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -162,6 +162,7 @@ EOF;
+@@ -161,6 +161,7 @@ EOF;
          $this->debugResponse($response);
  
          $this->assertEquals(400, $response->getStatusCode());

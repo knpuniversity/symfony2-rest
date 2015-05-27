@@ -45,10 +45,10 @@ index bf3d5a1..3325bbf 100644
 +    }
  }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 7b17190..f2fc9f5 100644
+index a694205..56cded0 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-@@ -142,7 +142,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -141,7 +141,7 @@ class ProgrammerControllerTest extends ApiTestCase
              'errors',
          ));
          $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');

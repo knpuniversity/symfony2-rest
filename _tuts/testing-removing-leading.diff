@@ -27,7 +27,7 @@ index 191ec88..4e6a885 100644
      }
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 55fec0e..4d75809 100644
+index 55fec0e..1db7e1a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -27,7 +27,7 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -39,6 +39,14 @@ index 55fec0e..4d75809 100644
          $finishedData = json_decode($response->getBody(true), true);
          $this->assertArrayHasKey('nickname', $finishedData);
          $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
+@@ -63,7 +63,6 @@ class ProgrammerControllerTest extends ApiTestCase
+         ));
+ 
+         $response = $this->client->get('/api/programmers');
+-        $this->printLastRequestUrl();
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyIsArray($response, 'programmers');
+         $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
 diff --git a/web/app_test.php b/web/app_test.php
 index 503a56d..0bed2d7 100644
 --- a/web/app_test.php
