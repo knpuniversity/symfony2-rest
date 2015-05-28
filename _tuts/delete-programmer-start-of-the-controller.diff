@@ -1,0 +1,31 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index dac97f0..d437014 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -115,6 +115,26 @@ class ProgrammerController extends BaseController
+         return $response;
+     }
+ 
++    /**
++     * @Route("/api/programmers/{nickname}")
++     * @Method("DELETE")
++     */
++    public function deleteAction($nickname)
++    {
++        $programmer = $this->getDoctrine()
++            ->getRepository('AppBundle:Programmer')
++            ->findOneByNickname($nickname);
++
++        if (!$programmer) {
++            throw $this->createNotFoundException(sprintf(
++                'No programmer found with nickname "%s"',
++                $nickname
++            ));
++        }
++
++        // todo ...
++    }
++
+     private function processForm(Request $request, FormInterface $form)
+     {
+         $data = json_decode($request->getContent(), true);

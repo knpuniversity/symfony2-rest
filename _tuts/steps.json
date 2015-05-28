@@ -186,6 +186,11 @@
             "description": null
         },
         {
+            "id": "delete-programmer-start-of-the-controller",
+            "name": "DELETE Programmer: Start of the controller",
+            "description": null
+        },
+        {
             "id": "delete-programmer-implement-the-controller",
             "name": "DELETE Programmer: Implement the controller",
             "description": null
@@ -331,5 +336,5 @@
             "description": null
         }
     ],
-    "sha": "6db3d004267ae39a4af90e702792aa320fc28a49"
+    "sha": "10648ab8fc672a544376b2e09f6ce0af895a0113"
 }
