@@ -7,12 +7,12 @@ create an rm -rf endpoint to send a programmer to `/dev/null`.
 Start with the test! `public function testDELETEProgrammer`, because we'll
 send a DELETE request to terminate that programmer resource:
 
-TODO CODE
+[[[ code('9724a7b5a3') ]]]
 
 Copy the guts of the GET test - fetching and deleting a programmer are almost
 the same, except for the HTTP method. Change the method to `delete()`:
 
-TODO CODE
+[[[ code('d5ecf72396') ]]]
 
 Now, what's the status code? What should we return? We can't return the JSON
 programmer, because we just finished truncating it's proverbial tables. I
@@ -21,7 +21,7 @@ we'll return nothing and use a status code - 204 - that means "everything
 went super great, but I have no content to send back." Remove the asserts
 on the bottom... since there's nothing to look at:
 
-TOOD CODE
+[[[ code('378757befd') ]]]
 
 ## The Controller
 
@@ -30,12 +30,12 @@ the route stuff from `updateAction()`. It's all the same again, except the
 method is different. Take out the route name - we don't need this unless we
 link here. And change the method to `DELETE`:
 
-TODO CODE
+[[[ code('bdc6e84a8c') ]]]
 
 Grab the query code from `updateAction()` too, and make sure you have your
 `$nickname` argument:
 
-TODO CODE
+[[[ code('bf47eaf37b') ]]]
 
 So this will 404 if we don't find the programmer. Surprise! In the REST world,
 this is controversial! Since the job of this endpoint is to make sure the
@@ -48,12 +48,12 @@ fine.
 Change the `if` statement to be `if ($programmer)`, then we'll delete it.
 Grab the EntityManager and call the normal `remove()` on it, then `flush()`:
 
-TODO CODE
+[[[ code('18d80cfae6') ]]]
 
 And whether the Programmer was found or not, we'll always return the same
 `new Response(null, 204)`:
 
-TODO CODE
+[[[ code('773a3df683') ]]]
 
 Try the test and send a programmer to the recycling bin! Filter for
 `testDELETE`.

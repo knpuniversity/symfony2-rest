@@ -9,7 +9,7 @@ We want the server to just ignore that. Add a new assert at the end that
 `nickname` *still* equals `CowboyCoder`, even though we're trying to mess
 with things:
 
-TODO CODE
+[[[ code('fb03a86552') ]]]
 
 Run just that test:
 
@@ -21,7 +21,7 @@ Womp womp - we're failing: the `nickname` *is* updated on the programmer.
 That makes perfect sense: our form will update *any* of the 3 fields we
 configured in `PogrammerType`:
 
-TODO CODE
+[[[ code('787b468429') ]]]
 
 ## Using disabled Form Fields
 
@@ -31,26 +31,24 @@ functional `nickname` text box when creating, but a *disabled* `nickname`
 text box when editing. We can use this idea in our API by giving the `nickname`
 field a `disabled` option that's set to `true`.
 
-TODO CODE
-
 In an API, this will mean that any value submitted to this field will just
 be ignored. If we can set this to `true` in edit mode only, that would do
 the trick!
 
 To do that, reference a new option called `is_edit`:
 
-TODO CODE
+[[[ code('5137469e7f') ]]]
 
 If we're in "edit mode", then the field is disabled. To make this a valid
 form option, add a new entry in `setDefaultOptions()` and default it to
 `false`:
 
-TODO CODE
+[[[ code('28ce87d6d5') ]]]
 
 Head back to `ProgrammerController::updateAction()` and give `createForm()`
 a third array argument. Pass `is_edit => true`.
 
-TODO CODE
+[[[ code('bb42823b90') ]]]
 
 Ok, try the test!
 
@@ -70,7 +68,7 @@ and git rid of `buildForm()`. In `setDefaultOptions()`, we only need to set
 `is_edit` to `true` and call the parent function above this. Make sure `getName()`
 returns something unique:
 
-TODO CODE
+[[[ code('dd2880573f') ]]]
 
 The whole purpose of this class is to act just like `ProgrammerType`, but
 set `is_edit` to true instead of us passing that in the controller. Both
@@ -78,7 +76,7 @@ approaches are fine - but I'm planning ahead to when we use NelmioApiDocBundle:
 it likes the 2 classes better. In the controller, use `new UpdateProgrammerType`
 and get rid of the third argument:
 
-TODO CODE
+[[[ code('2e5021ee4d') ]]]
 
 Test out your handy-work:
 

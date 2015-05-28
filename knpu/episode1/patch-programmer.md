@@ -10,7 +10,7 @@ just want to update `tagLine`, just send that field.
 So really, PATCH is a bit nicer to work with than PUT, and we'll support
 both. Start with the test - `public function testPATCHProgrammer()`:
 
-TODO CODE
+[[[ code('4913940271') ]]]
 
 Copy the inside of the PUT test: they'll be almost identical.
 
@@ -23,7 +23,7 @@ do this, we expect `tagLine` to be `bar`, but we also expect `avatarNumber`
 is still equal to 5. We're not sending `avatarNumber`, which means: don't
 change it. And change the method from `put()` to `patch()`:
 
-TODO CODE
+[[[ code('63be365d43') ]]]
 
 In reality, PATCH can be more complex than this, and we talk about that
 in our other REST screencast (see [The Truth Behind PATCH](http://knpuniversity.com/screencast/rest/patch#the-truth-behind-patch)).
@@ -43,7 +43,7 @@ Since PUT and PATCH are *so* similar, we can handle them in the same action.
 Just change the `@Method` annotation to have a curly-brace with `PUT` *and*
 `PATCH` inside of it:
 
-TODO CODE
+[[[ code('55d4bc20f4') ]]]
 
 Now, this route accepts PUT or PATCH. Try the test again:
 
@@ -62,12 +62,12 @@ fields are nullified. But if you set it to `false`, those fields are ignored.
 That's perfect PATCH behavior. Create a new variable above this line called
 `$clearMissing` and set it to `$request->getMethod() != 'PATCH'`:
 
-TODO CODE
+[[[ code('09bf959d42') ]]]
 
 In other words, clear all the missing fields, *unless* the request method
 is PATCH. Pass this as the second argument:
 
-TODO CODE
+[[[ code('d4635b89f6') ]]]
 
 Head back, get rid of the big error message and run things again:
 
