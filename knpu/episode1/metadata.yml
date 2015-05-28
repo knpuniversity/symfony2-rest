@@ -59,14 +59,19 @@ chapters:
         is_finished: false
     response-asserter:
         is_finished: false
-    test-base-url:
+    test-database:
         is_finished: false
-
     put-programmer:
+        is_finished: false
+    readonly-fields:
         is_finished: false
     delete-programmer:
         is_finished: false
     patch-programmer:
         is_finished: false
-    serializer:
+    serializer-basics:
+        is_finished: false
+    centralizing-response:
+        is_finished: false
+    serializer-control:
         is_finished: false
