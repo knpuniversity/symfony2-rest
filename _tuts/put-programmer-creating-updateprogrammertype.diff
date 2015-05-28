@@ -1,0 +1,53 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 6d65f65..dac97f0 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Api;
+ use AppBundle\Controller\BaseController;
+ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
++use AppBundle\Form\UpdateProgrammerType;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Symfony\Component\Form\FormInterface;
+@@ -101,9 +102,7 @@ class ProgrammerController extends BaseController
+             ));
+         }
+ 
+-        $form = $this->createForm(new ProgrammerType(), $programmer, array(
+-            'is_edit' => true,
+-        ));
++        $form = $this->createForm(new UpdateProgrammerType(), $programmer);
+         $this->processForm($request, $form);
+ 
+         $em = $this->getDoctrine()->getManager();
+diff --git a/src/AppBundle/Form/UpdateProgrammerType.php b/src/AppBundle/Form/UpdateProgrammerType.php
+new file mode 100644
+index 0000000..964a00e
+--- /dev/null
++++ b/src/AppBundle/Form/UpdateProgrammerType.php
+@@ -0,0 +1,23 @@
++<?php
++
++namespace AppBundle\Form;
++
++use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\FormBuilderInterface;
++use Symfony\Component\OptionsResolver\OptionsResolverInterface;
++
++class UpdateProgrammerType extends ProgrammerType
++{
++    public function setDefaultOptions(OptionsResolverInterface $resolver)
++    {
++        parent::setDefaultOptions($resolver);
++
++        // override this!
++        $resolver->setDefaults(['is_edit' => true]);
++    }
++
++    public function getName()
++    {
++        return 'programmer_edit';
++    }
++}
+\ No newline at end of file

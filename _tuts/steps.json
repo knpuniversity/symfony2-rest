@@ -176,6 +176,11 @@
             "description": null
         },
         {
+            "id": "put-programmer-creating-updateprogrammertype",
+            "name": "PUT Programmer: Creating UpdateProgrammerType",
+            "description": null
+        },
+        {
             "id": "delete-programmer-writing-the-test",
             "name": "DELETE Programmer: Writing the test",
             "description": null
@@ -326,5 +331,5 @@
             "description": null
         }
     ],
-    "sha": "e604b50f050688013824cdb3026dec48673bc6e7"
+    "sha": "6db3d004267ae39a4af90e702792aa320fc28a49"
 }
