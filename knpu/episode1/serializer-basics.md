@@ -6,8 +6,9 @@ TODO CODE
 
 That's pretty ok with just one resource, but this will be a pain when we
 have a lot more - especially when resources start having relations to other
-resources. To make this way more fun, we'll use a serializer library: code
-that's really good at turning objects into an array, or JSON or XML.
+resources. It'll turn into a whole soap opera. To make this way more fun, 
+we'll use a serializer library: code that's really good at turning objects 
+into an array, or JSON or XML.
 
 The one we'll use is called "JMS Serializer" and there's a bundle for it called
 [JMSSerializerBundle](http://jmsyst.com/bundles/JMSSerializerBundle). This
@@ -17,12 +18,11 @@ is not maintained all that well anymore and you'll see a little bug that we'll
 have to work around. But it's been around for years, it's really stable and
 has a lot of users.
 
-Symfony itself ships with a serializer, and in Symfony 2.7, it'll finally
-have a lot of features that JMS Serializer has. There's a push inside Symfony
-to make it eventually replace JSM Serialize for most use-cases. So, keep an
-eye on that. Oh, and JMS Serializer is licensed under Apache2, which is a
-little bit less permissive than MIT, which is Symfony's license. If that
-worries you, look into it further.
+Symfony itself ships with a serializer, Symfony 2.7 has a lot of features that 
+JMS Serializer has. There's a push inside Symfony to make it eventually replace 
+JSM Serialize for most use-cases. So, keep an eye on that. Oh, and JMS Serializer 
+is licensed under Apache2, which is a little bit less permissive than MIT, which 
+is Symfony's license. If that worries you, look into it further.
 
 With all that out of the way, let's get to work. Copy the `composer require`
 line and paste it into the terminal:
@@ -36,10 +36,10 @@ While we're waiting, copy the bundle line and add this into our `AppKernel`:
 TODO CODE
 
 This gives us a new service calld `jms_serializer`, which can turn any object
-into JSON or XML. So in the controller, rename `serializeProgrammer` to
-`serialize` and make the argument `$data`, so you can pass it anything.
-And inside, just return `$this->container->get('jms_serializer')` and call
-`serialize()` on that, passing it `$data` and `json`:
+into JSON or XML. Not unlike a Harry Potter wizarding spell.... accio JSON!
+So in the controller, rename `serializeProgrammer` to `serialize` and make 
+the argument `$data`, so you can pass it anything. And inside, just return 
+`$this->container->get('jms_serializer')` and call `serialize()` on that, passing it `$data` and `json`:
 
 TODO CODE
 
@@ -55,10 +55,8 @@ here too:
 
 TODO CODE
 
-For `listAction`, life gets easier. We can't use `serialize()` inside the
-loop anymore, or else we'll get a big array of JSON strings. But we *can*
-just put the `$programmers` array inside the `$data` array and then pass
-this big structure into the `serialize()` function:
+For `listAction`, life gets easier. Just put the `$programmers` array inside 
+the `$data` array and then pass this big structure into the `serialize()` function:
 
 TODO CODE
 
@@ -86,9 +84,9 @@ we're going to turn it off.
 The library has something called a "naming strategy" - basically how it transforms
 property names into JSON or XML keys. You can see some of this inside the
 bundle's configuration. They have a built-in class for doing nothing: it's
-caled the "identical" naming strategy. Unfortunately, the bundle has a bug
-in its configuration that makes this not configurable in the normal way.
-Instead, we need to go kung-foo on it.
+called the "identical" naming strategy. Unfortunately, the bundle has a bug
+that makes this not configurable in the normal way. Instead, we need to go 
+kung-foo on it.
 
 Open up `config.yml`. I'll paste a big long ugly new parameter here:
 
