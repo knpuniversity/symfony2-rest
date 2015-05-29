@@ -4,8 +4,8 @@ What if we don't want the `nickname` to be changeable? After all, we're using
 it almost like a primary key for the `Programmer`. Yea, I want an API client
 to set it on create, but I don't want them to be able to change it afterwards.
 
-What if we sent a new nickname in the body of the PUT request - `CowgirlCoder`.
-We want the server to just ignore that. Add a new assert at the end that
+Send a new nickname in the body of the PUT request - `CowgirlCoder`.
+We want the server to just ignore that. At the end, assert that
 `nickname` *still* equals `CowboyCoder`, even though we're trying to mess
 with things:
 
@@ -73,7 +73,7 @@ returns something unique:
 The whole purpose of this class is to act just like `ProgrammerType`, but
 set `is_edit` to true instead of us passing that in the controller. Both
 approaches are fine - but I'm planning ahead to when we use NelmioApiDocBundle:
-it likes the 2 classes better. In the controller, use `new UpdateProgrammerType`
+it likes 2 classes better. In the controller, use `new UpdateProgrammerType`
 and get rid of the third argument:
 
 [[[ code('2e5021ee4d') ]]]
