@@ -93,6 +93,13 @@ phpunit -c app --filter testGETProgrammer
 No more `id`! Take out the `debugResponse()`. Phew! Congrats! We only have
 one resource, but our API is kicking butt! We've built a system that let's
 us serialize things easily, create JSON responses and update data via forms.
+
+Oh, and the serializer can also *deserialize*. That is, take JSON and turn
+it back into an object. I prefer to use forms instead of this, but it may
+be another option. Of course, if life gets complex, you can always just
+handle incoming data manually without forms or deserialization. Just keep
+that in mind.
+
 We also have a killer test setup that let's us write tests first without
 any headache. We could just keep repeating what we have here to make a bigger
 API.
