@@ -1,10 +1,9 @@
 # PUT is for Updating
 
 Suppose now that someone using our API needs to *edit* a programmer: maybe
-they want to change the avatar of a programmer. What HTTP method should we
-use? And what should the endpoint return? Answering those questions is one
-of the reasons we always start by writing a test - it's like the design phase
-of a feature.
+they want to change its avatar. What HTTP method should we use? And what should 
+the endpoint return? Answering those questions is one of the reasons we always 
+start by writing a test - it's like the design phase of a feature.
 
 Create a `public function testPUTProgrammer()` method:
 
@@ -38,9 +37,9 @@ sure this is CowboyCoder's starting `tagLine`:
 [[[ code('25591ea067') ]]]
 
 This will create the Programmer in the database then send a PUT request where
-only the `tagLine` has changed. Assering a 200 status code is perfect, and
+only the `tagLine` is different. Asserting a 200 status code is perfect, and
 like most endpoints, we'll return the JSON programmer. But, we're already
-testing the JSON pretty well earlier. So here, just do a sanity check: assert
+testing the JSON pretty well in other spots. So here, just do a sanity check: assert
 that the `avatarNumber` has in fact changed to 2:
 
 [[[ code('f0fe136d49') ]]]
@@ -83,7 +82,7 @@ Done! And if you look at the function, it's really simple. Most of the duplicati
 is for pretty mundane code, like creating a form and saving the `Programmer`.
 Creating endpoints is already really easy.
 
-Before I congratulate is any more, let's give this a try:
+Before I congratulate us any more, let's give this a try:
 
 ```bash
 phpunit -c app --filter testPUTProgrammer
@@ -109,13 +108,13 @@ We're passing!
 
 ## Centralizing Form Data Processing
 
-Let's clean up some of the controller duplication. It's small, but each write
-endpoint is processing the request body in the same way: by fetching the
-content from the request, calling `json_decode()` on that, then passing it
-to `$form->submit()`.
+Before we go on we need to clean up some of this duplication. It's small, 
+but each write endpoint is processing the request body in the same way: by 
+fetching the content from the request, calling `json_decode()` on that, then 
+passing it to `$form->submit()`.
 
 Create a new private function called `processForm()`. This will have two
-argument - `$request` and the form object, which is a `FormInterface` instance,
+arguments - `$request` and the form object, which is a `FormInterface` instance,
 not that that's too important:
 
 [[[ code('cc047a0d41') ]]]
@@ -135,8 +134,9 @@ thing up in `newAction`:
 
 [[[ code('8928a1e494') ]]]
 
-Yay! We're just a little cleaner. Try the whole test suite:
+Yay! We're just a little cleaner. To really congratulate ourselves, try the whole test suite:
 
 ```bash
 phpunit -c app
 ```
+Wow!
