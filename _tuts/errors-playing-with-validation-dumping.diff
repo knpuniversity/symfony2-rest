@@ -20,7 +20,7 @@ index 415c2f2..bf3d5a1 100644
  
          $em = $this->getDoctrine()->getManager();
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index 2406613..a141395 100644
+index 84c131a..b601dfa 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
 @@ -4,6 +4,7 @@ namespace AppBundle\Entity;
@@ -31,7 +31,7 @@ index 2406613..a141395 100644
  
  /**
   * Programmer
-@@ -29,6 +30,7 @@ class Programmer
+@@ -28,6 +29,7 @@ class Programmer
       *
       * @ORM\Column(name="nickname", type="string", length=100, unique=true)
       * @Serializer\Expose
