@@ -56,7 +56,7 @@ Excellent! Let's add one more - an assert that the `nickname` is set to
 `UnitTester`. Use `assertResponsePropertyEquals()` - always pass the `$response`
 first. Then, `nickname` and it should equal `UnitTester`:
 
-TODO CODE
+[[[ code('35706879f2') ]]]
 
 Run that!
 
@@ -83,21 +83,24 @@ Our testing setup is, well, pretty sweet. So testing the GET collection endpoint
 should be easy. Create a `testGETProgrammersCollection()` method. Grab the
 `createProgrammer()` code from above, but paste it twice to create a new `CowboyCoder`:
 
-CODE TODO
+[[[ code('87ced20fab') ]]]
 
 Now grab the lines that makes the request and asserts the status code. Update
-the URL to just `/api/programmers`. No assertions yet, but let's make sure
-it doesn't blow up:
+the URL to just `/api/programmers`:
+
+[[[ code('5f592c9f3e') ]]]
+
+No assertions yet, but let's make sure it doesn't blow up:
 
 ```bash
 phpunit -c app src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 ```
 
-Great! Ok, so what do we want to assert? I don't know what do you want to assert?
+Great! Ok, so what do we want to assert? I don't know, what do you want to assert?
 Think about how the endpoint works: we're returning an associative array 
 with a `programmers` key and *that* actually holds the collection of programmers:
 
-CODE TODO
+[[[ code('db477f5540') ]]]
 
 Let's first assert that there's a `programmers` key in the response and that
 it's an array. Use `$this->asserter()->assertResponsePropertyIsArray()`:
@@ -106,7 +109,7 @@ that there are *two* things on this array. There's a method for that called
 `assertResponsePropertyCount()` - pass it the `$response`, `programmers`
 and the number 2:
 
-CODE TODO
+[[[ code('bd53d79b7f') ]]]
 
 Now let's run this - but copy the method name first. On the command line,
 before the filename, add `--filter` then paste the method name to *just*
@@ -126,7 +129,7 @@ the `CowboyCoder` data. Copy the `assertResponsePropertyEquals()` method
 and paste it here. But instead of just `nickname`, use `programmers[1].nickname`.
 And this should be `CowboyCoder`:
 
-TODO CODE
+[[[ code('ccd5b1653d') ]]]
 
 And that's the super-power of the PropertyAccess component: it lets you walk
 down through the response data. This is really fun, give this a try:
