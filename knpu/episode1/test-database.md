@@ -95,7 +95,7 @@ Use `$this->printLastRequestUrl()` after making the request:
 
 [[[ code('7d8164e463') ]]]
 
-This is one of the helper functions I wrote - is shows the *true* URL that
+This is one of the helper functions I wrote - it shows the *true* URL that
 Guzzle is using.
 
 Now run the test:
