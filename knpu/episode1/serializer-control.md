@@ -6,7 +6,7 @@ The serializer is... *mostly* working. But we have some test failures:
     avatarNumber, powerLevel)
 
 Huh. Yea, if you look at the response, `tagLine` is mysteriously absent!
-Where did you go Mr tagLine???
+Where did you go dear tagLine???
 
 So the serializer works like this: you give it an object, and it serializes
 every property on it. Yep, you *can* control that - just hang on a few minutes.
@@ -30,7 +30,7 @@ So run the *whole* test suite again and wait impatiently:
 phpunit -c app
 ```
 
-Sweet! All green.
+ZOMG! They're passing!
 
 ## Serialization Annotations
 
@@ -48,7 +48,7 @@ four fields. So what if we *didn't* want `id` or some property to be serialized?
 The solution is so nice. Go back to the homepage of the bundle's docs. There's
 one documentation gotcha: the bundle is a small wrapper around the JMS Serializer
 library, and most of the documentation lives there. Click the
-[documentation](http://jmsyst.com/libs/serializer) link to go there.
+[documentation](http://jmsyst.com/libs/serializer) link to check it out,.
 
 This has a *great* page called [Annotations](http://jmsyst.com/libs/serializer/master/reference/annotations):
 it's a reference of *all* of the ways that you can control serialization.
@@ -60,7 +60,7 @@ This lets you create a method and have its return value serialized. If you
 use that with `@SerializedName`, you can control the serialized property
 name for this or anything.
 
-For controller *which* fields are returned, we'll use
+For controlling *which* fields are returned, we'll use
 [@ExclusionPolicy](http://jmsyst.com/libs/serializer/master/reference/annotations#exclusionpolicy).
 Scroll down to the `@AccessType` code block and copy that `use` statement.
 Open the `Programmer` entity, paste this on top, but remove the last part
@@ -68,16 +68,16 @@ and add `as Serializer`:
 
 TODO CODE
 
-This well let us say things like `@Serializer\ExclusionPolicy`. Add that
+This will let us say things like `@Serializer\ExclusionPolicy`. Add that
 on top of the class, with `"all"`.
 
 TODO CODE
 
-This says: "Hey serializer, don't serialize *any* properties by default".
-Now we'll use `@Serializer\Expose()` to whitelist the stuff we *do* want.
-We don't want `id` - so leave that. Above the `$name` property, add
-`@Serializer\Expose()`. Do this same thing above `$avatarNumber`, `$tagLine`
-and `$powerLevel`:
+This says: "Hey serializer, don't serialize *any* properties by default,
+just hang out in your pajamas". Now we'll use `@Serializer\Expose()` to 
+whitelist the stuff we *do* want. We don't want `id` - so leave that. 
+Above the `$name` property, add `@Serializer\Expose()`. Do this same thing 
+above `$avatarNumber`, `$tagLine` and `$powerLevel`:
 
 TODO CODE
 
