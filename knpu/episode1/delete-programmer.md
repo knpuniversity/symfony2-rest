@@ -1,8 +1,8 @@
 # DELETE is for Saying Goodbye
 
-What if someone really hates a programmer they created? I know I know - programmers
-are so lovable that this will never happen. But just to prove a point, let's
-create an rm -rf endpoint to send a programmer to `/dev/null`.
+So you have to part ways with your programmer, and we all know goodbyes are hard.
+So let's delete them instead. We're going to create an rm -rf endpoint to send a 
+programmer to `/dev/null`.
 
 Start with the test! `public function testDELETEProgrammer`, because we'll
 send a DELETE request to terminate that programmer resource:
@@ -10,7 +10,7 @@ send a DELETE request to terminate that programmer resource:
 [[[ code('9724a7b5a3') ]]]
 
 Copy the guts of the GET test - fetching and deleting a programmer are almost
-the same, except for the HTTP method. Change the method to `delete()`:
+the same, except for the HTTP method, change it to `delete()`:
 
 [[[ code('d5ecf72396') ]]]
 
@@ -55,11 +55,11 @@ And whether the Programmer was found or not, we'll always return the same
 
 [[[ code('773a3df683') ]]]
 
-Try the test and send a programmer to the recycling bin! Filter for
+Try the test and send a programmer to the trash! Filter for
 `testDELETE`.
 
 ```bash
 phpunit -c app --filter testPUTProgrammer
 ```
 
-Another endpoint down!
+Another endpoint bites the dust!

@@ -35,7 +35,7 @@ Make sure the test fails - filter it for `PATCH` to run just this one:
 phpunit -c app --filter PATCH
 ```
 
-Yep: 405, method not allowed. Time to fix that!
+Sweet! 405, method not allowed. Time to fix that!
 
 ## Support PUT and PATCH
 
@@ -75,4 +75,4 @@ Head back, get rid of the big error message and run things again:
 phpunit -c app --filter PATCH
 ```
 
-Boom! So `PUT` and `PATCH` support with about 2 lines of code. 
+Boom! We've got `PUT` and `PATCH` support with about 2 lines of code. 

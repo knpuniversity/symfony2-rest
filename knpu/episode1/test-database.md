@@ -1,11 +1,11 @@
 # Using a Test Database
 
-We're using the built-in PHP web server and it's running on port 8000. We
-also have that hardcoded at the top of `ApiTestCase`: when the Client is
-created, it *always* goes to `localhost:8000`. Bummer! All of our co-workers
-will need to have the exact same setup.
+We're using the built-in PHP web server running on port 8000. We
+have that hardcoded at the top of `ApiTestCase`: when the Client is
+created, it *always* goes to `localhost:8000`. Bummer! All of our fellow
+code battlers will need to have the exact same setup.
 
-Let's make this configurable - create a new variable `$baseUrl` and set it
+We need to make this configurable - create a new variable `$baseUrl` and set it
 to an environment variable called `TEST_BASE_URL` - I'm making that name
 up. Use this for the `base_url` option:
 
@@ -13,13 +13,14 @@ up. Use this for the `base_url` option:
 
 There are endless ways to set environment variables. But we want to at least
 give this a default value. Open up `app/phpunit.xml.dist`. Get rid of those
-comments - we want a `php` element with an `env` element inside. I'll paste
+comments - we want a `php` element with an `env` node inside. I'll paste
 that in:
 
 [[[ code('fa4f904887') ]]]
 
-If you have our setup, everything just works. If not, set this environment
-variable or create a `phpunit.xml` file to override everything.
+If you have our setup, everything just works. If not, you can 
+set this environment variable or create a `phpunit.xml` file 
+to override everything.
 
 Let's double-check that this all works:
 
@@ -31,14 +32,14 @@ phpunit -c app --filter testGETProgrammersCollection src/AppBundle/Tests/Control
 
 One *little* bummer is that the tests are using our development database.
 Since those create a `weaverryan` user with password `foo`, that still works.
-But the cute programmer we created earlier is gone - they've been wiped out
-of existince! How rude!
+But the cute programmer we created earlier is gone - they've been wiped out,
+sent to /dev/null... hate to see that.
 
 ## Configuring the test Environment
 
 Symfony has a `test` environment for *just* this reason. So let's use it!
 Start by copying `app_dev.php` to `app_test.php`, then change the environment
-key from `dev` to `test`. And to know if this all works, put a temporary
+key from `dev` to `test`. To know if this all works, put a temporary
 `die` statement right on top:
 
 [[[ code('4517e45d88') ]]]
@@ -49,7 +50,7 @@ server with that as the default.
 
 Once we do that, we can setup the `test` environment to use a different database
 name. Open `config.yml` and copy the `doctrine` configuration. Paste it
-into `config_test.yml` to override the original And all we really want to
+into `config_test.yml` to override the original. All we really want to
 change is `dbname`. I like to just take the real database name and suffix
 it with `_test`:
 
@@ -58,7 +59,7 @@ it with `_test`:
 Ok, last step. In `phpunit.xml.dist`, add a `/app_test.php` to the end of
 the URL. In theory, all our API requests will now hit *this* front controller.
 
-Let's run our tests. And this *shouldn't* pass - it should hit that `die`
+Run the test! This *shouldn't* pass - it should hit that `die`
 statement on every endpoint:
 
 ```bash
@@ -69,10 +70,8 @@ They fail! But not for the reason we wanted:
 
     Unknown database `symfony_rest_recording_test`
 
-This isn't an error from our API endpoint, it's coming directly from `ApiTestCase`
-itself: it tries to create a user, then blows up when the database doesn't
-exist. Fix this with `doctrine:database:create` in the `test` environment
-and `doctrine:schema:create`:
+Woops, I forgot to create the new test database. Fix this with 
+`doctrine:database:create` in the `test` environment and `doctrine:schema:create`:
 
 ```bash
 php app/console doctrine:database:create --env=test
@@ -96,7 +95,7 @@ Use `$this->printLastRequestUrl()` after making the request:
 
 [[[ code('7d8164e463') ]]]
 
-This is one of the helper functions I wrote - is shows the *true* URL that
+This is one of the helper functions I wrote - it shows the *true* URL that
 Guzzle is using.
 
 Now run the test:
@@ -118,11 +117,11 @@ Instead, get rid of the `app_test.php` part in `phpunit.xml.dist`:
 
 [[[ code('11755b5401') ]]]
 
-Let's solve this a different way. When the `Client` is created in `ApiTestCase`,
+We'll solve this a different way. When the `Client` is created in `ApiTestCase`,
 we have the chance to attach listeners to it. Basically, we can hook into
 different points, like right before a request is sent or right after. Actually,
-I'm already doing that to keep track of the Client's history for debugging
-reasons.
+I'm already doing that to keep track of the Client's history for some debugging
+stuff.
 
 I'll paste some code, and add a `use` statement for this `BeforeEvent` class:
 
@@ -134,7 +133,7 @@ is look to see if the path starts with `/api`. If it does, prefix that with
 `/app_test.php`. This will make every request use that front controller,
 without ever needing to think about that in the tests.
 
-Let's give it another shot:
+Give it another shot:
 
 ```bash
 phpunit -c app --filter testGETProgrammersCollection src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
@@ -143,7 +142,7 @@ phpunit -c app --filter testGETProgrammersCollection src/AppBundle/Tests/Control
 Errors! Yes - it doesn't see a `programmers` property in the response because
 all we have is this crumby die statement text. Now that we know things hit
 `app_test.php`, go take that `die` statement out of it. And remove the
-`printLastRequestUrl()` too. Run the entire test suite:
+`printLastRequestUrl()`. Run the entire test suite:
 
 ```bash
 phpunit -c app

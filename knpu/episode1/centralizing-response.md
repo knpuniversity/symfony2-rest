@@ -4,8 +4,8 @@ Check out the response - it's got a `Content-Type` of `text/html`. I thought
 we fixed that! Well, that's no surprise - when we switched from `JsonResponse`
 to `Response`, we lost that header. But more importantly, this mistake is
 too easy to make: we're calling serialize() and then creating the `Response`
-by hand in *every* controller. That means we'd need to set this header in
-*every* controller. That sucks. Let's centralize this across our entire project.
+by hand in *every* controller. That means we'd need to set this header everywhere. 
+That sucks. Let's centralize this across our entire project.
 
 First, move `serialize()` out of `ProgrammerController` and into a class
 called `BaseController`. This is something I created and all controllers
