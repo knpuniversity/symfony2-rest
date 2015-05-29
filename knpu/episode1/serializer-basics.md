@@ -2,7 +2,7 @@
 
 We're turning Programmers into JSON by hand inside `serializeProgrammer()`:
 
-TODO CODE
+[[[ code('3e2386fd74') ]]]
 
 That's pretty ok with just one resource, but this will be a pain when we
 have a lot more - especially when resources start having relations to other
@@ -33,7 +33,7 @@ composer require jms/serializer-bundle
 
 While we're waiting, copy the bundle line and add this into our `AppKernel`:
 
-TODO CODE
+[[[ code('0fdffc1c5f') ]]]
 
 This gives us a new service calld `jms_serializer`, which can turn any object
 into JSON or XML. Not unlike a Harry Potter wizarding spell.... accio JSON!
@@ -41,7 +41,7 @@ So in the controller, rename `serializeProgrammer` to `serialize` and make
 the argument `$data`, so you can pass it anything. And inside, just return 
 `$this->container->get('jms_serializer')` and call `serialize()` on that, passing it `$data` and `json`:
 
-TODO CODE
+[[[ code('1cb9a4e0f6') ]]]
 
 PhpStorm is angry, just because composer hasn't finished downloading yet:
 we're working ahead.
@@ -53,17 +53,17 @@ anymore, or it'll encode things twice. Create a regular `Response` instead.
 Copy this and repeat the same thing in `showAction()`. Use a normal `Response`
 here too:
 
-TODO CODE
+[[[ code('be8d29cc5e') ]]]
 
 For `listAction`, life gets easier. Just put the `$programmers` array inside 
 the `$data` array and then pass this big structure into the `serialize()` function:
 
-TODO CODE
+[[[ code('d1149887b9') ]]]
 
 The serializer has no problem serializing arrays of things. Make the same
 changes in `updateAction()`:
 
-TODO CODE
+[[[ code('5cd1be7278') ]]]
 
 Great! Let's check on Composer. It's done, so let's try our entire test
 suite:
@@ -90,7 +90,7 @@ kung-foo on it.
 
 Open up `config.yml`. I'll paste a big long ugly new parameter here:
 
-TODO CODE
+[[[ code('10faf628df') ]]]
 
 This creates a new parameter called `jms_serializer.camel_case_naming_strategy.class`.
 I'm setting this to `JMS\Serializer\Naming\IdenticalPropertyNamingStrategy`.
@@ -108,4 +108,3 @@ phpunit -c app
 
 we still have failures. But in the dumped response, our property names are
 back!
-
