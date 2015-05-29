@@ -18,7 +18,7 @@ create a new variable called `$context` and set that to a `new SerializationCont
 Call `setSerializeNull()` on this and pass it `true`. To finish this off,
 pass that `$context` as the third argument to `serialize()`:
 
-TODO CODE
+[[[ code('2e69bfa784') ]]]
 
 Think of the `SerializationContext` as serialization configuration. It doesn't
 do a lot of useful stuff - but it *does* let us tell the serializer to actually
@@ -66,12 +66,12 @@ Scroll down to the `@AccessType` code block and copy that `use` statement.
 Open the `Programmer` entity, paste this on top, but remove the last part
 and add `as Serializer`:
 
-TODO CODE
+[[[ code('4b54f67e8f') ]]]
 
 This will let us say things like `@Serializer\ExclusionPolicy`. Add that
 on top of the class, with `"all"`.
 
-TODO CODE
+[[[ code('00290b3201') ]]]
 
 This says: "Hey serializer, don't serialize *any* properties by default,
 just hang out in your pajamas". Now we'll use `@Serializer\Expose()` to 
@@ -79,10 +79,10 @@ whitelist the stuff we *do* want. We don't want `id` - so leave that.
 Above the `$name` property, add `@Serializer\Expose()`. Do this same thing 
 above `$avatarNumber`, `$tagLine` and `$powerLevel`:
 
-TODO CODE
+[[[ code('971f32cac6') ]]]
 
 And my good buddy PhpStorm is telling me I have a syntax error up top. Whoops,
-I doubled my `use` statements - get rid of the extra one:
+I doubled my `use` statements - get rid of the extra one.
 
 With this, the `id` field *should* be gone from the response. Run the test!
 
