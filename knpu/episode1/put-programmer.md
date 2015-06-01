@@ -37,7 +37,7 @@ sure this is CowboyCoder's starting `tagLine`:
 [[[ code('25591ea067') ]]]
 
 This will create the Programmer in the database then send a PUT request where
-only the `tagLine` is different. Asserting a 200 status code is perfect, and
+only the `avatarNumber` is different. Asserting a 200 status code is perfect, and
 like most endpoints, we'll return the JSON programmer. But, we're already
 testing the JSON pretty well in other spots. So here, just do a sanity check: assert
 that the `avatarNumber` has in fact changed to 2:
