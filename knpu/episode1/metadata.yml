@@ -60,7 +60,7 @@ chapters:
     response-asserter:
         video_key: gjn1f5ybd8
     test-database:
-        is_finished: false
+        video_key: eccgwqcwhw
     put-programmer:
         is_finished: false
     readonly-fields:
