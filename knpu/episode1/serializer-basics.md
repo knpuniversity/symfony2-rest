@@ -20,7 +20,7 @@ has a lot of users.
 
 Symfony itself ships with a serializer, Symfony 2.7 has a lot of features that 
 JMS Serializer has. There's a push inside Symfony to make it eventually replace 
-JSM Serialize for most use-cases. So, keep an eye on that. Oh, and JMS Serializer 
+JMS Serialize for most use-cases. So, keep an eye on that. Oh, and JMS Serializer 
 is licensed under Apache2, which is a little bit less permissive than MIT, which 
 is Symfony's license. If that worries you, look into it further.
 
