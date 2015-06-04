@@ -62,13 +62,13 @@ chapters:
     test-database:
         video_key: eccgwqcwhw
     put-programmer:
-        is_finished: false
+        video_key: fmwzhrp49j
     readonly-fields:
-        is_finished: false
+        video_key: wln3cam4h8
     delete-programmer:
-        is_finished: false
+        video_key: gkspkwfnkz
     patch-programmer:
-        is_finished: false
+        video_key: a7dwkpj50b
     serializer-basics:
         is_finished: false
     centralizing-response:
