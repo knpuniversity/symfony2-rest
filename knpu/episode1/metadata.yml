@@ -26,7 +26,7 @@ summary: |
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf.png
-hasVideoDownload: 0
+videoDownloadExtension: mov
 tuts_hero:
     start_step: "start"
     finish_step: "Serialize: Whitelisting properties"
