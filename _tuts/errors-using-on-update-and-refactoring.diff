@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 3325bbf..8b3836a 100644
+index e189c7e..1bf6918 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -27,15 +27,7 @@ class ProgrammerController extends BaseController
+@@ -26,15 +26,7 @@ class ProgrammerController extends BaseController
          $this->processForm($request, $form);
  
          if (!$form->isValid()) {
@@ -19,7 +19,7 @@ index 3325bbf..8b3836a 100644
          }
  
          $programmer->setUser($this->findUserByUsername('weaverryan'));
-@@ -111,6 +103,10 @@ class ProgrammerController extends BaseController
+@@ -110,6 +102,10 @@ class ProgrammerController extends BaseController
          $form = $this->createForm(new UpdateProgrammerType(), $programmer);
          $this->processForm($request, $form);
  
@@ -30,7 +30,7 @@ index 3325bbf..8b3836a 100644
          $em = $this->getDoctrine()->getManager();
          $em->persist($programmer);
          $em->flush();
-@@ -167,4 +163,17 @@ class ProgrammerController extends BaseController
+@@ -166,4 +162,17 @@ class ProgrammerController extends BaseController
  
          return $errors;
      }

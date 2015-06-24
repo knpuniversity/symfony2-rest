@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 146ab0b..b4ff5f7 100644
+index 1736c2b..609ebae 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -148,35 +148,4 @@ class ProgrammerController extends BaseController
+@@ -147,35 +147,4 @@ class ProgrammerController extends BaseController
          $clearMissing = $request->getMethod() != 'PATCH';
          $form->submit($data, $clearMissing);
      }

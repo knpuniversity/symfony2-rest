@@ -35,10 +35,10 @@ index 618df9f..2aa72a7 100644
  
      public function toArray()
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 9f82f54..b4d5c40 100644
+index a98a51b..95ff4d3 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -171,8 +171,7 @@ class ProgrammerController extends BaseController
+@@ -170,8 +170,7 @@ class ProgrammerController extends BaseController
  
          $apiProblem = new ApiProblem(
              400,

@@ -1,19 +1,14 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 415c2f2..bf3d5a1 100644
+index 415c2f2..1a35769 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -22,9 +22,16 @@ class ProgrammerController extends BaseController
-     public function newAction(Request $request)
-     {
-         $programmer = new Programmer();
-+
+@@ -25,6 +25,11 @@ class ProgrammerController extends BaseController
          $form = $this->createForm(new ProgrammerType(), $programmer);
          $this->processForm($request, $form);
  
 +        if (!$form->isValid()) {
 +            header('Content-Type: cli');
 +            dump((string) $form->getErrors(true, false));die;
-+            die;
 +        }
 +
          $programmer->setUser($this->findUserByUsername('weaverryan'));
