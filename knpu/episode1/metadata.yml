@@ -26,7 +26,7 @@ summary: |
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf.png
-hasVideoDownload: 0
+videoDownloadExtension: mov
 tuts_hero:
     start_step: "start"
     finish_step: "Serialize: Whitelisting properties"
@@ -60,18 +60,18 @@ chapters:
     response-asserter:
         video_key: gjn1f5ybd8
     test-database:
-        is_finished: false
+        video_key: eccgwqcwhw
     put-programmer:
-        is_finished: false
+        video_key: fmwzhrp49j
     readonly-fields:
-        is_finished: false
+        video_key: wln3cam4h8
     delete-programmer:
-        is_finished: false
+        video_key: gkspkwfnkz
     patch-programmer:
-        is_finished: false
+        video_key: a7dwkpj50b
     serializer-basics:
-        is_finished: false
+        video_key: lwagoh85qc
     centralizing-response:
-        is_finished: false
+        video_key: ymrck16u35
     serializer-control:
-        is_finished: false
+        video_key: x37mmeyff8

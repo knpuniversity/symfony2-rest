@@ -14,7 +14,7 @@ summary: |
     * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
-illustration: rest-sf.png
+illustration: rest-sf-4.png
 hasVideoDownload: 0
 # tuts_hero:
 #     start_step: "Serialize: Whitelisting properties"
