@@ -1,7 +1,7 @@
 # Validation Errors Test
 
 Errors! A lot of things can go wrong - like 500 errors when your database server
-is one fire, 404 errors, validation errors, authentication errors and errors in
+is on fire, 404 errors, validation errors, authentication errors and errors in
 judgement, like wearing a khaki shirt with khaki shorts, unless you're on Safari.
 
 In your API, handling all of these errors correctly ends up taking some effort.
