@@ -30,4 +30,9 @@ tuts_hero:
     start_step: "Serialize: Whitelisting properties"
     finish_step: "Errors: Making type a URL"
 
-chapters: []
+chapters:
+    validation-errors-test:
+        is_finished: false
+    validation-errors-response:
+        is_finished: false
+
