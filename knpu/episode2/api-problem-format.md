@@ -28,8 +28,8 @@ a client sees this - they can research it to find out what the fields in the res
 
 Second, check out the fields: the main ones are `type` and `title`. `type` is a
 unique string for *what* went wrong. It's supposed to be a URL - our's is just a
-key. We'll revisit that later. This says `title` is a human-readable summary and
-there are a bunch of other optional fields. The [Extension Members](https://tools.ietf.org/html/draft-ietf-appsawg-http-problem-00#section-3.2)
+key. We'll revisit that later. Next, this says `title` is a human-readable version
+of `type` and there are a bunch of other optional fields. The [Extension Members](https://tools.ietf.org/html/draft-ietf-appsawg-http-problem-00#section-3.2)
 section says that you can also add whatever other fields you want. We're adding
 an extra `errors` key.
 
