@@ -21,13 +21,13 @@ Copy those three lines and repeat in `updateAction()`:
 
 We *could* write a test for this, but we've centralized everything so well, that
 I'm confident that if it works in `newAction`, it works in `updateAction()`. Basically,
-I think that's overkill. But we *should* run-run our test:
+I think that's overkill. But we *should* re-run our test:
 
 ```bash
 bin/phpunit -c app --filter testValidationErrors
 ```
 
-*All* good. Now re-run *all* the tests:
+*All* good. Now run *all* the tests:
 
 ```bash
 bin/phpunit -c app
@@ -56,11 +56,11 @@ bin/phpunit -c app
 Back to green! If you're using your form types for HTML pages *and* on your API,
 you won't want to set `csrf_protection` to false inside the class - that'll remove
 it everywhere. Instead, you can pass `csrf_protection` in as an option in the third
-argument to `createForm()` in your controller. Of you can do something fancier like
+argument to `createForm()` in your controller. Or you can do something fancier like
 a [Form Type Extension](http://symfony.com/doc/current/cookbook/form/create_form_type_extension.html)
 and control this option on a global basis.
 
-FOSRestBundle does something similar to this. In the [View Layer](http://symfony.com/doc/current/bundles/FOSRestBundle/2-the-view-layer.html#csrf-validation)
+FOSRestBundle has an interesting version of this. In the [View Layer](http://symfony.com/doc/current/bundles/FOSRestBundle/2-the-view-layer.html#csrf-validation)
 part of their docs, they show a configuration option that disables CSRF protection
 based on a role the user has. The idea is that only users that are authenticated
-via the sessionless-API would have the role you put here. Cool idea.
+via the sessionless-API would have the role you put here. That's a cool idea.

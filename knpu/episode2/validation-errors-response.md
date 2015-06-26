@@ -1,18 +1,16 @@
 # Sending back Validation Errors
 
 Time to add validation errors and get this test passing. First, add the validation.
-Open the `Programmer` class. There's no validation stuff here yet. Before adding
-some validation annotations, we need a `use` statement. I'll `use` the `NotBlank`
-class directly, let PhpStorm auto-complete that for me, then remove the last part
-and add `as Assert`:
+Open the `Programmer` class. There's no validation stuff here yet, so we need the
+`use` statement for it. I'll `use` the `NotBlank` class directly, let PhpStorm auto-complete
+that for me, then remove the last part and add `as Assert`:
 
 [[[ code('cfda552043') ]]]
 
-That's a little shortcut to get the `use` statement you'll find in the validation
-docs.
+That's a little shortcut to get that `use` statement you always need for validation.
 
-Now, above `username`, add the `@Assert\NotBlank` part with a `message` option. Go
-back and copy the clever message and paste it:
+Now, above `username`, add `@Assert\NotBlank` with a `message` option. Go back and
+copy the clever message and paste it here:
 
 [[[ code('c0149566a5') ]]]
 
@@ -26,18 +24,18 @@ Check out that `processForm()` function we created in episode 1:
 
 [[[ code('cd77c21b43') ]]]
 
-All this does is `json_decode` the input and call `$form->submit()`. That does the
-same thing as `$form->handleRequest()`, which you're probably familiar with. So
-after this function is called, the form processing has happened. After it, add an
-`if` statement with the normal `!$form->isValid()`:
+All this does is `json_decode` the request body and call `$form->submit()`. That
+does the same thing as `$form->handleRequest()`, which you're probably familiar with.
+So after this function is called, the form processing has happened. After it, add
+an `if` statement with the normal `if (!$form->isValid())`:
 
 [[[ code('669057db31') ]]]
 
-If we get here, it means we have validation errors. Let's see if this is working.
-Use the `dump()` function and the `$form->getErrors()` function, passing it `true`
-and `false` as arguments. That'll give us all the errors in a big tree. Cast this
-to a string - `getErrors()` returns a `FormErrorIterator` object, which has a nice
-`__toString()` method. Add a `die` at the end:
+If we find ourselves here, it means we have validation errors. Let's see if this
+is working. Use the `dump()` function and the `$form->getErrors()` function, passing
+it `true` and `false` as arguments. That'll give us all the errors in a big tree.
+Cast this to a string - `getErrors()` returns a `FormErrorIterator` object, which
+has a nice `__toString()` method. Add a `die` at the end:
 
 [[[ code('1c540ed6a5') ]]]
 
@@ -45,12 +43,12 @@ Let's run our test to see what this looks like. Copy the `testValidationErrors` 
 name, then run:
 
 ```bash
-bin/phpunit -c app --filter testValidationErrors
+php bin/phpunit -c app --filter testValidationErrors
 ```
 
 Ok, there's our printed dump. Woh, that is ugly. That's the nice HTML formatting
-that comes from the `dump()` function. It's unreadable here. I'll show you a trick
-to clean this up.
+that comes from the `dump()` function. But it's unreadable here. I'll show you a
+trick to clean that up.
 
 It's dumping HTML because it detects that something is accessing it via the web
 interface. But we kinda want it to print nicely for the terminal. Above the `dump()`
@@ -71,7 +69,7 @@ field and another for a missing CSRF token - we'll fix that soon. But, validatio
 ## Collecting the Validation Errors
 
 So now we just need to collect those errors and put them into a JSON response. To
-help with that, I'm going to copy a new private function into the bottom of
+help with that, I'm going to paste a new private function into the bottom of
 `ProgrammerController`:
 
 [[[ code('098708daf2') ]]]
@@ -82,12 +80,13 @@ from there. Actually, I adapted this from some code in FOSRestBundle.
 A `Form` object is a collection of other `Form` objects - one for each field. And
 sometimes, fields have sub-fields, which are yet *another* level of `Form` objects.
 It's a tree. And when validation runs, it attaches the errors to the `Form` object
-of the right field. That's the tech explanation of this function: it recursively
-loops through that tree, fetching the errors off of each field to create an associative
-array of those errors.
+of the right field. That's the treky, I mean techy, explanation of this function:
+it recursively loops through that tree, fetching the errors off of each field to
+create an associative array of those errors.
 
 Head back to `newAction()` and use this: `$errors = $this->getErrorsFromForm()` and
-pass it the `$form` object. Now, create a `$data` array that we'll turn into JSON:
+pass it the `$form` object. Now, create a `$data` array that will eventually be our
+JSON response.
 
 [[[ code('0ad36fdfdb') ]]]
 
@@ -106,10 +105,10 @@ Phew! Let's give it a try:
 bin/phpunit -c app --filter testValidationErrors
 ```
 
-Oof! That's not passing! That's a huge error. The dumped response perfect. The error
-started on `ProgrammerControllerTest` where we use `assertResponsePropertiesExist()`.
+Oof! That's not passing! That's a huge error. The dumped response looks perfect.
+The error started on `ProgrammerControllerTest` where we use `assertResponsePropertiesExist()`.
 Whoops! And there's the problem - I had `assertResponsePropertyExists()` - what you
-use to check for a single field. Make sure your's says `assertResponsePropertiesExists()`.
+use to check for a single field. Make sure your's says `assertResponsePropertiesExist()`.
 
 Try it again:
 
@@ -117,5 +116,5 @@ Try it again:
 bin/phpunit -c app --filter testValidationErrors
 ```
 
-It passes! Let's pretend I made that mistake on purpose - it was nice because we
+It's passing! Let's pretend I made that mistake on purpose - it was nice because we
 could see that the dumped response looks exactly like we wanted.

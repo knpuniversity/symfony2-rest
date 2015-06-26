@@ -2,18 +2,18 @@
 
 Time for me to reveal why I chose this error response format with `type`, `title`
 and `errors`. Imagine if every JSON API returned the same format when things went
-wrong: always with these keys. That'd be pretty awesome. As API clients, we'd always
+wrong: always with these keys. That'd be pretty awesome. As API client, we'd always
 know what to expect and what things mean. That's a beautiful fairy tale.
 
-In the real world, every API does something different. But there are people out there
+In the real world, every API does whatever they want. But there are people out there
 working on standards for error responses, with the hope that someday, API's have
 some consistency. 
 
 ## The API Problem Details Format
 
-One of those is called [api problem](https://tools.ietf.org/html/draft-nottingham-http-problem-07),
-or api problem details. Google for that. Ah, a boring spec document. Go ahead and
-read this whole thing, I'll wait... Kidding! I'll show you the good parts.
+One of those is called [api problem details](https://tools.ietf.org/html/draft-nottingham-http-problem-07).
+Google for that. Ah, a boring spec document. Go ahead and read this whole thing,
+I'll wait... Kidding! I'll show you the good parts.
 
 But first - click the [draft ietf](https://tools.ietf.org/html/draft-ietf-appsawg-http-problem-00)
 link. These drafts go through version, and this one has been replaced with a whole
@@ -31,13 +31,13 @@ unique string for *what* went wrong. It's supposed to be a URL - our's is just a
 key. We'll revisit that later. This says `title` is a human-readable summary and
 there are a bunch of other optional fields. The [Extension Members](https://tools.ietf.org/html/draft-ietf-appsawg-http-problem-00#section-3.2)
 section says that you can also add whatever other fields you want. We're adding
-an `errors` key.
+an extra `errors` key.
 
 ## Adding the application/problem+json Header
 
-We're already using following this format - or at least we're pretty close. So I
-want to advertise this to our clients so they can learn more about our format. Copy
-the `application/problem+json` `Content-Type` header so we can use it.
+So we're already following this format - or at least we're pretty close. So I want
+to advertise this to our clients so they can dig into what each key means. Copy the
+`application/problem+json` `Content-Type` header so we can use it.
 
 First, check for this in the test: `$this->assertEquals()` with `application/problem+json`
 as the expected value and `$response->getHeader('Content-Type')` for the actual value:
@@ -65,9 +65,9 @@ bin/phpunit -c app --filter testValidationErrors
 
 Error!
 
-    Attempted to call function JsonResponse from "AppBundle\Controller\Api"
+    Attempted to call function JsonResponse from namespace "AppBundle\Controller\Api"
 
-That looks like a "Ryan" mistake to - I deleted the `new` keyword before `JsonResponse`.
-You probably saw me do. Put it back and *now* try the tests:
+That looks like a "Ryan" mistake - I deleted the `new` keyword before `JsonResponse`.
+You probably saw me do that. Put it back and *now* try the tests:
 
-Green! We're advertising our special error format.
+Beautiful green! And now e're advertising our special error format.
