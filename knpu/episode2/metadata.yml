@@ -35,4 +35,8 @@ chapters:
         is_finished: false
     validation-errors-response:
         is_finished: false
+    put-validation-and-csrf:
+        is_finished: false
+    api-problem-format:
+        is_finished: false
 
