@@ -70,4 +70,4 @@ Error!
 That looks like a "Ryan" mistake - I deleted the `new` keyword before `JsonResponse`.
 You probably saw me do that. Put it back and *now* try the tests:
 
-Beautiful green! And now e're advertising our special error format.
+Beautiful green! And now we're advertising our special error format.
