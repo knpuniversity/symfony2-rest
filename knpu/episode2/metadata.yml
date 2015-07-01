@@ -32,11 +32,14 @@ tuts_hero:
 
 chapters:
     validation-errors-test:
-        is_finished: false
+        is_free: true
+        video_key: 8u402sh88o
     validation-errors-response:
-        is_finished: false
+        is_free: true
+        video_key: 0x7eckp0y6
     put-validation-and-csrf:
-        is_finished: false
+        is_free: true
+        video_key: 3ce81foxom
     api-problem-format:
-        is_finished: false
+        video_key: 3sn7vzfp81
 
