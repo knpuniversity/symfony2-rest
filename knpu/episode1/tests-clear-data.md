@@ -80,7 +80,7 @@ Because we have the container, we have the EntityManager. And that also means
 we have an easy way to clear data. Create a new private function called `purgeDatabase()`.
 Because we have the Doctrine [DataFixtures](https://github.com/doctrine/data-fixtures)
 library installed, we can use a great class called `ORMPurger`. Pass it the
-EntityManager - so `$this->getService('doctrine')->getManager()`. To clear
+EntityManager - so `$this->getService('doctrine.orm.default_entity_manager')`. To clear
 things out, say `$purger->purge()`:
 
 [[[ code('4bb6b5ca7a') ]]]
