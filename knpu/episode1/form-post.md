@@ -5,7 +5,7 @@ an HTML form submit? Really, not much. The biggest difference is that an
 HTML form sends us POST parameters and an API sends us a JSON string. But once
 we decode the JSON, both give us an array of submitted data. Then, everything
 is the same: create a Programmer object and update it with the submitted
-data. And you know who does this kind of work really well? Bernhard Schussek errr
+data. And you know who does this kind of work really well? Bernhard Schussek error
 Symfony forms!
 
 Create a new directory called `Form/` and inside of that, a new class called
