@@ -129,6 +129,15 @@ configuration:
 
 [[[ code('8eb7e0227d') ]]]
 
+***TIP
+To install this same version of Guzzle into your project, use Composer to fetch
+version 5.*:
+
+```bash
+composer require guzzlehttp/guzzle:~5.0
+```
+***
+
 The first is `base_url` set to `localhost:8000`. Next, pass it a `defaults`
 key - these are options that'll be passed, by default, to each request.
 Set one option - `exceptions` - to `false`. Normally, if our server returns
