@@ -276,6 +276,11 @@
             "description": null
         },
         {
+            "id": "errors-apiproblem-auto-titling",
+            "name": "Errors: ApiProblem auto-titling",
+            "description": null
+        },
+        {
             "id": "errors-invalid-json-format",
             "name": "Errors: Invalid JSON format",
             "description": null
@@ -336,5 +341,5 @@
             "description": null
         }
     ],
-    "sha": "67f7224e17906b09284dbd194c25ba9cc39c9093"
+    "sha": "f24a41d4d6dbbe879e128e0ec39f6c73e7bf4c31"
 }
