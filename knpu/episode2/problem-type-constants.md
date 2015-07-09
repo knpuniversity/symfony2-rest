@@ -4,17 +4,17 @@ Look back at the `title` field in the spec:
 
     A short, human-readable summary of the problem type. It SHOULD NOT
     change from occurrence to occurrence of the problem, except if you're
-    translating this.
+    translating it.
 
 In human terms, this means that *every* time we have a `validation_error` type,
 the title should be exactly `There was a validation error`. So when we're validating
 in other places in the future, both of the `type` *and* the `title` need to be
-*exactly* the same. Otherwise, we're making our client's life hard with our gross
-inconsistencies.
+*exactly* the same. Otherwise, our API clients are going to wonder what kind
+of inconsistent jerk programmed this API.
 
-Because `validation_error` is now a "special string" to us, I think this is great
+Because `validation_error` is now a "special string" in the app, I think this is great
 spot for a constant. In `ApiProblem`, add a constant called `TYPE_VALIDATION_ERROR`
-that's set to the string:
+and set it to the string:
 
 [[[ code('61ac9e472e') ]]]
 
@@ -27,7 +27,7 @@ want to have to *write* the title anywhere - can't it be guessed based on the ty
 
 I think so - let's just create a map from the type, to its associated title. In
 `ApiProblem`, add a `private static $titles` property. Let's make it an associative
-array map: from `TYPE_VALIDATION_ERROR` to the message: `There was a validation error`:
+array map: from `TYPE_VALIDATION_ERROR` to its message: `There was a validation error`:
 
 [[[ code('9771989477') ]]]
 
@@ -43,11 +43,11 @@ selves. How about, "Hey - buddy, use your head!". Or, more helpfully:
 
 [[[ code('6f1005c96c') ]]]
 
-Now we can pop up the last argument in the controller:
+Now we can pop off the last argument in the controller:
 
 [[[ code('b6732a755c') ]]]
 
-Ok future me, good lucking screwing up our API problem responses in the future. This
+Ok future me, good lucking screwing up our API problem responses. This
 is easy to use, and hard to break. Time to re-run the test:
 
 ```bash
