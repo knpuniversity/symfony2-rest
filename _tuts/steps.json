@@ -331,6 +331,11 @@
             "description": null
         },
         {
+            "id": "errors-only-affect-api",
+            "name": "Errors: Only affect API",
+            "description": null
+        },
+        {
             "id": "auth-show-simple-decoderequestbodyintoparameters",
             "name": "Auth: Show simple decodeRequestBodyIntoParameters",
             "description": null
@@ -341,5 +346,5 @@
             "description": null
         }
     ],
-    "sha": "f24a41d4d6dbbe879e128e0ec39f6c73e7bf4c31"
+    "sha": "cbb6d31c17248625c77ea8f910d2cf8fa93c5d0a"
 }

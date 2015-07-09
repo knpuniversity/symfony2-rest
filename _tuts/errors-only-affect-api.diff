@@ -1,0 +1,16 @@
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+index 81dc142..a76f234 100644
+--- a/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -21,6 +21,11 @@ class ApiExceptionListener implements EventSubscriberInterface
+ 
+     public function onKernelException(GetResponseForExceptionEvent $event)
+     {
++        // only reply to /api URLs
++        if (strpos($event->getRequest()->getPathInfo(), '/api') !== 0) {
++            return;
++        }
++
+         $e = $event->getException();
+ 
+         $statusCode = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
