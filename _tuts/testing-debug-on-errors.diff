@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 2ab8101..52eb3da 100644
+index 21b9cdb..12af6bb 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -3,18 +3,35 @@
@@ -68,7 +68,7 @@ index 2ab8101..52eb3da 100644
 +
      private function purgeDatabase()
      {
-         $purger = new ORMPurger($this->getService('doctrine.orm.default_entity_manager'));
+         $purger = new ORMPurger($this->getService('doctrine')->getManager());
 @@ -53,4 +87,113 @@ class ApiTestCase extends KernelTestCase
          return self::$kernel->getContainer()
              ->get($id);

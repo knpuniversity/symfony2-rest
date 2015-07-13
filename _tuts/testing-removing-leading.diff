@@ -12,7 +12,7 @@ index b6716e6..6090fdd 100644
  
      <filter>
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 191ec88..4e6a885 100644
+index 7ef7790..be61811 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -8,6 +8,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;

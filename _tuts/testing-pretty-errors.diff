@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 52eb3da..e42b726 100644
+index 12af6bb..1ea4492 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -28,6 +28,11 @@ class ApiTestCase extends KernelTestCase
