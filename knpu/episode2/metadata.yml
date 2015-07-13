@@ -46,4 +46,5 @@ chapters:
         video_key: hxyw3h6kp8
     problem-type-constants:
         video_key: f1vg46uufw
-
+    httpexception-invalid-json:
+        is_finished: false
