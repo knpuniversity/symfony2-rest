@@ -286,6 +286,11 @@
             "description": null
         },
         {
+            "id": "errors-send-nickname",
+            "name": "Errors: Send nickname",
+            "description": null
+        },
+        {
             "id": "errors-apiproblem-constant-for-invalid-body-format",
             "name": "Errors: ApiProblem constant for invalid_body_format",
             "description": null
@@ -346,5 +351,5 @@
             "description": null
         }
     ],
-    "sha": "cbb6d31c17248625c77ea8f910d2cf8fa93c5d0a"
+    "sha": "34c420b793bf2f0a214b76f818cfc8e027dc3100"
 }
