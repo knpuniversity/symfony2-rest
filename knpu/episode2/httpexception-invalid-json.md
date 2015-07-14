@@ -1,4 +1,4 @@
-# The Important HttpException (+ handling Invalid JSON)
+# The All-Important HttpExceptionInterface
 
 What do you think would happen if we POST'ed some badly-formatted JSON to an endpoint?
 Because, I'm not really sure - but I bet the error wouldn't be too obvious to the

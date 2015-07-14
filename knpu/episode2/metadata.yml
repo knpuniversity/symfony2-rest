@@ -48,3 +48,9 @@ chapters:
         video_key: f1vg46uufw
     httpexception-invalid-json:
         is_finished: false
+    invalid-json-api-problem:
+        is_finished: false
+    api-problem-exception:
+        is_finished: false
+    why-exceptions-are-html:
+        is_finished: false
