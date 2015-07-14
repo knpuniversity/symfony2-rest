@@ -1,6 +1,6 @@
 # The Important HttpException (+ handling Invalid JSON)
 
-What do you think would happen if we POST'ed some badly-formatted JSON to some endpoint?
+What do you think would happen if we POST'ed some badly-formatted JSON to an endpoint?
 Because, I'm not really sure - but I bet the error wouldn't be too obvious to the
 client.
 
@@ -15,7 +15,7 @@ Name the new method `testInvalidJSON()`:
 And we can't use this `$data` array anymore, `json_encode` is too good at creating
 *valid* JSON. Overachiever. Replace it with an `$invalidJson` variable - we'll have
 to create really bad JSON ourselves. Let's see here, start with one piece of valid
-JSON, remove a command and liven things up with a hanging quotation mark, and that
+JSON, remove a comma and liven things up with a hanging quotation mark, and that
 oughta do it! Now pass `$invalidJson` as the request body:
 
 [[[ code('45acca958d') ]]]
@@ -25,7 +25,7 @@ good. Invalid JSON is the client's fault, and any status code starting with 4 is
 for when *they* mess up. You could also use 422 - Unprocessable Entity - if you want
 to enhance your nerdery. But, nobody is going to notice.
 
-And since we're curious about how our API will *currently* handle invalid JSON, use
+And since we're curious about how our API *currently* handles invalid JSON, use
 `$this->debugResponse()` right above the assert:
 
 [[[ code('96c56bc3b2') ]]]
@@ -48,8 +48,8 @@ And try the test again:
 ```
 
 And we *still* fail because the `nickname` field is missing. So apparently, if we
-send invalid JSON, it acts like we're sending *no* data. Good luck to any future
-API client trying to debug this: "I passed you a nickname!!!".
+send invalid JSON, it acts like we're sending nothing. So good luck to any future
+API client trying to debug this.
 
 ## Handling Invalid JSON
 
@@ -75,15 +75,15 @@ can break the flow from inside `processForm()` is by throwing an exception. But 
 you're probably thinking, if you throw an exception in Symfony, that turns into a
 *500* error. We need a 400 error.
 
-And it turns out, that's totally possible - and it's an important concept for API's.
-First, I just said that throwing an exception causes a 500 error in Symfony. Well,
-that's just not the whole story. Throw a new `HttpException` from HttpKernel. It
+And it turns out, that's totally possible - and it's a really important concept for API's.
+First, I just said that throwing an exception causes a 500 error in Symfony.
+That's just not the whole story. Throw a new `HttpException` from HttpKernel. It
 has 2 arguments: the status code - 400 - and a message - just "Invalid JSON" for now.
 Don't worry *yet* about returning our nice API problem JSON:
 
 [[[ code('a2d9295db7') ]]]
 
-So here's the truth about exception: any exception will turn into a 500 error, *unless*
+So here's the truth about exceptions: any exception will turn into a 500 error, *unless*
 that exception implements the `HttpExceptionInterface`:
 
 [[[ code('6525fef246') ]]]
@@ -106,4 +106,4 @@ should get back our simple "Invalid JSON" text message:
 Yep! It passes and prints out "Invalid JSON". The "There was an error" part is from
 my test helper - but the red text below is the actual response. The point is that
 we *are* handling invalid JSON now, but we're not sending back the awesome API Problem
-JSON yet.
+JSON format yet.
