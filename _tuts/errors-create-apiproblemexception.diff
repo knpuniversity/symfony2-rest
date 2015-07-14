@@ -1,23 +1,9 @@
-diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
-index fba2739..90bd6d0 100644
---- a/src/AppBundle/Api/ApiProblem.php
-+++ b/src/AppBundle/Api/ApiProblem.php
-@@ -56,4 +56,9 @@ class ApiProblem
-     {
-         return $this->statusCode;
-     }
-+
-+    public function getTitle()
-+    {
-+        return $this->title;
-+    }
- }
 diff --git a/src/AppBundle/Api/ApiProblemException.php b/src/AppBundle/Api/ApiProblemException.php
 new file mode 100644
-index 0000000..5512dd5
+index 0000000..f12de49
 --- /dev/null
 +++ b/src/AppBundle/Api/ApiProblemException.php
-@@ -0,0 +1,24 @@
+@@ -0,0 +1,9 @@
 +<?php
 +
 +namespace AppBundle\Api;
@@ -26,24 +12,9 @@ index 0000000..5512dd5
 +
 +class ApiProblemException extends HttpException
 +{
-+    private $apiProblem;
-+
-+    public function __construct(ApiProblem $apiProblem, \Exception $previous = null, array $headers = array(), $code = 0)
-+    {
-+        $this->apiProblem = $apiProblem;
-+        $statusCode = $apiProblem->getStatusCode();
-+        $message = $apiProblem->getTitle();
-+
-+        parent::__construct($statusCode, $message, $previous, $headers, $code);
-+    }
-+
-+    public function getApiProblem()
-+    {
-+        return $this->apiProblem;
-+    }
 +}
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index ade8a62..a82ad4a 100644
+index ade8a62..4273618 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -3,6 +3,7 @@
@@ -59,7 +30,7 @@ index ade8a62..a82ad4a 100644
              $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
  
 -            // now what?
-+            throw new ApiProblemException($apiProblem);
++            // now what...
          }
  
          $clearMissing = $request->getMethod() != 'PATCH';

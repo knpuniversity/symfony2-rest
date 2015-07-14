@@ -301,6 +301,21 @@
             "description": null
         },
         {
+            "id": "errors-apiproblemexception-apiproblem-arg",
+            "name": "Errors: ApiProblemException ApiProblem arg",
+            "description": null
+        },
+        {
+            "id": "errors-create-exception",
+            "name": "Errors: Create exception",
+            "description": null
+        },
+        {
+            "id": "errors-remove-code-and-message-args",
+            "name": "Errors: Remove code and message args",
+            "description": null
+        },
+        {
             "id": "format-default-to-json-format",
             "name": "Format: Default to json _format",
             "description": null
@@ -351,5 +366,5 @@
             "description": null
         }
     ],
-    "sha": "e699aeb39fa52ce961eb3b8dd3bf722881ce70d1"
+    "sha": "6cafff7961b7275392e4a7db42f3be98be63a3c6"
 }

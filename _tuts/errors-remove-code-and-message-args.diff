@@ -1,0 +1,47 @@
+diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
+index fba2739..90bd6d0 100644
+--- a/src/AppBundle/Api/ApiProblem.php
++++ b/src/AppBundle/Api/ApiProblem.php
+@@ -56,4 +56,9 @@ class ApiProblem
+     {
+         return $this->statusCode;
+     }
++
++    public function getTitle()
++    {
++        return $this->title;
++    }
+ }
+diff --git a/src/AppBundle/Api/ApiProblemException.php b/src/AppBundle/Api/ApiProblemException.php
+index b8f4d69..991d43a 100644
+--- a/src/AppBundle/Api/ApiProblemException.php
++++ b/src/AppBundle/Api/ApiProblemException.php
+@@ -8,9 +8,11 @@ class ApiProblemException extends HttpException
+ {
+     private $apiProblem;
+ 
+-    public function __construct(ApiProblem $apiProblem, $statusCode, $message = null, \Exception $previous = null, array $headers = array(), $code = 0)
++    public function __construct(ApiProblem $apiProblem, \Exception $previous = null, array $headers = array(), $code = 0)
+     {
+         $this->apiProblem = $apiProblem;
++        $statusCode = $apiProblem->getStatusCode();
++        $message = $apiProblem->getTitle();
+ 
+         parent::__construct($statusCode, $message, $previous, $headers, $code);
+     }
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index a03ee62..a82ad4a 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -146,10 +146,7 @@ class ProgrammerController extends BaseController
+         if ($data === null) {
+             $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+ 
+-            throw new ApiProblemException(
+-                $apiProblem,
+-                400
+-            );
++            throw new ApiProblemException($apiProblem);
+         }
+ 
+         $clearMissing = $request->getMethod() != 'PATCH';
