@@ -48,7 +48,7 @@ four fields. So what if we *didn't* want `id` or some property to be serialized?
 The solution is so nice. Go back to the homepage of the bundle's docs. There's
 one documentation gotcha: the bundle is a small wrapper around the JMS Serializer
 library, and most of the documentation lives there. Click the
-[documentation](http://jmsyst.com/libs/serializer) link to check it out,.
+[documentation](http://jmsyst.com/libs/serializer) link to check it out.
 
 This has a *great* page called [Annotations](http://jmsyst.com/libs/serializer/master/reference/annotations):
 it's a reference of *all* of the ways that you can control serialization.
