@@ -47,7 +47,7 @@ chapters:
     problem-type-constants:
         video_key: f1vg46uufw
     httpexception-invalid-json:
-        is_finished: 53tbrzm9hq
+        video_key: 53tbrzm9hq
     invalid-json-api-problem:
         is_finished: false
     api-problem-exception:
