@@ -1,7 +1,7 @@
 # PATCH is (also) for Updating (basically)
 
 The main HTTP methods are: GET, [POST, PUT](http://knpuniversity.com/screencast/rest/put-versus-post)
-and DELETE. There's another one you hear a lot about: PATCH.
+and DELETE. There's another one you hear a lot about: [PATCH](http://knpuniversity.com/screencast/rest/patch).
 
 The simple, but not entirely accurate definition of PATCH is this: it's just
 like PUT, except you don't need to send up the entire resoure body. If you
