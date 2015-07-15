@@ -1,8 +1,8 @@
 # Request Format: Why Exceptions Return HTML
 
-When you throw an exception in Symfony - even an HttpException - it returns an HTML
-page. Notice the `Content-Type` header here of `text/html`. And in reality - my test
-helpers are hiding it, but this is returning a full, giant HTML exception page.
+When you throw an exception in Symfony - even an `HttpException` - it returns an HTML
+page. Notice the `Content-Type` header here of `text/html`. And in reality, this is returning
+a full, giant HTML exception page - my test helpers are just summarizing things.
 
 Why is that? Why does Symfony default to the idea that if something goes wrong, it
 should return HTML? 
@@ -31,6 +31,7 @@ of exceptions for our API. But with just this, re-run the tests:
 ```
 
 Yes! Now we get a `Content-Type` header of `application/json` and because we're in
-the `dev` environment, it returns the stack trace as JSON in the body.
+the `dev` environment, it returns the full stack trace as JSON.
 
-This is cool. But the JSON structure still won't be right. So let's take full control.
+This is cool. But the JSON structure still won't be right. So let's take full control
+using our `ApiProblemException`.
