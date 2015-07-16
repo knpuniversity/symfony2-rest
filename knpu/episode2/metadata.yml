@@ -49,7 +49,7 @@ chapters:
     httpexception-invalid-json:
         video_key: 53tbrzm9hq
     invalid-json-api-problem:
-        is_finished: false
+        video_key: 86ygfk6sct
     api-problem-exception:
         is_finished: false
     why-exceptions-are-html:
