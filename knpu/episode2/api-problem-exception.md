@@ -49,7 +49,7 @@ It still acts like before: with a 400 status code, and now an exception with no 
 
 Before we handle this, we can make one minor improvement. Remove the `$statusCode`
 and `$message` arguments because we can get those from the `ApiProblem` itself. Replace
-that with `$status = $apiProblem->getStatus()`. And I just realized I messed up my
+that with `$status = $apiProblem->getStatusCode()`. And I just realized I messed up my
 first line - make sure you have `$this->apiProblem = $apiProblem`. Also add
 `$message = $apiProblem->getTitle()`:
 
