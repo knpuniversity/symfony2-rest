@@ -67,7 +67,7 @@ it the `$statusCode`:
 
 For the `type` argument, we *could* pass `about:blank` - that *is* what we want.
 But then in `ApiProblem`, we'll need a constant for this, and that constant will
-need to be mapped to a title. But we actually want the title to be dynamical based
+need to be mapped to a title. But we actually want the title to be dynamic based
 on whatever the status code is: 404 is "Not Found", 403 is "Forbidden", etc. So,
 don't pass *anything* for the `type` argument. Let's handle all of this logic inside
 `ApiProblem` itself.
