@@ -19,4 +19,34 @@ supposed to be the same for every type. We could always add our own but if you l
 something called "detail" which is a "human readable explanation specific to *this* occurence
 of the problem." That right there is perfect for our use case!
 
-Back in `ProgrammerController` 
+Back in `ProgrammerControllerTest` let's look for this exact message, "No programmer found for
+username".  
+
+At the bottom we'll say `$this->asserter()->assertResponsePropertyEquals();` we'll fill this in
+so that when there's a 404 there will be a detail field and it should be set to "No programmer found
+for username fake" because that's what's in the URL.
+
+And if we try this out in our terminal, it looks good except it is failing in that spot because 
+there is no detail property yet. But no worries, creating that is easy! It all happens inside
+of our `ApiExceptionSubscriber`. 
+
+Very simply, we say `ApiProblem->set()` since that allows us to put in new fields. And we'll pass that
+`(detail and $e->getMessage());`. And that should do it, but don't do that...because that will expose
+the exception message of every exception in our system which is *definitely* not what we want to do.
+
+So there has to be some way for us to determine whether or not it is safe to show the message to the user.
+There are a number of different ways to do this, FOSRestBundle has some options where you can whitelist on
+a class by class basis. And that is something we could even do here with an if statement that indicates which
+classes to show it for. 
+
+Implementing your own interface is also an option! I'll do something simple here which may or may not work
+for you, so do think about your project critically when you choose how to do this. I'll check to see
+`if ($e instanceof httpExceptionInterface)`. This is used for 404 or 403 errors, so it's typically
+things that we are in control of.  
+
+And you can see here that our 404 error implements that interface which will allow it to be caught by that.
+
+Head back to the terminal and test that guy out. Beautiful!
+
+Now we have the opportuntiy to be more helpful to our users whenever we're doing a 404 or if you're creating
+an ApiProblem by hand you can set the details field manually.
