@@ -1,8 +1,8 @@
-diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 new file mode 100644
 index 0000000..facfea8
 --- /dev/null
-+++ b/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -0,0 +1,7 @@
 +<?php
 +

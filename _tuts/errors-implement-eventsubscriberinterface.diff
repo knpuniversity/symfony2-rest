@@ -1,7 +1,7 @@
-diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 index facfea8..5466d2f 100644
---- a/src/AppBundle/EventListener/ApiExceptionListener.php
-+++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+--- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
++++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -2,6 +2,12 @@
  
  namespace AppBundle\EventListener;

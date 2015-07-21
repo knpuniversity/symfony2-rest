@@ -41,10 +41,10 @@ index 90bd6d0..df145e6 100644
      }
  
      public function toArray()
-diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 index 5dc9e2c..fbe1620 100644
---- a/src/AppBundle/EventListener/ApiExceptionListener.php
-+++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+--- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
++++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -2,22 +2,29 @@
  
  namespace AppBundle\EventListener;

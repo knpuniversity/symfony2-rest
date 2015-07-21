@@ -1,24 +1,21 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index 7b9173c..816d58d 100644
+index e4903dd..dd7aeb7 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
-@@ -16,3 +16,12 @@ services:
-     battle.power_manager:
-         class: AppBundle\Battle\PowerManager
-         arguments: ['@doctrine.orm.entity_manager']
-+<<<<<<< HEAD
-+
-+    api_exception_listener:
-+        class: AppBundle\EventListener\ApiExceptionListener
+@@ -19,6 +19,6 @@ services:
+ 
+     api_exception_subscriber:
+         class: AppBundle\EventListener\ApiExceptionSubscriber
+-        arguments: []
 +        arguments: ['%kernel.debug%']
-+        tags:
+         tags:
+-            - { name: kernel.event_subscriber }
+\ No newline at end of file
 +            - { name: kernel.event_subscriber }
-+=======
-+>>>>>>> _tuts/master/errors-extra-information-on-error
-diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 index 4c2fbc9..8fa8911 100644
---- a/src/AppBundle/EventListener/ApiExceptionListener.php
-+++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+--- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
++++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -12,14 +12,28 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  
  class ApiExceptionSubscriber implements EventSubscriberInterface
