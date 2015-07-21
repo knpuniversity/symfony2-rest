@@ -1,0 +1,18 @@
+diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
+index facfea8..5466d2f 100644
+--- a/src/AppBundle/EventListener/ApiExceptionListener.php
++++ b/src/AppBundle/EventListener/ApiExceptionListener.php
+@@ -2,6 +2,12 @@
+ 
+ namespace AppBundle\EventListener;
+ 
+-class ApiExceptionSubscriber
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++class ApiExceptionSubscriber implements EventSubscriberInterface
+ {
++    public static function getSubscribedEvents()
++    {
++        // TODO: Implement getSubscribedEvents() method.
++    }
+ }

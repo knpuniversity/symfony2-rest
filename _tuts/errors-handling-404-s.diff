@@ -42,27 +42,31 @@ index 90bd6d0..df145e6 100644
  
      public function toArray()
 diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
-index 2f1def0..a8ad42b 100644
+index 5dc9e2c..fbe1620 100644
 --- a/src/AppBundle/EventListener/ApiExceptionListener.php
 +++ b/src/AppBundle/EventListener/ApiExceptionListener.php
-@@ -2,9 +2,11 @@
+@@ -2,22 +2,29 @@
  
  namespace AppBundle\EventListener;
  
 +use AppBundle\Api\ApiProblem;
  use AppBundle\Api\ApiProblemException;
  use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+ use Symfony\Component\HttpKernel\KernelEvents;
  use Symfony\Component\HttpFoundation\JsonResponse;
 +use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
- use Symfony\Component\HttpKernel\KernelEvents;
- use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
  
-@@ -14,13 +16,19 @@ class ApiExceptionListener implements EventSubscriberInterface
+ class ApiExceptionSubscriber implements EventSubscriberInterface
+ {
+     public function onKernelException(GetResponseForExceptionEvent $event)
      {
          $e = $event->getException();
- 
 -        if (!$e instanceof ApiProblemException) {
 -            return;
+-        }
+ 
+-        $apiProblem = $e->getApiProblem();
 +        if ($e instanceof ApiProblemException) {
 +            $apiProblem = $e->getApiProblem();
 +        } else {
@@ -71,16 +75,10 @@ index 2f1def0..a8ad42b 100644
 +            $apiProblem = new ApiProblem(
 +                $statusCode
 +            );
-         }
++        }
  
          $response = new JsonResponse(
--            $e->getApiProblem()->toArray(),
--            $e->getApiProblem()->getStatusCode()
-+            $apiProblem->toArray(),
-+            $apiProblem->getStatusCode()
-         );
-         $response->headers->set('Content-Type', 'application/problem+json');
- 
+             $apiProblem->toArray(),
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index 8ae72e5..365b36a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php

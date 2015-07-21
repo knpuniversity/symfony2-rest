@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
-index 81dc142..a76f234 100644
+index 228d95e..592d0d7 100644
 --- a/src/AppBundle/EventListener/ApiExceptionListener.php
 +++ b/src/AppBundle/EventListener/ApiExceptionListener.php
-@@ -21,6 +21,11 @@ class ApiExceptionListener implements EventSubscriberInterface
+@@ -21,6 +21,11 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
  
      public function onKernelException(GetResponseForExceptionEvent $event)
      {

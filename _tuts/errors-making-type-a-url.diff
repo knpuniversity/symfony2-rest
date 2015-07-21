@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
-index 39e7a2e..81dc142 100644
+index 8fa8911..228d95e 100644
 --- a/src/AppBundle/EventListener/ApiExceptionListener.php
 +++ b/src/AppBundle/EventListener/ApiExceptionListener.php
-@@ -50,8 +50,14 @@ class ApiExceptionListener implements EventSubscriberInterface
+@@ -50,8 +50,14 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
              }
          }
  

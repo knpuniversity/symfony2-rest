@@ -1,21 +1,27 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index 9abc12b..fcd4abc 100644
+index 7b9173c..816d58d 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
-@@ -19,5 +19,6 @@ services:
- 
-     api_exception_listener:
-         class: AppBundle\EventListener\ApiExceptionListener
+@@ -16,3 +16,12 @@ services:
+     battle.power_manager:
+         class: AppBundle\Battle\PowerManager
+         arguments: ['@doctrine.orm.entity_manager']
++<<<<<<< HEAD
++
++    api_exception_listener:
++        class: AppBundle\EventListener\ApiExceptionListener
 +        arguments: ['%kernel.debug%']
-         tags:
-             - { name: kernel.event_subscriber }
++        tags:
++            - { name: kernel.event_subscriber }
++=======
++>>>>>>> _tuts/master/errors-extra-information-on-error
 diff --git a/src/AppBundle/EventListener/ApiExceptionListener.php b/src/AppBundle/EventListener/ApiExceptionListener.php
-index f174367..39e7a2e 100644
+index 4c2fbc9..8fa8911 100644
 --- a/src/AppBundle/EventListener/ApiExceptionListener.php
 +++ b/src/AppBundle/EventListener/ApiExceptionListener.php
-@@ -12,14 +12,28 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+@@ -12,14 +12,28 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  
- class ApiExceptionListener implements EventSubscriberInterface
+ class ApiExceptionSubscriber implements EventSubscriberInterface
  {
 +    private $debug;
 +

@@ -1,0 +1,31 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index fee9716..4f7e7d6 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -29,7 +29,7 @@ class ProgrammerController extends BaseController
+         $this->processForm($request, $form);
+ 
+         if (!$form->isValid()) {
+-            return $this->createValidationErrorResponse($form);
++            $this->throwApiProblemValidationException($form);
+         }
+ 
+         $programmer->setUser($this->findUserByUsername('weaverryan'));
+@@ -106,7 +106,7 @@ class ProgrammerController extends BaseController
+         $this->processForm($request, $form);
+ 
+         if (!$form->isValid()) {
+-            return $this->createValidationErrorResponse($form);
++            $this->throwApiProblemValidationException($form);
+         }
+ 
+         $em = $this->getDoctrine()->getManager();
+@@ -171,7 +171,7 @@ class ProgrammerController extends BaseController
+         return $errors;
+     }
+ 
+-    private function createValidationErrorResponse(FormInterface $form)
++    private function throwApiProblemValidationException(FormInterface $form)
+     {
+         $errors = $this->getErrorsFromForm($form);
+ 

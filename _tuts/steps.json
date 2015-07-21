@@ -326,8 +326,38 @@
             "description": null
         },
         {
+            "id": "errors-implement-eventsubscriberinterface",
+            "name": "Errors: implement EventSubscriberInterface",
+            "description": null
+        },
+        {
+            "id": "errors-basic-subscriber-structure",
+            "name": "Errors: basic subscriber structure",
+            "description": null
+        },
+        {
+            "id": "errors-add-event-arg",
+            "name": "Errors: Add $event arg",
+            "description": null
+        },
+        {
+            "id": "errors-skip-if-no-apiproblemexception",
+            "name": "Errors: Skip if no ApiProblemException",
+            "description": null
+        },
+        {
+            "id": "errors-full-subscriber-logic",
+            "name": "Errors: Full subscriber logic",
+            "description": null
+        },
+        {
             "id": "errors-throw-apiproblemexception-on-validation-errors",
             "name": "Errors: Throw ApiProblemException on validation errors",
+            "description": null
+        },
+        {
+            "id": "errors-rename-validation-method",
+            "name": "Errors: rename validation method",
             "description": null
         },
         {
@@ -366,5 +396,5 @@
             "description": null
         }
     ],
-    "sha": "6cafff7961b7275392e4a7db42f3be98be63a3c6"
+    "sha": "e832a6fbe996ea4364d39c3b97e68174bba71133"
 }
