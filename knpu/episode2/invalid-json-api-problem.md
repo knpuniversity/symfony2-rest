@@ -2,8 +2,9 @@
 
 The nice API Problem JSON format always has a `type` key, so let's at least start
 looking for that in the response. Use `$this->asserter()->assertResponsePropertyEquals()`
-and pass it the `$response` and `type` as the key. The value will be our second
-special error "type" - the first being `validation_error`. How about `invalid_body_format`:
+and pass it the `$response` and `type` as the key. For the value - how about
+`invalid_body_format`. That's our *second* special error "type" - the first was
+`validation_error`.
 
 [[[ code('feb17eecfd') ]]]
 
@@ -13,13 +14,13 @@ This should get our test to fail again:
 ./bin/phpunit -c app --filter testInvalidJson
 ```
 
-Gooood - we're still returning HTML.
+Gooood - we're still returning the exception HTML.
 
 ## Creating the ApiProblem
 
 Let's fix this just like we did for validation errors: by creating an `ApiProblem`
 object. First, we need a new `type` constant. Create a second constant called
-`TYPE_INVALID_REQUEST_BODY_FORMAT` and set that to the string in our test: `invalid_body_format`.
+`TYPE_INVALID_REQUEST_BODY_FORMAT` and set that to the string from our test: `invalid_body_format`.
 Setup a title for this too: how about "Invalid JSON format sent". And I better fix
 my syntax error:
 
@@ -34,7 +35,7 @@ Pass it the 400 status code and the type: `ApiProblem::TYPE_INVALID_REQUEST_BODY
 
 Gosh, everything is going really well! And now we're stuck. For validation, we took
 the `ApiProblem`, turned it into a Response and returned it. But inside `processForm()`,
-that's not going to work: the return value of this method isn't being used. We can
+we're big trouble: the return value of this method isn't being used. We can
 only *throw* an exception to stop the flow. And while we *can* control the status
-code of an exception, the response body that `HttpException` generates is still just
+code of an exception, the response body that an `HttpException` generates is still
 an HTML error page.
