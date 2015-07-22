@@ -54,3 +54,7 @@ chapters:
         video_key: j3v07xjy3f
     why-exceptions-are-html:
         video_key: yo8vjeuo4e
+    api-exception-subscriber:
+        is_finished: false
+    handle-404s:
+        is_finished: false
