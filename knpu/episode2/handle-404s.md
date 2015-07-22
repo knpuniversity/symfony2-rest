@@ -15,13 +15,13 @@ the status code is 404. We also know that we want the nice `application/problem+
 
 We know the JSON will at least have `type` and `title` properties. So what would be
 good values for those? This is a weird situation. Usually, `type` conveys *what*
-happened. But in this case, the 404 status code already says exactly what happened.
-Using some `type` value like `not_found` is fine, but totally redundant.
+happened. But in this case, the 404 status code already says everything we need to.
+Using some `type` value like `not_found` would be fine, but totally redundant.
 
 Look back at the [Problem Details Spec](https://tools.ietf.org/html/draft-ietf-appsawg-http-problem-00).
 Under "Pre-Defined Problem Types", it says that if the status code is enough, you
 can set `type` to `about:blank`. And when you do this, it says that we should set
-`title` to whatever the standard text is for that status code. For a 404, that's
+`title` to whatever the standard text is for that status code. A 404 would be
 "Not Found".
 
 Add this to the test: use `$this->asserter()->assertResponsePropertyEquals()` to
@@ -35,19 +35,19 @@ is `Not Found`:
 A 404 happens whenever we call `$this->createNotFoundException()` in a controller.
 If you hold cmd or ctrl and click that method, you'll see that this is just a shortcut
 to throw a special `NotFoundHttpException`. And *all* of the other errors that might
-happen will ultimately be just different exceptions being thrown from different parts
-of the code.
+happen will ultimately just be different exceptions being thrown from different parts
+of our app.
 
 The only thing that makes *this* exception special is that it extends that very-important
 [HttpException](httpexception-invalid-json) class. That's why throwing this causes
-a 404 exception. But otherwise, it's just a normal exception.
+a 404 response. But otherwise, it's equally as exciting as any other exception.
 
 ## Handling *all* Errors
 
 In `ApiExceptionSubscriber`, we're only handling ApiException's so far. But if we
 handled *all* exceptions, we could turn *everything* into the nice format we want.
 
-Reverse the logic on the `if` statement and set the `$apiProblem` inside:
+Reverse the logic on the `if` statement and set the `$apiProblem` variable inside:
 
 [[[ code('19eba6836a') ]]]
 
@@ -67,12 +67,12 @@ it the `$statusCode`:
 
 For the `type` argument, we *could* pass `about:blank` - that *is* what we want.
 But then in `ApiProblem`, we'll need a constant for this, and that constant will
-need to be mapped to a title. But we actually want the title to be dynamically based
+need to be mapped to a title. But we actually want the title to be dynamic based
 on whatever the status code is: 404 is "Not Found", 403 is "Forbidden", etc. So,
-don't pass *anything* for the `type` argument. Let's handle all of this inside
+don't pass *anything* for the `type` argument. Let's handle all of this logic inside
 `ApiProblem` itself.
 
-In there, make the `$type` argument optional:
+In there, start by making the `$type` argument optional:
 
 [[[ code('3f001f9d29') ]]]
 
@@ -94,14 +94,14 @@ well, this is kind of a weird situation. Use `Unknown Status Code` with a frowny
 
 [[[ code('f3181afebf') ]]]
 
-If the `$type` *is* set - we're in the normal case. Move the check up there and set
+If the `$type` *is* set - we're in the normal case. Move the check up there and
 add `$title = self::$titles[$type]`. After everything, assign `$this->title = $title`:
 
 [[[ code('c8a89a4f16') ]]]
 
 Now the code we wrote in `ApiExceptionSubscriber` should work: a missing `$type`
-tells `ApiProblem` to use this `about:blank` stuff. Time to try this: copy the
-test method name:
+tells `ApiProblem` to use all the `about:blank` stuff. Time to try this: copy the
+test method name, then run:
 
 ```bash
 ./bin/phpunit -c app --filter test404Exception
@@ -111,6 +111,6 @@ Aaaand that's green. It's so nice when things work.
 
 What we just did is *huge*. If a 404 exception is thrown *anywhere* in the system,
 it'll map to the nice Api Problem format we want. In fact, if *any* exception is
-thrown it ends up with that format. So if your database blows up for some reason,
-an exception is thrown. Sure, that'll map to a 500 status code, but the JSON format
-will be just like every other error.
+thrown it ends up with that format. So if your database blows, an exception is thrown.
+Sure, that'll map to a 500 status code, but the JSON format will be just like every
+other error.
