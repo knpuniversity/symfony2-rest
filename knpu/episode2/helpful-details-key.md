@@ -26,7 +26,7 @@ At the bottom we'll say `$this->asserter()->assertResponsePropertyEquals()` we'l
 so that when there's a 404 there will be a `detail` field and it should be set to "No programmer found
 for username fake" because that's what's in the URL.
 
-And if we try this out in our terminal, it's failing nice:there's no `detail`
+And if we try this out in our terminal, it's failing nice: there's no `detail`
 property yet. But no worries, creating that is easy! It all happens inside of
 our `ApiExceptionSubscriber`. 
 
@@ -48,5 +48,5 @@ And you can see here that our 404 error implements that interface which will all
 
 Head back to the terminal and test that guy out. Beautiful!
 
-Now we have the opportuntiy to be more helpful to our users whenever we have a 404 error. Or,
+Now we have the opportunity to be more helpful to our users whenever we have a 404 error. Or,
 if you're creating an `ApiProblem` by hand, you can set the `detail` field manually.
