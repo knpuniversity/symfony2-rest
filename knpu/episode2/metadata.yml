@@ -55,6 +55,10 @@ chapters:
     why-exceptions-are-html:
         video_key: yo8vjeuo4e
     api-exception-subscriber:
-        is_finished: false
+        video_key: y8jt7oionl
     handle-404s:
-        is_finished: false
+        video_key: ln2kd1nkg9
+    helpful-details-key:
+        video_key: wj0lxcb5zy
+    debugging-cleanup:
+        video_key: 7vap36pa9a
