@@ -1,4 +1,4 @@
-# Debugging Cleanup
+# Debugging and Cleanup
 
 We're finally to the exciting conclusion, just a few more small cleanup
 items that we need to take care of. 
@@ -56,8 +56,17 @@ of them did fail. `invalid_body_format` failed because we're looking for this ex
 and now it's at the end of a URL.
 
 In your test, change `assertResponsePropertyEquals` to `assertResponsePropertyContains`
-which saves me from hardcoding my host name in there.  Copy just that test to our terminal
-and run it. Perfect, back to green! 
+which saves me from hardcoding my host name in there:
+
+[[[ code('96991ea4be') ]]]
+
+Copy just that test to our terminal and run it:
+
+```bash
+./bin/phpunit -c app --filter testInvalidJson
+```
+
+Perfect, back to green!
 
 ## Fixing Web Errors
 
@@ -67,20 +76,28 @@ makes sense because the subscriber has completely taken over the error handling 
 our site, even though, in realitym we only want this to handle errors for our API. 
 
 There are a couple of different ways to do this, but at least in our API, everything is
-under the URL /api. So fixing this is as simple as making our subscriber only do its magic
-when our URL starts with this. Let's do that!
+under the URL /api. So fixing this is as simple as making our subscriber only do
+its magic when our URL starts with this. Let's do that!
 
-First get the `$request` by saying `$event->getRequest()`. Then let's get our if statement
-in there.  `if (strpos())` and we'll look in the haystack which is `$request->getPathInfo()`,
-this is the full URL.  For the needle use `/api` and if all of this `!== 0`, in other words,
-if the URL doesn't start exactly with `/api`, then let's just `return`. 
+First get the `$request` by saying `$event->getRequest()`. Then let's get our if
+statement in there.  `if (strpos())` and we'll look in the haystack which is
+`$request->getPathInfo()`, this is the full URL. For the needle use `/api` and if
+all of this `!== 0`, in other words, if the URL doesn't start exactly with `/api`,
+then let's just `return`:
+
+[[[ code('101669030b') ]]]
 
 Head back to the browser and refresh the page. Web interface errors restored!
 
-Let's run the entire test suite to make sure we're done. Look at that, this is a
-setup to be proud of.
+Let's run the entire test suite to make sure we're done:
 
-In the next episode we're going to get back to work with pagination, filtering, and other
-tough but important things with API's.
+```bash
+./bin/phpunit -c app
+```
+
+Look at that, this is a setup to be proud of.
+
+In the next episode we're going to get back to work with pagination, filtering, and
+other tough but important things with API's.
 
 Alright guys, see ya next time!
