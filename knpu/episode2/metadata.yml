@@ -25,7 +25,7 @@ summary: |
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-ep2.png
-hasVideoDownload: 0
+videoDownloadExtension: mov
 tuts_hero:
     start_step: "Serialize: Whitelisting properties"
     finish_step: "Errors: Making type a URL"
