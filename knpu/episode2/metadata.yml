@@ -25,7 +25,6 @@ summary: |
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-ep2.png
-videoDownloadExtension: mov
 tuts_hero:
     start_step: "Serialize: Whitelisting properties"
     finish_step: "Errors: Making type a URL"
@@ -33,32 +32,32 @@ tuts_hero:
 chapters:
     validation-errors-test:
         is_free: true
-        video_key: 8u402sh88o
+        video_key:   140091830
     validation-errors-response:
         is_free: true
-        video_key: 0x7eckp0y6
+        video_key:   140091835
     put-validation-and-csrf:
         is_free: true
-        video_key: 3ce81foxom
+        video_key:   140091834
     api-problem-format:
-        video_key: 3sn7vzfp81
+        video_key:   140091833
     api-problem-class:
-        video_key: hxyw3h6kp8
+        video_key:   140091832
     problem-type-constants:
-        video_key: f1vg46uufw
+        video_key:   140091839
     httpexception-invalid-json:
-        video_key: 53tbrzm9hq
+        video_key:   140091838
     invalid-json-api-problem:
-        video_key: 86ygfk6sct
+        video_key:   140091840
     api-problem-exception:
-        video_key: j3v07xjy3f
+        video_key:   140091841
     why-exceptions-are-html:
-        video_key: yo8vjeuo4e
+        video_key:   140091837
     api-exception-subscriber:
-        video_key: y8jt7oionl
+        video_key:   140091842
     handle-404s:
-        video_key: ln2kd1nkg9
+        video_key:   140091846
     helpful-details-key:
-        video_key: wj0lxcb5zy
+        video_key:   140091844
     debugging-cleanup:
-        video_key: 7vap36pa9a
+        video_key:   140091845
