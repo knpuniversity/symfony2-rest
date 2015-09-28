@@ -26,7 +26,6 @@ summary: |
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf.png
-videoDownloadExtension: mov
 tuts_hero:
     start_step: "start"
     finish_step: "Serialize: Whitelisting properties"
@@ -34,44 +33,44 @@ tuts_hero:
 chapters:
     post:
         is_free: true
-        video_key: hdtvaj0m61
+        video_key:   140193423
     post-json-body:
         is_free: true
-        video_key: zvhvfwxbxb
+        video_key:   140193425
     form-post:
         is_free: true
-        video_key: z34rv0afxk
+        video_key:   140193424
     get-one:
-        video_key: s9xdkhrrl3
+        video_key:   140193422
     tightening-up-response:
-        video_key: 2nckk1m101
+        video_key:   140193426
     get-collection:
-        video_key: dwxs1sf36y
+        video_key:   140193421
     first-test:
-        video_key: q3l8rg2cnl
+        video_key:   140193433
     test-code-reuse:
-        video_key: nv5ep70agx
+        video_key:   140193434
     tests-clear-data:
-        video_key: ejpc6p14qx
+        video_key:   140193432
     mad-test-debugging:
-        video_key: 4r4tvldnn2
+        video_key:   140193431
     property-access-fixtures:
-        video_key: 0g6w2d5m6y
+        video_key:   140193430
     response-asserter:
-        video_key: gjn1f5ybd8
+        video_key:   140193429
     test-database:
-        video_key: eccgwqcwhw
+        video_key:   140193437
     put-programmer:
-        video_key: fmwzhrp49j
+        video_key:   140193436
     readonly-fields:
-        video_key: wln3cam4h8
+        video_key:   140193435
     delete-programmer:
-        video_key: gkspkwfnkz
+        video_key:   140193438
     patch-programmer:
-        video_key: a7dwkpj50b
+        video_key:   140193439
     serializer-basics:
-        video_key: lwagoh85qc
+        video_key:   140193441
     centralizing-response:
-        video_key: ymrck16u35
+        video_key:   140193442
     serializer-control:
-        video_key: x37mmeyff8
+        video_key:   140193443
