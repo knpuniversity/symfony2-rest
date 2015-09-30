@@ -386,6 +386,61 @@
             "description": null
         },
         {
+            "id": "docs-basic-nelmioapidocbundle",
+            "name": "Docs: Basic NelmioApiDocBundle",
+            "description": null
+        },
+        {
+            "id": "docs-make-annotation-error",
+            "name": "Docs: Make annotation error",
+            "description": null
+        },
+        {
+            "id": "docs-fix-form-name",
+            "name": "Docs: Fix form name",
+            "description": null
+        },
+        {
+            "id": "docs-add-form-field-description",
+            "name": "Docs: Add form field description",
+            "description": null
+        },
+        {
+            "id": "docs-change-extra-fields-message",
+            "name": "Docs: Change extra fields message",
+            "description": null
+        },
+        {
+            "id": "docs-config-request-format-method",
+            "name": "Docs: Config request format method",
+            "description": null
+        },
+        {
+            "id": "docs-config-body-format",
+            "name": "Docs: Config body format",
+            "description": null
+        },
+        {
+            "id": "docs-doc-get-collection",
+            "name": "Docs: Doc get\/collection",
+            "description": null
+        },
+        {
+            "id": "docs-describe-properties",
+            "name": "Docs: Describe properties",
+            "description": null
+        },
+        {
+            "id": "docs-describe-route-params",
+            "name": "Docs: Describe route params",
+            "description": null
+        },
+        {
+            "id": "docs-document-last-methods",
+            "name": "Docs: Document last methods",
+            "description": null
+        },
+        {
             "id": "auth-show-simple-decoderequestbodyintoparameters",
             "name": "Auth: Show simple decodeRequestBodyIntoParameters",
             "description": null
@@ -396,5 +451,5 @@
             "description": null
         }
     ],
-    "sha": "9a4cf7081c3e72eef713dc1a5d3a0b11ac9e2c01"
+    "sha": "683401fbecfa829c93574ebcdc16ae2d681f9fb1"
 }

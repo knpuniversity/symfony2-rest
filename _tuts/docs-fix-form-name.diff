@@ -1,0 +1,15 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 02bcb84..29c5d64 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -27,8 +27,8 @@ class ProgrammerController extends BaseController
+      *  resource=true,
+      *  description="Add a new programmer",
+      *  input={
+-     *      class="AppBundle\Form\ProgrammerType",
+-     *      name=""
++     *      "class"="AppBundle\Form\ProgrammerType",
++     *      "name"=""
+      *  },
+      *  output="AppBundle\Entity\Programmer"
+      * )

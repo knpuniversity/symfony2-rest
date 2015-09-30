@@ -1,0 +1,13 @@
+diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
+index b601dfa..f2e7a73 100644
+--- a/src/AppBundle/Entity/Programmer.php
++++ b/src/AppBundle/Entity/Programmer.php
+@@ -25,6 +25,8 @@ class Programmer
+     private $id;
+ 
+     /**
++     * The unique name of the programmer.
++     *
+      * @var string
+      *
+      * @ORM\Column(name="nickname", type="string", length=100, unique=true)

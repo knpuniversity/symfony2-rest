@@ -1,0 +1,13 @@
+diff --git a/app/config/config.yml b/app/config/config.yml
+index c4a85b2..d461e3e 100644
+--- a/app/config/config.yml
++++ b/app/config/config.yml
+@@ -76,3 +76,8 @@ swiftmailer:
+     username:  "%mailer_user%"
+     password:  "%mailer_password%"
+     spool:     { type: memory }
++
++nelmio_api_doc:
++    sandbox:
++        request_format:
++            method: accept_header

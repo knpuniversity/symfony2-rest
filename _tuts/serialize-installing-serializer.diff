@@ -25,19 +25,10 @@ index 9fe58c9..1cae1b7 100644
      "require-dev": {
          "sensio/generator-bundle": "~2.3",
 diff --git a/composer.lock b/composer.lock
-index 19da4ea..2d46e23 100644
+index a9c4f01..4575e69 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -4,7 +4,7 @@
-         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-         "This file is @generated automatically"
-     ],
--    "hash": "56b88d4a1f75d0a4838af7e37185f85c",
-+    "hash": "f1839b7cf44c9deb2e41d9e9e0e1e61f",
-     "packages": [
-         {
-             "name": "doctrine/annotations",
-@@ -1027,6 +1027,233 @@
+@@ -1028,6 +1028,233 @@
              "time": "2014-01-12 16:20:24"
          },
          {
@@ -271,7 +262,7 @@ index 19da4ea..2d46e23 100644
              "name": "kriswallsmith/assetic",
              "version": "v1.2.1",
              "source": {
-@@ -1231,6 +1458,105 @@
+@@ -1232,6 +1459,105 @@
              "time": "2014-10-10 13:07:37"
          },
          {
