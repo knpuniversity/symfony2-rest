@@ -1,0 +1,30 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 26ee832..46d1fb2 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -69,6 +69,25 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->asserter()->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
+     }
+ 
++    public function testGETProgrammersCollectionPagination()
++    {
++        for ($i = 0; $i < 25; $i++) {
++            $this->createProgrammer(array(
++                'nickname' => 'Programmer'.$i,
++                'avatarNumber' => 3,
++            ));
++        }
++
++        // page 1
++        $response = $this->client->get('/api/programmers');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'programmers[5].nickname',
++            'Programmer5'
++        );
++    }
++
+     public function testPUTProgrammer()
+     {
+         $this->createProgrammer(array(

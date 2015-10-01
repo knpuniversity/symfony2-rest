@@ -1,0 +1,62 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 108b51f..26dbaed 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -74,7 +74,7 @@ class ProgrammerController extends BaseController
+     }
+ 
+     /**
+-     * @Route("/api/programmers")
++     * @Route("/api/programmers", name="api_programmers_collection")
+      * @Method("GET")
+      */
+     public function listAction(Request $request)
+@@ -95,6 +95,26 @@ class ProgrammerController extends BaseController
+         }
+ 
+         $paginatedCollection = new PaginatedCollection($programmers, $pagerfanta->getNbResults());
++
++        $route = 'api_programmers_collection';
++        $routeParams = array();
++        $createLinkUrl = function($targetPage) use ($route, $routeParams) {
++            return $this->generateUrl($route, array_merge(
++                $routeParams,
++                array('page' => $targetPage)
++            ));
++        };
++
++        $paginatedCollection->addLink('self', $createLinkUrl($page));
++        $paginatedCollection->addLink('first', $createLinkUrl(1));
++        $paginatedCollection->addLink('last', $createLinkUrl($pagerfanta->getNbPages()));
++        if ($pagerfanta->hasNextPage()) {
++            $paginatedCollection->addLink('next', $createLinkUrl($pagerfanta->getNextPage()));
++        }
++        if ($pagerfanta->hasPreviousPage()) {
++            $paginatedCollection->addLink('prev', $createLinkUrl($pagerfanta->getPreviousPage()));
++        }
++
+         $response = $this->createApiResponse($paginatedCollection, 200);
+ 
+         return $response;
+diff --git a/src/AppBundle/Pagination/PaginatedCollection.php b/src/AppBundle/Pagination/PaginatedCollection.php
+index 8455e99..00c5706 100644
+--- a/src/AppBundle/Pagination/PaginatedCollection.php
++++ b/src/AppBundle/Pagination/PaginatedCollection.php
+@@ -12,10 +12,17 @@ class PaginatedCollection
+ 
+     private $count;
+ 
++    private $_links = array();
++
+     public function __construct(array $items, $totalItems)
+     {
+         $this->items = $items;
+         $this->total = $totalItems;
+         $this->count = count($items);
+     }
++
++    public function addLink($ref, $url)
++    {
++        $this->_links[$ref] = $url;
++    }
+ }

@@ -1,0 +1,23 @@
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index a0759bd..eb5f868 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -101,6 +101,18 @@ class ProgrammerControllerTest extends ApiTestCase
+             'Programmer15'
+         );
+         $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
++
++        $lastLink = $this->asserter()->readResponseProperty($response, '_links.last');
++        $response = $this->client->get($lastLink);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'programmers[4].nickname',
++            'Programmer24'
++        );
++
++        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'programmers[5].name');
++        $this->asserter()->assertResponsePropertyEquals($response, 'count', 5);
+     }
+ 
+     public function testPUTProgrammer()

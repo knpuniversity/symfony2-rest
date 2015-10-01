@@ -386,6 +386,51 @@
             "description": null
         },
         {
+            "id": "pagination-starting-test",
+            "name": "Pagination: Starting test",
+            "description": null
+        },
+        {
+            "id": "pagination-look-for-pagination-keys",
+            "name": "Pagination: Look for pagination keys",
+            "description": null
+        },
+        {
+            "id": "pagination-walking-to-page-2",
+            "name": "Pagination: Walking to page 2",
+            "description": null
+        },
+        {
+            "id": "pagination-walking-to-the-last-page",
+            "name": "Pagination: Walking to the last page",
+            "description": null
+        },
+        {
+            "id": "pagination-install-pagerfanta",
+            "name": "Pagination: Install Pagerfanta",
+            "description": null
+        },
+        {
+            "id": "pagination-basic-pagination-no-links",
+            "name": "Pagination: Basic pagination, no links",
+            "description": null
+        },
+        {
+            "id": "pagination-paginatedcollection",
+            "name": "Pagination: PaginatedCollection",
+            "description": null
+        },
+        {
+            "id": "pagination-add-links",
+            "name": "Pagination: Add links",
+            "description": null
+        },
+        {
+            "id": "pagination-paginationfactory",
+            "name": "Pagination: PaginationFactory",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -441,6 +486,11 @@
             "description": null
         },
         {
+            "id": "docs-add-more-description-to-endpoint",
+            "name": "Docs: Add more description to endpoint",
+            "description": null
+        },
+        {
             "id": "auth-show-simple-decoderequestbodyintoparameters",
             "name": "Auth: Show simple decodeRequestBodyIntoParameters",
             "description": null
@@ -451,5 +501,5 @@
             "description": null
         }
     ],
-    "sha": "683401fbecfa829c93574ebcdc16ae2d681f9fb1"
+    "sha": "6580f5d14704e5b27d221b0c6ef6fd7d87febe24"
 }

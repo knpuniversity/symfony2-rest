@@ -1,11 +1,11 @@
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index 411948e..c2404ba 100644
+index e68516c..63a831e 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
-@@ -18,6 +18,7 @@ class AppKernel extends Kernel
-             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+@@ -19,6 +19,7 @@ class AppKernel extends Kernel
              new AppBundle\AppBundle(),
              new \JMS\SerializerBundle\JMSSerializerBundle(),
+             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 +            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
          );
  
@@ -23,21 +23,21 @@ index a37a6f9..c983ae6 100644
 +    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
 +    prefix:   /api/doc
 diff --git a/composer.json b/composer.json
-index 1cae1b7..1de677f 100644
+index 311bff0..4a26119 100644
 --- a/composer.json
 +++ b/composer.json
-@@ -25,7 +25,8 @@
-         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+@@ -26,7 +26,8 @@
          "incenteev/composer-parameter-handler": "~2.0",
          "hautelook/alice-bundle": "0.2.*",
--        "jms/serializer-bundle": "0.13.*"
-+        "jms/serializer-bundle": "0.13.*",
+         "jms/serializer-bundle": "0.13.*",
+-        "white-october/pagerfanta-bundle": "^1.0"
++        "white-october/pagerfanta-bundle": "^1.0",
 +        "nelmio/api-doc-bundle": "^2.9"
      },
      "require-dev": {
          "sensio/generator-bundle": "~2.3",
 diff --git a/composer.lock b/composer.lock
-index 4575e69..936774f 100644
+index 0384acc..80dd203 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -1329,6 +1329,57 @@
@@ -180,10 +180,10 @@ index 4575e69..936774f 100644
 +            "time": "2015-05-16 17:16:14"
 +        },
 +        {
-             "name": "phpcollection/phpcollection",
-             "version": "0.4.0",
+             "name": "pagerfanta/pagerfanta",
+             "version": "v1.0.3",
              "source": {
-@@ -1510,21 +1639,24 @@
+@@ -1577,21 +1706,24 @@
          },
          {
              "name": "phpoption/phpoption",
@@ -212,7 +212,7 @@ index 4575e69..936774f 100644
              "type": "library",
              "extra": {
                  "branch-alias": {
-@@ -1542,10 +1674,8 @@
+@@ -1609,10 +1741,8 @@
              ],
              "authors": [
                  {
@@ -225,7 +225,7 @@ index 4575e69..936774f 100644
                  }
              ],
              "description": "Option Type for PHP",
-@@ -1555,7 +1685,7 @@
+@@ -1622,7 +1752,7 @@
                  "php",
                  "type"
              ],
@@ -235,10 +235,10 @@ index 4575e69..936774f 100644
          {
              "name": "psr/log",
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 4f7e7d6..b28bbc2 100644
+index 7452cc0..23615a1 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -15,12 +15,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
+@@ -18,12 +18,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  use Symfony\Component\HttpFoundation\Request;
  use Symfony\Component\HttpFoundation\Response;
  use Symfony\Component\HttpKernel\Exception\HttpException;

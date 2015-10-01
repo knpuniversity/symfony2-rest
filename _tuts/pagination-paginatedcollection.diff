@@ -1,0 +1,102 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 04c9ef6..108b51f 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -8,6 +8,7 @@ use AppBundle\Controller\BaseController;
+ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
+ use AppBundle\Form\UpdateProgrammerType;
++use AppBundle\Pagination\PaginatedCollection;
+ use Pagerfanta\Adapter\DoctrineORMAdapter;
+ use Pagerfanta\Pagerfanta;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+@@ -93,11 +94,8 @@ class ProgrammerController extends BaseController
+             $programmers[] = $result;
+         }
+ 
+-        $response = $this->createApiResponse([
+-            'total' => $pagerfanta->getNbResults(),
+-            'count' => count($programmers),
+-            'programmers' => $programmers,
+-        ], 200);
++        $paginatedCollection = new PaginatedCollection($programmers, $pagerfanta->getNbResults());
++        $response = $this->createApiResponse($paginatedCollection, 200);
+ 
+         return $response;
+     }
+diff --git a/src/AppBundle/Pagination/PaginatedCollection.php b/src/AppBundle/Pagination/PaginatedCollection.php
+new file mode 100644
+index 0000000..8455e99
+--- /dev/null
++++ b/src/AppBundle/Pagination/PaginatedCollection.php
+@@ -0,0 +1,21 @@
++<?php
++
++namespace AppBundle\Pagination;
++
++use JMS\Serializer\Annotation as Serializer;
++
++class PaginatedCollection
++{
++    private $items;
++
++    private $total;
++
++    private $count;
++
++    public function __construct(array $items, $totalItems)
++    {
++        $this->items = $items;
++        $this->total = $totalItems;
++        $this->count = count($items);
++    }
++}
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index eb5f868..de12b7f 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -64,9 +64,9 @@ class ProgrammerControllerTest extends ApiTestCase
+ 
+         $response = $this->client->get('/api/programmers');
+         $this->assertEquals(200, $response->getStatusCode());
+-        $this->asserter()->assertResponsePropertyIsArray($response, 'programmers');
+-        $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
+-        $this->asserter()->assertResponsePropertyEquals($response, 'programmers[1].nickname', 'CowboyCoder');
++        $this->asserter()->assertResponsePropertyIsArray($response, 'items');
++        $this->asserter()->assertResponsePropertyCount($response, 'items', 2);
++        $this->asserter()->assertResponsePropertyEquals($response, 'items[1].nickname', 'CowboyCoder');
+     }
+ 
+     public function testGETProgrammersCollectionPagination()
+@@ -83,7 +83,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            'programmers[5].nickname',
++            'items[5].nickname',
+             'Programmer5'
+         );
+ 
+@@ -97,7 +97,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            'programmers[5].nickname',
++            'items[5].nickname',
+             'Programmer15'
+         );
+         $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
+@@ -107,11 +107,11 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            'programmers[4].nickname',
++            'items[4].nickname',
+             'Programmer24'
+         );
+ 
+-        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'programmers[5].name');
++        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'items[5].name');
+         $this->asserter()->assertResponsePropertyEquals($response, 'count', 5);
+     }
+ 
