@@ -1,9 +1,9 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index 4167cf2..2d83f41 100644
+index e23c719..e24ac37 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -26,3 +26,8 @@ services:
-     pagination_factor:
+     pagination_factory:
          class: AppBundle\Pagination\PaginationFactory
          arguments: ['@router']
 +

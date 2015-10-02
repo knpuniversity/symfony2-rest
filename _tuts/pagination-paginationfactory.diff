@@ -1,5 +1,5 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index dd7aeb7..4167cf2 100644
+index dd7aeb7..e23c719 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -22,3 +22,7 @@ services:
@@ -7,11 +7,11 @@ index dd7aeb7..4167cf2 100644
          tags:
              - { name: kernel.event_subscriber }
 +
-+    pagination_factor:
++    pagination_factory:
 +        class: AppBundle\Pagination\PaginationFactory
 +        arguments: ['@router']
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 26dbaed..86ad1dd 100644
+index 26dbaed..68e67c6 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -8,9 +8,6 @@ use AppBundle\Controller\BaseController;
@@ -63,7 +63,7 @@ index 26dbaed..86ad1dd 100644
 -        if ($pagerfanta->hasPreviousPage()) {
 -            $paginatedCollection->addLink('prev', $createLinkUrl($pagerfanta->getPreviousPage()));
 -        }
-+        $paginatedCollection = $this->get('pagination_factor')
++        $paginatedCollection = $this->get('pagination_factory')
 +            ->createCollection($qb, $request, 'api_programmers_collection');
  
          $response = $this->createApiResponse($paginatedCollection, 200);

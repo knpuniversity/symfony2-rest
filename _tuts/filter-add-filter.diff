@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 86ad1dd..f568e61 100644
+index 68e67c6..30a9391 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -76,9 +76,11 @@ class ProgrammerController extends BaseController
@@ -12,7 +12,7 @@ index 86ad1dd..f568e61 100644
              ->getRepository('AppBundle:Programmer')
 -            ->findAllQueryBuilder();
 +            ->findAllQueryBuilder($filter);
-         $paginatedCollection = $this->get('pagination_factor')
+         $paginatedCollection = $this->get('pagination_factory')
              ->createCollection($qb, $request, 'api_programmers_collection');
  
 diff --git a/src/AppBundle/Repository/ProgrammerRepository.php b/src/AppBundle/Repository/ProgrammerRepository.php

@@ -235,7 +235,7 @@ index 0384acc..80dd203 100644
          {
              "name": "psr/log",
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index f568e61..1c2c75a 100644
+index 30a9391..fdb07c6 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -15,12 +15,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
