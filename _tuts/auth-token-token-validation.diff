@@ -39,7 +39,7 @@ index e02e7fc..f2a1745 100644
 -    }
  }
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index 3f15ca5..ae5ba63 100644
+index 42af7c9..44d681c 100644
 --- a/src/AppBundle/Controller/BaseController.php
 +++ b/src/AppBundle/Controller/BaseController.php
 @@ -11,6 +11,7 @@ use AppBundle\Repository\BattleRepository;
@@ -50,7 +50,7 @@ index 3f15ca5..ae5ba63 100644
  use Symfony\Component\HttpFoundation\Response;
  use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  use Symfony\Component\HttpFoundation\Request;
-@@ -148,4 +149,35 @@ abstract class BaseController extends Controller
+@@ -155,4 +156,35 @@ abstract class BaseController extends Controller
  
          return $data;
      }

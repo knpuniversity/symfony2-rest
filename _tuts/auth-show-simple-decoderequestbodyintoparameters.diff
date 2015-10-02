@@ -17,7 +17,7 @@ index 86219de..e02e7fc 100644
          $clearMissing = $request->getMethod() != 'PATCH';
          $form->submit($data, $clearMissing);
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index 5ef4b79..3f15ca5 100644
+index 520d1d2..42af7c9 100644
 --- a/src/AppBundle/Controller/BaseController.php
 +++ b/src/AppBundle/Controller/BaseController.php
 @@ -2,6 +2,8 @@
@@ -29,7 +29,7 @@ index 5ef4b79..3f15ca5 100644
  use AppBundle\Repository\ProgrammerRepository;
  use AppBundle\Repository\UserRepository;
  use AppBundle\Repository\ProjectRepository;
-@@ -129,4 +131,21 @@ abstract class BaseController extends Controller
+@@ -136,4 +138,21 @@ abstract class BaseController extends Controller
          return $this->container->get('jms_serializer')
              ->serialize($data, $format, $context);
      }

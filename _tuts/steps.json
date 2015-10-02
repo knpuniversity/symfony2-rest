@@ -461,6 +461,11 @@
             "description": null
         },
         {
+            "id": "serialization-deep-option",
+            "name": "Serialization: Deep option",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -531,5 +536,5 @@
             "description": null
         }
     ],
-    "sha": "3aa7b6a26c2b43006bdd23d64f28faf6aed3679d"
+    "sha": "525b7274bb6b173416a9cf7ee5b1ed6838c5b780"
 }
