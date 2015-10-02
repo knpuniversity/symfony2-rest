@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 951adae..2bb2b0b 100644
+index 86219de..e02e7fc 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -202,12 +202,7 @@ class ProgrammerController extends BaseController
+@@ -199,12 +199,7 @@ class ProgrammerController extends BaseController
  
      private function processForm(Request $request, FormInterface $form)
      {

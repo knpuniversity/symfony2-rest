@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 23615a1..db11211 100644
+index 1c2c75a..d2dfeab 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -29,7 +29,10 @@ class ProgrammerController extends BaseController
+@@ -26,7 +26,10 @@ class ProgrammerController extends BaseController
       * @ApiDoc(
       *  resource=true,
       *  description="Add a new programmer",

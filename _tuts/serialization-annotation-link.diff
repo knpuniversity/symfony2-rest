@@ -1,0 +1,167 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 0dfb795..aa0c216 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -29,6 +29,6 @@ services:
+ 
+     link_serialization_subscriber:
+         class: AppBundle\Serializer\LinkSerializationSubscriber
+-        arguments: ['@router']
++        arguments: ['@router', '@annotation_reader']
+         tags:
+             - { name: jms_serializer.event_subscriber }
+diff --git a/src/AppBundle/Annotation/Link.php b/src/AppBundle/Annotation/Link.php
+new file mode 100644
+index 0000000..2bcf902
+--- /dev/null
++++ b/src/AppBundle/Annotation/Link.php
+@@ -0,0 +1,26 @@
++<?php
++
++namespace AppBundle\Annotation;
++
++/**
++ * @Annotation
++ * @Target("CLASS")
++ */
++class Link
++{
++    /**
++     * @Required
++     *
++     * @var string
++     */
++    public $name;
++
++    /**
++     * @Required
++     *
++     * @var string
++     */
++    public $route;
++
++    public $params = array();
++}
+diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
+index b601dfa..357a053 100644
+--- a/src/AppBundle/Entity/Programmer.php
++++ b/src/AppBundle/Entity/Programmer.php
+@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
+ use Doctrine\ORM\Mapping as ORM;
+ use JMS\Serializer\Annotation as Serializer;
+ use Symfony\Component\Validator\Constraints as Assert;
++use AppBundle\Annotation\Link;
+ 
+ /**
+  * Programmer
+@@ -12,6 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
+  * @ORM\Table(name="battle_programmer")
+  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProgrammerRepository")
+  * @Serializer\ExclusionPolicy("all")
++ * @Link(
++ *  "self",
++ *  route = "api_programmers_show",
++ *  params = { "nickname": "object.getNickname()" }
++ * )
+  */
+ class Programmer
+ {
+diff --git a/src/AppBundle/Serializer/LinkSerializationSubscriber.php b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
+index 8c96789..0324280 100644
+--- a/src/AppBundle/Serializer/LinkSerializationSubscriber.php
++++ b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
+@@ -2,34 +2,62 @@
+ 
+ namespace AppBundle\Serializer;
+ 
++use AppBundle\Annotation\Link;
++use Doctrine\Common\Annotations\Reader;
+ use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
+ use JMS\Serializer\EventDispatcher\ObjectEvent;
+ use JMS\Serializer\JsonSerializationVisitor;
++use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+ use Symfony\Component\Routing\RouterInterface;
+-use AppBundle\Entity\Programmer;
+ 
+ class LinkSerializationSubscriber implements EventSubscriberInterface
+ {
+     private $router;
+ 
+-    public function __construct(RouterInterface $router)
++    private $annotationReader;
++
++    private $expressionLanguage;
++
++    public function __construct(RouterInterface $router, Reader $annotationReader)
+     {
+         $this->router = $router;
++        $this->annotationReader = $annotationReader;
++        $this->expressionLanguage = new ExpressionLanguage();
+     }
+ 
+     public function onPostSerialize(ObjectEvent $event)
+     {
+         /** @var JsonSerializationVisitor $visitor */
+         $visitor = $event->getVisitor();
+-        /** @var Programmer $programmer */
+-        $programmer = $event->getObject();
+-
+-        $visitor->addData(
+-            'uri',
+-            $this->router->generate('api_programmers_show', [
+-                'nickname' => $programmer->getNickname()
+-            ])
+-        );
++
++        $object = $event->getObject();
++        $annotations = $this->annotationReader
++            ->getClassAnnotations(new \ReflectionObject($object));
++
++        $links = array();
++        foreach ($annotations as $annotation) {
++            if ($annotation instanceof Link) {
++                $uri = $this->router->generate(
++                    $annotation->route,
++                    $this->resolveParams($annotation->params, $object)
++                );
++                $links[$annotation->name] = $uri;
++            }
++        }
++
++        if ($links) {
++            $visitor->addData('_links', $links);
++        }
++    }
++
++    private function resolveParams(array $params, $object)
++    {
++        foreach ($params as $key => $param) {
++            $params[$key] = $this->expressionLanguage
++                ->evaluate($param, array('object' => $object));
++        }
++
++        return $params;
+     }
+ 
+     public static function getSubscribedEvents()
+@@ -39,7 +67,6 @@ class LinkSerializationSubscriber implements EventSubscriberInterface
+                 'event' => 'serializer.post_serialize',
+                 'method' => 'onPostSerialize',
+                 'format' => 'json',
+-                'class' => 'AppBundle\Entity\Programmer'
+             )
+         );
+     }
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 355f7d8..e647186 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -51,7 +51,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            'uri',
++            '_links.self',
+             $this->adjustUri('/api/programmers/UnitTester')
+         );
+     }

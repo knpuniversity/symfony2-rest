@@ -1,0 +1,88 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 2d83f41..0dfb795 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -29,5 +29,6 @@ services:
+ 
+     link_serialization_subscriber:
+         class: AppBundle\Serializer\LinkSerializationSubscriber
++        arguments: ['@router']
+         tags:
+             - { name: jms_serializer.event_subscriber }
+diff --git a/src/AppBundle/Serializer/LinkSerializationSubscriber.php b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
+index e87c177..8c96789 100644
+--- a/src/AppBundle/Serializer/LinkSerializationSubscriber.php
++++ b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
+@@ -5,14 +5,31 @@ namespace AppBundle\Serializer;
+ use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
+ use JMS\Serializer\EventDispatcher\ObjectEvent;
+ use JMS\Serializer\JsonSerializationVisitor;
++use Symfony\Component\Routing\RouterInterface;
++use AppBundle\Entity\Programmer;
+ 
+ class LinkSerializationSubscriber implements EventSubscriberInterface
+ {
++    private $router;
++
++    public function __construct(RouterInterface $router)
++    {
++        $this->router = $router;
++    }
++
+     public function onPostSerialize(ObjectEvent $event)
+     {
+         /** @var JsonSerializationVisitor $visitor */
+         $visitor = $event->getVisitor();
+-        $visitor->addData('uri', 'FOO');
++        /** @var Programmer $programmer */
++        $programmer = $event->getObject();
++
++        $visitor->addData(
++            'uri',
++            $this->router->generate('api_programmers_show', [
++                'nickname' => $programmer->getNickname()
++            ])
++        );
+     }
+ 
+     public static function getSubscribedEvents()
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index be61811..3b05a84 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
+@@ -279,4 +279,18 @@ class ApiTestCase extends KernelTestCase
+     {
+         return $this->getService('doctrine.orm.entity_manager');
+     }
++
++    /**
++     * Call this when you want to compare URLs in a test
++     *
++     * (since the returned URL's will have /app_test.php in front)
++     *
++     * @param string $uri
++     * @return string
++     */
++    protected function adjustUri($uri)
++    {
++        return '/app_test.php'.$uri;
++    }
++
+ }
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 7032c94..355f7d8 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -49,7 +49,11 @@ class ProgrammerControllerTest extends ApiTestCase
+             'tagLine'
+         ));
+         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
+-        $this->asserter()->assertResponsePropertyEquals($response, 'uri', '/api/programmers/UnitTester');
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'uri',
++            $this->adjustUri('/api/programmers/UnitTester')
++        );
+     }
+ 
+     public function testGETProgrammersCollection()

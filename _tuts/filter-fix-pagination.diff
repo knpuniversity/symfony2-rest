@@ -1,0 +1,14 @@
+diff --git a/src/AppBundle/Pagination/PaginationFactory.php b/src/AppBundle/Pagination/PaginationFactory.php
+index 311f063..5a3209e 100644
+--- a/src/AppBundle/Pagination/PaginationFactory.php
++++ b/src/AppBundle/Pagination/PaginationFactory.php
+@@ -33,6 +33,9 @@ class PaginationFactory
+ 
+         $paginatedCollection = new PaginatedCollection($programmers, $pagerfanta->getNbResults());
+ 
++        // make sure query parameters are included in pagination links
++        $routeParams = array_merge($routeParams, $request->query->all());
++
+         $createLinkUrl = function($targetPage) use ($route, $routeParams) {
+             return $this->router->generate($route, array_merge(
+                 $routeParams,

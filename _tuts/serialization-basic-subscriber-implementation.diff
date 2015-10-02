@@ -1,0 +1,57 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 4167cf2..2d83f41 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -26,3 +26,8 @@ services:
+     pagination_factor:
+         class: AppBundle\Pagination\PaginationFactory
+         arguments: ['@router']
++
++    link_serialization_subscriber:
++        class: AppBundle\Serializer\LinkSerializationSubscriber
++        tags:
++            - { name: jms_serializer.event_subscriber }
+diff --git a/src/AppBundle/Serializer/LinkSerializationSubscriber.php b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
+index 9fb0577..e87c177 100644
+--- a/src/AppBundle/Serializer/LinkSerializationSubscriber.php
++++ b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
+@@ -3,10 +3,27 @@
+ namespace AppBundle\Serializer;
+ 
+ use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
++use JMS\Serializer\EventDispatcher\ObjectEvent;
++use JMS\Serializer\JsonSerializationVisitor;
+ 
+ class LinkSerializationSubscriber implements EventSubscriberInterface
+ {
++    public function onPostSerialize(ObjectEvent $event)
++    {
++        /** @var JsonSerializationVisitor $visitor */
++        $visitor = $event->getVisitor();
++        $visitor->addData('uri', 'FOO');
++    }
++
+     public static function getSubscribedEvents()
+     {
++        return array(
++            array(
++                'event' => 'serializer.post_serialize',
++                'method' => 'onPostSerialize',
++                'format' => 'json',
++                'class' => 'AppBundle\Entity\Programmer'
++            )
++        );
+     }
+ }
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+index 6a89c5a..7032c94 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
++++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+@@ -49,6 +49,7 @@ class ProgrammerControllerTest extends ApiTestCase
+             'tagLine'
+         ));
+         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
++        $this->asserter()->assertResponsePropertyEquals($response, 'uri', '/api/programmers/UnitTester');
+     }
+ 
+     public function testGETProgrammersCollection()

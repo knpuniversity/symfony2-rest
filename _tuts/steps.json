@@ -431,6 +431,36 @@
             "description": null
         },
         {
+            "id": "filter-add-filter",
+            "name": "Filter: add filter",
+            "description": null
+        },
+        {
+            "id": "filter-fix-pagination",
+            "name": "Filter: fix pagination",
+            "description": null
+        },
+        {
+            "id": "serialization-create-subscriber",
+            "name": "Serialization: Create subscriber",
+            "description": null
+        },
+        {
+            "id": "serialization-basic-subscriber-implementation",
+            "name": "Serialization: Basic subscriber implementation",
+            "description": null
+        },
+        {
+            "id": "serialization-generating-real-url",
+            "name": "Serialization: Generating real url",
+            "description": null
+        },
+        {
+            "id": "serialization-annotation-link",
+            "name": "Serialization: Annotation @Link",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -501,5 +531,5 @@
             "description": null
         }
     ],
-    "sha": "6580f5d14704e5b27d221b0c6ef6fd7d87febe24"
+    "sha": "3aa7b6a26c2b43006bdd23d64f28faf6aed3679d"
 }
