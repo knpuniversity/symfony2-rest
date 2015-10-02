@@ -26,15 +26,13 @@ index 04c9ef6..108b51f 100644
      }
 diff --git a/src/AppBundle/Pagination/PaginatedCollection.php b/src/AppBundle/Pagination/PaginatedCollection.php
 new file mode 100644
-index 0000000..8455e99
+index 0000000..8b84d7d
 --- /dev/null
 +++ b/src/AppBundle/Pagination/PaginatedCollection.php
-@@ -0,0 +1,21 @@
+@@ -0,0 +1,19 @@
 +<?php
 +
 +namespace AppBundle\Pagination;
-+
-+use JMS\Serializer\Annotation as Serializer;
 +
 +class PaginatedCollection
 +{

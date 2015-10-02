@@ -39,10 +39,10 @@ index 108b51f..26dbaed 100644
  
          return $response;
 diff --git a/src/AppBundle/Pagination/PaginatedCollection.php b/src/AppBundle/Pagination/PaginatedCollection.php
-index 8455e99..00c5706 100644
+index 8b84d7d..23d1ba1 100644
 --- a/src/AppBundle/Pagination/PaginatedCollection.php
 +++ b/src/AppBundle/Pagination/PaginatedCollection.php
-@@ -12,10 +12,17 @@ class PaginatedCollection
+@@ -10,10 +10,17 @@ class PaginatedCollection
  
      private $count;
  
