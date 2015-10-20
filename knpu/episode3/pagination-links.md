@@ -60,4 +60,35 @@ going to want every single time we paginate.
 
 Create a new service, inside of the pagination directory create a new PHP class called `PaginationFactory`. Inside
 of here add a new `public function createCollection()` which will create the entire final paginated collection
-for a resource. In thinking about that 
+for a resource. There are a few things that we'll need to create this paginated collection resource, like the
+`QueryBuilder` and the `$request` object which we'll use that to get what the current page. We'll also need to
+know what route we're linking to and any `$routeParams` that we have. And that is it! 
+
+Head over to `ProgrammerController` and copy the logic, remove it and put it into `PaginationFactory.php`. 
+
+To clean things up here we need a few use statements, I'll let these autocomplete on `DoctrineORMAdapter` and
+`Pagerfanta`. I can delete the `$route` and `$routeParams` because those should now be passed in now. And
+we'll also delete the `$qb` because that's also getting passed in. In fact, I'll move that back to our 
+`ProgrammerController` because we'll need it in a second. 
+
+The only other thing that's highlighting bad here is `$this->generateUrl` because we don't have a `generateUrl`
+function inside of here. We are going to need to generate urls so we'll need the router. Add a `__construct` function
+up here, and we'll inject the `RouterInterface`. I'm using the alt+enter PHPStorm shortcut to initialize that field.
+And finally just delete a few of these empty lines here. 
+
+Back down here, change `$this->generateUrl` to `$this->router->generate` and that should take care of our work here.
+
+Next, we'll need to register this fine piece of code as a service. In `app/config/services.yml` add a new key
+called `pagination_factory` which will have a class of `PaginationFactory` and the arguments only include `@router`.
+We can copy that key and go into our `ProgrammerController` and hook this whole thing up. 
+
+`$paginatedCollection = $this->get('pagination_factory')` `->createCollection()`, pass it the `$qb`, the `$request`,
+the name of our route `api_programmers_collection` and we don't have any `routeParams` in this case so let's head 
+back over to `PaginationFactory` and make that optional by defaulting it to an empty array. Now, this should look
+happy, but it doesn't. It looks more like someone stole it's icecream. Ah, because I forgot to `return $paginatedCollection`
+in `PaginationFactory`. The error was complaining that it didn't look like this had a return value. . . and it was
+right.
+
+Let's check our test to see if we broke anything. And it still passes! If you want some sweet pagination 
+for a resource just create a `queryBuilder`, pass it into the `PaginationFactory`, pass it a create API response
+and you'll have a full paginated thing with links. That is awesome!
