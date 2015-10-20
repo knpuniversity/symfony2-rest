@@ -26,4 +26,28 @@ hasVideoDownload: 0
 #     start_step: "Serialize: Whitelisting properties"
 #     finish_step: "Errors: Making type a URL"
 
-chapters: []
+chapters:
+    pagination-test:
+        is_free: true
+        is_finished: false
+        video_key:   
+    pagerfanta-pagination:
+        is_free: true
+        is_finished: false
+        video_key:   
+    pagination-links:
+        is_finished: false
+        video_key:   
+    filtering:
+        is_finished: false
+        video_key:   
+    custom-serialization-fields-subscriber:
+        is_finished: false
+        video_key:   
+    links-via-annotations:
+        is_finished: false
+        video_key:   
+    conditionally-embedding-relations:
+        is_free: true
+        is_finished: false
+        video_key:   
