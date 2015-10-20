@@ -16,4 +16,8 @@ Next up is `$routeParams` which represent any parameters that we need to fill in
 curly braces in this route so we'll set this to an empty array. We're writing this way because we'll be able to
 use this logic in a second. 
 
-Next, we're going to need to be able to generate links to several different pages. 
+Next, we're going to need to be able to generate links to several different pages. To do this, create a new variable
+that's an anonymouse function, `$createLinkUrl = function ()` which will take in the `$targetPage` you want to link to.
+And by using the `$route` and `$routeParams` this will be able to generate that url. We can do that by saying
+`return $this->generateURL()` passing it the `$route` and we'll do an `array_merge()` of the `routeParams` we have. 
+
