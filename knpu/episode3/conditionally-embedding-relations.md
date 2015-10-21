@@ -41,5 +41,12 @@ The last piece of the puzzle is, how do I serialize different groups? To answer 
 `serialize`. When you serialize we have this serialization context which are options for serialization,
 there's not much on here but there is a way to control your groups here. First, get the `$request` object
 by going out to the `request_stack` service and say `getCurrentRequest`. Now create a new `$groups` variable
-and set that to `Default`, make sure you capitalize the 'D'.
+and set that to `Default`, make sure you capitalize the 'D', because we always want to serialize at least
+the `Default` group.
 
+Now say ``if ($request->query->get('deep'))` is true then we just add our group `deep` to `$groups`. 
+Finish this up with `$context->setGroups($groups)`. And just like that we're able to conditionally show
+other fields. Sweet!
+
+Rerun our test for `testGetProgrammerDeep` it passes! To really prove it refresh the browser and we won't
+see the user unless we add `?deep=1` to the url. There you have a cool way to leverage groups. 
