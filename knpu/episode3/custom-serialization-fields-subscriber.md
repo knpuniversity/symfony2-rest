@@ -19,3 +19,41 @@ generate the URL. This can be a really frustrating thing, where you say "Nevermi
 not using the serializer anymore!" and stomp off to your bedroom to play video games.
 But this is really easy to overcome with an event subscriber on the serializer.
 
+In `AppBundle` create a new directory called `Serializer` and inside of there create a
+new PHP class called `LinkSeralizationSubscriber` and we'll put it in the `AppBundle\Serializer`
+namespace. In order to have subscriber we just need to implement `EventSubscriberInterface`
+and make sure you're getting the one from `JMS\Serializer`. There's also a core one and they
+unfortunately have the exact same name. 
+
+In PHPStorm head into the implement methods menu from generate and we only need the 
+`getSubscribedEvents`. Inside of here we'll return an array of all of the events that we
+want to subscribe to. Each one of those events is going to be an array as well. We'll need
+a few keys in here, the first is for which even we want to subscribe to. There are two for
+seralization, there is `serializer.pre_serialize` and `serializer.post_serialize`, we want
+the second one, this allows us to modify the data that is being returned in the JSON.
+The second thing we'll say is that the method to call is `onPostSerialize` which we'll create in
+a second. And the format is JSON. We're only serializing to JSON but if we were also doing it
+to XML it wouldn't call this particular subscriber. We'd want to create another subscriber that
+handled this for XML because the formats are just that different. The last thing we'll have in
+here is a class key which says "Hey! Only call this `onPostSerialize` for programmer classes!".
+
+Create a new `public function onPostSerialize` and like core Symfony events it's going to be passed
+an object, which in this case is `ObjectEvent`.
+
+Before we go any further with this, let's head over to our test and think about how we want this
+to look. In `testGETProgrammer` add a new assert that asserts that we have some uri property 
+that's equal to `/api/programmers/UnitTester`.
+
+In our subscriber, when we serialize a programmer this method is going to be called and it has a
+really important object on it called `$visitor` which we can get off the event with `$event->getVisitor();`.
+We're only serializing JSON so we know that this visitor will be an instance of `JsonSerializationVisitor`.
+Write an inline documentation for that and add a use statement up top. 
+
+This is all really cool because that has a method on it called `addData` where we can add whatever we want
+to our JSON. This is the key to being able to add custom fields.
+
+Ok, let's see if we can get this working! The last thing we need to do, which you can probably guess, is go
+to `services.yml` and register this as a new service `link_serialization_subscriber`, this name isn't important
+but the class that we'll fill in next is! And we don't have any arguments to add on this yet, so just leave
+that blank. We do need a tag for the JMS Serializer to use it. 
+
