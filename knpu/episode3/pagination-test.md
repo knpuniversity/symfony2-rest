@@ -34,9 +34,8 @@ pagination.
 
 To make this interesting, we need more programmers - like 25. Add a `for` loop to
 do this: `for i=0; i<25; i++`. In each loop, create a programmer with the super
-creative name of Programmer plus the i value. This means that programmer that we'll
-have programmers zero through 24. The `avatarNumber` is required, but we don't care
-about its value.
+creative name of Programmer plus the i value. This means that we'll have programmers
+zero through 24. The `avatarNumber` is required, but we don't care about its value.
 
 Keep the same URL and the 200 status code assertion. Below, start basic with a sanity
 check for page 1: assert that the programmer with index 5 is equal to `Programmer5`.
@@ -47,7 +46,7 @@ but since we start with Programmer0, this should definitely be Programmer5.
 
 It might also be useful to tell the API client how many results are on *this* page
 and how many results there are in total. I want to show 10 results per page in the
-API so add a line that looks a new property called `count` that's set to 10. Let's
+API so add a line that looks for a new property called `count` that's set to 10. Let's
 also have another property called `total`. That'll be the *total* number of results.
 In this case, that should be 25.
 
@@ -79,7 +78,7 @@ programmer with index 5 should be `Programmer15` because we're looking at result
 11 through 20. Next, the `count` should still be 10, and the `total` still 25 - but
 let's save a little code and remove that line.
 
-The `next` link is nice. But we' can do even more by *also* having a `first` link,
+The `next` link is nice. But we can do even more by *also* having a `first` link,
 a `last` link and a `prev` link unless we're on page 1. Copy the code from earlier
 that clicked the `next` link. Ooh, and let me fixing my formatting!
 

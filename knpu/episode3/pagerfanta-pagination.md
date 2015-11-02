@@ -37,7 +37,7 @@ I'll hold `cmd` and click to go into the `ProgrammerRepository`. Add the new met
 This is *all* we need to use Pagerfanta. In the controller, start with
 `$adapter = new DoctrineORMAdapter()` - since we're using Doctrine - and pass it
 the query builder. Next, create a `$pagerfanta` variable set to `new Pagerfanta()`
-and bass *it* the adapter.
+and pass *it* the adapter.
 
 On the Pagerfanta object, call `setMaxPerPage()` and pass it 10. And then call
 `$pagerfanta->setCurrentPage()` and pass it `$page`.
@@ -52,10 +52,10 @@ those programmes inside. This confuses the serializer. To fix that, create a new
 programmers array: `$programmers = array()`.
 
 Next, loop over that traversable object from Pagerfanta and push each `Programmer`
-object into our simple array. This gives us a simple array of `Programmer` objects.
+object into our simple array. This gives us a clean array of `Programmer` objects.
 
 And that means we're dangerous. In `createApiResponse`, we *still* need to pass in
-the `programmers` key, but we also need to add `count` and `total`, Add the `total`
+the `programmers` key, but we also need to add `count` and `total`. Add the `total`
 key and set it to `$pagerfanta->getNbResults()`
 
 For `count`, that's easy: that's the current number of results that are shown on
@@ -70,7 +70,7 @@ that test:
 ./bin/phpunit -c app --filter testGETProgrammersCollectionPaginated
 ```
 
-This fails. But looks closely: we *do* have programmers 0 through 9 in the response
+This fails. But look closely: we *do* have programmers 0 through 9 in the response
 for page 1. It fails when trying to read the `_links.next` property because we haven't
 added those yet.
 
@@ -82,7 +82,7 @@ create an object with these properties, and then let the serializer turn *that* 
 into JSON?
 
 Create a new directory called Pagination. And inside of that, a new class to model
-this called `PaginatedCollection`. Make sure it's in the page `AppBundle\Pagination`
+this called `PaginatedCollection`. Make sure it's in the `AppBundle\Pagination`
 namespace. Very simply: give this 3 properties: `items`, `total` and `count`.
 
 Generate the constructor and allow `items` and `total` to be passed. We don't need
@@ -106,5 +106,5 @@ Pass it `$programmers` and `$pagerfanta->getNbResults()`.
 To create the `ApiResponse` pass it the `$paginatedCollection` variable directly:
 `$response = $this->createApiResponse($paginatedCollection)`.
 
-Try this test! It still fails, but only once it looks for the links. The first response
+Try the test! It still fails, but only once it looks for the links. The first response
 looks exactly how we want it to. Okay, that's awesome - so now let's add some links.
