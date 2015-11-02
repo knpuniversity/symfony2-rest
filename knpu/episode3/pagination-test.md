@@ -1,89 +1,96 @@
-# Pagination Test
+# Pagination Design and Test
 
-Hey, Guys. Welcome to Episode 3 of our Rest and Symfony Series. In this episode,
-we're gonna cover some kind of – we're gonna cover some things – some really important
-details we haven't talked about yet, like pagination, filtering, and taking the
-serializer and doing really custom things with it. 
+Hey, Guys! Welcome to Episode 3 of our REST in Symfony Series. In this episode,
+we're going to cover some really important details we haven't talked about yet, like
+pagination, filtering, and taking the serializer and doing really cool and custom
+things with it.
 
-And first, we're gonna talk about pagination. If you're following along with me,
-we're gonna use the same project we've been using. Same project we have been using,
-and you can download this off of our site and go into start directory, and we're
-gonna add console server run to get that going. 
+If you're following along with me, use the same project we've been building. If you're
+just joining, where have you been? Ah, it's fine: download the code from this page
+and move into the `start/` directory. Start up the built-in PHP web server to get
+things running.
 
-Now, let's talk about pagination because right now, our slash API slash programmers
-endpoint doesn't have it. And eventually, we're gonna have a lot of programmers in
-here and we are not going to be able to return all of them. So first, think about
-pagination on the web. How does it work?  Well, usually it's done with query parameters.
-So we have things like question mark page equals one, page equals two, page equals
-three, and so forth. You can also do it as slash three, slash four, slash five, but
-query parameters are a good bet.
+## Designing how Pagination should Work
 
-The second important thing is that they're done – is that we don't make the user guess
-those URLs, we give them links. So we're used to having a 'next' link and a 'previous'
-link. Sometimes we also have a 'last' link and a 'first' link. So in API, it's gonna
-be exactly the same. We're gonna use query parameters, and we're gonna use links
-to help the user get around.
+Let's talk about pagination first, because the `/api/programmers` endpoint doesn't
+have it. Eventually, once someone talks about our cool app on Reddit, we're going
+to have a lot of programmers here: too many to return all at once. First, think about
+pagination on the web. How does it work?  Usually, it's done with query parameters:
+something like `?page=1`, `?page=2`, and so on. Sometimes, it's done in the URL - like
+`/products/1` and `/products/2`. For API's, query parameters is better.
 
-So, like always, we're gonna start with our test and it's gonna help us design exactly
-how we want this to look. So in Programmer Controller Test, I'm gonna go down and
-find my Test Programmers Collection. I'm gonna copy this and make a new one for
-pagination. Now, to make this interesting, we're gonna create 25 programmers, so
-I'll do a for-loop, for 'i' equals zero, 'i' less than 25, 'i' plus plus, and we'll
-call a create programmer inside of there each time, and we'll call each programmer
-programmer plus 'i', so programmers zero through 24 and the avatar number doesn't
-matter. 
+Second, on the web, we don't make the user guess those URLs: we give them links,
+like "next" and "previous", and maybe even "first" and "last".
 
-The URL's still the same. The assert 200 is good. And down here, I'm gonna want to
-assert first that programmers index five nickname is equal to programmer five. I'll
-spread this onto multiple lines. So five being the sixth programmer, we have programmers
-at zero, one, two, three, four, five, so the sixth one is actually programmer five.
-And that's already how things work now.
+So why would building an API be any different? Let's use query parameters and include
+links to help the API client get around.
 
-In addition to links, a lot of times on the web, it will also tell you how many you're
-seeing on a specific page, like ten results on this time, and it will also tell you
-how many results there are. So, ten showing on this page out of 500. So let's do the
-same thing here. Let's assume – and it's not of our API. So let's have a property
-called count, which will be the number we want per page, and then our API, let's
-use ten per page. And let's have another one called total, which will be the total
-number of results, which we know in this case is going to be 25.
+## Adding a Test
 
-And the last thing we need to worry about are those links I keep talking about. I
-don't want the user to have to guess how to get to the next page. Instead, let's
-embed a field inside of our API endpoint that says, "The next page is this URL." 
-So I'm gonna use the asserter again. I'm just gonna change this to 'assert response
-property exists'. Let's assert that there is an underscore links dot next. The next
-part should make a lot of sense. And underscore links is just my way of separating
-what we can think of as data from the data from this field, which is not data but
-it's a link. Oh, and you probably saw, actually, my field above that actually says
-total, not count.
+Like always, we're gonna start with a test because it's the easiest way to try things
+out *and* it helps us think about the API's design. In `ProgrammerControllerTest`,
+find the `testProgrammersCollection` method and copy this to make a new test for
+pagination.
 
-So what's cool about this now is that we can just grab this link, and just follow
-it to the next page, and in our test, that's what I want to do. So next URL equals
-this, asserter, and we can use a method called read response property, and get that
-underscore links dot next property off of there, and now, we'll just say response
-equals client, this get client – this, arrow client, arrow get, next URL, to follow
-onto the next page. 
+To make this interesting, we need more programmers - like 25. Add a `for` loop to
+do this: `for i=0; i<25; i++`. In each loop, create a programmer with the super
+creative name of Programmer plus the i value. This means that programmer that we'll
+have programmers zero through 24. The `avatarNumber` is required, but we don't care
+about its value.
 
-Now, let's do some more tests on this page. All right, I'll copy a bunch of these
-things up here – copy a bunch of the reasserts that we just wrote. This time, programmer
-index five should actually be programmer 15 because we're looking at results 11 through
-20. Down here, the count should still be ten because there is still ten, and total
-should still be 25, but let's go ahead and remove that. Okay, so this is doing a
-next link. We're gonna want a previous link, and I'm also gonna have a first link
-and a last link. So let's do one more thing where we actually click the last URL. 
+Keep the same URL and the 200 status code assertion. Below, start basic with a sanity
+check for page 1: assert that the programmer with index 5 is equal to `Programmer5`.
+I'll use multiple lines to keep things clear. Index 5 is actually the 6th programmer,
+but since we start with Programmer0, this should definitely be Programmer5. 
 
-What is going on with my formatting here?  And now, let's print the last URL. So
-look for underscore links dot last, which the next URL in this case would also be
-the same as the last URL. And we will make a get request of that, and this time,
-programmers four will be the last one because it's zero through – index zero through
-24, and now we programmer 24. Account should be five, and I'm also gonna use the
-asserter just to say this asserter – assert response property does not exist, to
-make sure we don't have a programmer index five here. So response, and what should
-not exist is we should not have a programmer five dot nickname. In fact, we shouldn't
-even have a programmer's five key, but there's a little – if I do a limitation in
-Symfony's property path, when you check – if you're checking for the – if you're
-checking to see if a property exists, go all the way down to call something on the
-object itself.
+## Adding count and total
 
-And now that we have – so our – so our – the way we're gonna paginate is really
-well-defined now. So in the next chapter, we're gonna actually make this work.
+It might also be useful to tell the API client how many results are on *this* page
+and how many results there are in total. I want to show 10 results per page in the
+API so add a line that looks a new property called `count` that's set to 10. Let's
+also have another property called `total`. That'll be the *total* number of results.
+In this case, that should be 25.
+
+## Adding Links
+
+Finally, the API response needs to have those links! And by "links", I mean that I
+want to add a new field - maybe called "next" - whose value will be the URL to get
+the next page of results. Use the asserter again and change this to
+`assertResponsePropertyExists()`. Let's assert that there is an `_links.next` key,
+which means the JSON will have an `_links` key and a `next` key under that. By
+moving things under `_links`, it makes it a little more obvious that `next` isn't
+a property of a programmer, but something different: a link.
+
+Oh, and you probably saw my mistake above: change the line above to `total`, not `count`.
+
+## Following Links
+
+And here's where things get really cool. In our test, we need to make a request to
+page 2 and make sure we see the next 10 programmers. Instead of hardcoding the URL,
+we can *read* the next link and use that for the next request. It's like the API
+version of clicking links!
+
+Use `$this->asserter()` and then a method called `readResponseProperty()` to read
+the `_links.next` property. Now, add `$response = $this->client->get($nextUrl)` to
+go to the next page.
+
+Ok, let's test page 2! Copy some of the asserts that we just wrote. This time, the
+programmer with index 5 should be `Programmer15` because we're looking at results
+11 through 20. Next, the `count` should still be 10, and the `total` still 25 - but
+let's save a little code and remove that line.
+
+The `next` link is nice. But we' can do even more by *also* having a `first` link,
+a `last` link and a `prev` link unless we're on page 1. Copy the code from earlier
+that clicked the `next` link. Ooh, and let me fixing my formatting!
+
+This time, use the `_links.last` key and update the variable to be `$lastUrl`. When
+we make a request to the final page, `programmers[4]` will be the last programmer
+because we started with index 0. The name should be `Programmer24`. And on this last
+page, `count` should be just 5. I'm also going to use the asserter with
+`assertResponsePropertyDoesNotExist` to make sure that there is *no* programmer here
+with index 5. Specifically, check for no `programmers[5].name` path: There's a small
+bug in my asserter code: if I just check for `programmers[5]`, it thinks it exists
+but is set to `null`. That's why I'm checking for the `name` key.
+
+That's it! Our pagination system is now *really* well-defined. Next, we'll bring
+this all to life.
