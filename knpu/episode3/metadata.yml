@@ -4,13 +4,12 @@ summary: |
     [Errors](http://knpuniversity.com/screencast/symfony-rest), double check!
     Now let's get back to some *core* API concepts and take things up a level.
 
-    * API Documentation and sandbox (NelmioApiDocBundle)
-    * Making fields non-mutable
-    * Setting the "request format" to JSON
-    * Returning a proper Collection resource format
-    * Pagination
-    * Filtering
-    * Adding a custom serializer subscriber
+    * REST Pagination
+    * Including next/prev pagination links
+    * Filtering collections
+    * Advanced serialization customization (serializer subscriber)
+    * Including links via custom annotations
+    * Making embedded resources configurable/conditional
 
     The REST of the Symfony Series:
     
@@ -22,9 +21,9 @@ summary: |
 
 illustration: rest-sf-3.png
 hasVideoDownload: 0
-# tuts_hero:
-#     start_step: "Serialize: Whitelisting properties"
-#     finish_step: "Errors: Making type a URL"
+tuts_hero:
+    start_step: "errors-only-affect-api"
+    finish_step: "serialization-deep-option"
 
 chapters:
     pagination-test:
