@@ -2,6 +2,7 @@
 
 namespace AppBundle\Test;
 
+use AppBundle\Entity\Programmer;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
@@ -14,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ApiTestCase extends KernelTestCase
 {
@@ -222,6 +224,27 @@ class ApiTestCase extends KernelTestCase
         $em->flush();
 
         return $user;
+    }
+
+    protected function createProgrammer(array $data)
+    {
+        $data = array_merge(array(
+            'powerLevel' => rand(0, 10),
+            'user' => $this->getEntityManager()
+                ->getRepository('AppBundle:User')
+                ->findAny()
+        ), $data);
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $programmer = new Programmer();
+        foreach ($data as $key => $value) {
+            $accessor->setValue($programmer, $key, $value);
+        }
+
+        $this->getEntityManager()->persist($programmer);
+        $this->getEntityManager()->flush();
+
+        return $programmer;
     }
 
     /**

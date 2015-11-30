@@ -32,4 +32,22 @@ class ProgrammerControllerTest extends ApiTestCase
         $this->assertArrayHasKey('nickname', $finishedData);
         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
     }
+
+    public function testGETProgrammer()
+    {
+        $this->createProgrammer(array(
+            'nickname' => 'UnitTester',
+            'avatarNumber' => 3,
+        ));
+
+        $response = $this->client->get('/api/programmers/UnitTester');
+        $this->assertEquals(200, $response->getStatusCode());
+        $data = $response->json();
+        $this->assertEquals(array(
+            'nickname',
+            'avatarNumber',
+            'powerLevel',
+            'tagLine'
+        ), array_keys($data));
+    }
 }
