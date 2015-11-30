@@ -68,6 +68,8 @@ class ProgrammerController extends BaseController
      *  description="Return a programmer",
      *  output="AppBundle\Entity\Programmer"
      * )
+     *
+     * @param string $nickname The unique nickname of your programmer
      */
     public function showAction($nickname)
     {
