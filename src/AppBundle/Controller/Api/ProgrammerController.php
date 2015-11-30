@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Api;
 
 use AppBundle\Controller\BaseController;
 use AppBundle\Entity\Programmer;
+use AppBundle\Form\ProgrammerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,8 +20,10 @@ class ProgrammerController extends BaseController
     {
         $data = json_decode($request->getContent(), true);
 
-        $programmer = new Programmer($data['nickname'], $data['avatarNumber']);
-        $programmer->setTagLine($data['tagLine']);
+        $programmer = new Programmer();
+        $form = $this->createForm(new ProgrammerType(), $programmer);
+        $form->submit($data);
+
         $programmer->setUser($this->findUserByUsername('weaverryan'));
 
         $em = $this->getDoctrine()->getManager();
