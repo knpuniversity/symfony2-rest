@@ -158,7 +158,6 @@ EOF;
         $response = $this->client->post('/api/programmers', [
             'body' => $invalidBody
         ]);
-        $this->debugResponse($response);
 
         $this->assertEquals(400, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
