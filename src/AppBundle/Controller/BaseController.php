@@ -11,6 +11,7 @@ use AppBundle\Repository\BattleRepository;
 use AppBundle\Repository\ApiTokenRepository;
 use JMS\Serializer\SerializationContext;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpFoundation\Request;
@@ -154,5 +155,36 @@ abstract class BaseController extends Controller
         }
 
         return $data;
+    }
+
+    protected function throwApiProblemValidationException(FormInterface $form)
+    {
+        $errors = $this->getErrorsFromForm($form);
+
+        $apiProblem = new ApiProblem(
+            400,
+            ApiProblem::TYPE_VALIDATION_ERROR
+        );
+        $apiProblem->set('errors', $errors);
+
+        throw new ApiProblemException($apiProblem);
+    }
+
+    protected function getErrorsFromForm(FormInterface $form)
+    {
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            $errors[] = $error->getMessage();
+        }
+
+        foreach ($form->all() as $childForm) {
+            if ($childForm instanceof FormInterface) {
+                if ($childErrors = $this->getErrorsFromForm($childForm)) {
+                    $errors[$childForm->getName()] = $childErrors;
+                }
+            }
+        }
+
+        return $errors;
     }
 }
