@@ -170,8 +170,7 @@ class ProgrammerController extends BaseController
 
         $apiProblem = new ApiProblem(
             400,
-            ApiProblem::TYPE_VALIDATION_ERROR,
-            'There was a validation error'
+            ApiProblem::TYPE_VALIDATION_ERROR
         );
         $apiProblem->set('errors', $errors);
 
