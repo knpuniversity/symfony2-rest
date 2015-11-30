@@ -116,6 +116,15 @@ class ProgrammerController extends BaseController
     /**
      * @Route("/api/programmers/{nickname}")
      * @Method({"PUT", "PATCH"})
+     *
+     * @ApiDoc(
+     *  description="Update a programmer",
+     *  input={
+     *      "class"="AppBundle\Form\UpdateProgrammerType",
+     *      "name"=""
+     *  },
+     *  output="Programmer"
+     * )
      */
     public function updateAction($nickname, Request $request)
     {
@@ -149,6 +158,10 @@ class ProgrammerController extends BaseController
     /**
      * @Route("/api/programmers/{nickname}")
      * @Method("DELETE")
+     *
+     * @ApiDoc(
+     *  description="Delete a programmer"
+     * )
      */
     public function deleteAction($nickname)
     {
