@@ -25,6 +25,11 @@ class ProgrammerController extends BaseController
         $form = $this->createForm(new ProgrammerType(), $programmer);
         $this->processForm($request, $form);
 
+        if (!$form->isValid()) {
+            header('Content-Type: cli');
+            dump((string) $form->getErrors(true, false));die;
+        }
+
         $programmer->setUser($this->findUserByUsername('weaverryan'));
 
         $em = $this->getDoctrine()->getManager();
