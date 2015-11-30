@@ -90,6 +90,17 @@ class ProgrammerControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
         $this->asserter()->assertResponsePropertyEquals($response, 'total', 25);
         $this->asserter()->assertResponsePropertyExists($response, '_links.next');
+
+        // page 2
+        $nextLink = $this->asserter()->readResponseProperty($response, '_links.next');
+        $response = $this->client->get($nextLink);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->asserter()->assertResponsePropertyEquals(
+            $response,
+            'programmers[5].nickname',
+            'Programmer15'
+        );
+        $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
     }
 
     public function testPUTProgrammer()
