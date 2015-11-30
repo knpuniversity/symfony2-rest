@@ -15,12 +15,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ProgrammerController extends BaseController
 {
     /**
      * @Route("/api/programmers")
      * @Method("POST")
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Add a new programmer",
+     *  input="AppBundle\Form\ProgrammerType",
+     *  output="AppBundle\Entity\Programmer"
+     * )
      */
     public function newAction(Request $request)
     {
