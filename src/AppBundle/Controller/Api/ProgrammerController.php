@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Api;
 
+use AppBundle\Api\ApiProblem;
 use AppBundle\Controller\BaseController;
 use AppBundle\Entity\Programmer;
 use AppBundle\Form\ProgrammerType;
@@ -167,13 +168,14 @@ class ProgrammerController extends BaseController
     {
         $errors = $this->getErrorsFromForm($form);
 
-        $data = [
-            'type' => 'validation_error',
-            'title' => 'There was a validation error',
-            'errors' => $errors
-        ];
+        $apiProblem = new ApiProblem(
+            400,
+            'validation_error',
+            'There was a validation error'
+        );
+        $apiProblem->set('errors', $errors);
 
-        $response = new JsonResponse($data, 400);
+        $response = new JsonResponse($apiProblem->toArray(), $apiProblem->getStatusCode());
         $response->headers->set('Content-Type', 'application/problem+json');
 
         return $response;
