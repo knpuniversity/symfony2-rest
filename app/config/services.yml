@@ -22,3 +22,7 @@ services:
         arguments: ['%kernel.debug%']
         tags:
             - { name: kernel.event_subscriber }
+
+    pagination_factory:
+        class: AppBundle\Pagination\PaginationFactory
+        arguments: ['@router']
