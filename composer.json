@@ -24,7 +24,8 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "hautelook/alice-bundle": "0.2.*"
+        "hautelook/alice-bundle": "0.2.*",
+        "jms/serializer-bundle": "0.13.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
