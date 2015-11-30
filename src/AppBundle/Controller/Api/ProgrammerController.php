@@ -26,15 +26,7 @@ class ProgrammerController extends BaseController
         $this->processForm($request, $form);
 
         if (!$form->isValid()) {
-            $errors = $this->getErrorsFromForm($form);
-
-            $data = [
-                'type' => 'validation_error',
-                'title' => 'There was a validation error',
-                'errors' => $errors
-            ];
-
-            return new JsonResponse($data, 400);
+            return $this->createValidationErrorResponse($form);
         }
 
         $programmer->setUser($this->findUserByUsername('weaverryan'));
@@ -110,6 +102,10 @@ class ProgrammerController extends BaseController
         $form = $this->createForm(new UpdateProgrammerType(), $programmer);
         $this->processForm($request, $form);
 
+        if (!$form->isValid()) {
+            return $this->createValidationErrorResponse($form);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($programmer);
         $em->flush();
@@ -165,5 +161,18 @@ class ProgrammerController extends BaseController
         }
 
         return $errors;
+    }
+
+    private function createValidationErrorResponse(FormInterface $form)
+    {
+        $errors = $this->getErrorsFromForm($form);
+
+        $data = [
+            'type' => 'validation_error',
+            'title' => 'There was a validation error',
+            'errors' => $errors
+        ];
+
+        return new JsonResponse($data, 400);
     }
 }
