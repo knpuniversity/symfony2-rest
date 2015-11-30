@@ -90,4 +90,15 @@ class ProgrammerControllerTest extends ApiTestCase
         // the nickname is immutable on edit
         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
     }
+
+    public function testDELETEProgrammer()
+    {
+        $this->createProgrammer(array(
+            'nickname' => 'UnitTester',
+            'avatarNumber' => 3,
+        ));
+
+        $response = $this->client->delete('/api/programmers/UnitTester');
+        $this->assertEquals(204, $response->getStatusCode());
+    }
 }
