@@ -181,9 +181,6 @@ class ProgrammerController extends BaseController
         );
         $apiProblem->set('errors', $errors);
 
-        $response = new JsonResponse($apiProblem->toArray(), $apiProblem->getStatusCode());
-        $response->headers->set('Content-Type', 'application/problem+json');
-
-        return $response;
+        throw new ApiProblemException($apiProblem);
     }
 }
