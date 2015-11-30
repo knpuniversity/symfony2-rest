@@ -8,6 +8,8 @@ use AppBundle\Controller\BaseController;
 use AppBundle\Entity\Programmer;
 use AppBundle\Form\ProgrammerType;
 use AppBundle\Form\UpdateProgrammerType;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Form\FormInterface;
@@ -74,13 +76,28 @@ class ProgrammerController extends BaseController
      * @Route("/api/programmers")
      * @Method("GET")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $programmers = $this->getDoctrine()
-            ->getRepository('AppBundle:Programmer')
-            ->findAll();
+        $page = $request->query->get('page', 1);
 
-        $response = $this->createApiResponse(['programmers' => $programmers], 200);
+        $qb = $this->getDoctrine()
+            ->getRepository('AppBundle:Programmer')
+            ->findAllQueryBuilder();
+        $adapter = new DoctrineORMAdapter($qb);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(10);
+        $pagerfanta->setCurrentPage($page);
+
+        $programmers = [];
+        foreach ($pagerfanta->getCurrentPageResults() as $result) {
+            $programmers[] = $result;
+        }
+
+        $response = $this->createApiResponse([
+            'total' => $pagerfanta->getNbResults(),
+            'count' => count($programmers),
+            'programmers' => $programmers,
+        ], 200);
 
         return $response;
     }
