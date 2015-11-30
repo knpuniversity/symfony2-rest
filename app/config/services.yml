@@ -16,3 +16,9 @@ services:
     battle.power_manager:
         class: AppBundle\Battle\PowerManager
         arguments: ['@doctrine.orm.entity_manager']
+
+    api_exception_subscriber:
+        class: AppBundle\EventListener\ApiExceptionSubscriber
+        arguments: []
+        tags:
+            - { name: kernel.event_subscriber }
