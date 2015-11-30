@@ -30,6 +30,6 @@ class ProgrammerController extends BaseController
         $em->persist($programmer);
         $em->flush();
 
-        return new Response('It worked. Believe me - I\'m an API');
+        return new Response('It worked. Believe me - I\'m an API', 201);
     }
 }
