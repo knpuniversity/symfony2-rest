@@ -62,6 +62,12 @@ class ProgrammerController extends BaseController
     /**
      * @Route("/api/programmers/{nickname}", name="api_programmers_show")
      * @Method("GET")
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  description="Return a programmer",
+     *  output="AppBundle\Entity\Programmer"
+     * )
      */
     public function showAction($nickname)
     {
@@ -84,6 +90,11 @@ class ProgrammerController extends BaseController
     /**
      * @Route("/api/programmers", name="api_programmers_collection")
      * @Method("GET")
+     *
+     * @ApiDoc(
+     *  description="Return a collection of programmer",
+     *  output="array<AppBundle\Entity\Programmer>"
+     * )
      */
     public function listAction(Request $request)
     {
