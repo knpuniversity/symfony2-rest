@@ -28,6 +28,11 @@ class ApiTestCase extends KernelTestCase
     protected $client;
 
     /**
+     * @var ConsoleOutput
+     */
+    private $output;
+
+    /**
      * @var FormatterHelper
      */
     private $formatterHelper;
@@ -179,7 +184,11 @@ class ApiTestCase extends KernelTestCase
      */
     protected function printDebug($string)
     {
-        echo $string."\n";
+        if ($this->output === null) {
+            $this->output = new ConsoleOutput();
+        }
+
+        $this->output->writeln($string);
     }
 
     /**
