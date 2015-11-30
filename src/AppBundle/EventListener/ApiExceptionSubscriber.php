@@ -24,6 +24,16 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
             $apiProblem = new ApiProblem(
                 $statusCode
             );
+
+            /*
+             * If it's an HttpException message (e.g. for 404, 403),
+             * we'll say as a rule that the exception message is safe
+             * for the client. Otherwise, it could be some sensitive
+             * low-level exception, which should *not* be exposed
+             */
+            if ($e instanceof HttpExceptionInterface) {
+                $apiProblem->set('detail', $e->getMessage());
+            }
         }
 
         $response = new JsonResponse(

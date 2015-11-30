@@ -171,5 +171,6 @@ EOF;
         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
+        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
     }
 }
