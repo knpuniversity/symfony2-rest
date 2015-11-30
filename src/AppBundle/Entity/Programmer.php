@@ -66,6 +66,8 @@ class Programmer
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Groups({"deep"})
+     * @Serializer\Expose()
      */
     private $user;
 
