@@ -2,6 +2,12 @@
 
 namespace AppBundle\EventListener;
 
-class ApiExceptionSubscriber
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class ApiExceptionSubscriber implements EventSubscriberInterface
 {
+    public static function getSubscribedEvents()
+    {
+        // TODO: Implement getSubscribedEvents() method.
+    }
 }
