@@ -53,6 +53,9 @@ class ProgrammerController extends BaseController
             'tagLine' => $programmer->getTagLine(),
         );
 
-        return new Response(json_encode($data), 200);
+        $response = new Response(json_encode($data), 200);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }
