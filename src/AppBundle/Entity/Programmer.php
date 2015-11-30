@@ -31,6 +31,8 @@ class Programmer
     private $id;
 
     /**
+     * The unique name of the programmer.
+     *
      * @var string
      *
      * @ORM\Column(name="nickname", type="string", length=100, unique=true)
