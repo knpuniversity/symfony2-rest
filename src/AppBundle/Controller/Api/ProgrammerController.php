@@ -31,13 +31,17 @@ class ProgrammerController extends BaseController
         $em->flush();
 
         $response = new Response('It worked. Believe me - I\'m an API', 201);
-        $response->headers->set('Location', '/some/programmer/url');
+        $programmerUrl = $this->generateUrl(
+            'api_programmers_show',
+            ['nickname' => $programmer->getNickname()]
+        );
+        $response->headers->set('Location', $programmerUrl);
 
         return $response;
     }
 
     /**
-     * @Route("/api/programmers/{nickname}")
+     * @Route("/api/programmers/{nickname}", name="api_programmers_show")
      * @Method("GET")
      */
     public function showAction($nickname)

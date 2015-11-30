@@ -21,6 +21,10 @@ $response = $client->post('/api/programmers', [
     'body' => json_encode($data)
 ]);
 
+echo $response;
+echo "\n\n";
+die;
+
 // 2) GET a programmer resource
 $response = $client->get('/api/programmers/abcd'.$nickname);
 
