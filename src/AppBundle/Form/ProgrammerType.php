@@ -26,7 +26,8 @@ class ProgrammerType extends AbstractType
                     4 => 'Boy with Hat',
                     5 => 'Happy Robot',
                     6 => 'Girl (purple)',
-                ]
+                ],
+                'description' => 'Choose one of the pre-made avatars by number'
             ])
             ->add('tagLine', 'textarea')
         ;
