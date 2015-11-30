@@ -5,6 +5,13 @@ use AppBundle\Test\ApiTestCase;
 
 class ProgrammerControllerTest extends ApiTestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->createUser('weaverryan');
+    }
+
     public function testPOST()
     {
         $data = array(
