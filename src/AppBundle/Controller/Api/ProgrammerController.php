@@ -85,6 +85,38 @@ class ProgrammerController extends BaseController
         return $response;
     }
 
+    /**
+     * @Route("/api/programmers/{nickname}")
+     * @Method("PUT")
+     */
+    public function updateAction($nickname, Request $request)
+    {
+        $programmer = $this->getDoctrine()
+            ->getRepository('AppBundle:Programmer')
+            ->findOneByNickname($nickname);
+
+        if (!$programmer) {
+            throw $this->createNotFoundException(sprintf(
+                'No programmer found with nickname "%s"',
+                $nickname
+            ));
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $form = $this->createForm(new ProgrammerType(), $programmer);
+        $form->submit($data);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($programmer);
+        $em->flush();
+
+        $data = $this->serializeProgrammer($programmer);
+        $response = new JsonResponse($data, 200);
+
+        return $response;
+    }
+
+
     private function serializeProgrammer(Programmer $programmer)
     {
         return array(
