@@ -39,6 +39,7 @@ class ProgrammerType extends AbstractType
             'data_class' => 'AppBundle\Entity\Programmer',
             'is_edit' => false,
             'csrf_protection' => false,
+            'extra_fields_message' => 'Extra fields sent! {{ extra_fields }}'
         ));
     }
 
