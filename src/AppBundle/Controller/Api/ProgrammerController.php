@@ -8,6 +8,7 @@ use AppBundle\Controller\BaseController;
 use AppBundle\Entity\Programmer;
 use AppBundle\Form\ProgrammerType;
 use AppBundle\Form\UpdateProgrammerType;
+use AppBundle\Pagination\PaginatedCollection;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -93,11 +94,8 @@ class ProgrammerController extends BaseController
             $programmers[] = $result;
         }
 
-        $response = $this->createApiResponse([
-            'total' => $pagerfanta->getNbResults(),
-            'count' => count($programmers),
-            'programmers' => $programmers,
-        ], 200);
+        $paginatedCollection = new PaginatedCollection($programmers, $pagerfanta->getNbResults());
+        $response = $this->createApiResponse($paginatedCollection, 200);
 
         return $response;
     }
