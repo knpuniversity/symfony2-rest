@@ -16,7 +16,7 @@
     </testsuites>
 
     <php>
-        <env name="TEST_BASE_URL" value="http://localhost:8000" />
+        <env name="TEST_BASE_URL" value="http://localhost:8000/app_test.php" />
     </php>
 
     <filter>

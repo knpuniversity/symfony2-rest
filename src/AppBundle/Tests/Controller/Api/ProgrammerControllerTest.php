@@ -63,6 +63,7 @@ class ProgrammerControllerTest extends ApiTestCase
         ));
 
         $response = $this->client->get('/api/programmers');
+        $this->printLastRequestUrl();
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyIsArray($response, 'programmers');
         $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
