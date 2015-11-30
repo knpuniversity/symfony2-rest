@@ -125,14 +125,16 @@ class ProgrammerController extends BaseController
             ->getRepository('AppBundle:Programmer')
             ->findOneByNickname($nickname);
 
-        if (!$programmer) {
-            throw $this->createNotFoundException(sprintf(
-                'No programmer found with nickname "%s"',
-                $nickname
-            ));
+        if ($programmer) {
+            // debated point: should we 404 on an unknown nickname?
+            // or should we just return a nice 204 in all cases?
+            // we're doing the latter
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($programmer);
+            $em->flush();
         }
 
-        // todo ...
+        return new Response(null, 204);
     }
 
     private function processForm(Request $request, FormInterface $form)
