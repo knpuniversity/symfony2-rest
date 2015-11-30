@@ -71,6 +71,11 @@ class ProgrammerControllerTest extends ApiTestCase
 
     public function testGETProgrammersCollectionPagination()
     {
+        $this->createProgrammer(array(
+            'nickname' => 'willnotmatch',
+            'avatarNumber' => 5,
+        ));
+
         for ($i = 0; $i < 25; $i++) {
             $this->createProgrammer(array(
                 'nickname' => 'Programmer'.$i,
@@ -79,7 +84,7 @@ class ProgrammerControllerTest extends ApiTestCase
         }
 
         // page 1
-        $response = $this->client->get('/api/programmers');
+        $response = $this->client->get('/api/programmers?filter=programmer');
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertyEquals(
             $response,
