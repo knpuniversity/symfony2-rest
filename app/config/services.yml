@@ -26,3 +26,8 @@ services:
     pagination_factory:
         class: AppBundle\Pagination\PaginationFactory
         arguments: ['@router']
+
+    link_serialization_subscriber:
+        class: AppBundle\Serializer\LinkSerializationSubscriber
+        tags:
+            - { name: jms_serializer.event_subscriber }
