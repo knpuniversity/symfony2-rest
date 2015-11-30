@@ -143,7 +143,9 @@ class ProgrammerController extends BaseController
     {
         $data = json_decode($request->getContent(), true);
         if ($data === null) {
-            throw new HttpException(400, 'Invalid JSON body!');
+            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+
+            // now what?
         }
 
         $clearMissing = $request->getMethod() != 'PATCH';

@@ -161,6 +161,7 @@ EOF;
         $this->debugResponse($response);
 
         $this->assertEquals(400, $response->getStatusCode());
+        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'invalid_body_format');
     }
 
 }
