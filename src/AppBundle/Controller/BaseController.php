@@ -7,6 +7,7 @@ use AppBundle\Repository\UserRepository;
 use AppBundle\Repository\ProjectRepository;
 use AppBundle\Repository\BattleRepository;
 use AppBundle\Repository\ApiTokenRepository;
+use JMS\Serializer\SerializationContext;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -122,7 +123,10 @@ abstract class BaseController extends Controller
 
     protected function serialize($data, $format = 'json')
     {
+        $context = new SerializationContext();
+        $context->setSerializeNull(true);
+
         return $this->container->get('jms_serializer')
-            ->serialize($data, $format);
+            ->serialize($data, $format, $context);
     }
 }
