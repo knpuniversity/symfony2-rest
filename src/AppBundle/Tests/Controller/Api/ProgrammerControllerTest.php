@@ -149,6 +149,7 @@ class ProgrammerControllerTest extends ApiTestCase
     {
         $invalidBody = <<<EOF
 {
+    "nickname": "JohnnyRobot",
     "avatarNumber" : "2
     "tagLine": "I'm from a test!"
 }
