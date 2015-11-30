@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProgrammerController extends BaseController
 {
@@ -141,6 +142,9 @@ class ProgrammerController extends BaseController
     private function processForm(Request $request, FormInterface $form)
     {
         $data = json_decode($request->getContent(), true);
+        if ($data === null) {
+            throw new HttpException(400, 'Invalid JSON body!');
+        }
 
         $clearMissing = $request->getMethod() != 'PATCH';
         $form->submit($data, $clearMissing);
