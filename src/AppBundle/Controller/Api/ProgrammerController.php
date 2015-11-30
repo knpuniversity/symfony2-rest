@@ -26,7 +26,10 @@ class ProgrammerController extends BaseController
      * @ApiDoc(
      *  resource=true,
      *  description="Add a new programmer",
-     *  input="AppBundle\Form\ProgrammerType",
+     *  input={
+     *      class="AppBundle\Form\ProgrammerType",
+     *      name=""
+     *  },
      *  output="AppBundle\Entity\Programmer"
      * )
      */
