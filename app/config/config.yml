@@ -81,3 +81,5 @@ nelmio_api_doc:
     sandbox:
         request_format:
             method: accept_header
+        body_format:
+            formats: [json]
