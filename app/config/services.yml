@@ -29,5 +29,6 @@ services:
 
     link_serialization_subscriber:
         class: AppBundle\Serializer\LinkSerializationSubscriber
+        arguments: ['@router']
         tags:
             - { name: jms_serializer.event_subscriber }
