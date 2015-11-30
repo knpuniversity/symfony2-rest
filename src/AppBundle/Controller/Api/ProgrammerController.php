@@ -42,6 +42,17 @@ class ProgrammerController extends BaseController
      */
     public function showAction($nickname)
     {
-        return new Response('Hello '.$nickname);
+        $programmer = $this->getDoctrine()
+            ->getRepository('AppBundle:Programmer')
+            ->findOneByNickname($nickname);
+
+        $data = array(
+            'nickname' => $programmer->getNickname(),
+            'avatarNumber' => $programmer->getAvatarNumber(),
+            'powerLevel' => $programmer->getPowerLevel(),
+            'tagLine' => $programmer->getTagLine(),
+        );
+
+        return new Response(json_encode($data), 200);
     }
 }
