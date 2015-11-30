@@ -27,8 +27,8 @@ class ProgrammerController extends BaseController
      *  resource=true,
      *  description="Add a new programmer",
      *  input={
-     *      class="AppBundle\Form\ProgrammerType",
-     *      name=""
+     *      "class"="AppBundle\Form\ProgrammerType",
+     *      "name"=""
      *  },
      *  output="AppBundle\Entity\Programmer"
      * )
