@@ -35,4 +35,13 @@ class ProgrammerController extends BaseController
 
         return $response;
     }
+
+    /**
+     * @Route("/api/programmers/{nickname}")
+     * @Method("GET")
+     */
+    public function showAction($nickname)
+    {
+        return new Response('Hello '.$nickname);
+    }
 }
