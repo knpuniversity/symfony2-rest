@@ -90,12 +90,28 @@ class ProgrammerController extends BaseController
     }
 
     /**
+     * Returns an array of `Programmer` resources:
+     *
+     * ```
+     * {
+     *     "programmers": []
+     * }
+     * ```
+     *
+     * And here's a Guzzle example:
+     *
+     * ```
+     * $request = $client->get('/api/programmers');
+     * $request = $response->send();
+     * ```
+     *
      * @Route("/api/programmers", name="api_programmers_collection")
      * @Method("GET")
      *
      * @ApiDoc(
      *  description="Return a collection of programmer",
-     *  output="array<AppBundle\Entity\Programmer>"
+     *  output="array<AppBundle\Entity\Programmer>",
+     *  description="Returns a collection of programmers"
      * )
      */
     public function listAction(Request $request)
