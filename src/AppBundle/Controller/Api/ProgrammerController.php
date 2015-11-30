@@ -57,16 +57,41 @@ class ProgrammerController extends BaseController
             ));
         }
 
-        $data = array(
-            'nickname' => $programmer->getNickname(),
-            'avatarNumber' => $programmer->getAvatarNumber(),
-            'powerLevel' => $programmer->getPowerLevel(),
-            'tagLine' => $programmer->getTagLine(),
-        );
+        $data = $this->serializeProgrammer($programmer);
 
         $response = new Response(json_encode($data), 200);
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+    /**
+     * @Route("/api/programmers")
+     * @Method("GET")
+     */
+    public function listAction()
+    {
+        $programmers = $this->getDoctrine()
+            ->getRepository('AppBundle:Programmer')
+            ->findAll();
+        $data = array('programmers' => array());
+        foreach ($programmers as $programmer) {
+            $data['programmers'][] = $this->serializeProgrammer($programmer);
+        }
+
+        $response = new Response(json_encode($data), 200);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    private function serializeProgrammer(Programmer $programmer)
+    {
+        return array(
+            'nickname' => $programmer->getNickname(),
+            'avatarNumber' => $programmer->getAvatarNumber(),
+            'powerLevel' => $programmer->getPowerLevel(),
+            'tagLine' => $programmer->getTagLine(),
+        );
     }
 }
