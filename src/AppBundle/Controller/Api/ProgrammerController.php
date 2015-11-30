@@ -115,6 +115,26 @@ class ProgrammerController extends BaseController
         return $response;
     }
 
+    /**
+     * @Route("/api/programmers/{nickname}")
+     * @Method("DELETE")
+     */
+    public function deleteAction($nickname)
+    {
+        $programmer = $this->getDoctrine()
+            ->getRepository('AppBundle:Programmer')
+            ->findOneByNickname($nickname);
+
+        if (!$programmer) {
+            throw $this->createNotFoundException(sprintf(
+                'No programmer found with nickname "%s"',
+                $nickname
+            ));
+        }
+
+        // todo ...
+    }
+
     private function processForm(Request $request, FormInterface $form)
     {
         $data = json_decode($request->getContent(), true);
