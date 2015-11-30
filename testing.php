@@ -22,7 +22,7 @@ $response = $client->post('/api/programmers', [
 ]);
 
 // 2) GET a programmer resource
-$response = $client->get('/api/programmers/'.$nickname);
+$response = $client->get('/api/programmers/abcd'.$nickname);
 
 echo $response;
 echo "\n\n";
