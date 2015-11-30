@@ -146,7 +146,10 @@ class ProgrammerController extends BaseController
         if ($data === null) {
             $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
 
-            // now what...
+            throw new ApiProblemException(
+                $apiProblem,
+                400
+            );
         }
 
         $clearMissing = $request->getMethod() != 'PATCH';
