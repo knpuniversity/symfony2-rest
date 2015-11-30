@@ -5,3 +5,5 @@ app_web:
 app_api:
     resource: "@AppBundle/Controller/Api"
     type:     annotation
+    defaults:
+        _format: json
