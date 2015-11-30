@@ -7,6 +7,8 @@ namespace AppBundle\Api;
  */
 class ApiProblem
 {
+    const TYPE_VALIDATION_ERROR = 'validation_error';
+
     private $statusCode;
 
     private $type;
