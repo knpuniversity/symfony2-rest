@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Api\ApiProblem;
+use AppBundle\Api\ApiProblemException;
 use AppBundle\Repository\ProgrammerRepository;
 use AppBundle\Repository\UserRepository;
 use AppBundle\Repository\ProjectRepository;
@@ -135,5 +137,22 @@ abstract class BaseController extends Controller
 
         return $this->container->get('jms_serializer')
             ->serialize($data, $format, $context);
+    }
+
+    protected function decodeRequestBody(Request $request)
+    {
+        // allow for a possibly empty body
+        if (!$request->getContent()) {
+            return array();
+        }
+
+        $data = json_decode($request->getContent(), true);
+        if ($data === null) {
+            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+
+            throw new ApiProblemException($apiProblem);
+        }
+
+        return $data;
     }
 }
