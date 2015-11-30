@@ -37,6 +37,7 @@ class ProgrammerType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Programmer',
             'is_edit' => false,
+            'csrf_protection' => false,
         ));
     }
 
