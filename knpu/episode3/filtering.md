@@ -4,7 +4,7 @@
 
 Paginated a big collection is a must. But you might also want a client to be able
 to search or filter that collection. Ok, so how do we search on the web? Well usually,
-you fill in a box, hit submitm and that makes a `GET` request with your search term
+you fill in a box, hit submit, and that makes a `GET` request with your search term
 as a query parameter like `?q=`. The server reads that and returns the results. 
 
 I have an idea! Let's do the *exact* same thing! First, we will *of course* add a

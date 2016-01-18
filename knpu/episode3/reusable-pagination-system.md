@@ -24,7 +24,7 @@ means we need the `router`. Add a `__construct()` function at the top with
 to create and set that property.
 
 Back inside `createCollection()`, change `$this->generateUrl()` to `$this->router->generate()`.
-Our work in this class is done! Next, register it as as service in
+Our work in this class is done! Next, register this as service in
 `app/config/services.yml` - let's call it `pagination_factory`. How creative! Set
 the class to `PaginationFactory` and pass one key for `arguments`: `@router`.
 

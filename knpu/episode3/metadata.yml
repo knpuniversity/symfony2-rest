@@ -53,6 +53,9 @@ chapters:
     links-via-annotations:
         is_finished: false
         video_key:   
+    evaluating-expression:
+        is_finished: false
+        video_key:   
     conditionally-embedding-relations:
         is_free: true
         is_finished: false

@@ -1,6 +1,6 @@
 # Adding Links via Annotations
 
-Oh man, this chapter is will be one of my *favorite* ever to record, because we're
+Oh man, this chapter will be one of my *favorite* ever to record, because we're
 going to do some sweet stuff with annotations.
 
 In `ProgrammerControllerTest`, we called this key `uri` because, well...why not?
@@ -17,8 +17,8 @@ with `"self"` inside, `route = "api_programmers_show"` `params = { }`. This rout
 has a `nickname` wildcard, so add `"nickname":` and then use the expression `object.getNickname()`.
 That last part is an *expression*, from Symfony's expression language. You and I
 are going to build the system that makes this work, so I'm going to assume that we'll
-pass a variable called `object` to the expression language that is the `Programmer`
-objects being serialized. Then, we just call `.getNickname()`.
+pass a variable called `object` to the expression language that is this `Programmer`
+object being serialized. Then, we just call `.getNickname()`.
 
 Of course, this won't work yet - in fact it'll totally bomb if you try it. But it
 will in a few minutes!
@@ -45,8 +45,8 @@ And... that's it!
 
 Inside of `Programmer`, every annotation - except for the special `@Annotation`
 and `@Target` guys, they're core to that system - needs a use statement - we already
-some for `Serializer`, `Assert` and `ORM`. Add a `use` statment directly to the class
-itself for `Link`. This hooks the annotation up with the class we just created. 
+havesome for `Serializer`, `Assert` and `ORM`. Add a `use` statment directly to the
+class itself for `Link`. This hooks the annotation up with the class we just created. 
 
 ## Reading the Annotation
 
@@ -63,13 +63,13 @@ And before I forget, in `services.yml`, inject that by adding `@annotation_reade
 as the second argument. So easy.
 
 Too easy, back to work! Delete all of this junk in `onPostSerialize` and start with
-`$object = event->getObject()`. To read the annotations off of that object, add
+`$object = $event->getObject()`. To read the annotations off of that object, add
 `$annotations = $this->annotationReader->getClassAnnotations()`. Pass that that a
 `new \ReflectionObject` for `$object`. That's it!
 
-Now, the class *could* have a lot of annotations above it, but we're only intersted
+Now, the class *could* have a lot of annotations above it, but we're only interested
 in the `Link` annotation. We'll add an if statement to look for that in a second.
-But first, create `$links = array ()`: that'll be our holder for any links we find.
+But first, create `$links = array()`: that'll be our holder for any links we find.
 
 Now, `foreach ($annotations as $annotations)`. Immediately, see if this is something
 we care about with `if ($annotation instanceof Link)`. At this point, the annotation
@@ -81,8 +81,8 @@ How sweet is that? Well, we're not done yet: the params contain an expression st
 which we're not parsing yet. We'll get back to that in a second.
 
 Finish this off with `$links[$annotation->name] = $uri;`. At the bottom, finish with
-the familiar `$visitor->addData()` with `_links` set it to `$links;`. Other than
-evaluation the expression, that's all the code you need.
+the familiar `$visitor->addData()` with `_links` set to `$links;`. Other than
+evaluating the expression, that's all the code you need.
 
 Check this out by going to `/api/programmers` in the browser. Look at that! The embedded
 programmer entities actually have a link called `self`. It worked!

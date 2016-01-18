@@ -18,8 +18,8 @@ Let's start with a quick test: copy part of `testGETProgramer` and name the new 
 `testGETProgrammerDeep`. Now, add a query parameter called `?deep`. The idea is simple:
 if the client adds `?deep=1`, then the API should expose more embedded objects. Use
 the asserter to say `assertResponsePropertyExists()`, pass that the `$response` and
-the property we'll expect is `user`. Since this will be an entire user object, check
-specifically for `user.username`.
+the property we'll expect, which is `user`. Since this will be an entire user object,
+check specifically for `user.username`.
 
 Very nice!
 
@@ -49,7 +49,7 @@ above `username`.
 
 Back in `Programmer.php`, remove the "groups" code temporarily and refresh. Ok good,
 *only* the `username` is showing. Put that "groups" code back and try again. Ok great:
-the `user` is gone: it's not serializing *only* the fields in the `Default` group,
+the `user` is gone: it's now serializing *only* the fields in the `Default` group,
 which does *not* include the `user` property.
 
 ## Setting the SerializationGroup
@@ -60,11 +60,11 @@ Ok... so now, how can we serialize a different set of groups? To answer that, op
 which holds a few options for serialization. Honestly, there's not much you can control
 with this, but you *can* set which *groups* you want to serialize.
 
-First, get the `$request` object fetching the `request_stack` service and adding
+First, get the `$request` object by fetching the `request_stack` service and adding
 `getCurrentRequest`. Next, create a new `$groups` variable and set it to only `Default`:
 we *always* want to serialize the properties in this group.
 
-Now say ``if ($request->query->get('deep'))` is true then add `deep` to `$groups`. 
+Now say `if ($request->query->get('deep'))` is true then add `deep` to `$groups`. 
 Finish this up with `$context->setGroups($groups)`. And just like that, we're able
 to conditionally show fields. Sweet!
 

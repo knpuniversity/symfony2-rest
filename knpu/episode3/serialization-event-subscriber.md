@@ -39,7 +39,7 @@ will tell me all the methods that the interface requires. And, it's just one:
 
 Stop: here's the goal. Whenever we serialize something, there are a few events we
 can hook into to customize that process. In this method, we'll tell the serializer
-exactly which methods we want to hook into. One of those will allow us to *add* a
+exactly which events we want to hook into. One of those will allow us to *add* a
 new field... which will be the URL to whatever Programmer is being serialized.
 
 Return an array with another array inside: we'll need a few keys here. The first
@@ -60,8 +60,8 @@ Setup, done! Create that `public function onPostSerialize`. Just like with core 
 events, you'll be passed an event argument, which in this case is an instance of
 `ObjectEvent`. Now, we can start messing with the serialization process.
 
-Before we go any further, go back to our test. To goal is for each Programmer to
-have a new field that is a link it itself. In `testGETProgrammer`, add a new assert
+Before we go any further, go back to our test. The goal is for each Programmer to
+have a new field that is a link to itself. In `testGETProgrammer`, add a new assert
 that checks that we have a `uri` property that's equal to `/api/programmers/UnitTester`.
 
 Ok, let's see how we can use the fancy subscriber to add this field automatically.

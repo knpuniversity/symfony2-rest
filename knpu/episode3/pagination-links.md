@@ -7,9 +7,9 @@ is simple: just add a new `private $_links = array();` property.
 
 ## Creating and Setting the Links
 
-To actually add links, create in a new function called `public function addLink()`
+To actually add links, create a new function called `public function addLink()`
 that has two arguments: the `$ref` - that's the *name* of the link, like
-`first` or `last` - and the `$url`. Add the link with `$this_links[$ref] = $url;`.
+`first` or `last` - and the `$url`. Add the link with `$this->_links[$ref] = $url;`.
 Great - now head back to the controller.
 
 Every link will point to the same route, but with a different `page` query parameter.
