@@ -87,9 +87,9 @@ we make a request to the final page, `programmers[4]` will be the last programme
 because we started with index 0. The name should be `Programmer24`. And on this last
 page, `count` should be just 5. I'm also going to use the asserter with
 `assertResponsePropertyDoesNotExist` to make sure that there is *no* programmer here
-with index 5. Specifically, check for no `programmers[5].name` path: There's a small
+with index 5. Specifically, check for no `programmers[5].nickname` path: There's a small
 bug in my asserter code: if I just check for `programmers[5]`, it thinks it exists
-but is set to `null`. That's why I'm checking for the `name` key.
+but is set to `null`. That's why I'm checking for the `nickname` key.
 
 That's it! Our pagination system is now *really* well-defined. Next, we'll bring
 this all to life.
