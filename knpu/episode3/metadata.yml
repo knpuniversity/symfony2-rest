@@ -38,6 +38,9 @@ chapters:
     pagination-links:
         is_finished: false
         video_key:   
+    reusable-pagination-system:
+        is_finished: false
+        video_key:   
     filtering:
         is_finished: false
         video_key:   

@@ -4,32 +4,30 @@
 
 Paginated a big collection is a must. But you might also want a client to be able
 to search or filter that collection. Ok, so how do we search on the web? Well usually,
-you fill in a box, hit submit and that makes a `GET` request with your search term
-a query parameter like `?q=` at the end of URL. The server reads that and returns
-the results. 
+you fill in a box, hit submitm and that makes a `GET` request with your search term
+as a query parameter like `?q=`. The server reads that and returns the results. 
 
 I have an idea! Let's do the *exact* same thing! First, we will *of course* add a
-test for this. Add a new programmer at the top of the pagination test with
+test. Add a new programmer at the top of the pagination test with
 `$this->createProgrammer()`. I want to do a search that will *not* return this new
 programmer, but still *will* return the original 25. To do that, give it a totally
 different nickname, like `'nickname' => 'willnotmatch'`. Keep the avatar number as
-3 - we don't really care.
+3... because we don't really care.
 
 For the query parameter, use whatever name you want: how about `?filter=programmer`.
-If you're feeling fancy, you *could* have multiple query parameters for different
+If you're feeling fancy, you could have multiple query parameters for different
 fields, or some cool search syntax like on GitHub. That's all up to you - the API
-will still work exactly the same way.
+will still work exactly the same.
 
 ## Filtering the Collection
 
-Great news: it turns out that this is going to be pretty easy to get working.
-First, get the filter value: `$filter = $request->query->get('filter');`. Pass that
-the "query builder" function as an argument: let's update that to handle an optional
-filter.
+Great news: it turns out that this is going to be pretty easy. First, get the filter
+value: `$filter = $request->query->get('filter');`. Pass that to the "query builder"
+function as an argument. Let's update that to handle a filter string.
 
 In `ProgrammerRepository`, add a `$filter` argument, but make it optional. Below,
 set the old return value to a new `$qb` variable. Then, `if ($filter)` has some value,
-add a where clause to the query: `andWhere('programmer.nickname LIKE :filter OR programmer.tagLine LIKE filter')`.
+add a where clause: `andWhere('programmer.nickname LIKE :filter OR programmer.tagLine LIKE filter')`.
 Then use `setParameter('filter' , '%'.$filter.'%')`. Finish things by returning `$qb`
 at the bottom.
 
@@ -67,6 +65,8 @@ makes index 5 Programmer4 instead of Programmer5. When we put the filter logic b
 it has that exact same problem on page 2. Can you guess what's going on here? Yep!
 We're losing our filter query parameter when we paginate through the results.
 womp womp.
+
+## Don't Lose the Filter Parameter!
 
 In the test, the URL ends in `?page=2` with *no* filter on it. We need to maintain
 the filter query parameter *through* our pagination. Since we have everything centralized
