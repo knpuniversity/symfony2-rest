@@ -9,6 +9,7 @@ summary: |
     * Filtering collections
     * Advanced serialization customization (serializer subscriber)
     * Including links via custom annotations
+    * Evaluating expressions
     * Making embedded resources configurable/conditional
 
     The REST of the Symfony Series:

@@ -1,52 +1,77 @@
-# Conditionally Embedding Relations
+# Conditionally Serializing Fields with Groups
 
-I feel like we deserve a reward after that last chapter. So here it is, Once upon a time
-I worked for a client that had a really interesting request which would totally violate REST
-but I kinda liked the idea. They said, "When we have one object that relates to another
-object [kinda like our programmer relates to this user here] sometimes we want to embed the
-user in the response and sometimes we don't. In fact, we want our user [client] to tell us via
-a query parameter, whether or not they want to embed related objects." This client's idea
-violates REST because you now have two different urls that return the same resource, it's just
-a different represenatation. So there's some rules that you are bending but if this is useful
-for you then I say go for it. The code to implement this is almost nothing. 
+Once upon a time, I worked with a client that had a really interesting API requirement.
+In fact, one that *totally* violate REST... but it's kinda cool. They said:
 
-We'll start by writing a quick test and I'll get that started by copying part of `TestGETProgramer`
-and call the new one `TestGETProgrammerDeep`. Here add a query parameter called `?deep`, and if
-you say `?deep=1` then we expose more embedded objects. And we're going to use the asserter
-to say `assertResponsePropertyExists()`, pass that the `$response` and the property we're going to
-do is the programmer user. So we should hav ea `user.username` property so that user should be a user
-object. 
+> When we have one object that relates to another object - like how our programmer
+> relates to a user - *sometimes* we want to embed the user in the response
+> and sometimes we don't. In fact, we want the API client to tell us via -
+> a query parameter - whether or not they want embedded objects in the response.
 
-Looking over in our browser right now we definitely do not have that. There are only two things we need
-to do to add it. First, we need to expose this with `Serializer\Expose()`, but if we do that it will
-show up all the time which is not what we want. To avoid that add `@Serializer\Groups()` and add a new
-group to that called `deep`. 
+Sounds cool...but it *totally* violates REST because you now have two different urls
+that return the same resource... each just returns a different *representation*.
+Rules are great - but come on... if this is useful to you, make it happen.
 
-The idea here is that when you serialize every single property is assigned to one or more groups. If you don't
-have the serialzer groups annotation then all of your properties are in a group automatically called `Default`
-with a capital 'D'. Normally when you serialize you are serializing all the properties in the group `Default`,
-but you could also serialize all properties in another group or a collection of groups. 
+## Testing the Deep Functionality
 
-You may have also noticed that my password is getting exposed on my user entity object, I don't really care 
-about that but it does bother me enough that I have to fix it. Add the use statement and get the `Expose`
-part off of there and instead write `as Serializer;` and then add an `@Serializer\ExclusionPolicy()` above
-our user for `all`. Then `Expose` the username. 
+Let's start with a quick test: copy part of `testGETProgramer` and name the new method
+`testGETProgrammerDeep`. Now, add a query parameter called `?deep`. The idea is simple:
+if the client adds `?deep=1`, then the API should expose more embedded objects. Use
+the asserter to say `assertResponsePropertyExists()`, pass that the `$response` and
+the property we'll expect is `user`. Since this will be an entire user object, check
+specifically for `user.username`.
 
-Back in `Programmer.php` if I take off this groups temporarily we will see just the username when we refresh
-our browser. When I put it back and refresh we see nothing because we're now serializing in the `Default` group
-so it won't serialize this user property. 
+Very nice!
 
-The last piece of the puzzle is, how do I serialize different groups? To answer that head over to the 
-`ProgrammerController` find the `showAction` follow `createApiResponse` into the `BaseController` and find 
-`serialize`. When you serialize we have this serialization context which are options for serialization,
-there's not much on here but there is a way to control your groups here. First, get the `$request` object
-by going out to the `request_stack` service and say `getCurrentRequest`. Now create a new `$groups` variable
-and set that to `Default`, make sure you capitalize the 'D', because we always want to serialize at least
-the `Default` group.
+## Serialization Groups
 
-Now say ``if ($request->query->get('deep'))` is true then we just add our group `deep` to `$groups`. 
-Finish this up with `$context->setGroups($groups)`. And just like that we're able to conditionally show
-other fields. Sweet!
+If you look at this response in the browser, we definitely do *not* have a `user` field.
+But there are only *two* little things we need to do to add it.
 
-Rerun our test for `testGetProgrammerDeep` it passes! To really prove it refresh the browser and we won't
-see the user unless we add `?deep=1` to the url. There you have a cool way to leverage groups. 
+First, expose the `user` property with `@Serializer\Expose()`. Of course, it can't
+be that simple: now the `user` property would *always* be included. To avoid that,
+add `@Serializer\Groups()` and use a new group called `deep`. 
+
+Here's the idea: when you serialize, each property belongs to one or more "groups".
+If you don't include the `@Serializer\Groups` annotation above a property, then it
+will live in a group called `Default` - with a capital `D`. Normally, the serializer
+serializes all the properties in this group called `Default`, but you can also tell
+it to serialize only the properties in a different group, or even in a set of groups.
+We can use groups to serialize the `user` property under only *certain* conditions.
+
+But before we get there - I just noticed that the `password` field is being exposed
+on my `User`. That's definitely lame. Fix it by adding the `Expose` use statement,
+removing that last part and writing `as Serializer` instead. That's a nice trick
+to get that `use` statement.
+
+Now set `@Serializer\ExclusionPolicy()` above the class with `all` and add `@Expose`
+above `username`.
+
+Back in `Programmer.php`, remove the "groups" code temporarily and refresh. Ok good,
+*only* the `username` is showing. Put that "groups" code back and try again. Ok great:
+the `user` is gone: it's not serializing *only* the fields in the `Default` group,
+which does *not* include the `user` property.
+
+## Setting the SerializationGroup
+
+Ok... so now, how can we serialize a different set of groups? To answer that, open
+`ProgrammerController` and find `showAction`. Follow `createApiResponse` into the
+`BaseController` and find `serialize`. When we serialize, we create this `SerializationContext`,
+which holds a few options for serialization. Honestly, there's not much you can control
+with this, but you *can* set which *groups* you want to serialize.
+
+First, get the `$request` object fetching the `request_stack` service and adding
+`getCurrentRequest`. Next, create a new `$groups` variable and set it to only `Default`:
+we *always* want to serialize the properties in this group.
+
+Now say ``if ($request->query->get('deep'))` is true then add `deep` to `$groups`. 
+Finish this up with `$context->setGroups($groups)`. And just like that, we're able
+to conditionally show fields. Sweet!
+
+Re-run our test for `testGetProgrammerDeep`. It passes! To really prove it, refresh
+the browser. Nope, no `user` property. Now add `?deep=1` to the url. That's a cool
+way to leverage groups. 
+
+Wow, nice work guys! We've just taken another huge chunk out of our API with pagination,
+filtering and a whole lot of cool serialization magic. Ok, now keep going with the
+next episode!
