@@ -40,7 +40,10 @@ chapters:
     filtering:
         is_finished: false
         video_key:   
-    custom-serialization-fields-subscriber:
+    serialization-event-subscriber:
+        is_finished: false
+        video_key:   
+    custom-serialization-field:
         is_finished: false
         video_key:   
     links-via-annotations:
