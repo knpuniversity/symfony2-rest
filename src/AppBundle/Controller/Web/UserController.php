@@ -58,7 +58,7 @@ class UserController extends BaseController
         $user->setUsername($username);
         $encodedPassword = $this->container->get('security.password_encoder')
             ->encodePassword($user, $plainPassword);
-        $user->setPassword($plainPassword);
+        $user->setPassword($encodedPassword);
 
         // errors? Show them!
         if (count($errors) > 0) {
