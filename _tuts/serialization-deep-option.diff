@@ -29,6 +29,29 @@ index 357a053..ee358f4 100644
       */
      private $user;
  
+diff --git a/src/AppBundle/Entity/User.php b/src/AppBundle/Entity/User.php
+index 29fcaac..00df5b2 100644
+--- a/src/AppBundle/Entity/User.php
++++ b/src/AppBundle/Entity/User.php
+@@ -5,7 +5,10 @@ namespace AppBundle\Entity;
+ use Doctrine\ORM\Mapping as ORM;
+ use Symfony\Component\Security\Core\User\UserInterface;
+ 
++use JMS\Serializer\Annotation as Serializer;
++
+ /**
++ * @Serializer\ExclusionPolicy("all")
+  * @ORM\Table(name="battle_user")
+  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+  */
+@@ -19,6 +22,7 @@ class User implements UserInterface
+     private $id;
+ 
+     /**
++     * @Serializer\Expose()
+      * @ORM\Column(type="string", unique=true)
+      */
+     private $username;
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 index e647186..9f300bd 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
