@@ -35,7 +35,7 @@ add `@Serializer\Groups()` and use a new group called `deep`.
 Here's the idea: when you serialize, each property belongs to one or more "groups".
 If you don't include the `@Serializer\Groups` annotation above a property, then it
 will live in a group called `Default` - with a capital `D`. Normally, the serializer
-serializes all the properties in this group called `Default`, but you can also tell
+serializes *all* properties, regardless of their group. But you can also tell
 it to serialize only the properties in a different group, or even in a set of groups.
 We can use groups to serialize the `user` property under only *certain* conditions.
 
@@ -48,13 +48,11 @@ Now set `@Serializer\ExclusionPolicy()` above the class with `all` and add `@Exp
 above `username`.
 
 Back in `Programmer.php`, remove the "groups" code temporarily and refresh. Ok good,
-*only* the `username` is showing. Put that "groups" code back and try again. Ok great:
-the `user` is gone: it's now serializing *only* the fields in the `Default` group,
-which does *not* include the `user` property.
+*only* the `username` is showing. Put that "groups" code back.
 
 ## Setting the SerializationGroup
 
-Ok... so now, how can we serialize a different set of groups? To answer that, open
+Ok... so now, how can we serialize a specific set of groups? To answer that, open
 `ProgrammerController` and find `showAction`. Follow `createApiResponse` into the
 `BaseController` and find `serialize`. When we serialize, we create this `SerializationContext`,
 which holds a few options for serialization. Honestly, there's not much you can control
