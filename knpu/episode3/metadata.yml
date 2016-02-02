@@ -29,24 +29,18 @@ tuts_hero:
 chapters:
     pagination-test:
         is_free: true
-        is_finished: false
-        video_key:   
+        video_key: 152305257
     pagerfanta-pagination:
         is_free: true
-        is_finished: false
-        video_key:   
+        video_key: 153824766
     pagination-links:
-        is_finished: false
-        video_key:   
+        video_key: 153826498  
     reusable-pagination-system:
-        is_finished: false
-        video_key:   
+        video_key: 153827098
     filtering:
-        is_finished: false
-        video_key:   
+        video_key: 153829769  
     serialization-event-subscriber:
-        is_finished: false
-        video_key:   
+        video_key: 153832161
     custom-serialization-field:
         is_finished: false
         video_key:   
