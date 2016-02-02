@@ -44,8 +44,7 @@ chapters:
     custom-serialization-field:
         video_key: 153963661  
     links-via-annotations:
-        is_finished: false
-        video_key:   
+        video_key: 153965971  
     evaluating-expression:
         video_key: 153965278  
     conditionally-embedding-relations:
