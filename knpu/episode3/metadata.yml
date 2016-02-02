@@ -42,8 +42,7 @@ chapters:
     serialization-event-subscriber:
         video_key: 153832161
     custom-serialization-field:
-        is_finished: false
-        video_key:   
+        video_key: 153963661  
     links-via-annotations:
         is_finished: false
         video_key:   
