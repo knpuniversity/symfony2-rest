@@ -8,7 +8,11 @@ things with it.
 If you're following along with me, use the same project we've been building. If you're
 just joining, where have you been? Ah, it's fine: download the code from this page
 and move into the `start/` directory. Start up the built-in PHP web server to get
-things running.
+things running:
+
+```bash
+./app/console server:run
+```
 
 ## Designing how Pagination should Work
 
