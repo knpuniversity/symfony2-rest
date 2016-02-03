@@ -30,6 +30,12 @@ there is *no* query parameter:
 
 [[[ code('ee22d8e8dd') ]]]
 
+***SEE_ALSO
+You could also use `getInt()` method here instead of simple `get()` to convert
+the `page` query parameter's value right to the integer behind the scene. Check
+the [accessing request data][1] to know additional useful methods.
+***
+
 Next, replace `$programmers` with `$qb`, standing for query builder. And instead of
 calling `findAll()`, use a new method called `findAllQueryBuilder()`:
 
