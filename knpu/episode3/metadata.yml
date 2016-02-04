@@ -21,7 +21,6 @@ summary: |
     * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-3.png
-hasVideoDownload: 0
 tuts_hero:
     start_step: "errors-only-affect-api"
     finish_step: "serialization-deep-option"
