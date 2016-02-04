@@ -37,8 +37,7 @@ chapters:
     reusable-pagination-system:
         video_key: 153827098
     filtering:
-        is_finished: false
-        video_key: 153829769  
+        video_key: 153829769
     serialization-event-subscriber:
         is_finished: false
         video_key: 153832161
