@@ -1,6 +1,6 @@
 # Super Custom Serialization Fields
 
-### The Serialization Visitor
+## The Serialization Visitor
 
 Back in the subscriber, create a new variable called `$visitor` and set it to
 `$event->getVisitor()`. The visitor is kind of in charge of the serialization process.
