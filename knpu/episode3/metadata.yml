@@ -45,8 +45,7 @@ chapters:
     links-via-annotations:
         video_key: 153965971  
     evaluating-expression:
-        is_finished: false
-        video_key: 153965278  
+        video_key: 153965278
     conditionally-embedding-relations:
         is_finished: false
         video_key: 153973809  
