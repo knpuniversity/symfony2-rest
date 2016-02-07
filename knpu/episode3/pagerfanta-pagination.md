@@ -30,7 +30,7 @@ there is *no* query parameter:
 
 [[[ code('ee22d8e8dd') ]]]
 
-***SEE_ALSO
+***SEE_ALSO:
 You could also use `$request->query->getInt('page', 1)` instead of `get()` to convert
 the `page` query parameter into an integer. See [accessing request data][1] for other
 useful methods.

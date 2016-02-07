@@ -87,7 +87,7 @@ Finish this up with `$context->setGroups($groups)`:
 
 [[[ code('59c7ce31c3') ]]]
 
-***SEE_ALSO
+***SEE_ALSO:
 You could also use `$request->query->getBoolean('deep')` instead of `get()` to convert
 the `deep` query parameter into a `boolean`. See [accessing request data][1] for other
 useful methods.
