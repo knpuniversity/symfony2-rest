@@ -1,6 +1,6 @@
-title:  "Symfony RESTful API: Hypermedia, Links & Bonuses (Episode 5)"
+title:  "Symfony RESTful API: Hypermedia, Links & Bonuses (Course 5)"
 summary: |
-    After 4 episodes, we've somehow avoided the hottest buzzwords in REST:
+    After 4 courses, we've somehow avoided the hottest buzzwords in REST:
     Hypermedia and HATEOAS. These can make your API awesome, or could bring
     you to your knees with fuzzy details, missing best practices and complexity.
     Let's make our API awesome:
@@ -13,11 +13,11 @@ summary: |
 
     The REST of the Symfony Series:
     
-    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
-    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+    * [Course 1](http://knpuniversity.com/screencast/symfony-rest)
+    * [Course 2](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Course 3](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Course 4](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Course 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-5.png
 hasVideoDownload: 0
