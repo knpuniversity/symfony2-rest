@@ -1,6 +1,6 @@
-title:  Symfony RESTful API: Authentication (Episode 4)
+title:  Symfony RESTful API: Authentication (Course 4)
 summary: |
-    After 3 episodes, we've got a nice API, But we've been completely ignoring
+    After 3 courses, we've got a nice API, But we've been completely ignoring
     authentication. That's a big topic, so let's tackle it:
 
     * Creating an API token authentication system
@@ -8,11 +8,11 @@ summary: |
 
     The REST of the Symfony Series:
     
-    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
-    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+    * [Course 1](http://knpuniversity.com/screencast/symfony-rest)
+    * [Course 2](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Course 3](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Course 4](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Course 5](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-4.png
 hasVideoDownload: 0
