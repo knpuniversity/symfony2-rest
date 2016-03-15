@@ -27,6 +27,30 @@ index c279389..93821ad 100644
 +!var/SymfonyRequirements.php
  /vendor/
  /web/bundles/
+diff --git a/README.md b/README.md
+index 7b83e94..f4832a3 100644
+--- a/README.md
++++ b/README.md
+@@ -32,15 +32,15 @@ Make sure `app/config/parameters.yml` is correct for your database
+ credentials. Then:
+ 
+ ```bash
+-php app/console doctrine:database:create
+-php app/console doctrine:schema:update --force
+-php app/console doctrine:fixtures:load
++php bin/console doctrine:database:create
++php bin/console doctrine:schema:update --force
++php bin/console doctrine:fixtures:load
+ ```
+ 
+ 4. Start up the built-in PHP web server:
+ 
+ ```bash
+-php app/console server:run
++php bin/console server:run
+ ```
+ 
+ Then find the site at http://localhost:8000.
 diff --git a/app/AppKernel.php b/app/AppKernel.php
 index e68516c..8b33918 100644
 --- a/app/AppKernel.php
