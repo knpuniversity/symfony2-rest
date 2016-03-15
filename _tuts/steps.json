@@ -501,13 +501,13 @@
             "description": null
         },
         {
-            "id": "jwt-create-empty-authenticator",
-            "name": "JWT: Create empty authenticator",
+            "id": "jwt-add-token-to-test",
+            "name": "JWT: Add token to test",
             "description": null
         },
         {
-            "id": "jwt-add-token-to-test",
-            "name": "JWT: Add token to test",
+            "id": "jwt-create-empty-authenticator",
+            "name": "JWT: Create empty authenticator",
             "description": null
         },
         {
