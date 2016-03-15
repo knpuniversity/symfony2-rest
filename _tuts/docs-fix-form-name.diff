@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index ca8f58a..02f3c54 100644
+index 1294e78..61786f9 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -27,8 +27,8 @@ class ProgrammerController extends BaseController
+@@ -31,8 +31,8 @@ class ProgrammerController extends BaseController
       *  resource=true,
       *  description="Add a new programmer",
       *  input={

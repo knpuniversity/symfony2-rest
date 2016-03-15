@@ -1,0 +1,53 @@
+diff --git a/app/config/security.yml b/app/config/security.yml
+index a6aefa3..aeecab8 100644
+--- a/app/config/security.yml
++++ b/app/config/security.yml
+@@ -7,6 +7,13 @@ security:
+             entity: { class: AppBundle:User }
+ 
+     firewalls:
++        api:
++            pattern: ^/api/
++            anonymous: true
++            stateless: true
++            guard:
++                authenticators:
++                    - 'jwt_token_authenticator'
+         main:
+             pattern: ^/
+             anonymous: true
+@@ -18,9 +25,6 @@ security:
+             logout:
+                 # The route name the user can go to in order to logout
+                 path: security_logout
+-            guard:
+-                authenticators:
+-                    - 'jwt_token_authenticator'
+ 
+     access_control:
+         - { path: ^/_wdt|_profiler, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
+index 8413385..2795bab 100644
+--- a/src/AppBundle/Security/JwtTokenAuthenticator.php
++++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
+@@ -5,6 +5,7 @@ namespace AppBundle\Security;
+ use Doctrine\ORM\EntityManager;
+ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+ use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
++use Symfony\Component\HttpFoundation\JsonResponse;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+@@ -78,6 +79,11 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
+ 
+     public function start(Request $request, AuthenticationException $authException = null)
+     {
+-        // TODO: Implement start() method.
++        // called when authentication info is missing from a
++        // request that requires it
++
++        return new JsonResponse([
++            'error' => 'auth required'
++        ], 401);
+     }
+ }

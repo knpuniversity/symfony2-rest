@@ -1,0 +1,42 @@
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 0cb4ca4..4e29ff8 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
+@@ -279,6 +279,16 @@ class ApiTestCase extends KernelTestCase
+         return $user;
+     }
+ 
++    protected function getAuthorizedHeaders($username, $headers = array())
++    {
++        $token = $this->getService('lexik_jwt_authentication.encoder')
++            ->encode(['username' => $username]);
++
++        $headers['Authorization'] = 'Bearer '.$token;
++
++        return $headers;
++    }
++
+     protected function createProgrammer(array $data)
+     {
+         $data = array_merge(array(
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index bf903f8..660e1d2 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -21,15 +21,10 @@ class ProgrammerControllerTest extends ApiTestCase
+             'tagLine' => 'a test dev!'
+         );
+ 
+-        $token = $this->getService('lexik_jwt_authentication.encoder')
+-            ->encode(['username' => 'weaverryan']);
+-
+         // 1) Create a programmer resource
+         $response = $this->client->post('/api/programmers', [
+             'body' => json_encode($data),
+-            'headers' => [
+-                'Authorization' => 'Bearer '.$token
+-            ]
++            'headers' => $this->getAuthorizedHeaders('weaverryan')
+         ]);
+ 
+         $this->assertEquals(201, $response->getStatusCode());

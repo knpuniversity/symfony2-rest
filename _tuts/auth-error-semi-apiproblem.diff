@@ -1,0 +1,41 @@
+diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
+index 2795bab..ef51990 100644
+--- a/src/AppBundle/Security/JwtTokenAuthenticator.php
++++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Security;
+ 
++use AppBundle\Api\ApiProblem;
+ use Doctrine\ORM\EntityManager;
+ use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+ use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
+@@ -82,8 +83,11 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
+         // called when authentication info is missing from a
+         // request that requires it
+ 
+-        return new JsonResponse([
+-            'error' => 'auth required'
+-        ], 401);
++        $apiProblem = new ApiProblem(401);
++        // you could translate this
++        $message = $authException ? $authException->getMessageKey() : 'Missing credentials';
++        $apiProblem->set('details', $message);
++
++        return new JsonResponse($apiProblem->toArray(), 401);
+     }
+ }
+diff --git a/tests/AppBundle/Controller/Api/TokenControllerTest.php b/tests/AppBundle/Controller/Api/TokenControllerTest.php
+index 0101b1b..da66ffc 100644
+--- a/tests/AppBundle/Controller/Api/TokenControllerTest.php
++++ b/tests/AppBundle/Controller/Api/TokenControllerTest.php
+@@ -28,5 +28,9 @@ class TokenControllerTest extends ApiTestCase
+             'auth' => ['weaverryan', 'IH8Pizza']
+         ]);
+         $this->assertEquals(401, $response->getStatusCode());
++        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
++        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
++        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Unauthorized');
++        $this->asserter()->assertResponsePropertyEquals($response, 'details', 'Invalid credentials.');
+     }
+ }

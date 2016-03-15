@@ -511,6 +511,56 @@
             "description": null
         },
         {
+            "id": "jwt-finish-authenticator",
+            "name": "JWT: Finish authenticator",
+            "description": null
+        },
+        {
+            "id": "jwt-user-getuser-in-controller",
+            "name": "JWT: User getUser() in controller",
+            "description": null
+        },
+        {
+            "id": "auth-centralizing-auth-for-test",
+            "name": "Auth: Centralizing auth for test",
+            "description": null
+        },
+        {
+            "id": "auth-require-user-everywhere",
+            "name": "Auth: Require user everywhere",
+            "description": null
+        },
+        {
+            "id": "auth-error-split-firewall",
+            "name": "Auth Error: Split firewall",
+            "description": null
+        },
+        {
+            "id": "auth-error-semi-apiproblem",
+            "name": "Auth Error: Semi ApiProblem",
+            "description": null
+        },
+        {
+            "id": "auth-error-responsefactory-centralize",
+            "name": "Auth Error: ResponseFactory centralize",
+            "description": null
+        },
+        {
+            "id": "auth-error-invalid-credentials",
+            "name": "Auth Error: Invalid credentials",
+            "description": null
+        },
+        {
+            "id": "auth-error-finish-invalid-credentials",
+            "name": "Auth Error: Finish invalid credentials",
+            "description": null
+        },
+        {
+            "id": "auth-error-remove-debug",
+            "name": "Auth Error: Remove debug",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -581,5 +631,5 @@
             "description": null
         }
     ],
-    "sha": "035167d39adf5f66c46f36951b9deb6ecc4770f1"
+    "sha": "2ca50035e0691d1e8fab97da05cf4623a9bd4894"
 }

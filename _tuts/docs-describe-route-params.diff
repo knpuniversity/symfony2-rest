@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 7b70c8d..267f23c 100644
+index f32db04..8681c33 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -70,6 +70,8 @@ class ProgrammerController extends BaseController
+@@ -72,6 +72,8 @@ class ProgrammerController extends BaseController
       *  description="Return a programmer",
       *  output="AppBundle\Entity\Programmer"
       * )

@@ -1,0 +1,108 @@
+diff --git a/app/config/security.yml b/app/config/security.yml
+index 4ce17ef..a6aefa3 100644
+--- a/app/config/security.yml
++++ b/app/config/security.yml
+@@ -18,6 +18,9 @@ security:
+             logout:
+                 # The route name the user can go to in order to logout
+                 path: security_logout
++            guard:
++                authenticators:
++                    - 'jwt_token_authenticator'
+ 
+     access_control:
+         - { path: ^/_wdt|_profiler, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+diff --git a/app/config/services.yml b/app/config/services.yml
+index 269a996..b6c90b8 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -32,3 +32,7 @@ services:
+         arguments: ['@router', '@annotation_reader']
+         tags:
+             - { name: jms_serializer.event_subscriber }
++
++    jwt_token_authenticator:
++        class: AppBundle\Security\JwtTokenAuthenticator
++        autowire: true
+diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
+index 6d02142..8413385 100644
+--- a/src/AppBundle/Security/JwtTokenAuthenticator.php
++++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
+@@ -2,17 +2,29 @@
+ 
+ namespace AppBundle\Security;
+ 
++use Doctrine\ORM\EntityManager;
++use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
+ use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\AuthorizationHeaderTokenExtractor;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+ use Symfony\Component\Security\Core\Exception\AuthenticationException;
++use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+ use Symfony\Component\Security\Core\User\UserInterface;
+ use Symfony\Component\Security\Core\User\UserProviderInterface;
+ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+ 
+ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
+ {
++    private $jwtEncoder;
++    private $em;
++
++    public function __construct(JWTEncoderInterface $jwtEncoder, EntityManager $em)
++    {
++        $this->jwtEncoder = $jwtEncoder;
++        $this->em = $em;
++    }
++
+     public function getCredentials(Request $request)
+     {
+         $extractor = new AuthorizationHeaderTokenExtractor(
+@@ -27,32 +39,41 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
+         }
+ 
+         return $token;
+-
+     }
+ 
+     public function getUser($credentials, UserProviderInterface $userProvider)
+     {
+-        // TODO: Implement getUser() method.
++        $data = $this->jwtEncoder->decode($credentials);
++
++        if ($data === false) {
++            throw new CustomUserMessageAuthenticationException('Invalid Token');
++        }
++
++        $username = $data['username'];
++
++        return $this->em
++            ->getRepository('AppBundle:User')
++            ->findOneBy(['username' => $username]);
+     }
+ 
+     public function checkCredentials($credentials, UserInterface $user)
+     {
+-        // TODO: Implement checkCredentials() method.
++        return true;
+     }
+ 
+     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+     {
+-        // TODO: Implement onAuthenticationFailure() method.
++
+     }
+ 
+     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+     {
+-        // TODO: Implement onAuthenticationSuccess() method.
++        // do nothing - let the controller be called
+     }
+ 
+     public function supportsRememberMe()
+     {
+-        // TODO: Implement supportsRememberMe() method.
++        return false;
+     }
+ 
+     public function start(Request $request, AuthenticationException $authException = null)

@@ -201,17 +201,18 @@ index 5d074d5..a79f12a 100644
              "version": "v1.0.3",
              "source": {
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 264e261..a600d4a 100644
+index ed12e52..d6bef54 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -15,12 +15,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
+@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  use Symfony\Component\HttpFoundation\Request;
  use Symfony\Component\HttpFoundation\Response;
  use Symfony\Component\HttpKernel\Exception\HttpException;
 +use Nelmio\ApiDocBundle\Annotation\ApiDoc;
  
- class ProgrammerController extends BaseController
- {
+ /**
+  * @Security("is_granted('ROLE_USER')")
+@@ -25,6 +26,13 @@ class ProgrammerController extends BaseController
      /**
       * @Route("/api/programmers")
       * @Method("POST")
