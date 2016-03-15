@@ -1,4 +1,4 @@
-title:  Symfony RESTful API: Episode 1
+title:  Symfony RESTful API: Course 1
 summary: |    
     In this series, we get to work: by building the same API in the
     [REST series](http://knpuniversity.com/screencast/rest), but leveraging
@@ -7,7 +7,7 @@ summary: |
     with the [REST series](http://knpuniversity.com/screencast/rest) and
     then come back. And get ready to get your (API) mind blown.
 
-    In Episode 1, we'll start quick with:
+    In Course 1, we'll start quick with:
 
     * Build your first functional POST endpoint
     * Decoding the Request body

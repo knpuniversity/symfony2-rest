@@ -1,4 +1,4 @@
-title:  Symfony RESTful API: Basics++ (Episode 3)
+title:  Symfony RESTful API: Basics++ (Course 3)
 summary: |
     The [basics](http://knpuniversity.com/screencast/symfony-rest), check!
     [Errors](http://knpuniversity.com/screencast/symfony-rest), double check!
@@ -13,7 +13,7 @@ summary: |
     * Making embedded resources configurable/conditional
 
     The REST of the Symfony Series:
-    
+
     * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
     * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
     * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
@@ -21,7 +21,6 @@ summary: |
     * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-3.png
-hasVideoDownload: 0
 tuts_hero:
     start_step: "errors-only-affect-api"
     finish_step: "serialization-deep-option"
@@ -29,34 +28,23 @@ tuts_hero:
 chapters:
     pagination-test:
         is_free: true
-        is_finished: false
-        video_key:   
+        video_key: 152305257
     pagerfanta-pagination:
         is_free: true
-        is_finished: false
-        video_key:   
+        video_key: 153824766
     pagination-links:
-        is_finished: false
-        video_key:   
+        video_key: 153826498  
     reusable-pagination-system:
-        is_finished: false
-        video_key:   
+        video_key: 153827098
     filtering:
-        is_finished: false
-        video_key:   
+        video_key: 153829769
     serialization-event-subscriber:
-        is_finished: false
-        video_key:   
+        video_key: 153832161
     custom-serialization-field:
-        is_finished: false
-        video_key:   
+        video_key: 153963661  
     links-via-annotations:
-        is_finished: false
-        video_key:   
+        video_key: 153965971  
     evaluating-expression:
-        is_finished: false
-        video_key:   
+        video_key: 153965278
     conditionally-embedding-relations:
-        is_free: true
-        is_finished: false
-        video_key:   
+        video_key: 153973809
