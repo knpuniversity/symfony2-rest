@@ -14,11 +14,11 @@ summary: |
 
     The REST of the Symfony Series:
     
-    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
-    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+    * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
+    * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Part 4: Authentication](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-3.png
 hasVideoDownload: 0

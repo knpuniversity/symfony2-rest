@@ -1,6 +1,6 @@
 title:  Symfony RESTful API: Authentication (Episode 4)
 summary: |
-    After 3 episodes, we've got a nice API, But we've been completely ignoring
+    After 3 tutorials, we've got a nice API, But we've been completely ignoring
     authentication. That's a big topic, so let's tackle it:
 
     * Creating an API token authentication system
@@ -8,16 +8,15 @@ summary: |
 
     The REST of the Symfony Series:
     
-    * [Episode 1](http://knpuniversity.com/screencast/symfony-rest)
-    * [Episode 2](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Episode 3](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Episode 4](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Episode 5](http://knpuniversity.com/screencast/symfony-rest5)
+    * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
+    * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
+    * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
+    * [Part 4: Authentication](http://knpuniversity.com/screencast/symfony-rest4)
+    * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-4.png
-hasVideoDownload: 0
-# tuts_hero:
-#     start_step: "Serialize: Whitelisting properties"
-#     finish_step: "Errors: Making type a URL"
+tuts_hero:
+    start_step: "upgrade-to-symfony-3                                       "
+    finish_step: "Errors: Making type a URL"
 
 chapters: []
