@@ -1,8 +1,8 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index d461e3e..f137ebe 100644
+index e53fc26..77fdba1 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
-@@ -81,3 +81,5 @@ nelmio_api_doc:
+@@ -74,3 +74,5 @@ nelmio_api_doc:
      sandbox:
          request_format:
              method: accept_header

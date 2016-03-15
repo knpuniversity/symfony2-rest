@@ -466,6 +466,11 @@
             "description": null
         },
         {
+            "id": "upgrade-to-symfony-3",
+            "name": "Upgrade to Symfony 3",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -536,5 +541,5 @@
             "description": null
         }
     ],
-    "sha": "c23bdcdd379d0b613b6aaee99c16090e4ff45c6c"
+    "sha": "540588ff475b92db5fc6e37719ac8af44e5ce4e1"
 }

@@ -1,8 +1,8 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index c4a85b2..d461e3e 100644
+index 0711b8e..e53fc26 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
-@@ -76,3 +76,8 @@ swiftmailer:
+@@ -69,3 +69,8 @@ swiftmailer:
      username:  "%mailer_user%"
      password:  "%mailer_password%"
      spool:     { type: memory }
