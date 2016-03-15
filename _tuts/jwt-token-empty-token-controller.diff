@@ -1,0 +1,27 @@
+diff --git a/src/AppBundle/Controller/Api/TokenController.php b/src/AppBundle/Controller/Api/TokenController.php
+new file mode 100644
+index 0000000..790213b
+--- /dev/null
++++ b/src/AppBundle/Controller/Api/TokenController.php
+@@ -0,0 +1,20 @@
++<?php
++
++namespace AppBundle\Controller\Api;
++
++use AppBundle\Controller\BaseController;
++use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
++use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
++use Symfony\Component\HttpFoundation\Response;
++
++class TokenController extends BaseController
++{
++    /**
++     * @Route("/api/tokens")
++     * @Method("POST")
++     */
++    public function newTokenAction()
++    {
++        return new Response('TOKEN!');
++    }
++}
+\ No newline at end of file

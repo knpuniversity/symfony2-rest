@@ -476,6 +476,41 @@
             "description": null
         },
         {
+            "id": "jwt-install-bundle-keys",
+            "name": "JWT: Install bundle + keys",
+            "description": null
+        },
+        {
+            "id": "jwt-test-to-get-token",
+            "name": "JWT: Test to get token",
+            "description": null
+        },
+        {
+            "id": "jwt-token-empty-token-controller",
+            "name": "JWT Token: Empty token controller",
+            "description": null
+        },
+        {
+            "id": "jwt-token-finish-controller",
+            "name": "JWT Token: Finish controller",
+            "description": null
+        },
+        {
+            "id": "jwt-token-add-test-for-bad-credentials",
+            "name": "JWT Token: Add test for bad credentials",
+            "description": null
+        },
+        {
+            "id": "jwt-create-empty-authenticator",
+            "name": "JWT: Create empty authenticator",
+            "description": null
+        },
+        {
+            "id": "jwt-add-token-to-test",
+            "name": "JWT: Add token to test",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -546,5 +581,5 @@
             "description": null
         }
     ],
-    "sha": "deecacf12bde616151014d36f7b43923559ed93c"
+    "sha": "035167d39adf5f66c46f36951b9deb6ecc4770f1"
 }

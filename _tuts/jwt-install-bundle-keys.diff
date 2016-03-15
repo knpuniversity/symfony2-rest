@@ -1,0 +1,391 @@
+diff --git a/app/AppKernel.php b/app/AppKernel.php
+index 8b33918..c7d123b 100644
+--- a/app/AppKernel.php
++++ b/app/AppKernel.php
+@@ -18,6 +18,7 @@ class AppKernel extends Kernel
+             new AppBundle\AppBundle(),
+             new \JMS\SerializerBundle\JMSSerializerBundle(),
+             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
++            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+         );
+ 
+         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+diff --git a/app/config/config.yml b/app/config/config.yml
+index 0711b8e..c7d7163 100644
+--- a/app/config/config.yml
++++ b/app/config/config.yml
+@@ -69,3 +69,9 @@ swiftmailer:
+     username:  "%mailer_user%"
+     password:  "%mailer_password%"
+     spool:     { type: memory }
++
++lexik_jwt_authentication:
++    private_key_path: %kernel.root_dir%/../var/jwt/private.pem
++    public_key_path:  %kernel.root_dir%/../var/jwt/public.pem
++    pass_phrase:      %jwt_key_pass_phrase%
++    token_ttl:        3600
+\ No newline at end of file
+diff --git a/app/config/parameters.yml.dist b/app/config/parameters.yml.dist
+index f5ba553..80271d9 100644
+--- a/app/config/parameters.yml.dist
++++ b/app/config/parameters.yml.dist
+@@ -17,3 +17,5 @@ parameters:
+ 
+     # A secret key that's used to generate certain security-related tokens
+     secret:            ThisTokenIsNotSoSecretChangeIt
++
++    jwt_key_pass_phrase: ~
+diff --git a/composer.json b/composer.json
+index 02c9800..7b91969 100644
+--- a/composer.json
++++ b/composer.json
+@@ -24,7 +24,8 @@
+         "sensio/framework-extra-bundle": "^3.0.2",
+         "incenteev/composer-parameter-handler": "~2.0",
+         "jms/serializer-bundle": "^1.1.0",
+-        "white-october/pagerfanta-bundle": "^1.0"
++        "white-october/pagerfanta-bundle": "^1.0",
++        "lexik/jwt-authentication-bundle": "^1.4"
+     },
+     "require-dev": {
+         "sensio/generator-bundle": "^3.0",
+diff --git a/composer.lock b/composer.lock
+index 7cc98ba..5d074d5 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -4,8 +4,8 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+         "This file is @generated automatically"
+     ],
+-    "hash": "4500289d34489fb1eddc02b884d8d596",
+-    "content-hash": "421c6db4d578ac1870293e371d14bcb7",
++    "hash": "050baf4005665ce87971f2183c4aa901",
++    "content-hash": "c4f44ac5b6bc042b5e0f17fd43338f7f",
+     "packages": [
+         {
+             "name": "doctrine/annotations",
+@@ -1105,6 +1105,81 @@
+             "time": "2015-11-10 12:26:42"
+         },
+         {
++            "name": "lexik/jwt-authentication-bundle",
++            "version": "v1.4.3",
++            "target-dir": "Lexik/Bundle/JWTAuthenticationBundle",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
++                "reference": "ffb58688d3222b24dd425d5bbdf3ac10f4cf1473"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/ffb58688d3222b24dd425d5bbdf3ac10f4cf1473",
++                "reference": "ffb58688d3222b24dd425d5bbdf3ac10f4cf1473",
++                "shasum": ""
++            },
++            "require": {
++                "namshi/jose": "~6.0",
++                "php": ">=5.4.8",
++                "symfony/console": "~2.3|~3.0",
++                "symfony/framework-bundle": "~2.3|~3.0",
++                "symfony/security-bundle": "~2.3|~3.0"
++            },
++            "require-dev": {
++                "phpunit/phpunit": "^4.1|^5.0",
++                "symfony/phpunit-bridge": "~2.7|~3.0"
++            },
++            "suggest": {
++                "gesdinet/jwt-refresh-token-bundle": "Implements a refresh token system over Json Web Tokens in Symfony"
++            },
++            "type": "symfony-bundle",
++            "extra": {
++                "branch-alias": {
++                    "dev-master": "2.0.x-dev"
++                }
++            },
++            "autoload": {
++                "psr-0": {
++                    "Lexik\\Bundle\\JWTAuthenticationBundle": ""
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Jeremy Barthe",
++                    "email": "j.barthe@lexik.fr"
++                },
++                {
++                    "name": "Dev Lexik",
++                    "email": "dev@lexik.fr"
++                },
++                {
++                    "name": "Cedric Girard",
++                    "email": "c.girard@lexik.fr"
++                },
++                {
++                    "name": "Nicolas Cabot",
++                    "email": "n.cabot@lexik.fr"
++                }
++            ],
++            "description": "This bundle provides JWT authentication for your Symfony REST API",
++            "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle",
++            "keywords": [
++                "Authentication",
++                "JWS",
++                "api",
++                "bundle",
++                "jwt",
++                "rest",
++                "symfony"
++            ],
++            "time": "2016-01-30 13:02:32"
++        },
++        {
+             "name": "monolog/monolog",
+             "version": "1.18.1",
+             "source": {
+@@ -1183,6 +1258,66 @@
+             "time": "2016-03-13 16:08:35"
+         },
+         {
++            "name": "namshi/jose",
++            "version": "6.1.1",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/namshi/jose.git",
++                "reference": "d234ab5da058bda234efbfc231a4ff68f9c984be"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/namshi/jose/zipball/d234ab5da058bda234efbfc231a4ff68f9c984be",
++                "reference": "d234ab5da058bda234efbfc231a4ff68f9c984be",
++                "shasum": ""
++            },
++            "require": {
++                "ext-date": "*",
++                "ext-hash": "*",
++                "ext-json": "*",
++                "ext-openssl": "*",
++                "ext-pcre": "*",
++                "ext-spl": "*",
++                "php": ">=5.5",
++                "phpseclib/phpseclib": "^2.0",
++                "symfony/polyfill-php56": "^1.0"
++            },
++            "require-dev": {
++                "phpunit/phpunit": "^4.5|^5.0",
++                "satooshi/php-coveralls": "^1.0"
++            },
++            "type": "library",
++            "autoload": {
++                "psr-4": {
++                    "Namshi\\JOSE\\": "src/Namshi/JOSE/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Alessandro Nadalin",
++                    "email": "alessandro.nadalin@gmail.com"
++                },
++                {
++                    "name": "Alessandro Cinelli (cirpo)",
++                    "email": "alessandro.cinelli@gmail.com"
++                }
++            ],
++            "description": "JSON Object Signing and Encryption library for PHP.",
++            "keywords": [
++                "JSON Web Signature",
++                "JSON Web Token",
++                "JWS",
++                "json",
++                "jwt",
++                "token"
++            ],
++            "time": "2016-01-24 11:10:26"
++        },
++        {
+             "name": "pagerfanta/pagerfanta",
+             "version": "v1.0.3",
+             "source": {
+@@ -1398,6 +1533,95 @@
+             "time": "2015-07-25 16:39:46"
+         },
+         {
++            "name": "phpseclib/phpseclib",
++            "version": "2.0.1",
++            "source": {
++                "type": "git",
++                "url": "https://github.com/phpseclib/phpseclib.git",
++                "reference": "ba6fb78f727cd09f2a649113b95468019e490585"
++            },
++            "dist": {
++                "type": "zip",
++                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/ba6fb78f727cd09f2a649113b95468019e490585",
++                "reference": "ba6fb78f727cd09f2a649113b95468019e490585",
++                "shasum": ""
++            },
++            "require": {
++                "php": ">=5.3.3"
++            },
++            "require-dev": {
++                "phing/phing": "~2.7",
++                "phpunit/phpunit": "~4.0",
++                "sami/sami": "~2.0",
++                "squizlabs/php_codesniffer": "~2.0"
++            },
++            "suggest": {
++                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
++                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
++                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
++                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
++            },
++            "type": "library",
++            "autoload": {
++                "psr-4": {
++                    "phpseclib\\": "phpseclib/"
++                }
++            },
++            "notification-url": "https://packagist.org/downloads/",
++            "license": [
++                "MIT"
++            ],
++            "authors": [
++                {
++                    "name": "Jim Wigginton",
++                    "email": "terrafrost@php.net",
++                    "role": "Lead Developer"
++                },
++                {
++                    "name": "Patrick Monnerat",
++                    "email": "pm@datasphere.ch",
++                    "role": "Developer"
++                },
++                {
++                    "name": "Andreas Fischer",
++                    "email": "bantu@phpbb.com",
++                    "role": "Developer"
++                },
++                {
++                    "name": "Hans-Jürgen Petrich",
++                    "email": "petrich@tronic-media.com",
++                    "role": "Developer"
++                },
++                {
++                    "name": "Graham Campbell",
++                    "email": "graham@alt-three.com",
++                    "role": "Developer"
++                }
++            ],
++            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
++            "homepage": "http://phpseclib.sourceforge.net",
++            "keywords": [
++                "BigInteger",
++                "aes",
++                "asn.1",
++                "asn1",
++                "blowfish",
++                "crypto",
++                "cryptography",
++                "encryption",
++                "rsa",
++                "security",
++                "sftp",
++                "signature",
++                "signing",
++                "ssh",
++                "twofish",
++                "x.509",
++                "x509"
++            ],
++            "time": "2016-01-18 17:07:21"
++        },
++        {
+             "name": "psr/log",
+             "version": "1.0.0",
+             "source": {
+diff --git a/var/jwt/private.pem b/var/jwt/private.pem
+new file mode 100644
+index 0000000..770f268
+--- /dev/null
++++ b/var/jwt/private.pem
+@@ -0,0 +1,54 @@
++-----BEGIN RSA PRIVATE KEY-----
++Proc-Type: 4,ENCRYPTED
++DEK-Info: AES-256-CBC,59DEF820DD94C6F744EE58133C307537
++
++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
++-----END RSA PRIVATE KEY-----
+diff --git a/var/jwt/public.pem b/var/jwt/public.pem
+new file mode 100644
+index 0000000..7dc87ea
+--- /dev/null
++++ b/var/jwt/public.pem
+@@ -0,0 +1,14 @@
++-----BEGIN PUBLIC KEY-----
++MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA8EancSmx19huomo6wxQO
++PD8rXMYISNhDFxv61epgOP17a9N9LMx/aSF+T6k/4vXStqEbTxjNTFfPj0uqoRwL
++Tnz26R3KHe7Lt1bJwUh1JETij6B8PBM122DmAcO/rdTJptgSOqWFzZeI0GzrnjGM
++BvYOqetQ31Q/rxiLDuFVntWVxdcTkmi31li4gsJw5vOq6qUGs2FuFtkgscKyV3Km
++CFLfVr6Eu56euyOXoHyPTvQrcxUE7dHgvblp17zITYg0WUn5cEi5RlKI1eXEZRoI
++hX2Ch2h9HRZzCr7WJMV1h+pbxsLcDvBXuRC4c8JrOXJTNoqZTnptmqM6ab94dnwM
++Z7itmZHW0Q/WEbIHCJKtWzUaMFWX+wIUWVH7qziDRo3cXI4vROlp4r3UfNxtg8yL
+++nnnCigT0V8FOPLU//XPkHvYQDsY52U0KMGgiQYUT3OwKiC0mUKyLy6WQ4tXL9b+
++Z+/UksoeG9RJKldMqlPygXIQWFRGaa45QJUtGUVRQDVKGGzyltgaPohj3FuPMPSj
++w3TyMWmIooG9r34TXibpS/BbGiCMevCYMuJ8Fa2N5sO8RTGruXa3lmCh1hC9Dmqy
+++yOrqZRKe2R/Oti083MqR59d561JX5Dbca/9mIZ5ppC5rYpwIGsEA0W/8AERKCo0
++lY1W1ChHTqH9zAmmGMpEof0CAwEAAQ==
++-----END PUBLIC KEY-----

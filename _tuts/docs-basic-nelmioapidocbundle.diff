@@ -1,11 +1,11 @@
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index 8b33918..1a43c2a 100644
+index c7d123b..d2fb0dd 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
-@@ -18,6 +18,7 @@ class AppKernel extends Kernel
-             new AppBundle\AppBundle(),
+@@ -19,6 +19,7 @@ class AppKernel extends Kernel
              new \JMS\SerializerBundle\JMSSerializerBundle(),
              new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
 +            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
          );
  
@@ -23,38 +23,49 @@ index a37a6f9..c983ae6 100644
 +    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
 +    prefix:   /api/doc
 diff --git a/composer.json b/composer.json
-index 02c9800..60e4dac 100644
+index 7b91969..7034d7a 100644
 --- a/composer.json
 +++ b/composer.json
-@@ -24,7 +24,8 @@
-         "sensio/framework-extra-bundle": "^3.0.2",
+@@ -25,7 +25,8 @@
          "incenteev/composer-parameter-handler": "~2.0",
          "jms/serializer-bundle": "^1.1.0",
--        "white-october/pagerfanta-bundle": "^1.0"
-+        "white-october/pagerfanta-bundle": "^1.0",
+         "white-october/pagerfanta-bundle": "^1.0",
+-        "lexik/jwt-authentication-bundle": "^1.4"
++        "lexik/jwt-authentication-bundle": "^1.4",
 +        "nelmio/api-doc-bundle": "^2.9"
      },
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index 7cc98ba..cc767ca 100644
+index 5d074d5..a79f12a 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -1105,6 +1105,57 @@
-             "time": "2015-11-10 12:26:42"
+@@ -4,8 +4,8 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+         "This file is @generated automatically"
+     ],
+-    "hash": "050baf4005665ce87971f2183c4aa901",
+-    "content-hash": "c4f44ac5b6bc042b5e0f17fd43338f7f",
++    "hash": "9ee656bc40ef2bbb9a77133e4a1f4965",
++    "content-hash": "2c0513071c3423e5be349e5ef872996a",
+     "packages": [
+         {
+             "name": "doctrine/annotations",
+@@ -1180,6 +1180,57 @@
+             "time": "2016-01-30 13:02:32"
          },
          {
 +            "name": "michelf/php-markdown",
-+            "version": "1.5.0",
++            "version": "1.6.0",
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/michelf/php-markdown.git",
-+                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9"
++                "reference": "156e56ee036505ec637d761ee62dc425d807183c"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/e1aabe18173231ebcefc90e615565742fc1c7fd9",
-+                "reference": "e1aabe18173231ebcefc90e615565742fc1c7fd9",
++                "url": "https://api.github.com/repos/michelf/php-markdown/zipball/156e56ee036505ec637d761ee62dc425d807183c",
++                "reference": "156e56ee036505ec637d761ee62dc425d807183c",
 +                "shasum": ""
 +            },
 +            "require": {
@@ -77,14 +88,14 @@ index 7cc98ba..cc767ca 100644
 +            ],
 +            "authors": [
 +                {
-+                    "name": "John Gruber",
-+                    "homepage": "http://daringfireball.net/"
-+                },
-+                {
 +                    "name": "Michel Fortin",
 +                    "email": "michel.fortin@michelf.ca",
 +                    "homepage": "https://michelf.ca/",
 +                    "role": "Developer"
++                },
++                {
++                    "name": "John Gruber",
++                    "homepage": "https://daringfireball.net/"
 +                }
 +            ],
 +            "description": "PHP Markdown",
@@ -92,51 +103,57 @@ index 7cc98ba..cc767ca 100644
 +            "keywords": [
 +                "markdown"
 +            ],
-+            "time": "2015-03-01 12:03:08"
++            "time": "2015-12-24 01:37:31"
 +        },
 +        {
              "name": "monolog/monolog",
              "version": "1.18.1",
              "source": {
-@@ -1183,6 +1234,84 @@
-             "time": "2016-03-13 16:08:35"
+@@ -1318,6 +1369,90 @@
+             "time": "2016-01-24 11:10:26"
          },
          {
 +            "name": "nelmio/api-doc-bundle",
-+            "version": "2.9.0",
++            "version": "2.11.2",
 +            "target-dir": "Nelmio/ApiDocBundle",
 +            "source": {
 +                "type": "git",
 +                "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-+                "reference": "de31760fd84a45fadbb4fe24db050b5e29ea70d1"
++                "reference": "1ae2cfa9a50279d722d6b6e7b02322cef948d55d"
 +            },
 +            "dist": {
 +                "type": "zip",
-+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/de31760fd84a45fadbb4fe24db050b5e29ea70d1",
-+                "reference": "de31760fd84a45fadbb4fe24db050b5e29ea70d1",
++                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/1ae2cfa9a50279d722d6b6e7b02322cef948d55d",
++                "reference": "1ae2cfa9a50279d722d6b6e7b02322cef948d55d",
 +                "shasum": ""
 +            },
 +            "require": {
 +                "michelf/php-markdown": "~1.4",
-+                "symfony/console": "~2.1",
-+                "symfony/framework-bundle": "~2.1",
-+                "symfony/twig-bundle": "~2.1"
++                "php": ">=5.3",
++                "symfony/console": "~2.3|~3.0",
++                "symfony/framework-bundle": "~2.3|~3.0",
++                "symfony/twig-bundle": "~2.3|~3.0"
 +            },
 +            "conflict": {
 +                "jms/serializer": "<0.12",
-+                "jms/serializer-bundle": "<0.11"
++                "jms/serializer-bundle": "<0.11",
++                "twig/twig": "<1.12"
 +            },
 +            "require-dev": {
-+                "dunglas/api-bundle": "dev-master",
-+                "friendsofsymfony/rest-bundle": "~1.0",
++                "doctrine/doctrine-bundle": "~1.5",
++                "doctrine/orm": "~2.3",
++                "dunglas/api-bundle": "~1.0@dev",
++                "friendsofsymfony/rest-bundle": "~1.0|~2.0",
 +                "jms/serializer-bundle": ">=0.11",
 +                "sensio/framework-extra-bundle": "~3.0",
-+                "symfony/browser-kit": "~2.1",
-+                "symfony/css-selector": "~2.1",
-+                "symfony/form": "~2.1",
-+                "symfony/serializer": "~2.7@dev",
-+                "symfony/validator": "~2.1",
-+                "symfony/yaml": "~2.1"
++                "symfony/browser-kit": "~2.3|~3.0",
++                "symfony/css-selector": "~2.3|~3.0",
++                "symfony/finder": "~2.3|~3.0",
++                "symfony/form": "~2.3|~3.0",
++                "symfony/phpunit-bridge": "~2.7|~3.0",
++                "symfony/serializer": "~2.7|~3.0",
++                "symfony/validator": "~2.3|~3.0",
++                "symfony/yaml": "~2.3|~3.0"
 +            },
 +            "suggest": {
 +                "dunglas/api-bundle": "For making use of resources definitions of DunglasApiBundle.",
@@ -148,7 +165,7 @@ index 7cc98ba..cc767ca 100644
 +            "type": "symfony-bundle",
 +            "extra": {
 +                "branch-alias": {
-+                    "dev-master": "2.9.x-dev"
++                    "dev-master": "2.11-dev"
 +                }
 +            },
 +            "autoload": {
@@ -177,7 +194,7 @@ index 7cc98ba..cc767ca 100644
 +                "documentation",
 +                "rest"
 +            ],
-+            "time": "2015-05-16 17:16:14"
++            "time": "2015-12-16 15:17:51"
 +        },
 +        {
              "name": "pagerfanta/pagerfanta",

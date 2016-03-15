@@ -1,0 +1,45 @@
+diff --git a/src/AppBundle/Controller/Api/TokenController.php b/src/AppBundle/Controller/Api/TokenController.php
+index 790213b..ca6d70e 100644
+--- a/src/AppBundle/Controller/Api/TokenController.php
++++ b/src/AppBundle/Controller/Api/TokenController.php
+@@ -5,7 +5,10 @@ namespace AppBundle\Controller\Api;
+ use AppBundle\Controller\BaseController;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
++use Symfony\Component\HttpFoundation\JsonResponse;
++use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
++use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+ 
+ class TokenController extends BaseController
+ {
+@@ -13,8 +16,26 @@ class TokenController extends BaseController
+      * @Route("/api/tokens")
+      * @Method("POST")
+      */
+-    public function newTokenAction()
++    public function newTokenAction(Request $request)
+     {
+-        return new Response('TOKEN!');
++        $user = $this->getDoctrine()
++            ->getRepository('AppBundle:User')
++            ->findOneBy(['username' => $request->getUser()]);
++
++        if (!$user) {
++            throw $this->createNotFoundException();
++        }
++
++        $isValid = $this->get('security.password_encoder')
++            ->isPasswordValid($user, $request->getPassword());
++
++        if (!$isValid) {
++            throw new BadCredentialsException();
++        }
++
++        $token = $this->get('lexik_jwt_authentication.encoder')
++            ->encode(['username' => $user->getUsername()]);
++
++        return new JsonResponse(['token' => $token]);
+     }
+ }
+\ No newline at end of file

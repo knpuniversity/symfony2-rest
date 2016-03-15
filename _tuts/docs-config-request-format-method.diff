@@ -1,11 +1,14 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 0711b8e..e53fc26 100644
+index c7d7163..a05f09d 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
-@@ -69,3 +69,8 @@ swiftmailer:
-     username:  "%mailer_user%"
-     password:  "%mailer_password%"
-     spool:     { type: memory }
+@@ -74,4 +74,9 @@ lexik_jwt_authentication:
+     private_key_path: %kernel.root_dir%/../var/jwt/private.pem
+     public_key_path:  %kernel.root_dir%/../var/jwt/public.pem
+     pass_phrase:      %jwt_key_pass_phrase%
+-    token_ttl:        3600
+\ No newline at end of file
++    token_ttl:        3600
 +
 +nelmio_api_doc:
 +    sandbox:

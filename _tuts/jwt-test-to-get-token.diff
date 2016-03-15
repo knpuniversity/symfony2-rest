@@ -1,0 +1,28 @@
+diff --git a/tests/AppBundle/Controller/Api/TokenControllerTest.php b/tests/AppBundle/Controller/Api/TokenControllerTest.php
+new file mode 100644
+index 0000000..5115564
+--- /dev/null
++++ b/tests/AppBundle/Controller/Api/TokenControllerTest.php
+@@ -0,0 +1,22 @@
++<?php
++
++namespace Tests\AppBundle\Controller\Api;
++
++use AppBundle\Test\ApiTestCase;
++
++class TokenControllerTest extends ApiTestCase
++{
++    public function testPOSTCreateToken()
++    {
++        $this->createUser('weaverryan', 'I<3Pizza');
++
++        $response = $this->client->post('/api/tokens', [
++            'auth' => ['weaverryan', 'I<3Pizza']
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyExists(
++            $response,
++            'token'
++        );
++    }
++}
