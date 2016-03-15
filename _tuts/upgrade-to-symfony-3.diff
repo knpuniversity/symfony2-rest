@@ -6162,7 +6162,7 @@ index 9f300bd..0000000
 -}
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 new file mode 100644
-index 0000000..841b283
+index 0000000..e0167a8
 --- /dev/null
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -0,0 +1,247 @@
@@ -6407,7 +6407,7 @@ index 0000000..841b283
 +        $response = $this->client->get('/api/programmers/fake');
 +
 +        $this->assertEquals(404, $response->getStatusCode());
-+        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
++        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
 +        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
 +        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
 +        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
