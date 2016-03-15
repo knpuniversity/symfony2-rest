@@ -1,10 +1,14 @@
-title:  Symfony RESTful API: Authentication (Course 4)
+title:  Symfony RESTful API: Authentication with JWT (Course 4)
 summary: |
     After 3 tutorials, we've got a nice API, But we've been completely ignoring
-    authentication. That's a big topic, so let's tackle it:
+    authentication. Thanks to some modern tools, this will be *such* a treat:
 
-    * Creating an API token authentication system
-    * Create API endpoints for managing tokens
+    * Understanding JSON web tokens (JWT)
+    * Creating, signing & returning JWT's
+    * Using Guard for a custom JWT authentication system
+    * Sending tokens on the Authorization header
+    * Proper API errors for invalid credentials and missing credentials
+    * Choosing to split into 2 firewalls
 
     The REST of the Symfony Series:
     
