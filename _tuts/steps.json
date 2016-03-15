@@ -471,6 +471,11 @@
             "description": null
         },
         {
+            "id": "auth-require-auth-on-endpoint",
+            "name": "Auth: Require auth on endpoint",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -541,5 +546,5 @@
             "description": null
         }
     ],
-    "sha": "fc40204651924c92879d4cab5115519f87310d68"
+    "sha": "deecacf12bde616151014d36f7b43923559ed93c"
 }

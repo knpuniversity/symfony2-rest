@@ -1,0 +1,36 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index df092a5..264e261 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -24,6 +24,8 @@ class ProgrammerController extends BaseController
+      */
+     public function newAction(Request $request)
+     {
++        $this->denyAccessUnlessGranted('ROLE_USER');
++
+         $programmer = new Programmer();
+         $form = $this->createForm(ProgrammerType::class, $programmer);
+         $this->processForm($request, $form);
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index 841b283..95cea6e 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -239,9 +239,17 @@ EOF;
+         $response = $this->client->get('/api/programmers/fake');
+ 
+         $this->assertEquals(404, $response->getStatusCode());
+-        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
++        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
+         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
+         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
+         $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
+     }
++
++    public function testRequiresAuthentication()
++    {
++        $response = $this->client->post('/api/programmers', [
++            'body' => '[]'
++        ]);
++        $this->assertEquals(401, $response->getStatusCode());
++    }
+ }

@@ -1,12 +1,12 @@
 diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
-index a3e16d8..b4c5563 100644
+index bc9379b..cc66e42 100644
 --- a/src/AppBundle/Form/ProgrammerType.php
 +++ b/src/AppBundle/Form/ProgrammerType.php
-@@ -39,6 +39,7 @@ class ProgrammerType extends AbstractType
+@@ -42,6 +42,7 @@ class ProgrammerType extends AbstractType
              'data_class' => 'AppBundle\Entity\Programmer',
              'is_edit' => false,
              'csrf_protection' => false,
 +            'extra_fields_message' => 'Extra fields sent! {{ extra_fields }}'
          ));
      }
- 
+ }

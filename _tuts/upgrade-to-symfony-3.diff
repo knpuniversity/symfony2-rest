@@ -5498,11 +5498,10 @@ index 0384acc..7cc98ba 100644
  }
 diff --git a/phpunit.xml.dist b/phpunit.xml.dist
 new file mode 100644
-index 0000000..77d66e9
+index 0000000..1e463f5
 --- /dev/null
 +++ b/phpunit.xml.dist
 @@ -0,0 +1,32 @@
-+
 +<?xml version="1.0" encoding="UTF-8"?>
 +
 +<!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html -->
@@ -5515,6 +5514,7 @@ index 0000000..77d66e9
 +    <php>
 +        <ini name="error_reporting" value="-1" />
 +        <server name="KERNEL_DIR" value="app/" />
++        <env name="TEST_BASE_URL" value="http://localhost:8000" />
 +    </php>
 +
 +    <testsuites>
@@ -5534,6 +5534,28 @@ index 0000000..77d66e9
 +        </whitelist>
 +    </filter>
 +</phpunit>
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 30a9391..df092a5 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -25,7 +25,7 @@ class ProgrammerController extends BaseController
+     public function newAction(Request $request)
+     {
+         $programmer = new Programmer();
+-        $form = $this->createForm(new ProgrammerType(), $programmer);
++        $form = $this->createForm(ProgrammerType::class, $programmer);
+         $this->processForm($request, $form);
+ 
+         if (!$form->isValid()) {
+@@ -106,7 +106,7 @@ class ProgrammerController extends BaseController
+             ));
+         }
+ 
+-        $form = $this->createForm(new UpdateProgrammerType(), $programmer);
++        $form = $this->createForm(UpdateProgrammerType::class, $programmer);
+         $this->processForm($request, $form);
+ 
+         if (!$form->isValid()) {
 diff --git a/src/AppBundle/DataFixtures/ORM/LoadFixtures.php b/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
 index 07639e6..ea64bc7 100644
 --- a/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
@@ -5565,6 +5587,105 @@ index 07639e6..ea64bc7 100644
      }
  }
 \ No newline at end of file
+diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
+index 411deff..1961d5a 100644
+--- a/src/AppBundle/Form/ProgrammerType.php
++++ b/src/AppBundle/Form/ProgrammerType.php
+@@ -3,36 +3,39 @@
+ namespace AppBundle\Form;
+ 
+ use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
++use Symfony\Component\Form\Extension\Core\Type\TextareaType;
++use Symfony\Component\Form\Extension\Core\Type\TextType;
+ use Symfony\Component\Form\FormBuilderInterface;
+-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
++use Symfony\Component\OptionsResolver\OptionsResolver;
+ 
+ class ProgrammerType extends AbstractType
+ {
+     public function buildForm(FormBuilderInterface $builder, array $options)
+     {
+         $builder
+-            ->add('nickname', 'text', [
++            ->add('nickname', TextType::class, [
+                 // readonly if we're in edit mode
+                 'disabled' => $options['is_edit']
+             ])
+-            ->add('avatarNumber', 'choice', [
++            ->add('avatarNumber', ChoiceType::class, [
+                 'choices' => [
+                     // the key is the value that will be set
+                     // the value/label isn't shown in an API, and could
+                     // be set to anything
+-                    1 => 'Girl (green)',
+-                    2 => 'Boy',
+-                    3 => 'Cat',
+-                    4 => 'Boy with Hat',
+-                    5 => 'Happy Robot',
+-                    6 => 'Girl (purple)',
++                    'Girl (green)' => 1,
++                    'Boy' => 2,
++                    'Cat' => 3,
++                    'Boy with Hat' => 4,
++                    'Happy Robot' => 5,
++                    'Girl (purple)' => 6,
+                 ]
+             ])
+-            ->add('tagLine', 'textarea')
++            ->add('tagLine', TextareaType::class)
+         ;
+     }
+ 
+-    public function setDefaultOptions(OptionsResolverInterface $resolver)
++    public function configureOptions(OptionsResolver $resolver)
+     {
+         $resolver->setDefaults(array(
+             'data_class' => 'AppBundle\Entity\Programmer',
+@@ -40,9 +43,4 @@ class ProgrammerType extends AbstractType
+             'csrf_protection' => false,
+         ));
+     }
+-
+-    public function getName()
+-    {
+-        return 'programmer';
+-    }
+-}
+\ No newline at end of file
++}
+diff --git a/src/AppBundle/Form/UpdateProgrammerType.php b/src/AppBundle/Form/UpdateProgrammerType.php
+index 964a00e..2be8b1a 100644
+--- a/src/AppBundle/Form/UpdateProgrammerType.php
++++ b/src/AppBundle/Form/UpdateProgrammerType.php
+@@ -2,22 +2,15 @@
+ 
+ namespace AppBundle\Form;
+ 
+-use Symfony\Component\Form\AbstractType;
+-use Symfony\Component\Form\FormBuilderInterface;
+-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
++use Symfony\Component\OptionsResolver\OptionsResolver;
+ 
+ class UpdateProgrammerType extends ProgrammerType
+ {
+-    public function setDefaultOptions(OptionsResolverInterface $resolver)
++    public function configureOptions(OptionsResolver $resolver)
+     {
+-        parent::setDefaultOptions($resolver);
++        parent::configureOptions($resolver);
+ 
+         // override this!
+         $resolver->setDefaults(['is_edit' => true]);
+     }
+-
+-    public function getName()
+-    {
+-        return 'programmer_edit';
+-    }
+-}
+\ No newline at end of file
++}
 diff --git a/src/AppBundle/Repository/UserRepository.php b/src/AppBundle/Repository/UserRepository.php
 index ed7195a..ff49ee2 100644
 --- a/src/AppBundle/Repository/UserRepository.php
@@ -5604,6 +5725,189 @@ index ed7195a..ff49ee2 100644
 -        return $class === 'AppBundle\Entity\User';
 -    }
  }
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 3b05a84..0cb4ca4 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
+@@ -8,10 +8,10 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use Doctrine\ORM\EntityManager;
+ use Exception;
+ use GuzzleHttp\Client;
+-use GuzzleHttp\Event\BeforeEvent;
+-use GuzzleHttp\Message\AbstractMessage;
+-use GuzzleHttp\Message\ResponseInterface;
+-use GuzzleHttp\Subscriber\History;
++use GuzzleHttp\HandlerStack;
++use GuzzleHttp\Middleware;
++use Psr\Http\Message\RequestInterface;
++use Psr\Http\Message\ResponseInterface;
+ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+ use Symfony\Component\Console\Helper\FormatterHelper;
+ use Symfony\Component\Console\Output\ConsoleOutput;
+@@ -23,9 +23,9 @@ class ApiTestCase extends KernelTestCase
+     private static $staticClient;
+ 
+     /**
+-     * @var History
++     * @var array
+      */
+-    private static $history;
++    private static $history = array();
+ 
+     /**
+      * @var Client
+@@ -46,25 +46,28 @@ class ApiTestCase extends KernelTestCase
+ 
+     public static function setUpBeforeClass()
+     {
++        $handler = HandlerStack::create();
++
++        $handler->push(Middleware::history(self::$history));
++        $handler->push(Middleware::mapRequest(function(RequestInterface $request) {
++            $path = $request->getUri()->getPath();
++            if (strpos($path, '/app_test.php') !== 0) {
++                $path = '/app_test.php' . $path;
++            }
++            $uri = $request->getUri()->withPath($path);
++
++            return $request->withUri($uri);
++        }));
++
+         $baseUrl = getenv('TEST_BASE_URL');
++        if ($baseUrl) {
++
++        }
+         self::$staticClient = new Client([
+-            'base_url' => $baseUrl,
+-            'defaults' => [
+-                'exceptions' => false
+-            ]
++            'base_uri' => $baseUrl,
++            'http_errors' => false,
++            'handler' => $handler
+         ]);
+-        self::$history = new History();
+-        self::$staticClient->getEmitter()
+-            ->attach(self::$history);
+-
+-        // guaranteeing that /app_test.php is prefixed to all URLs
+-        self::$staticClient->getEmitter()
+-            ->on('before', function(BeforeEvent $event) {
+-                $path = $event->getRequest()->getPath();
+-                if (strpos($path, '/api') === 0) {
+-                    $event->getRequest()->setPath('/app_test.php'.$path);
+-                }
+-            });
+ 
+         self::bootKernel();
+     }
+@@ -72,6 +75,8 @@ class ApiTestCase extends KernelTestCase
+     protected function setUp()
+     {
+         $this->client = self::$staticClient;
++        // reset the history
++        self::$history = array();
+ 
+         $this->purgeDatabase();
+     }
+@@ -86,7 +91,7 @@ class ApiTestCase extends KernelTestCase
+ 
+     protected function onNotSuccessfulTest(Exception $e)
+     {
+-        if (self::$history && $lastResponse = self::$history->getLastResponse()) {
++        if ($lastResponse = $this->getLastResponse()) {
+             $this->printDebug('');
+             $this->printDebug('<error>Failure!</error> when making the following request:');
+             $this->printLastRequestUrl();
+@@ -112,10 +117,10 @@ class ApiTestCase extends KernelTestCase
+ 
+     protected function printLastRequestUrl()
+     {
+-        $lastRequest = self::$history->getLastRequest();
++        $lastRequest = $this->getLastRequest();
+ 
+         if ($lastRequest) {
+-            $this->printDebug(sprintf('<comment>%s</comment>: <info>%s</info>', $lastRequest->getMethod(), $lastRequest->getUrl()));
++            $this->printDebug(sprintf('<comment>%s</comment>: <info>%s</info>', $lastRequest->getMethod(), $lastRequest->getUri()));
+         } else {
+             $this->printDebug('No request was made.');
+         }
+@@ -123,10 +128,13 @@ class ApiTestCase extends KernelTestCase
+ 
+     protected function debugResponse(ResponseInterface $response)
+     {
+-        $this->printDebug(AbstractMessage::getStartLineAndHeaders($response));
++        foreach ($response->getHeaders() as $name => $values) {
++            $this->printDebug(sprintf('%s: %s', $name, implode(', ', $values)));
++        }
+         $body = (string) $response->getBody();
+ 
+         $contentType = $response->getHeader('Content-Type');
++        $contentType = $contentType[0];
+         if ($contentType == 'application/json' || strpos($contentType, '+json') !== false) {
+             $data = json_decode($body);
+             if ($data === null) {
+@@ -178,7 +186,7 @@ class ApiTestCase extends KernelTestCase
+ 
+                 $profilerUrl = $response->getHeader('X-Debug-Token-Link');
+                 if ($profilerUrl) {
+-                    $fullProfilerUrl = $response->getHeader('Host').$profilerUrl;
++                    $fullProfilerUrl = $response->getHeader('Host').$profilerUrl[0];
+                     $this->printDebug('');
+                     $this->printDebug(sprintf(
+                         'Profiler URL: <comment>%s</comment>',
+@@ -223,6 +231,38 @@ class ApiTestCase extends KernelTestCase
+         $this->printDebug($output);
+     }
+ 
++    /**
++     * @return RequestInterface
++     */
++    private function getLastRequest()
++    {
++        if (!self::$history || empty(self::$history)) {
++            return null;
++        }
++
++        $history = self::$history;
++
++        $last = array_pop($history);
++
++        return $last['request'];
++    }
++
++    /**
++     * @return ResponseInterface
++     */
++    private function getLastResponse()
++    {
++        if (!self::$history || empty(self::$history)) {
++            return null;
++        }
++
++        $history = self::$history;
++
++        $last = array_pop($history);
++
++        return $last['response'];
++    }
++
+     protected function createUser($username, $plainPassword = 'foo')
+     {
+         $user = new User();
+diff --git a/src/AppBundle/Test/ResponseAsserter.php b/src/AppBundle/Test/ResponseAsserter.php
+index 628bc17..dba73fa 100644
+--- a/src/AppBundle/Test/ResponseAsserter.php
++++ b/src/AppBundle/Test/ResponseAsserter.php
+@@ -2,7 +2,7 @@
+ 
+ namespace AppBundle\Test;
+ 
+-use GuzzleHttp\Message\ResponseInterface;
++use Psr\Http\Message\ResponseInterface;
+ use Symfony\Component\PropertyAccess\Exception\RuntimeException;
+ use Symfony\Component\PropertyAccess\PropertyAccess;
+ use Symfony\Component\PropertyAccess\Exception\AccessException;
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 deleted file mode 100644
 index 9f300bd..0000000
@@ -5858,7 +6162,7 @@ index 9f300bd..0000000
 -}
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 new file mode 100644
-index 0000000..4c07137
+index 0000000..841b283
 --- /dev/null
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -0,0 +1,247 @@
@@ -5892,7 +6196,7 @@ index 0000000..4c07137
 +
 +        $this->assertEquals(201, $response->getStatusCode());
 +        $this->assertTrue($response->hasHeader('Location'));
-+        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
++        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location')[0]);
 +        $finishedData = json_decode($response->getBody(true), true);
 +        $this->assertArrayHasKey('nickname', $finishedData);
 +        $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
@@ -6077,7 +6381,7 @@ index 0000000..4c07137
 +        $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
 +        $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
 +        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
-+        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
++        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
 +    }
 +
 +    public function testInvalidJson()
@@ -7444,6 +7748,47 @@ index 17fb981..71c729d 100644
          $flags = defined('PHP_OUTPUT_HANDLER_REMOVABLE') ? PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE) : -1;
  
          while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || $flags === ($s['flags'] & $flags) : $s['del'])) {
+diff --git a/web/app.php b/web/app.php
+index c5c2640..584e602 100644
+--- a/web/app.php
++++ b/web/app.php
+@@ -1,23 +1,23 @@
+ <?php
+ 
+-use Symfony\Component\ClassLoader\ApcClassLoader;
+ use Symfony\Component\HttpFoundation\Request;
+ 
+-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
++/**
++ * @var Composer\Autoload\ClassLoader
++ */
++$loader = require __DIR__.'/../app/autoload.php';
++include_once __DIR__.'/../var/bootstrap.php.cache';
+ 
+ // Enable APC for autoloading to improve performance.
+ // You should change the ApcClassLoader first argument to a unique prefix
+ // in order to prevent cache key conflicts with other applications
+ // also using APC.
+ /*
+-$apcLoader = new ApcClassLoader(sha1(__FILE__), $loader);
++$apcLoader = new Symfony\Component\ClassLoader\ApcClassLoader(sha1(__FILE__), $loader);
+ $loader->unregister();
+ $apcLoader->register(true);
+ */
+ 
+-require_once __DIR__.'/../app/AppKernel.php';
+-//require_once __DIR__.'/../app/AppCache.php';
+-
+ $kernel = new AppKernel('prod', false);
+ $kernel->loadClassCache();
+ //$kernel = new AppCache($kernel);
+@@ -27,4 +27,4 @@ $kernel->loadClassCache();
+ $request = Request::createFromGlobals();
+ $response = $kernel->handle($request);
+ $response->send();
+-$kernel->terminate($request, $response);
++$kernel->terminate($request, $response);
+\ No newline at end of file
 diff --git a/web/app_dev.php b/web/app_dev.php
 index e0279c2..95e0477 100644
 --- a/web/app_dev.php
@@ -7478,6 +7823,47 @@ index e0279c2..95e0477 100644
 -require_once __DIR__.'/../app/AppKernel.php';
 -
  $kernel = new AppKernel('dev', true);
+ $kernel->loadClassCache();
+ $request = Request::createFromGlobals();
+ $response = $kernel->handle($request);
+ $response->send();
+-$kernel->terminate($request, $response);
++$kernel->terminate($request, $response);
+\ No newline at end of file
+diff --git a/web/app_test.php b/web/app_test.php
+index 0bed2d7..7c891f2 100644
+--- a/web/app_test.php
++++ b/web/app_test.php
+@@ -4,27 +4,29 @@ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\Debug\Debug;
+ 
+ // If you don't want to setup permissions the proper way, just uncomment the following PHP line
+-// read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
++// read http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup
++// for more information
+ //umask(0000);
+ 
+ // This check prevents access to debug front controllers that are deployed by accident to production servers.
+ // Feel free to remove this, extend it, or make something more sophisticated.
+ if (isset($_SERVER['HTTP_CLIENT_IP'])
+     || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
+-    || !(in_array(@$_SERVER['REMOTE_ADDR'], array('127.0.0.1', 'fe80::1', '::1')) || php_sapi_name() === 'cli-server')
++    || !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', 'fe80::1', '::1']) || php_sapi_name() === 'cli-server')
+ ) {
+     header('HTTP/1.0 403 Forbidden');
+     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+ }
+ 
+-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
++/**
++ * @var Composer\Autoload\ClassLoader $loader
++ */
++$loader = require __DIR__.'/../app/autoload.php';
+ Debug::enable();
+ 
+-require_once __DIR__.'/../app/AppKernel.php';
+-
+ $kernel = new AppKernel('test', true);
  $kernel->loadClassCache();
  $request = Request::createFromGlobals();
  $response = $kernel->handle($request);

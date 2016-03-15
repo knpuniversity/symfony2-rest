@@ -184,7 +184,7 @@ index 7cc98ba..cc767ca 100644
              "version": "v1.0.3",
              "source": {
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 30a9391..fdb07c6 100644
+index 264e261..a600d4a 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -15,12 +15,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
