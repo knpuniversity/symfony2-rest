@@ -20,7 +20,7 @@ summary: |
 
 illustration: rest-sf-4.png
 tuts_hero:
-    start_step: "upgrade-to-symfony-3                                       "
+    start_step: "upgrade-to-symfony-3"
     finish_step: "Errors: Making type a URL"
 
 chapters: []
