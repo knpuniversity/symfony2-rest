@@ -96,7 +96,7 @@ index 592d0d7..ea5627f 100644
          $event->setResponse($response);
      }
 diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
-index ef51990..a1d4f36 100644
+index 9647839..37d72b3 100644
 --- a/src/AppBundle/Security/JwtTokenAuthenticator.php
 +++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
 @@ -3,6 +3,7 @@
@@ -124,7 +124,7 @@ index ef51990..a1d4f36 100644
      public function getCredentials(Request $request)
 @@ -88,6 +91,6 @@ class JwtTokenAuthenticator extends AbstractGuardAuthenticator
          $message = $authException ? $authException->getMessageKey() : 'Missing credentials';
-         $apiProblem->set('details', $message);
+         $apiProblem->set('detail', $message);
  
 -        return new JsonResponse($apiProblem->toArray(), 401);
 +        return $this->responseFactory->createResponse($apiProblem);
