@@ -1,11 +1,61 @@
-# JSON Web Token
+# JSON Web Tokens (are awesome)
 
-Think about how you normally authenticate on the web. Well, usually after we send our user name and password, a cookie is sent back to us and then on every request that cookie is sent to the server and that cookie identifies who we are. So in a traditional application, the cookie on the server side has reference to our user ID so that the application can look up our user ID in the database and get information about us, but more generally authentication is usually done by sending a token. 
+How does authentication normally work on the web? Usually, after we send our
+username and password, a cookie is returned to us. Then, on every request after,
+we send that cookie back to the server: the cookie identifies who we are, it's our
+*key* to the app. The server *reads* that cookie and uses some server-side storage
+to figure out who we are.
 
-In an API, this is no different. Ultimately our clients will obtain a token and when they send us that token, the token is going to tell us two possible things. It might tell us who the user is. So I send a token. It identifies that I am user ID five or it may contain information about what I can do. So that token might say that I have certain scopes. This is how oh off works. The token that you get an oh off when you send it to the server, the server knows that this token is allowed to do certain things, but not allowed to do other things. Traditionally, tokens work like this. 
+Guess what? An API isn't much different. One way or another, an API client will
+will obtain a unique *token*, which - like the cookie - acts as their *key* to the
+API. On every request, the client will send this token and the server will use that
+token to figure out *who* the client is and *what* they're allowed to do.
 
-The client sends the token and then on the server, all of the tokens are stored in a database somewhere along with the information attached to the token, like the user ID or the scopes, the permissions, the things that that token is allowed to do, but what if we could create a simpler system? What if when we built our API, when the user sent the token, they could actually send us just their user ID, like 123? And then all we would need to do on our application is read that 123 and boom, we would know who was authenticated. 
+How does it do that? Typically, the server will have a database of tokens. If I send
+the token `abc123`, it can query to see if that's a valid token *and* to find out
+what information might be attached to it - like my user id, or even a list of permissions
+or *scopes*.
 
-Now, of course, we can’t do that, right? Because then anyone could just send any user ID and suddenly take over someone’s account and there wouldn’t be security. Right? Actually, wrong. Go to jwt.io, the main website for JSON web tokens which let you do exactly what I just said. Basically a JSON web token is nothing more than a big – a JSON string that is then signed so that you can send it back and forth from the client to server. It allows you to store information in it like my name is John Doe and securely exchange that between your client and your server. How does that work? 
+By the way, some of you might be wondering how OAuth fits into all o this. Well,
+OAuth is basically just a pattern for *how* your API clients *get* the token in
+the first place. And it's not the only method for obtaining tokens - we'll use a
+simpler method. If OAuth confuses you, watch our [OAuth2 Tutorial](knpuniversity.com/screencast/oauth).
+I'll mention OAuth a few more times, but mostly - stop thinking about it!
 
-Well, the key behind JSON web tokens is that yes, these JSON web tokens are encoded, but anyone can read them. So they’re not secret. You would never put something secret inside of a JSON web token, but anyone can read it, but no one can modify it. So if I give you a token, JSON web token, that says your user ID is 123, anyone else can steal that token and use it to become you, but nobody can take that token and change the user ID to something else and that is what makes it secure and when you use JSON web tokens, it makes implementing authentication on your server much easier and a lot more flexible. So let’s do it. 
+Anyways, that's token authentication in a nut shell: you pass around a secret token
+string instead of your username and password.
+
+But what if we could create a simpler system? What if the API client could simply
+send us their real user ID - like 123 - on each request, instead of a token. Well,
+that would be awesome! Our application could just read that number, instead of needing
+to keep a big database of tokens and what they mean.s
+
+But alas, we can't do that, right? Because then *anyone* could send *any* user ID
+and easily authenticate as other users in the system. Right? Actually, no! We
+*can* do this.
+
+In your browser, open [jwt.io](http://jwt.io): the main website for JSON web tokens.
+These are the key to my dream. Basically, a JSON web token is nothing more than a
+big JSON string that contains whatever data you want to put into it - like a user's
+id or their favorite color. But then, the JSON is cryptographically signed and encoded
+to create a *new* string that doesn't look like JSON at all. This is what a JSON
+web token actually looks like.
+
+But wait! JSON web tokens are encoded, but *anyone* can read them: they're easily
+decoded. This means they're information is *not* a secret: you would never put something
+private inside of a JSON web token, like a credit card number - because anyone can
+read a JSON web token.
+
+But here's the key: *nobody* can *modify* a JSON web token without us knowing. So
+if I give you a JSON web token that says your user ID is 123, someone else *could*
+steal this token and use it to authenticate as you. But, they *cannot* change the
+user ID to something else. If they do, we'll know the token has been tampered with.
+
+That's it! JSON web tokens allow us to create tokens that actually *contain* information,
+instead of using random strings that require us to store and lookup the meaning of
+those tokens on the server. It makes life simpler.
+
+Oh, and by the way - once you eventually deploy your API, make sure it only works
+over SSL. No matter how you do authentication, tokens can be stolen. So, use HTTPS!
+
+Now that we know why JSON web tokens - or JWT - rock my world, let's use them!

@@ -1,15 +1,79 @@
-# Deny Access
+# Start Securing the App!
 
-Welcome back guys. This is now part four of our symphony restful series and this one is going to be really, really great because it’s on authentication and in particular we’re going to do something cool with JWT that’s Jason Web Token authentication. So I cannot wait to start doing that. Now, you should totally code along with me so that this all sinks in and you get really good at it. To do that, find the screencast page. Go to download. Go to code, unzip it and move it to the Start directory. I already have the Start directory code downloaded into this symphony dash rest directory. 
+You again? Get outta here.... punk... is what *we* will be saying soon to API clients
+in this tutorial that don't have valid credentials! Yep, welcome back guys, this
+time to a tutorial that's making security exciting again! Seriously, I'm *pumped*
+to talk about authentication in an API... and in particular, a really powerful tool
+called JSON web tokens.
 
-So I’m going to go ahead and start the built in – so I’m going to open a new tab. I’m going to start the built in web server with bin consul server colon run. Now you’ll also notice one other difference and that is that I’ve upgraded our project to symphony three. So if you’re following along with me from the previous tutorial, download the start codes so that you have the new fresh symphony three project. As a reminder, our app is called code battles. It has a cool web interface. You can log in with Weaver Ryan Foo. 
+To make sure your JSON web tokens *extra* are the envy of all your friends, code
+along with me by downloading the code from any of the tutorial pages. Then, just
+unzip it and move into the `start/` directory. I already have that `start` code
+in my `symfony-rest` directory.
 
-We’re going to create programmers and start battles and our goal has to be to create an API interface for that and so far we’ve actually done a really good job with that. Insider of our controller slash API directory, we have this great looking program or controller where we’re able to create programmers, get programmers, edit programmers and we have an awesome test suite in the test directory for all of these different endpoints. However, everything in our API is anonymous right now which means anybody can use our API to do anything and that is not what we intend. 
+I also upgraded our project to Symfony 3! Woohoo! Almost everything we'll do will
+work for Symfony 2 or 3, but there are a few differences in the directory structure.
+We have a tutorial on upgrading to Symfony 3 if you want to learn the differences.
 
-For example, to create a new programmer, you need to be logged into our system. That’s exactly how the web interface works. So as always, let’s start with a test. So we can think about what our API should return if a user tries to do something on the site and they’re not authenticated. So in programmer controller tasks, let’s create a new public function, test requires authentication and what we’ll do is we’ll just make an API call to an endpoint that we ultimately want to be secured. So response equals this arrow client. Hm. Response equals this arrow client arrow post slash API slash programmers. 
+Let's start the built-in web server with:
 
-That’s the endpoint to create a new programmer and we’ll send a valid [inaudible] [00:03:57] body, but we’ll just send black [inaudible]. Eventually, we want this actually to fail. So we want to assert equals that the response status code is 401. Copy the method name and go to the terminal. Go back to the original tab. Let’s run vendor VIN PHP unit dash dash filter and that method name so we can try it out. Now right now it fails which we expect and it’s failing because there’s a validation error. So we see this is actually getting into our controller and it’s failing because it’s actually trying to process our data and we haven’t sent it a nickname. 
+```bash
+bin/console server:run
+```
 
-So obviously not passing which is fine because we don’t have any security yet. So in programmer controller, our first job is to require the user to be logged in. Now we’re not talking about the user is going to be authenticated yet because it doesn’t matter in your controller. Your job in your controller is just to say yes or no, I want to allow access. So let’s say this arrow deny access unless granted and then we’ll say role underscore user. Role underscore user is a role that in most authentication systems all users have. 
+And if you just downloaded the code, open the README and follow a few other directions.
 
-So this is a way for us to say you have to be logged in somehow. So now go back to our test. Try it again and interesting. It’s a 200 status code instead of a 401 and look closely here. It’s actually failed because it’s being redirected to the login page. You can see a summary of what our page looks like here. So in some ways it’s working because it is denying access, but our security system is not setup correctly yet to send back a response that’s proper for an API. So that’s what we need to work on and we’re going to [inaudible] web tokens to do it.
+## The (sad) State of our App's Security
+
+Ok, our app is Code Battles! It has a cool web interface and you can login with
+`weaverryan` and password `foo`: super secure! Here, we can create programmers and
+start battles. And our API already supports *a lot* of this stuff, and a bit more.
+
+Open up `ProgrammerController` inside the `Controller/Api` directory. Awesome! We
+can already create, fetch and update programmers. AND, we've got a pretty sweet test
+um, suite... that checks these endpoints.
+
+Ready for the problem? Our API has *no* security! The horror! Anonymous users are
+able to create programmers and then change the avatar on other programmers. It's
+chaos!
+
+On the web interface, you need to be logged in to do any of these things. Let's make
+the API work the same way.
+
+## Testing for Security
+
+As always: we need to start by writing a test. In `ProgrammerControllerTest`, add
+a new `public function testRequiresAuthentication`. Let's make an API request to
+an endpoint thta *should* be secured and then assert some things. Start with
+`$response = $this->client->post('/api/programmers')`. Send this a valid JSON body.
+
+Ok, if our API client tries to anonymously access a secured endpoint, what should
+be returned? Well, at the very least, assert that the response status code is 401,
+meaning "Unauthorized".
+
+Ok! Let's go make sure this fails! Copy the method name and find the terminal. Run:
+
+```bash
+./vendor/bin/phpunit --filter testRequiresAuthentication
+```
+
+It fails with a validation error: it *is* getting beyond the security layer and executing
+our controller. Time to lock that controller down!
+
+## Securing a Controller
+
+Open `ProgrammerController`. How do we require the API client to be authenticated?
+The *exact* same way you do in a web application. Add `$this->denyAccessUnlessGranted('ROLE_USER')`.
+
+That's it. I'm using `ROLE_USER` because *all* of my users have this role - you could
+also use `IS_AUTHENTICATED_FULLY`.
+
+Ok, back to the test! Run it!
+
+```bash
+./vendor/bin/phpunit --filter testRequiresAuthentication
+```
+
+Oh, *interesting* - it's a *200* status code instead of 401. Look closely: it redirected
+to the login page. So, it's *kind* of working... you can't add programmers anonymously
+anymore. But clearly, we've got some work to do.
