@@ -1,7 +1,34 @@
-# Send Token in Request
+# Send the Token in the Request
 
-Remember when we started, we already add this deny Access Unless Granted to our new programmers action.  So, the new programmers action is broken right now because we don’t have an authentication system hooked up yet.  In fact, if we open Programmer Controller Test and go up to test POST and actually we can run this.  Actually, rename that to test POST Programmer Works.  That’ll make it easier because we can just copy that method name.  And then run ./vendor/bin/phpunit –filter, and we’ll only run that one method.  So, perfect.  Instead of a 201 status code, we get the 200 status code, because it’s redirecting us to the login page.  So, we don’t have our security system hooked up yet, but we do have a way to create a token.  So, what I want to do is update this test so that we’re sending the token up to our server.  
+We already added a `denyAccessUnlessGranted()` line to `ProgrammerController::newAction()`.
+That means this endpoint is broken: we don't have an API authentication system hooked
+up yet.
 
-So, the first thing we need to do inside of our test is grab a token.  And we can do that by saying $token = $this–>get Service, which is a shortcut we have set up to get a service out of the service container.  And we can just get a token the same way we did a second ago in the token controller.  Grab the lexik authentication encoder and then just call it encode and pass it username, weaverryan.  So there we have the token.  So, now how do we send the token to the server?  Well, we can do whatever we want because we’re creating the Api.  We can put it as a query [inaudible] [00:01:45] or we can add it as a header.  The most common thing is to add it on an authorization header.  So, then on the guzzle call, add a headers key and create one called Authorization and set its value to Bearer. $ token.  
+Open up `ProgrammerControllerTest` and find `testPOST`: the test for this endpoint.
+Rename this to `testPOSTProgrammerWorks` - this will make its name unique enough
+that we can run it alone. Copy that name and run it:
 
-That’s a really standard way to send a token up to an Api.  And that’s it.  If we rerun the test now, it’s of course still failing, but now we’re set up.  The last step we need to do is create an authentication system that looks for that token and logs in our user. And as soon as we do that, this test is going to pass.  
+```bash
+./vendor/bin/phpunit --filter testPOSTProgrammerWorks
+```
+
+Instead of the 201, we get a 200 status code after being redirected to `/login`.
+I know we don't have our security system hooked up yet, but pretend that it *is*
+hooked up and working nicely. How can we update the test to *send* a token?
+
+## Sending a Token in the Test
+
+Well, first, we'll need to create a valid token. Do that the same way we just did in
+the controller: `$token = $this->getService()` - which is just a shortcut we made
+to fetch a service from the container - and grab the `lexik_jwt_authentication.encoder`
+service. Finally, call `encode()` and pass it `'username' => 'weaverryan'`.
+
+And we have a token! Now, how do we send it to the server? Well, it's our API, so we
+can do whatever the heck we want! We can set it as a query string or attach it on
+a header. The most common way is to set it on a header called `Authorization`.
+Add a `headers` key to te Guzzle call with one header called `Authorization`. Set
+its value to the word `Bearer`, a space, and then the `$token.`
+
+Weird as it might look, this is a really standard way to send a token to an API.
+If we re-run the test now, it of course still fails. But we're finally ready to
+create an authentication system that looks for this token and authenticates our user.

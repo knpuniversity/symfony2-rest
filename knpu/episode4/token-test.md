@@ -1,15 +1,60 @@
-# Token Test
+# The Fetch a Token Endpoint Test
 
-No matter how you do Api authentication, whether it’s with JWT, OAuth, or something different, it’s always just about the same system.  Somehow, your APAC client needs to get an access token from your server. Once it does that, it will attach that to all future requests to prove that it has access to certain actions on your site.  So, there’s two parts to the process.  The first part, accessing the token, that’s actually more interesting, because there are several different ways that you can do that.  For example, you can just have an end point where the user submits their username and password and then you give them back an access token that they can use in the Api to act under their account.  
+Almost every API authentication system - whether you're using JWT, OAuth or something
+different - works basically the same. *Somehow*, your API client gets an access token.
+And once it does that, it attaches it to all future requests to prove who it is and
+that it has access to perform some action.
 
-Or, you can do something more complicated, like an OAuth flow, which is appropriate when you have third-party clients, like an iPhone app, that need to gain access to your server on behalf of a third-party user.  In those cases, you don’t want your users to have to give that third-party iPhone app their username and password, so you make an OAuth flow, which ultimately results in them getting that same access token.  Or, you could use both, which is something that GitHub does.  We’re going to start with submitting a username and password and getting back a token, because that’s something that’s going to work for most Apis.  
+## How does the Client get a Token?
 
-Up until now, we’ve been doing everything inside of Programmer Controller and Programmer Controller Test in order to create programmers, get programmers, update programmers.  But now we’re going to be working with tokens.  And you can think of tokens like another resource.  We can create tokens.  We can potentially delete tokens if we need to do that.  So, as always, we’re going to start with the test.  So, in the Api directory of tests, put in new TokenControllerTest.  And we’re going to make this extend our nice ApiTestCase that we’ve been working on.  
+So, there are *two* parts to the process: how the client *gets* a token and how a
+client *uses* that token. And actually, the first part is a lot more interesting
+because there are a *bunch* of strategies for how a client should obtain a token.
+For example, you could create an endpoint where the client submits their username
+and password in exchange for a token. Or, you can do something more complex: like
+use the OAuth flow. This is a good idea when you have third-party clients - like an
+iPhone app - that need to gain access to your server on behalf of some user. Or, you
+could use both strategies - GitHub lets you do that.
 
-And we’ll start with the public function testPOSTCreateToken.  Because we’ll be creating a token, so POST is the proper method.  So, let’s think about this.  First, we’re going to need a user in the database.  So, we’ll say this arrow createUser.  This will put a weaverryan user in the database with my super-secure password of I<3Pizza.  And then simply, we’re going to make a post request, so response = this arrow client arrow POST, and I’ll make it to how about api/tokens.  That’ll be consistent with our /api/programmers.  And then we’re going to send it our username and password.  And you can do this in a lot of different ways, but I’m going to use http basic authentication.  And with Guzzle, you use the off key and then you just pass the username and password as the two arguments to that off key.  So this will send http basic authentication.  
+But the end result is always the same: the client gets a token. We're going to build
+the first idea: a simple endpoint where the client can submit a username and password
+to get back a token. That's something that will work for most APIs.
 
-And, of course, this means that your Api needs to be used over an https, because these will be sent in plain text, but that’s kind of always the case.  Set up your Api to use SSL.  So, what do we expect back?  Well, we expect a token resource, which really is a string.  It might have other properties on it, like when it expires, if we need that.  For this, we just need a string to be returned.  So, let’s just assert first that we get back a 200 status code.  And then we’ll user the asserter to assert that the response property exists of token.  So, this will have a JSON response and will at least have a token property.  We don’t know what that’s going to be because that’ll be some super-secret thing.  But we at least want to make sure that exists.  So, I’m going to copy that method name.  We’ll go over it, run ./vendor/bin/phpunit --filter and then paste that method name.  Of course, this should fail with a 404 – perfect, it does.  
+## The new Token Resource
 
-So, let’s get to work on implementing this.  So, in the Api directory of our bundle, create a new TokenController.  Make that extend our same BaseController that we’ve been working with and let’s get to work.  First to make this work, make a public function newTokenAction.  And I will add our @Route above there.  Let that autocomplete so you get the annotation.  /api/tokens and I’ll then even add an @Method on there because we only want this to be a POST method.  And for now, let’s just return a new response from http foundation TOKEN!  Got it.  So, that won’t make our test pass, but it will almost make it pass.  Go back, rerun and perfect.  It’s failing, but now it actually gets a 200 status code.  You can see our token coming back.  
+Everything we've built so far has been centered around the Programmer resource. Now,
+we'll be sending back tokens: and you can think of a Token as our second API resource:
+the client will be able to create new tokens, and potentially, we could allow them
+to delete tokens.
 
-So, we have a plan of action. Now we actually need to hook up the logic and new token action to return our JSON web token.  Let’s do that next.
+As always, we'll start with the test. Create a new class called `TokenControllerTest`.
+Make it extend the handy `ApiTestCase` that we've been working on.
+
+Add `public function testPOSTCreateToken`. Ok, let's think about this. First,
+we're going to need a user in the database before we start. To create one, add
+`$this->createUser()` with `weaverryan` and the super-secure and realistic password
+`I<3Pizza`. Next, make the POST request: `$response = $this->client->post()` to
+`/api/tokens`. That URL could be anything, but the most important thing is that it's
+consistent with the `/api/programmers` we already have.
+
+The last thing we need to do is send the username and password. And really, you can
+do this however you want. But, why not take advantage of the class HTTP Basic Authentication.
+To send an HTTP Basic username and password with Guzzle, add an `auth` option and
+set it to an array containing the username and password.
+
+And hey, reminder time! On production, you *will* make your API work over https.
+The last thing we want is plain-text password flying all over the interwebs.
+
+Below, assert that we get back a 200 status code, or you could use 201 - since technically
+a resource is being created. Now, what should the response *look* like? Well, it
+should be a token resource... which is really just a string. Use the asserter to
+assert that the JSON at least contains a `token` property - we don't know exactly
+what its value will be.
+
+Looks cool! Copy the method name and run *only* this test:
+
+```bash
+./vendor/bin/phpunit --filter testPOSTCreateToken
+```
+
+This should fail... and it does! A 404 not found. Time to bring this to life!

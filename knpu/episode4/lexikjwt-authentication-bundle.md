@@ -1,15 +1,89 @@
 # Lexikjwt Authentication Bundle
 
-Google for Lexikjwt authentication bundle. This one is going to make creating JSON web tokens really easy. So let’s install it. Click to read the documentation and then you guys know the drill. I’ll grab the composer require line and run composer require Lexikjwt authentication bundle and while we’re waiting on that, we’ll grab the new bundle line and put that into our app current. Great. Ultimately, the main thing that we need to do with JWT is we need to be able to create one of these tokens. 
+Google for LexikJWTAuthenticationBundle. This bundle is going to make creating and
+validating JSON web tokens as much fun as eating ice cream. Click to read the
+documentation. And now, you guys know the drill. Copy the library name from the
+`composer require` line and run:
 
-We will start with a package of information like the user name of the user and then we need something to cryptographically turn that into this special JSON web token structure. There are a number of libraries in PHP that do this and this bundle leverages one of those and gives us a really handy service to do this. Now, in order to create a JSON web token, you need to have a secret key and this is the secret key that allows you to sign those JSON web tokens. So it’s very important that you keep your secret key secret. 
+```bash
+composer require lexik/jwt-authentication-bundle
+```
 
-If somebody else gets it, they’ll be able to create new JSON web tokens which you definitely do not want. So we’ll copy these three lines down here at the bottom to create our new public and private keys, but I’m going to change them slightly because we’re on symphony three to put things into the VAR directory. Let’s wait for composer to finish its job. Come on Jordy. Right. And don’t worry about that error. That’s the bundle requiring us to have some configuration which we’ll add in a second. Start with make dir var slash JWT. That will be a new directory that we’ll store our tokens in. 
+While we're waiting for Jordi, I mean Composer to download that for us, let's keep
+busy. Copy the new bundle line and put that into `AppKernel`.
 
-Second, grab the second line to create a new private key and remove the app so it goes directly into the VAR directory. This will ask you for a password which you should use. It’s another layer of authentication in case somebody gets your private key. Let’s use happy API. Perfect. And then finally grab the last line and this generates the public key off of the private key. If you’re not very comfortable with public and private keys, the point is that we’re creating a cryptographic secret, a secret string that we want nobody else to know and I’ll remove the app from that command. It asks me for the pass phrase. 
+Great!
 
-Use happy API and there we go. This gives us a public dot PEM and a private dot PEM. Now you probably will not want to commit these to your repository. The main important thing is that they remain secret. Now, they can be different on your local machine than on production. So you can have your own set of public and private key locally that is not so secret and then keep a different one on your production server that is very, very secret and make sure you don’t change it on your production server ever because that will invalidate any existing JSON web tokens that your clients have. 
+## Generating the Public and Private Key
 
-All right. Last step is to configure the bundle. So I’ll copy the configuration. Open up all config, config dot YML and then go ahead and paste this on the bottom and I’m not going to use quite as many parameters as the author is using. We’ll use kernel dot route there slash dot dot slash var slash JWT slash private dot PM and then we’ll copy that and change it to public dot PM for the next and we copied the JW key pass phrase, but then change the token TTL to 3600 or whatever you want. So this would be – every token has a lifetime so this will make it last for six hours. 
+Our first goal is to write some code that can take an array of information - like
+a user's username - and turn that into a JSON web token. This bundle gives us a
+really handy service to do that. 
 
-Now I’ll open parameters dot YML and add the date JWT key passphrase set ours to happy API. Then don’t forget to add that to your parameters dot YML dot disk file for future developers. Cool and that’s it. We are ready to go with generating our JSON web tokens. This bundle gave us one important thing and you can see it if you go to debug container and search for JWT. We now have a really handy service for encoding JSON web tokens. 
+But before we can use it, we need to generate a public and private key. The private,
+or secret key, will be used to *sign* the JSON web tokens. And no matter what the FBI
+says, this must stay private: if someone else gets it, they'll be able to create
+*new* JSON web tokens with whatever information they want - like with someone else's
+username to gain access to their account. 
+
+Copy the first line, head to the terminal and wait for Composer to finish all its
+thinking. Come on Jordi! Don't worry about the error: this bundle has some required
+configuration that we're *about* to provide.
+
+First, make a new directory to hold the keys:
+
+```bash
+mkdir var/jwt
+```
+
+Next, copy the second line to create a private key, but change its path to the
+`var/jwt` directory:
+
+```bash
+openssl genrsa -out var/jwt/private.pem -aes256 4096
+```
+
+This asks you for a password - give it one! It adds another layer of security in case
+somebody gets your private key. I'll use `happyapi`. Perfect!
+
+Last step: copy the final line and remove `app` at the beginning and the end to point
+to the `var/jwt` directory:
+
+```bash
+openssl rsa -pubout -in var/jwt/private.pem -out var/jwt/public.pem
+```
+
+Type in the password you just set. This creates a *public* key. It'll be used to
+*verify* that a JWT hasn't been tampered with. It's not private, but you probably
+won't need to share it, unless someone else - or some other app - needs to *also*
+verify that a JWT we created is valid.
+
+We now have a `private.pem` and a `public.pem`. You probably will *not* want to commit
+these to your repository: the private key needs to stay secret. But there's good news!
+You can create a key pair to use locally and then generate a totally different key
+pair on production when you deploy. They don't need to be the same. Just don't change
+the keys on production: that will invalidate any existing JSON web tokens that your
+clients have.
+
+## Configuring the Bundle
+
+Ok, last step: tell the bundle about our keys. Copy the configuration from the docs
+and open up `app/config/config.yml`. Paste this at the bottom. Instead of using
+all these fancy parameters, it's fine to set the path directly: `private_key_path: %kernel.root_dir%` -
+that's the `app/` directory - `/../var/jwt/private.pem`. Do the same for the public
+key, with `public.pem`. Set the `token_ttl` to whatever you want: I'll use 3600:
+this means every token will be valid for only 1 hour.
+
+Finally, open `parameters.yml` and add the `jwt_key_pass_phrase`, which for me is
+`happyapi`. Don't forget to add an empty setting also in `parameters.yml.dist` for
+future developers.
+
+Phew! That's it! We had to generate a public and private key, but now, life is going
+to be sweet. Run:
+
+```bash
+bin/console debug:container jwt
+```
+
+Select `lexik_jwt_authentication.jwt_encoder`. This is our new best friend for generating
+JSON web tokens.
