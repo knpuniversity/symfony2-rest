@@ -38,7 +38,7 @@ we're going to need a user in the database before we start. To create one, add
 consistent with the `/api/programmers` we already have.
 
 The last thing we need to do is send the username and password. And really, you can
-do this however you want. But, why not take advantage of the class HTTP Basic Authentication.
+do this however you want. But, why not take advantage of the classic HTTP Basic Authentication.
 To send an HTTP Basic username and password with Guzzle, add an `auth` option and
 set it to an array containing the username and password.
 

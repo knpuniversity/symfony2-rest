@@ -26,7 +26,7 @@ service. Finally, call `encode()` and pass it `'username' => 'weaverryan'`.
 And we have a token! Now, how do we send it to the server? Well, it's our API, so we
 can do whatever the heck we want! We can set it as a query string or attach it on
 a header. The most common way is to set it on a header called `Authorization`.
-Add a `headers` key to te Guzzle call with one header called `Authorization`. Set
+Add a `headers` key to the Guzzle call with one header called `Authorization`. Set
 its value to the word `Bearer`, a space, and then the `$token.`
 
 Weird as it might look, this is a really standard way to send a token to an API.

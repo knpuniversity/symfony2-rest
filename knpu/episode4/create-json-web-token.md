@@ -28,7 +28,7 @@ Head back to `TokenController`. Here's the process:
 4. High-five everyone at your office. I can't wait to get to that step.
 
 Type-hint a new argument with `Request` to get the request object. Next, query for
-a User object with the normal `$user = $this->getDoctrine()->getRepository('AppBundle:User)`
+a User object with the normal `$user = $this->getDoctrine()->getRepository('AppBundle:User')`
 and `findOneBy(['username' => ''])`. Get the HTTP Basic username string with `$request->getUser()`.
 
 And what if we can't find a user? Throw a `$this->createNotFoundException()`. If
@@ -41,7 +41,7 @@ string: `$request->getPassword()`.
 
 If this is *not* valid, throw a new `BadCredentialsException`. We're going to talk
 a lot more later about properly handling errors so that we can control the exact
-JSON return. But for now, this will at least kick the user out.
+JSON returned. But for now, this will at least kick the user out.
 
 Ok, ready to finally generate that JSON web token? Create a `$token` variable and
 set it to `$this->get('lexik_jwt_authentication.encoder')->encode()` and pass that
