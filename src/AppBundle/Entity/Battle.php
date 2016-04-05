@@ -49,7 +49,7 @@ class Battle
      * @param $programmer
      * @param $project
      */
-    public function __construct(Programmer $programmer = null, Project $project = null)
+    public function __construct(Programmer $programmer, Project $project)
     {
         $this->programmer = $programmer;
         $this->project = $project;
@@ -102,15 +102,5 @@ class Battle
     public function getNotes()
     {
         return $this->notes;
-    }
-
-    public function setProgrammer(Programmer $programmer)
-    {
-        $this->programmer = $programmer;
-    }
-
-    public function setProject(Project $project)
-    {
-        $this->project = $project;
     }
 }
