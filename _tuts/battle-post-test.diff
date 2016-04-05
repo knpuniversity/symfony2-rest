@@ -1,0 +1,46 @@
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+new file mode 100644
+index 0000000..2c01ffe
+--- /dev/null
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -0,0 +1,40 @@
++<?php
++
++namespace Tests\AppBundle\Controller\Api;
++
++use AppBundle\Test\ApiTestCase;
++
++class BattleControllerTest extends ApiTestCase
++{
++    protected function setUp()
++    {
++        parent::setUp();
++
++        $this->createUser('weaverryan');
++    }
++
++    public function testPOSTCreateBattle()
++    {
++        $project = $this->createProject('my_project');
++        $programmer = $this->createProgrammer([
++            'nickname' => 'fred'
++        ], 'weaverryan');
++
++        $data = array(
++            'project' => $project->getId(),
++            'programmer' => $programmer->getId()
++        );
++
++        // 1) Create a programmer resource
++        $response = $this->client->post('/api/battles', [
++            'body' => json_encode($data),
++            'headers' => $this->getAuthorizedHeaders('weaverryan')
++        ]);
++
++        $this->assertEquals(201, $response->getStatusCode());
++        $this->asserter()
++            ->assertResponsePropertyExists($response, 'didProgrammerWin');
++        // todo for later
++        //$this->assertTrue($response->hasHeader('Location'));
++    }
++}

@@ -1,0 +1,18 @@
+diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
+index 2c67325..affa847 100644
+--- a/src/AppBundle/Entity/Programmer.php
++++ b/src/AppBundle/Entity/Programmer.php
+@@ -21,6 +21,13 @@ use Hateoas\Configuration\Annotation as Hateoas;
+  *          parameters = { "nickname"= "expr(object.getNickname())" }
+  *      )
+  * )
++ * @Hateoas\Relation(
++ *      "battles",
++ *      href=@Hateoas\Route(
++ *          "???",
++ *          parameters = { "nickname"= "expr(object.getNickname())" }
++ *      )
++ * )
+  */
+ class Programmer
+ {

@@ -1,0 +1,37 @@
+diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
+index 666f15a..4865ffb 100644
+--- a/src/AppBundle/Form/BattleType.php
++++ b/src/AppBundle/Form/BattleType.php
+@@ -12,11 +12,13 @@ class BattleType extends AbstractType
+     public function buildForm(FormBuilderInterface $builder, array $options)
+     {
+         $builder
+-            ->add('programmer', EntityType::class, [
+-                'class' => 'AppBundle\Entity\Programmer'
++            ->add('programmerId', EntityType::class, [
++                'class' => 'AppBundle\Entity\Programmer',
++                'property_path' => 'programmer'
+             ])
+-            ->add('project', EntityType::class, [
+-                'class' => 'AppBundle\Entity\Project'
++            ->add('projectId', EntityType::class, [
++                'class' => 'AppBundle\Entity\Project',
++                'property_path' => 'project'
+             ])
+         ;
+     }
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 8f3c7aa..23edf2f 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -21,8 +21,8 @@ class BattleControllerTest extends ApiTestCase
+         ], 'weaverryan');
+ 
+         $data = array(
+-            'project' => $project->getId(),
+-            'programmer' => $programmer->getId()
++            'projectId' => $project->getId(),
++            'programmerId' => $programmer->getId()
+         );
+ 
+         // 1) Create a programmer resource

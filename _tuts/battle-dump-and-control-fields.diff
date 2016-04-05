@@ -1,0 +1,57 @@
+diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
+index 16a6f31..0c7bef7 100644
+--- a/src/AppBundle/Entity/Battle.php
++++ b/src/AppBundle/Entity/Battle.php
+@@ -4,9 +4,12 @@ namespace AppBundle\Entity;
+ 
+ use Doctrine\ORM\Mapping as ORM;
+ 
++use JMS\Serializer\Annotation as Serializer;
++
+ /**
+  * @ORM\Table(name="battle_battle")
+  * @ORM\Entity(repositoryClass="AppBundle\Repository\BattleRepository")
++ * @Serializer\ExclusionPolicy("all")
+  */
+ class Battle
+ {
+@@ -14,6 +17,7 @@ class Battle
+      * @ORM\Column(name="id", type="integer")
+      * @ORM\Id
+      * @ORM\GeneratedValue(strategy="AUTO")
++     * @Serializer\Expose()
+      */
+     private $id;
+ 
+@@ -31,16 +35,19 @@ class Battle
+ 
+     /**
+      * @ORM\Column(type="boolean")
++     * @Serializer\Expose()
+      */
+     private $didProgrammerWin;
+ 
+     /**
+      * @ORM\Column(type="datetime")
++     * @Serializer\Expose()
+      */
+     private $foughtAt;
+ 
+     /**
+      * @ORM\Column(type="text")
++     * @Serializer\Expose()
+      */
+     private $notes;
+ 
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 2c01ffe..6b54f1e 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -34,6 +34,7 @@ class BattleControllerTest extends ApiTestCase
+         $this->assertEquals(201, $response->getStatusCode());
+         $this->asserter()
+             ->assertResponsePropertyExists($response, 'didProgrammerWin');
++        $this->debugResponse($response);
+         // todo for later
+         //$this->assertTrue($response->hasHeader('Location'));
+     }

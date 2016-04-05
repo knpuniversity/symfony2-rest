@@ -1,0 +1,123 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index ed12e52..49449bd 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -147,48 +147,4 @@ class ProgrammerController extends BaseController
+ 
+         return new Response(null, 204);
+     }
+-
+-    private function processForm(Request $request, FormInterface $form)
+-    {
+-        $data = json_decode($request->getContent(), true);
+-        if ($data === null) {
+-            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
+-
+-            throw new ApiProblemException($apiProblem);
+-        }
+-
+-        $clearMissing = $request->getMethod() != 'PATCH';
+-        $form->submit($data, $clearMissing);
+-    }
+-
+-    private function getErrorsFromForm(FormInterface $form)
+-    {
+-        $errors = array();
+-        foreach ($form->getErrors() as $error) {
+-            $errors[] = $error->getMessage();
+-        }
+-
+-        foreach ($form->all() as $childForm) {
+-            if ($childForm instanceof FormInterface) {
+-                if ($childErrors = $this->getErrorsFromForm($childForm)) {
+-                    $errors[$childForm->getName()] = $childErrors;
+-                }
+-            }
+-        }
+-
+-        return $errors;
+-    }
+-
+-    private function throwApiProblemValidationException(FormInterface $form)
+-    {
+-        $errors = $this->getErrorsFromForm($form);
+-
+-        $apiProblem = new ApiProblem(
+-            400,
+-            ApiProblem::TYPE_VALIDATION_ERROR
+-        );
+-        $apiProblem->set('errors', $errors);
+-
+-        throw new ApiProblemException($apiProblem);
+-    }
+ }
+diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
+index 520d1d2..29051d4 100644
+--- a/src/AppBundle/Controller/BaseController.php
++++ b/src/AppBundle/Controller/BaseController.php
+@@ -2,6 +2,8 @@
+ 
+ namespace AppBundle\Controller;
+ 
++use AppBundle\Api\ApiProblem;
++use AppBundle\Api\ApiProblemException;
+ use AppBundle\Repository\ProgrammerRepository;
+ use AppBundle\Repository\UserRepository;
+ use AppBundle\Repository\ProjectRepository;
+@@ -9,6 +11,7 @@ use AppBundle\Repository\BattleRepository;
+ use AppBundle\Repository\ApiTokenRepository;
+ use JMS\Serializer\SerializationContext;
+ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
++use Symfony\Component\Form\FormInterface;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+ use Symfony\Component\HttpFoundation\Request;
+@@ -136,4 +139,48 @@ abstract class BaseController extends Controller
+         return $this->container->get('jms_serializer')
+             ->serialize($data, $format, $context);
+     }
++
++    protected function processForm(Request $request, FormInterface $form)
++    {
++        $data = json_decode($request->getContent(), true);
++        if ($data === null) {
++            $apiProblem = new ApiProblem(400, ApiProblem::TYPE_INVALID_REQUEST_BODY_FORMAT);
++
++            throw new ApiProblemException($apiProblem);
++        }
++
++        $clearMissing = $request->getMethod() != 'PATCH';
++        $form->submit($data, $clearMissing);
++    }
++
++    protected function getErrorsFromForm(FormInterface $form)
++    {
++        $errors = array();
++        foreach ($form->getErrors() as $error) {
++            $errors[] = $error->getMessage();
++        }
++
++        foreach ($form->all() as $childForm) {
++            if ($childForm instanceof FormInterface) {
++                if ($childErrors = $this->getErrorsFromForm($childForm)) {
++                    $errors[$childForm->getName()] = $childErrors;
++                }
++            }
++        }
++
++        return $errors;
++    }
++
++    protected function throwApiProblemValidationException(FormInterface $form)
++    {
++        $errors = $this->getErrorsFromForm($form);
++
++        $apiProblem = new ApiProblem(
++            400,
++            ApiProblem::TYPE_VALIDATION_ERROR
++        );
++        $apiProblem->set('errors', $errors);
++
++        throw new ApiProblemException($apiProblem);
++    }
+ }

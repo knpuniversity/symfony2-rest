@@ -1,10 +1,10 @@
-diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 080fdc3..b670773 100644
---- a/src/AppBundle/Controller/Api/ProgrammerController.php
-+++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -203,12 +203,7 @@ class ProgrammerController extends BaseController
+diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
+index ed3b875..e8160fc 100644
+--- a/src/AppBundle/Controller/BaseController.php
++++ b/src/AppBundle/Controller/BaseController.php
+@@ -142,15 +142,8 @@ abstract class BaseController extends Controller
  
-     private function processForm(Request $request, FormInterface $form)
+     protected function processForm(Request $request, FormInterface $form)
      {
 -        $data = json_decode($request->getContent(), true);
 -        if ($data === null) {
@@ -12,26 +12,16 @@ index 080fdc3..b670773 100644
 -
 -            throw new ApiProblemException($apiProblem);
 -        }
-+        $data = $this->decodeRequestBody($request);
- 
+-
          $clearMissing = $request->getMethod() != 'PATCH';
-         $form->submit($data, $clearMissing);
-diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index 520d1d2..42af7c9 100644
---- a/src/AppBundle/Controller/BaseController.php
-+++ b/src/AppBundle/Controller/BaseController.php
-@@ -2,6 +2,8 @@
+-        $form->submit($data, $clearMissing);
++        $form->submit($this->decodeRequestBody($request), $clearMissing);
+     }
  
- namespace AppBundle\Controller;
+     protected function getErrorsFromForm(FormInterface $form)
+@@ -183,4 +176,21 @@ abstract class BaseController extends Controller
  
-+use AppBundle\Api\ApiProblem;
-+use AppBundle\Api\ApiProblemException;
- use AppBundle\Repository\ProgrammerRepository;
- use AppBundle\Repository\UserRepository;
- use AppBundle\Repository\ProjectRepository;
-@@ -136,4 +138,21 @@ abstract class BaseController extends Controller
-         return $this->container->get('jms_serializer')
-             ->serialize($data, $format, $context);
+         throw new ApiProblemException($apiProblem);
      }
 +
 +    protected function decodeRequestBody(Request $request)

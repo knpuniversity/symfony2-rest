@@ -1,0 +1,62 @@
+diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
+index 4e29ff8..3bb7b4b 100644
+--- a/src/AppBundle/Test/ApiTestCase.php
++++ b/src/AppBundle/Test/ApiTestCase.php
+@@ -3,6 +3,7 @@
+ namespace AppBundle\Test;
+ 
+ use AppBundle\Entity\Programmer;
++use AppBundle\Entity\Project;
+ use AppBundle\Entity\User;
+ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+ use Doctrine\ORM\EntityManager;
+@@ -289,13 +290,22 @@ class ApiTestCase extends KernelTestCase
+         return $headers;
+     }
+ 
+-    protected function createProgrammer(array $data)
++    protected function createProgrammer(array $data, $ownerUsername = null)
+     {
++        if ($ownerUsername) {
++            $owner = $this->getEntityManager()
++                ->getRepository('AppBundle:User')
++                ->findOneBy(['username' => $ownerUsername]);
++        } else {
++            $owner = $this->getEntityManager()
++                ->getRepository('AppBundle:User')
++                ->findAny();
++        }
++
+         $data = array_merge(array(
+             'powerLevel' => rand(0, 10),
+-            'user' => $this->getEntityManager()
+-                ->getRepository('AppBundle:User')
+-                ->findAny()
++            'user' => $owner,
++            'avatarNumber' => rand(1, 6)
+         ), $data);
+ 
+         $accessor = PropertyAccess::createPropertyAccessor();
+@@ -311,6 +321,22 @@ class ApiTestCase extends KernelTestCase
+     }
+ 
+     /**
++     * @param string $name
++     * @return Project
++     */
++    protected function createProject($name)
++    {
++        $project = new Project();
++        $project->setName($name);
++        $project->setDifficultyLevel(rand(1, 10));
++
++        $this->getEntityManager()->persist($project);
++        $this->getEntityManager()->flush();
++
++        return $project;
++    }
++
++    /**
+      * @return ResponseAsserter
+      */
+     protected function asserter()

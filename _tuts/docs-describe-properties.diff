@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index ee358f4..0cdb294 100644
+index 446c773..6472e39 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
-@@ -31,6 +31,8 @@ class Programmer
+@@ -41,6 +41,8 @@ class Programmer
      private $id;
  
      /**

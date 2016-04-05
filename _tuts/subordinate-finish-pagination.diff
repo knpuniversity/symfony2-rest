@@ -1,0 +1,46 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 4889fe6..e434f37 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -152,12 +152,17 @@ class ProgrammerController extends BaseController
+     /**
+      * @Route("/api/programmers/{nickname}/battles", name="api_programmers_battles_list")
+      */
+-    public function battlesListAction(Programmer $programmer)
++    public function battlesListAction(Programmer $programmer, Request $request)
+     {
+-        $battles = $this->getDoctrine()->getRepository('AppBundle:Battle')
+-            ->findBy(['programmer' => $programmer]);
++        $battlesQb = $this->getDoctrine()->getRepository('AppBundle:Battle')
++            ->createQueryBuilderForProgrammer($programmer);
+ 
+-        $collection = new PaginatedCollection($battles, count($battles));
++        $collection = $this->get('pagination_factory')->createCollection(
++            $battlesQb,
++            $request,
++            'api_programmers_battles_list',
++            ['nickname' => $programmer->getNickname()]
++        );
+ 
+         return $this->createApiResponse($collection);
+     }
+diff --git a/src/AppBundle/Repository/BattleRepository.php b/src/AppBundle/Repository/BattleRepository.php
+index 4b19de2..33af149 100644
+--- a/src/AppBundle/Repository/BattleRepository.php
++++ b/src/AppBundle/Repository/BattleRepository.php
+@@ -2,8 +2,15 @@
+ 
+ namespace AppBundle\Repository;
+ 
++use AppBundle\Entity\Programmer;
+ use Doctrine\ORM\EntityRepository;
+ 
+ class BattleRepository extends EntityRepository
+ {
++    public function createQueryBuilderForProgrammer(Programmer $programmer)
++    {
++        return $this->createQueryBuilder('battle')
++            ->andWhere('battle.programmer = :programmer')
++            ->setParameter('programmer', $programmer);
++    }
+ }

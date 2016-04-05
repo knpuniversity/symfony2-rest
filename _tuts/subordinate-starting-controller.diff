@@ -1,0 +1,30 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 49449bd..1c084c5 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -147,4 +147,12 @@ class ProgrammerController extends BaseController
+ 
+         return new Response(null, 204);
+     }
++
++    /**
++     * @Route("/api/programmers/{nickname}/battles", name="api_programmers_battles_list")
++     */
++    public function battlesListAction()
++    {
++
++    }
+ }
+diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
+index affa847..446c773 100644
+--- a/src/AppBundle/Entity/Programmer.php
++++ b/src/AppBundle/Entity/Programmer.php
+@@ -24,7 +24,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
+  * @Hateoas\Relation(
+  *      "battles",
+  *      href=@Hateoas\Route(
+- *          "???",
++ *          "api_programmers_battles_list",
+  *          parameters = { "nickname"= "expr(object.getNickname())" }
+  *      )
+  * )

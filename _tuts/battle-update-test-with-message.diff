@@ -1,0 +1,12 @@
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 75ff777..33cb80d 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -65,6 +65,6 @@ class BattleControllerTest extends ApiTestCase
+         $this->assertEquals(400, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyExists($response, 'errors.projectId');
+         $this->asserter()->assertResponsePropertyEquals($response, 'errors.projectId[0]', 'This value should not be blank.');
+-        $this->asserter()->assertResponsePropertyEquals($response, 'errors.programmerId[0]', '???');
++        $this->asserter()->assertResponsePropertyEquals($response, 'errors.programmerId[0]', 'This value is not valid.');
+     }
+ }

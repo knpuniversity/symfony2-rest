@@ -1,0 +1,41 @@
+diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
+index 5d032d1..93ff962 100644
+--- a/src/AppBundle/Entity/Battle.php
++++ b/src/AppBundle/Entity/Battle.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Entity;
+ 
++use AppBundle\Annotation\Link;
+ use Doctrine\ORM\Mapping as ORM;
+ 
+ use JMS\Serializer\Annotation as Serializer;
+@@ -10,6 +11,11 @@ use JMS\Serializer\Annotation as Serializer;
+  * @ORM\Table(name="battle_battle")
+  * @ORM\Entity(repositoryClass="AppBundle\Repository\BattleRepository")
+  * @Serializer\ExclusionPolicy("all")
++ * @Link(
++ *     "programmer",
++ *     route="api_programmers_show",
++ *     params={"nickname": "object.getProgrammerNickname()"}
++ * )
+  */
+ class Battle
+ {
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 33cb80d..c437be7 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -39,6 +39,12 @@ class BattleControllerTest extends ApiTestCase
+         $this->asserter()
+             ->assertResponsePropertyEquals($response, 'programmer', 'fred');
+ 
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            '_links.programmer',
++            $this->adjustUri('/api/programmers/fred')
++        );
++
+         // todo for later
+         //$this->assertTrue($response->hasHeader('Location'));
+     }

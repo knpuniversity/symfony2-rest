@@ -561,6 +561,136 @@
             "description": null
         },
         {
+            "id": "refactor-move-methods-to-basecontroller",
+            "name": "Refactor: Move methods to BaseController",
+            "description": null
+        },
+        {
+            "id": "refactor-improve-apitestcase",
+            "name": "Refactor: Improve ApiTestCAse",
+            "description": null
+        },
+        {
+            "id": "battle-post-test",
+            "name": "Battle: POST test",
+            "description": null
+        },
+        {
+            "id": "battle-start-battlecontroller",
+            "name": "Battle: Start BattleController",
+            "description": null
+        },
+        {
+            "id": "battle-finish-post-controller",
+            "name": "Battle: Finish POST controller",
+            "description": null
+        },
+        {
+            "id": "battle-dump-and-control-fields",
+            "name": "Battle: Dump and control fields",
+            "description": null
+        },
+        {
+            "id": "battle-expose-custom-relation-fields",
+            "name": "Battle: Expose custom relation fields",
+            "description": null
+        },
+        {
+            "id": "battle-control-input-with-property-path",
+            "name": "Battle: control input with property_path",
+            "description": null
+        },
+        {
+            "id": "battle-add-projectid-validation",
+            "name": "Battle: Add projectId validation",
+            "description": null
+        },
+        {
+            "id": "battle-restrict-to-my-programmers",
+            "name": "Battle: Restrict to *my* programmers",
+            "description": null
+        },
+        {
+            "id": "battle-update-test-with-message",
+            "name": "Battle: Update test with message",
+            "description": null
+        },
+        {
+            "id": "battle-add-link-to-programmer",
+            "name": "Battle: Add link to programmer",
+            "description": null
+        },
+        {
+            "id": "hateoas-install-bundle",
+            "name": "HATEOAS: Install bundle",
+            "description": null
+        },
+        {
+            "id": "hateoas-apply-to-battle",
+            "name": "HATEOAS: Apply to Battle",
+            "description": null
+        },
+        {
+            "id": "hateoas-apply-to-programmer",
+            "name": "HATEOAS: Apply to Programmer",
+            "description": null
+        },
+        {
+            "id": "hateoas-remove-old-link-code",
+            "name": "HATEOAS: Remove old @Link code",
+            "description": null
+        },
+        {
+            "id": "hateoas-embed",
+            "name": "HATEOAS: Embed",
+            "description": null
+        },
+        {
+            "id": "hateoas-test-for-embedded",
+            "name": "HATEOAS: Test for _embedded",
+            "description": null
+        },
+        {
+            "id": "hateoas-custom-json-serializer-empty",
+            "name": "HATEOAS: Custom json serializer empty",
+            "description": null
+        },
+        {
+            "id": "hateoas-custom-json-serializer",
+            "name": "HATEOAS: Custom JSON serializer",
+            "description": null
+        },
+        {
+            "id": "hypermedia-custom-media-type",
+            "name": "Hypermedia: Custom media type",
+            "description": null
+        },
+        {
+            "id": "subordinate-start-programmer-battles-link",
+            "name": "Subordinate: Start programmer.battles link",
+            "description": null
+        },
+        {
+            "id": "subordinate-starting-controller",
+            "name": "Subordinate: Starting controller",
+            "description": null
+        },
+        {
+            "id": "subordinate-adding-controller-part-test",
+            "name": "Subordinate: Adding controller + part test",
+            "description": null
+        },
+        {
+            "id": "subordinate-manual-collection",
+            "name": "Subordinate: Manual collection",
+            "description": null
+        },
+        {
+            "id": "subordinate-finish-pagination",
+            "name": "Subordinate: Finish pagination",
+            "description": null
+        },
+        {
             "id": "docs-basic-nelmioapidocbundle",
             "name": "Docs: Basic NelmioApiDocBundle",
             "description": null
@@ -631,5 +761,5 @@
             "description": null
         }
     ],
-    "sha": "8a02010827660fa151f12b8cd58046ceddceb8e4"
+    "sha": "fd626b8e223b9deecec6f8ae6d895ed3e8634cdb"
 }

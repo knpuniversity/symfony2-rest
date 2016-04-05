@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 8681c33..7363864 100644
+index a5ed9be..1417734 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -120,6 +120,15 @@ class ProgrammerController extends BaseController
+@@ -121,6 +121,15 @@ class ProgrammerController extends BaseController
      /**
       * @Route("/api/programmers/{nickname}")
       * @Method({"PUT", "PATCH"})
@@ -18,7 +18,7 @@ index 8681c33..7363864 100644
       */
      public function updateAction($nickname, Request $request)
      {
-@@ -153,6 +162,10 @@ class ProgrammerController extends BaseController
+@@ -154,6 +163,10 @@ class ProgrammerController extends BaseController
      /**
       * @Route("/api/programmers/{nickname}")
       * @Method("DELETE")

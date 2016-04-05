@@ -1,0 +1,26 @@
+diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
+index c9ebe05..21d5370 100644
+--- a/src/AppBundle/Entity/Battle.php
++++ b/src/AppBundle/Entity/Battle.php
+@@ -17,7 +17,8 @@ use Hateoas\Configuration\Annotation as Hateoas;
+  *     href=@Hateoas\Route(
+  *          "api_programmers_show",
+  *          parameters={"nickname"= "expr(object.getProgrammerNickname())"}
+- *     )
++ *     ),
++ *     embedded = "expr(object.getProgrammer())"
+  * )
+  */
+ class Battle
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 8bdcc21..d863cc1 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -44,6 +44,7 @@ class BattleControllerTest extends ApiTestCase
+             '_links.programmer.href',
+             $this->adjustUri('/api/programmers/fred')
+         );
++        $this->debugResponse($response);
+ 
+         // todo for later
+         //$this->assertTrue($response->hasHeader('Location'));

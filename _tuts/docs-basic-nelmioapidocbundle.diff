@@ -1,11 +1,11 @@
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index c7d123b..d2fb0dd 100644
+index 862ed57..d98e371 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
-@@ -19,6 +19,7 @@ class AppKernel extends Kernel
-             new \JMS\SerializerBundle\JMSSerializerBundle(),
+@@ -20,6 +20,7 @@ class AppKernel extends Kernel
              new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
              new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
+             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
 +            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
          );
  
@@ -23,34 +23,23 @@ index a37a6f9..c983ae6 100644
 +    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
 +    prefix:   /api/doc
 diff --git a/composer.json b/composer.json
-index 7b91969..7034d7a 100644
+index ae47075..5de85d2 100644
 --- a/composer.json
 +++ b/composer.json
-@@ -25,7 +25,8 @@
-         "incenteev/composer-parameter-handler": "~2.0",
+@@ -26,7 +26,8 @@
          "jms/serializer-bundle": "^1.1.0",
          "white-october/pagerfanta-bundle": "^1.0",
--        "lexik/jwt-authentication-bundle": "^1.4"
-+        "lexik/jwt-authentication-bundle": "^1.4",
+         "lexik/jwt-authentication-bundle": "^1.4",
+-        "willdurand/hateoas-bundle": "^1.1"
++        "willdurand/hateoas-bundle": "^1.1",
 +        "nelmio/api-doc-bundle": "^2.9"
      },
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index 5d074d5..a79f12a 100644
+index 7e3b125..d11a315 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -4,8 +4,8 @@
-         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
-         "This file is @generated automatically"
-     ],
--    "hash": "050baf4005665ce87971f2183c4aa901",
--    "content-hash": "c4f44ac5b6bc042b5e0f17fd43338f7f",
-+    "hash": "9ee656bc40ef2bbb9a77133e4a1f4965",
-+    "content-hash": "2c0513071c3423e5be349e5ef872996a",
-     "packages": [
-         {
-             "name": "doctrine/annotations",
 @@ -1180,6 +1180,57 @@
              "time": "2016-01-30 13:02:32"
          },
@@ -201,10 +190,10 @@ index 5d074d5..a79f12a 100644
              "version": "v1.0.3",
              "source": {
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index ed12e52..d6bef54 100644
+index e434f37..be25db7 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
+@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  use Symfony\Component\HttpFoundation\Request;
  use Symfony\Component\HttpFoundation\Response;
  use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -212,7 +201,7 @@ index ed12e52..d6bef54 100644
  
  /**
   * @Security("is_granted('ROLE_USER')")
-@@ -25,6 +26,13 @@ class ProgrammerController extends BaseController
+@@ -26,6 +27,13 @@ class ProgrammerController extends BaseController
      /**
       * @Route("/api/programmers")
       * @Method("POST")

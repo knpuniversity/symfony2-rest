@@ -1,0 +1,111 @@
+diff --git a/src/AppBundle/Controller/Api/BattleController.php b/src/AppBundle/Controller/Api/BattleController.php
+index 8131a01..3ac3d37 100644
+--- a/src/AppBundle/Controller/Api/BattleController.php
++++ b/src/AppBundle/Controller/Api/BattleController.php
+@@ -3,6 +3,8 @@
+ namespace AppBundle\Controller\Api;
+ 
+ use AppBundle\Controller\BaseController;
++use AppBundle\Form\BattleType;
++use AppBundle\Form\Model\BattleModel;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Symfony\Component\HttpFoundation\Request;
+@@ -15,5 +17,20 @@ class BattleController extends BaseController
+      */
+     public function newAction(Request $request)
+     {
++        $battleModel = new BattleModel();
++        $form = $this->createForm(BattleType::class, $battleModel);
++        $this->processForm($request, $form);
++
++        if (!$form->isValid()) {
++            $this->throwApiProblemValidationException($form);
++        }
++
++        $battle = $this->getBattleManager()->battle(
++            $battleModel->getProgrammer(),
++            $battleModel->getProject()
++        );
++
++        // todo - set Location header
++        return $this->createApiResponse($battle, 201);
+     }
+ }
+diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
+new file mode 100644
+index 0000000..666f15a
+--- /dev/null
++++ b/src/AppBundle/Form/BattleType.php
+@@ -0,0 +1,31 @@
++<?php
++
++namespace AppBundle\Form;
++
++use Symfony\Bridge\Doctrine\Form\Type\EntityType;
++use Symfony\Component\Form\AbstractType;
++use Symfony\Component\Form\FormBuilderInterface;
++use Symfony\Component\OptionsResolver\OptionsResolver;
++
++class BattleType extends AbstractType
++{
++    public function buildForm(FormBuilderInterface $builder, array $options)
++    {
++        $builder
++            ->add('programmer', EntityType::class, [
++                'class' => 'AppBundle\Entity\Programmer'
++            ])
++            ->add('project', EntityType::class, [
++                'class' => 'AppBundle\Entity\Project'
++            ])
++        ;
++    }
++
++    public function configureOptions(OptionsResolver $resolver)
++    {
++        $resolver->setDefaults([
++            'data_class' => 'AppBundle\Form\Model\BattleModel',
++            'csrf_protection' => false,
++        ]);
++    }
++}
+diff --git a/src/AppBundle/Form/Model/BattleModel.php b/src/AppBundle/Form/Model/BattleModel.php
+new file mode 100644
+index 0000000..2f2ab93
+--- /dev/null
++++ b/src/AppBundle/Form/Model/BattleModel.php
+@@ -0,0 +1,33 @@
++<?php
++
++namespace AppBundle\Form\Model;
++
++use AppBundle\Entity\Programmer;
++use AppBundle\Entity\Project;
++
++class BattleModel
++{
++    private $project;
++
++    private $programmer;
++
++    public function getProject()
++    {
++        return $this->project;
++    }
++
++    public function setProject(Project $project)
++    {
++        $this->project = $project;
++    }
++
++    public function getProgrammer()
++    {
++        return $this->programmer;
++    }
++
++    public function setProgrammer(Programmer $programmer)
++    {
++        $this->programmer = $programmer;
++    }
++}
+\ No newline at end of file

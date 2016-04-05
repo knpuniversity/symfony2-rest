@@ -1,0 +1,34 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index c35e9d5..4889fe6 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -8,6 +8,7 @@ use AppBundle\Controller\BaseController;
+ use AppBundle\Entity\Programmer;
+ use AppBundle\Form\ProgrammerType;
+ use AppBundle\Form\UpdateProgrammerType;
++use AppBundle\Pagination\PaginatedCollection;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+@@ -156,6 +157,8 @@ class ProgrammerController extends BaseController
+         $battles = $this->getDoctrine()->getRepository('AppBundle:Battle')
+             ->findBy(['programmer' => $programmer]);
+ 
+-        return $this->createApiResponse($battles);
++        $collection = new PaginatedCollection($battles, count($battles));
++
++        return $this->createApiResponse($collection);
+     }
+ }
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index db13cfc..cebd07c 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -84,6 +84,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         $response = $this->client->get($url, [
+             'headers' => $this->getAuthorizedHeaders('weaverryan')
+         ]);
++        $this->asserter()->assertResponsePropertyExists($response, 'items');
+         $this->debugResponse($response);
+     }
+ 

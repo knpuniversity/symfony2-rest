@@ -1,0 +1,61 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 1c084c5..c35e9d5 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -151,8 +151,11 @@ class ProgrammerController extends BaseController
+     /**
+      * @Route("/api/programmers/{nickname}/battles", name="api_programmers_battles_list")
+      */
+-    public function battlesListAction()
++    public function battlesListAction(Programmer $programmer)
+     {
++        $battles = $this->getDoctrine()->getRepository('AppBundle:Battle')
++            ->findBy(['programmer' => $programmer]);
+ 
++        return $this->createApiResponse($battles);
+     }
+ }
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index 569fa2a..db13cfc 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -2,6 +2,7 @@
+ 
+ namespace Tests\AppBundle\Controller\Api;
+ 
++use AppBundle\Battle\BattleManager;
+ use AppBundle\Test\ApiTestCase;
+ 
+ class ProgrammerControllerTest extends ApiTestCase
+@@ -61,6 +62,31 @@ class ProgrammerControllerTest extends ApiTestCase
+         );
+     }
+ 
++    public function testFollowProgrammerBattlesLink()
++    {
++        $programmer = $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++        $project = $this->createProject('cool_project');
++
++        /** @var BattleManager $battleManager */
++        $battleManager = $this->getService('battle.battle_manager');
++        $battleManager->battle($programmer, $project);
++        $battleManager->battle($programmer, $project);
++        $battleManager->battle($programmer, $project);
++
++        $response = $this->client->get('/api/programmers/UnitTester', [
++            'headers' => $this->getAuthorizedHeaders('weaverryan')
++        ]);
++        $url = $this->asserter()
++            ->readResponseProperty($response, '_links.battles');
++        $response = $this->client->get($url, [
++            'headers' => $this->getAuthorizedHeaders('weaverryan')
++        ]);
++        $this->debugResponse($response);
++    }
++
+     public function testGETProgrammerDeep()
+     {
+         $this->createProgrammer(array(

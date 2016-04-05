@@ -1,0 +1,96 @@
+diff --git a/src/AppBundle/Controller/Api/BattleController.php b/src/AppBundle/Controller/Api/BattleController.php
+index 3ac3d37..44ee65a 100644
+--- a/src/AppBundle/Controller/Api/BattleController.php
++++ b/src/AppBundle/Controller/Api/BattleController.php
+@@ -17,8 +17,12 @@ class BattleController extends BaseController
+      */
+     public function newAction(Request $request)
+     {
++        $this->denyAccessUnlessGranted('ROLE_USER');
++
+         $battleModel = new BattleModel();
+-        $form = $this->createForm(BattleType::class, $battleModel);
++        $form = $this->createForm(BattleType::class, $battleModel, [
++            'user' => $this->getUser()
++        ]);
+         $this->processForm($request, $form);
+ 
+         if (!$form->isValid()) {
+diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
+index 4865ffb..6e39080 100644
+--- a/src/AppBundle/Form/BattleType.php
++++ b/src/AppBundle/Form/BattleType.php
+@@ -2,6 +2,7 @@
+ 
+ namespace AppBundle\Form;
+ 
++use AppBundle\Repository\ProgrammerRepository;
+ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+ use Symfony\Component\Form\AbstractType;
+ use Symfony\Component\Form\FormBuilderInterface;
+@@ -11,10 +12,15 @@ class BattleType extends AbstractType
+ {
+     public function buildForm(FormBuilderInterface $builder, array $options)
+     {
++        $user = $options['user'];
++
+         $builder
+             ->add('programmerId', EntityType::class, [
+                 'class' => 'AppBundle\Entity\Programmer',
+-                'property_path' => 'programmer'
++                'property_path' => 'programmer',
++                'query_builder' => function(ProgrammerRepository $repo) use ($user) {
++                    return $repo->createQueryBuilderForUser($user);
++                },
+             ])
+             ->add('projectId', EntityType::class, [
+                 'class' => 'AppBundle\Entity\Project',
+@@ -29,5 +35,6 @@ class BattleType extends AbstractType
+             'data_class' => 'AppBundle\Form\Model\BattleModel',
+             'csrf_protection' => false,
+         ]);
++        $resolver->setRequired(['user']);
+     }
+ }
+diff --git a/src/AppBundle/Repository/ProgrammerRepository.php b/src/AppBundle/Repository/ProgrammerRepository.php
+index 2692cbe..592d885 100644
+--- a/src/AppBundle/Repository/ProgrammerRepository.php
++++ b/src/AppBundle/Repository/ProgrammerRepository.php
+@@ -17,6 +17,13 @@ class ProgrammerRepository extends EntityRepository
+         return $this->findBy(array('user' => $user));
+     }
+ 
++    public function createQueryBuilderForUser(User $user)
++    {
++        return $this->createQueryBuilder('programmer')
++            ->andWhere('programmer.user = :user')
++            ->setParameter('user', $user);
++    }
++
+     /**
+      * @param $nickname
+      * @return Programmer
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index cc6163f..75ff777 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -45,9 +45,11 @@ class BattleControllerTest extends ApiTestCase
+ 
+     public function testPOSTBattleValidationErrors()
+     {
++        // create a Programmer owned by someone else
++        $this->createUser('someone_else');
+         $programmer = $this->createProgrammer([
+             'nickname' => 'fred'
+-        ], 'weaverryan');
++        ], 'someone_else');
+ 
+         $data = array(
+             'projectId' => null,
+@@ -63,5 +65,6 @@ class BattleControllerTest extends ApiTestCase
+         $this->assertEquals(400, $response->getStatusCode());
+         $this->asserter()->assertResponsePropertyExists($response, 'errors.projectId');
+         $this->asserter()->assertResponsePropertyEquals($response, 'errors.projectId[0]', 'This value should not be blank.');
++        $this->asserter()->assertResponsePropertyEquals($response, 'errors.programmerId[0]', '???');
+     }
+ }

@@ -1,0 +1,44 @@
+diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
+index 0c7bef7..5d032d1 100644
+--- a/src/AppBundle/Entity/Battle.php
++++ b/src/AppBundle/Entity/Battle.php
+@@ -110,4 +110,22 @@ class Battle
+     {
+         return $this->notes;
+     }
++
++    /**
++     * @Serializer\VirtualProperty()
++     * @Serializer\SerializedName("programmer")
++     */
++    public function getProgrammerNickname()
++    {
++        return $this->programmer->getNickname();
++    }
++
++    /**
++     * @Serializer\VirtualProperty()
++     * @Serializer\SerializedName("project")
++     */
++    public function getProjectId()
++    {
++        return $this->project->getId();
++    }
+ }
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 6b54f1e..8f3c7aa 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -34,7 +34,11 @@ class BattleControllerTest extends ApiTestCase
+         $this->assertEquals(201, $response->getStatusCode());
+         $this->asserter()
+             ->assertResponsePropertyExists($response, 'didProgrammerWin');
+-        $this->debugResponse($response);
++        $this->asserter()
++            ->assertResponsePropertyExists($response, 'project');
++        $this->asserter()
++            ->assertResponsePropertyEquals($response, 'programmer', 'fred');
++
+         // todo for later
+         //$this->assertTrue($response->hasHeader('Location'));
+     }

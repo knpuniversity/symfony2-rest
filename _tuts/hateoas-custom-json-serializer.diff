@@ -1,0 +1,78 @@
+diff --git a/app/config/config.yml b/app/config/config.yml
+index c7d7163..83196b5 100644
+--- a/app/config/config.yml
++++ b/app/config/config.yml
+@@ -74,4 +74,8 @@ lexik_jwt_authentication:
+     private_key_path: %kernel.root_dir%/../var/jwt/private.pem
+     public_key_path:  %kernel.root_dir%/../var/jwt/public.pem
+     pass_phrase:      %jwt_key_pass_phrase%
+-    token_ttl:        3600
+\ No newline at end of file
++    token_ttl:        3600
++
++bazinga_hateoas:
++    serializer:
++        json: custom_hateoas_json_serializer
+diff --git a/app/config/services.yml b/app/config/services.yml
+index f822af6..a935b0a 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -33,3 +33,6 @@ services:
+ 
+     api.response_factory:
+         class: AppBundle\Api\ResponseFactory
++
++    custom_hateoas_json_serializer:
++        class: AppBundle\Serializer\CustomHATEOASJsonSerializer
+\ No newline at end of file
+diff --git a/src/AppBundle/Serializer/CustomHATEOASJsonSerializer.php b/src/AppBundle/Serializer/CustomHATEOASJsonSerializer.php
+index a29e093..da665a5 100644
+--- a/src/AppBundle/Serializer/CustomHATEOASJsonSerializer.php
++++ b/src/AppBundle/Serializer/CustomHATEOASJsonSerializer.php
+@@ -10,4 +10,18 @@ use JMS\Serializer\SerializationContext;
+ 
+ class CustomHATEOASJsonSerializer extends JsonHalSerializer
+ {
+-}
+\ No newline at end of file
++    /**
++     * @param Link[] $links
++     * @param JsonSerializationVisitor $visitor
++     * @param SerializationContext $context
++     */
++    public function serializeLinks(array $links, JsonSerializationVisitor $visitor, SerializationContext $context)
++    {
++        $serializedLinks = array();
++        foreach ($links as $link) {
++            $serializedLinks[$link->getRel()] = $link->getHref();
++        }
++
++        $visitor->addData('_links', $serializedLinks);
++    }
++}
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 34bc1bb..301541f 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -41,7 +41,7 @@ class BattleControllerTest extends ApiTestCase
+ 
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            '_links.programmer.href',
++            '_links.programmer',
+             $this->adjustUri('/api/programmers/fred')
+         );
+         $this->asserter()->assertResponsePropertyEquals(
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index 80c2ba6..107fb34 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -55,7 +55,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            '_links.self.href',
++            '_links.self',
+             $this->adjustUri('/api/programmers/UnitTester')
+         );
+     }

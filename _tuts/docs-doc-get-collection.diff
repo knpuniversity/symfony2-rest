@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 61786f9..f32db04 100644
+index 3f6dd2a..5799c6d 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
-@@ -66,6 +66,12 @@ class ProgrammerController extends BaseController
+@@ -67,6 +67,12 @@ class ProgrammerController extends BaseController
      /**
       * @Route("/api/programmers/{nickname}", name="api_programmers_show")
       * @Method("GET")
@@ -15,7 +15,7 @@ index 61786f9..f32db04 100644
       */
      public function showAction($nickname)
      {
-@@ -88,6 +94,11 @@ class ProgrammerController extends BaseController
+@@ -89,6 +95,11 @@ class ProgrammerController extends BaseController
      /**
       * @Route("/api/programmers", name="api_programmers_collection")
       * @Method("GET")

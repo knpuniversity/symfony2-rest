@@ -1,0 +1,54 @@
+diff --git a/src/AppBundle/Form/Model/BattleModel.php b/src/AppBundle/Form/Model/BattleModel.php
+index 2f2ab93..04f9ae2 100644
+--- a/src/AppBundle/Form/Model/BattleModel.php
++++ b/src/AppBundle/Form/Model/BattleModel.php
+@@ -4,11 +4,18 @@ namespace AppBundle\Form\Model;
+ 
+ use AppBundle\Entity\Programmer;
+ use AppBundle\Entity\Project;
++use Symfony\Component\Validator\Constraints as Assert;
+ 
+ class BattleModel
+ {
++    /**
++     * @Assert\NotBlank()
++     */
+     private $project;
+ 
++    /**
++     * @Assert\NotBlank()
++     */
+     private $programmer;
+ 
+     public function getProject()
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 23edf2f..cc6163f 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -42,4 +42,26 @@ class BattleControllerTest extends ApiTestCase
+         // todo for later
+         //$this->assertTrue($response->hasHeader('Location'));
+     }
++
++    public function testPOSTBattleValidationErrors()
++    {
++        $programmer = $this->createProgrammer([
++            'nickname' => 'fred'
++        ], 'weaverryan');
++
++        $data = array(
++            'projectId' => null,
++            'programmerId' => $programmer->getId()
++        );
++
++        // 1) Create a programmer resource
++        $response = $this->client->post('/api/battles', [
++            'body' => json_encode($data),
++            'headers' => $this->getAuthorizedHeaders('weaverryan')
++        ]);
++
++        $this->assertEquals(400, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyExists($response, 'errors.projectId');
++        $this->asserter()->assertResponsePropertyEquals($response, 'errors.projectId[0]', 'This value should not be blank.');
++    }
+ }
