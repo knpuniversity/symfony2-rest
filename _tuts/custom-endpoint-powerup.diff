@@ -1,0 +1,47 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index 144d7bc..26a90d6 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -180,4 +180,16 @@ class ProgrammerController extends BaseController
+ 
+         return new Response($programmer->getTagLine());
+     }
++
++    /**
++     * @Route("/api/programmers/{nickname}/powerup")
++     * @Method("POST")
++     */
++    public function powerUpAction(Programmer $programmer)
++    {
++        $this->get('battle.power_manager')
++            ->powerUp($programmer);
++
++        return $this->createApiResponse($programmer);
++    }
+ }
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index 867c989..1148f48 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -330,4 +330,21 @@ EOF;
+         $this->assertEquals(200, $response->getStatusCode());
+         $this->assertEquals('New Tag Line', (string) $response->getBody());
+     }
++
++    public function testPowerUp()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++            'powerLevel' => 10
++        ));
++
++        $response = $this->client->post('/api/programmers/UnitTester/powerup', [
++            'headers' => $this->getAuthorizedHeaders('weaverryan')
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $powerLevel = $this->asserter()
++            ->readResponseProperty($response, 'powerLevel');
++        $this->assertNotEquals(10, $powerLevel, 'The level should change');
++    }
+ }

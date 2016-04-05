@@ -1,0 +1,48 @@
+diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
+index e434f37..144d7bc 100644
+--- a/src/AppBundle/Controller/Api/ProgrammerController.php
++++ b/src/AppBundle/Controller/Api/ProgrammerController.php
+@@ -166,4 +166,18 @@ class ProgrammerController extends BaseController
+ 
+         return $this->createApiResponse($collection);
+     }
++
++    /**
++     * @Route("/api/programmers/{nickname}/tagline")
++     * @Method("PUT")
++     */
++    public function editTagLineAction(Programmer $programmer, Request $request)
++    {
++        $programmer->setTagLine($request->getContent());
++        $em = $this->getDoctrine()->getManager();
++        $em->persist($programmer);
++        $em->flush();
++
++        return new Response($programmer->getTagLine());
++    }
+ }
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index cebd07c..867c989 100644
+--- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
++++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+@@ -314,4 +314,20 @@ EOF;
+         $this->assertEquals(401, $response->getStatusCode());
+         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
+     }
++
++    public function testEditTagline()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++            'tagLine' => 'The original UnitTester'
++        ));
++
++        $response = $this->client->put('/api/programmers/UnitTester/tagline', [
++            'headers' => $this->getAuthorizedHeaders('weaverryan'),
++            'body' => 'New Tag Line'
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->assertEquals('New Tag Line', (string) $response->getBody());
++    }
+ }
