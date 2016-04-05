@@ -641,6 +641,11 @@
             "description": null
         },
         {
+            "id": "hateoas-use-application-hal-json",
+            "name": "HATEOAS: Use application\/hal+json",
+            "description": null
+        },
+        {
             "id": "hateoas-embed",
             "name": "HATEOAS: Embed",
             "description": null
@@ -771,5 +776,5 @@
             "description": null
         }
     ],
-    "sha": "f14cde612fbb2819331b4bf6093f4c30c5602ecd"
+    "sha": "4e3f94a387f585a89ece9ffc0fa01e63cfcf45d1"
 }

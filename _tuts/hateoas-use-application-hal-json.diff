@@ -1,26 +1,25 @@
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index e6349c7..ed3b875 100644
+index 29051d4..e6349c7 100644
 --- a/src/AppBundle/Controller/BaseController.php
 +++ b/src/AppBundle/Controller/BaseController.php
 @@ -120,7 +120,7 @@ abstract class BaseController extends Controller
          $json = $this->serialize($data);
  
          return new Response($json, $statusCode, array(
--            'Content-Type' => 'application/hal+json'
-+            'Content-Type' => 'application/vnd.codebattles+json'
+-            'Content-Type' => 'application/json'
++            'Content-Type' => 'application/hal+json'
          ));
      }
  
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 5524427..569fa2a 100644
+index 80c2ba6..0deea1f 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-@@ -28,7 +28,7 @@ class ProgrammerControllerTest extends ApiTestCase
+@@ -28,6 +28,7 @@ class ProgrammerControllerTest extends ApiTestCase
          ]);
  
          $this->assertEquals(201, $response->getStatusCode());
--        $this->assertEquals('application/hal+json', $response->getHeader('Content-Type')[0]);
-+        $this->assertEquals('application/vnd.codebattles+json', $response->getHeader('Content-Type')[0]);
++        $this->assertEquals('application/hal+json', $response->getHeader('Content-Type')[0]);
          $this->assertTrue($response->hasHeader('Location'));
          $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location')[0]);
          $finishedData = json_decode($response->getBody(true), true);
