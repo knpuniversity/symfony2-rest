@@ -26,7 +26,7 @@ index 0c7bef7..5d032d1 100644
 +    }
  }
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 7cf444e..b3707fc 100644
+index facfedc..9b8082e 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -33,7 +33,11 @@ class BattleControllerTest extends ApiTestCase
@@ -37,7 +37,7 @@ index 7cf444e..b3707fc 100644
 +        $this->asserter()
 +            ->assertResponsePropertyEquals($response, 'project', $project->getId());
 +        $this->asserter()
-+            ->assertResponsePropertyEquals($response, 'programmer', 'fred');
++            ->assertResponsePropertyEquals($response, 'programmer', 'Fred');
 +
          // todo for later
          //$this->assertTrue($response->hasHeader('Location'));

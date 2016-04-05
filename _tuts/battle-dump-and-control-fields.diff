@@ -44,7 +44,7 @@ index 16a6f31..0c7bef7 100644
      private $notes;
  
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index b8c4b59..7cf444e 100644
+index 0f3e67b..facfedc 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -33,6 +33,7 @@ class BattleControllerTest extends ApiTestCase
