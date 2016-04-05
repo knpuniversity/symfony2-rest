@@ -51,7 +51,7 @@ index a29e093..da665a5 100644
 +    }
 +}
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 27db262..2dabacc 100644
+index e501aa6..72b66c3 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -40,7 +40,7 @@ class BattleControllerTest extends ApiTestCase
@@ -60,7 +60,7 @@ index 27db262..2dabacc 100644
              $response,
 -            '_links.programmer.href',
 +            '_links.programmer',
-             $this->adjustUri('/api/programmers/fred')
+             $this->adjustUri('/api/programmers/Fred')
          );
          $this->asserter()->assertResponsePropertyEquals(
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php

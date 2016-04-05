@@ -71,7 +71,7 @@ index 2692cbe..592d885 100644
       * @param $nickname
       * @return Programmer
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 50aa5c9..566bf40 100644
+index 56ed55d..906e17f 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -44,9 +44,11 @@ class BattleControllerTest extends ApiTestCase
@@ -81,7 +81,7 @@ index 50aa5c9..566bf40 100644
 +        // create a Programmer owned by someone else
 +        $this->createUser('someone_else');
          $programmer = $this->createProgrammer([
-             'nickname' => 'fred'
+             'nickname' => 'Fred'
 -        ], 'weaverryan');
 +        ], 'someone_else');
  

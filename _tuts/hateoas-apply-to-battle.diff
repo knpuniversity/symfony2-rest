@@ -25,7 +25,7 @@ index 93ff962..c9ebe05 100644
   */
  class Battle
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 2951b4d..6adbf7c 100644
+index 0cbdac9..22403c4 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -40,7 +40,7 @@ class BattleControllerTest extends ApiTestCase
@@ -34,6 +34,6 @@ index 2951b4d..6adbf7c 100644
              $response,
 -            '_links.programmer',
 +            '_links.programmer.href',
-             $this->adjustUri('/api/programmers/fred')
+             $this->adjustUri('/api/programmers/Fred')
          );
  

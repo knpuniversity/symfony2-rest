@@ -1,10 +1,10 @@
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 54daa10..27db262 100644
+index becfb20..e501aa6 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -43,7 +43,11 @@ class BattleControllerTest extends ApiTestCase
              '_links.programmer.href',
-             $this->adjustUri('/api/programmers/fred')
+             $this->adjustUri('/api/programmers/Fred')
          );
 -        $this->debugResponse($response);
 +        $this->asserter()->assertResponsePropertyEquals(
