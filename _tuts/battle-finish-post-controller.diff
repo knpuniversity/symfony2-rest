@@ -40,14 +40,15 @@ index c63bb6d..3ac3d37 100644
  }
 diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
 new file mode 100644
-index 0000000..666f15a
+index 0000000..4718482
 --- /dev/null
 +++ b/src/AppBundle/Form/BattleType.php
-@@ -0,0 +1,31 @@
+@@ -0,0 +1,32 @@
 +<?php
 +
 +namespace AppBundle\Form;
 +
++use AppBundle\Form\Model\BattleModel;
 +use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 +use Symfony\Component\Form\AbstractType;
 +use Symfony\Component\Form\FormBuilderInterface;
@@ -70,7 +71,7 @@ index 0000000..666f15a
 +    public function configureOptions(OptionsResolver $resolver)
 +    {
 +        $resolver->setDefaults([
-+            'data_class' => 'AppBundle\Form\Model\BattleModel',
++            'data_class' => BattleModel::class,
 +            'csrf_protection' => false,
 +        ]);
 +    }

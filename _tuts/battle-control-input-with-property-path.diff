@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
-index 666f15a..4865ffb 100644
+index 4718482..3933bc7 100644
 --- a/src/AppBundle/Form/BattleType.php
 +++ b/src/AppBundle/Form/BattleType.php
-@@ -12,11 +12,13 @@ class BattleType extends AbstractType
+@@ -13,11 +13,13 @@ class BattleType extends AbstractType
      public function buildForm(FormBuilderInterface $builder, array $options)
      {
          $builder
@@ -21,7 +21,7 @@ index 666f15a..4865ffb 100644
          ;
      }
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 4f03f20..f723148 100644
+index b3707fc..4d6b14b 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -21,8 +21,8 @@ class BattleControllerTest extends ApiTestCase

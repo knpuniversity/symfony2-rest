@@ -22,7 +22,7 @@ index 2f2ab93..04f9ae2 100644
  
      public function getProject()
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index f723148..0088deb 100644
+index 4d6b14b..b522ff9 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -41,4 +41,26 @@ class BattleControllerTest extends ApiTestCase

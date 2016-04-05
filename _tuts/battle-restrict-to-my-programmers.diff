@@ -17,7 +17,7 @@ index 3ac3d37..44ee65a 100644
  
          if (!$form->isValid()) {
 diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
-index 4865ffb..6e39080 100644
+index 3933bc7..1e3cf19 100644
 --- a/src/AppBundle/Form/BattleType.php
 +++ b/src/AppBundle/Form/BattleType.php
 @@ -2,6 +2,7 @@
@@ -25,10 +25,10 @@ index 4865ffb..6e39080 100644
  namespace AppBundle\Form;
  
 +use AppBundle\Repository\ProgrammerRepository;
+ use AppBundle\Form\Model\BattleModel;
  use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  use Symfony\Component\Form\AbstractType;
- use Symfony\Component\Form\FormBuilderInterface;
-@@ -11,10 +12,15 @@ class BattleType extends AbstractType
+@@ -12,10 +13,15 @@ class BattleType extends AbstractType
  {
      public function buildForm(FormBuilderInterface $builder, array $options)
      {
@@ -45,8 +45,8 @@ index 4865ffb..6e39080 100644
              ])
              ->add('projectId', EntityType::class, [
                  'class' => 'AppBundle\Entity\Project',
-@@ -29,5 +35,6 @@ class BattleType extends AbstractType
-             'data_class' => 'AppBundle\Form\Model\BattleModel',
+@@ -30,5 +36,6 @@ class BattleType extends AbstractType
+             'data_class' => BattleModel::class,
              'csrf_protection' => false,
          ]);
 +        $resolver->setRequired(['user']);
@@ -71,7 +71,7 @@ index 2692cbe..592d885 100644
       * @param $nickname
       * @return Programmer
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 0088deb..3b52247 100644
+index b522ff9..a2633da 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -44,9 +44,11 @@ class BattleControllerTest extends ApiTestCase
