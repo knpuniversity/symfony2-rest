@@ -71,10 +71,10 @@ index 2692cbe..592d885 100644
       * @param $nickname
       * @return Programmer
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index cc6163f..75ff777 100644
+index 0088deb..3b52247 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-@@ -45,9 +45,11 @@ class BattleControllerTest extends ApiTestCase
+@@ -44,9 +44,11 @@ class BattleControllerTest extends ApiTestCase
  
      public function testPOSTBattleValidationErrors()
      {
@@ -87,7 +87,7 @@ index cc6163f..75ff777 100644
  
          $data = array(
              'projectId' => null,
-@@ -63,5 +65,6 @@ class BattleControllerTest extends ApiTestCase
+@@ -62,5 +64,6 @@ class BattleControllerTest extends ApiTestCase
          $this->assertEquals(400, $response->getStatusCode());
          $this->asserter()->assertResponsePropertyExists($response, 'errors.projectId');
          $this->asserter()->assertResponsePropertyEquals($response, 'errors.projectId[0]', 'This value should not be blank.');

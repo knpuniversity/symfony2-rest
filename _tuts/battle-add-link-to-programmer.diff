@@ -23,10 +23,10 @@ index 5d032d1..93ff962 100644
  class Battle
  {
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 33cb80d..c437be7 100644
+index b727a09..c37b244 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-@@ -39,6 +39,12 @@ class BattleControllerTest extends ApiTestCase
+@@ -38,6 +38,12 @@ class BattleControllerTest extends ApiTestCase
          $this->asserter()
              ->assertResponsePropertyEquals($response, 'programmer', 'fred');
  

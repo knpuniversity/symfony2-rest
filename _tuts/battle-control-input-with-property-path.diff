@@ -21,7 +21,7 @@ index 666f15a..4865ffb 100644
          ;
      }
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 8f3c7aa..23edf2f 100644
+index 4f03f20..f723148 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -21,8 +21,8 @@ class BattleControllerTest extends ApiTestCase
@@ -34,4 +34,4 @@ index 8f3c7aa..23edf2f 100644
 +            'programmerId' => $programmer->getId()
          );
  
-         // 1) Create a programmer resource
+         $response = $this->client->post('/api/battles', [

@@ -1,9 +1,9 @@
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 new file mode 100644
-index 0000000..2c01ffe
+index 0000000..b8c4b59
 --- /dev/null
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-@@ -0,0 +1,40 @@
+@@ -0,0 +1,39 @@
 +<?php
 +
 +namespace Tests\AppBundle\Controller\Api;
@@ -31,7 +31,6 @@ index 0000000..2c01ffe
 +            'programmer' => $programmer->getId()
 +        );
 +
-+        // 1) Create a programmer resource
 +        $response = $this->client->post('/api/battles', [
 +            'body' => json_encode($data),
 +            'headers' => $this->getAuthorizedHeaders('weaverryan')

@@ -1,8 +1,8 @@
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index d863cc1..34bc1bb 100644
+index 05621cf..9101d66 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-@@ -44,7 +44,11 @@ class BattleControllerTest extends ApiTestCase
+@@ -43,7 +43,11 @@ class BattleControllerTest extends ApiTestCase
              '_links.programmer.href',
              $this->adjustUri('/api/programmers/fred')
          );

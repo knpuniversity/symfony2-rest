@@ -51,10 +51,10 @@ index a29e093..da665a5 100644
 +    }
 +}
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 34bc1bb..301541f 100644
+index 9101d66..e688c50 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-@@ -41,7 +41,7 @@ class BattleControllerTest extends ApiTestCase
+@@ -40,7 +40,7 @@ class BattleControllerTest extends ApiTestCase
  
          $this->asserter()->assertResponsePropertyEquals(
              $response,

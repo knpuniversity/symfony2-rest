@@ -44,10 +44,10 @@ index 16a6f31..0c7bef7 100644
      private $notes;
  
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 2c01ffe..6b54f1e 100644
+index b8c4b59..7cf444e 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-@@ -34,6 +34,7 @@ class BattleControllerTest extends ApiTestCase
+@@ -33,6 +33,7 @@ class BattleControllerTest extends ApiTestCase
          $this->assertEquals(201, $response->getStatusCode());
          $this->asserter()
              ->assertResponsePropertyExists($response, 'didProgrammerWin');

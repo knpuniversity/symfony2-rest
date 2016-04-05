@@ -1,8 +1,8 @@
 diff --git a/src/AppBundle/Controller/Api/BattleController.php b/src/AppBundle/Controller/Api/BattleController.php
-index 8131a01..3ac3d37 100644
+index c63bb6d..3ac3d37 100644
 --- a/src/AppBundle/Controller/Api/BattleController.php
 +++ b/src/AppBundle/Controller/Api/BattleController.php
-@@ -3,6 +3,8 @@
+@@ -3,8 +3,11 @@
  namespace AppBundle\Controller\Api;
  
  use AppBundle\Controller\BaseController;
@@ -10,10 +10,16 @@ index 8131a01..3ac3d37 100644
 +use AppBundle\Form\Model\BattleModel;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
  use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
- use Symfony\Component\HttpFoundation\Request;
-@@ -15,5 +17,20 @@ class BattleController extends BaseController
++use Symfony\Component\HttpFoundation\Request;
+ 
+ class BattleController extends BaseController
+ {
+@@ -12,7 +15,22 @@ class BattleController extends BaseController
+      * @Route("/api/battles")
+      * @Method("POST")
       */
-     public function newAction(Request $request)
+-    public function newAction()
++    public function newAction(Request $request)
      {
 +        $battleModel = new BattleModel();
 +        $form = $this->createForm(BattleType::class, $battleModel);
