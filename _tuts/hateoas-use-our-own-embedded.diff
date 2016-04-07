@@ -1,0 +1,50 @@
+diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
+index 21d5370..a4630a4 100644
+--- a/src/AppBundle/Entity/Battle.php
++++ b/src/AppBundle/Entity/Battle.php
+@@ -34,6 +34,7 @@ class Battle
+     /**
+      * @ORM\ManyToOne(targetEntity="Programmer")
+      * @ORM\JoinColumn(nullable=false)
++     * @Serializer\Expose()
+      */
+     private $programmer;
+ 
+@@ -123,15 +124,6 @@ class Battle
+ 
+     /**
+      * @Serializer\VirtualProperty()
+-     * @Serializer\SerializedName("programmer")
+-     */
+-    public function getProgrammerNickname()
+-    {
+-        return $this->programmer->getNickname();
+-    }
+-
+-    /**
+-     * @Serializer\VirtualProperty()
+      * @Serializer\SerializedName("project")
+      */
+     public function getProjectId()
+diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+index 5ab2ea4..ed3b9ee 100644
+--- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
++++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
+@@ -35,8 +35,6 @@ class BattleControllerTest extends ApiTestCase
+             ->assertResponsePropertyExists($response, 'didProgrammerWin');
+         $this->asserter()
+             ->assertResponsePropertyEquals($response, 'project', $project->getId());
+-        $this->asserter()
+-            ->assertResponsePropertyEquals($response, 'programmer', 'Fred');
+ 
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+@@ -45,7 +43,7 @@ class BattleControllerTest extends ApiTestCase
+         );
+         $this->asserter()->assertResponsePropertyEquals(
+             $response,
+-            '_embedded.programmer.nickname',
++            'programmer.nickname',
+             'Fred'
+         );
+ 

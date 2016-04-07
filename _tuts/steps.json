@@ -666,6 +666,11 @@
             "description": null
         },
         {
+            "id": "hateoas-use-our-own-embedded",
+            "name": "HATEOAS: Use our own embedded",
+            "description": null
+        },
+        {
             "id": "hypermedia-custom-media-type",
             "name": "Hypermedia: Custom media type",
             "description": null
@@ -776,5 +781,5 @@
             "description": null
         }
     ],
-    "sha": "586a327231bda07411a42d91c42a0b192efc4917"
+    "sha": "adc66c2ec35e7a068eb49b00c57fc3ed32476ca8"
 }
