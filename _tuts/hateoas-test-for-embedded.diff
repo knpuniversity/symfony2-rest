@@ -1,5 +1,5 @@
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index becfb20..e501aa6 100644
+index becfb20..3989420 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -43,7 +43,11 @@ class BattleControllerTest extends ApiTestCase
@@ -10,7 +10,7 @@ index becfb20..e501aa6 100644
 +        $this->asserter()->assertResponsePropertyEquals(
 +            $response,
 +            '_embedded.programmer.nickname',
-+            'fred'
++            'Fred'
 +        );
  
          // todo for later
