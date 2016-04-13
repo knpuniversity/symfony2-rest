@@ -5,11 +5,13 @@ summary: |
     you to your knees with fuzzy details, missing best practices and complexity.
     Let's make our API awesome:
 
-    * Linking to Resources (and Hypermedia)
-    * POSTing related resource ids (EntityToIdTransformer)
-    * VirtualPropertys and Form property_paths
-    * HATEOAS
-    * Handling a Collection resource update
+    * Linking to Resources (and Hypermedia) without hating it
+    * Controlling your JSON fields with VirtualProperty and SerializedName
+    * Customizing your *input* field names with property_path
+    * The wonderful HATEOAS php library
+    * HAL+JSON... and whether you want to use it or not
+    * Subordinate resources!
+    * Handle ugly, non-RESTful, weird endpoints with some swagger
 
     The REST of the Symfony Series:
 
@@ -20,9 +22,9 @@ summary: |
     * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
 
 illustration: rest-sf-5.png
-# tuts_hero:
-#     start_step: "Serialize: Whitelisting properties"
-     finish_step: "start"
+tuts_hero:
+     start_step: "refactor-improve-apitestcase"
+     finish_step: "custom-endpoint-powerup"
 
 chapters: 
     battle-resource-test:
