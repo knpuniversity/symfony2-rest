@@ -26,43 +26,46 @@ tuts_hero:
      start_step: "refactor-improve-apitestcase"
      finish_step: "custom-endpoint-powerup"
 
-chapters: []
-    # battle-resource-test:
-    #     is_finished: false
-    #     video_key: ~
-    # api-relations-in-form:
-    #     is_finished: false
-    #     video_key: ~
-    # virtual-property:
-    #     is_finished: false
-    #     video_key: ~
-    # property-path:
-    #     is_finished: false
-    #     video_key: ~
-    # restrict-valid-programmer-input:
-    #     is_finished: false
-    #     video_key: ~
-    # hateoas-hypermedia-buzzwords:
-    #     is_finished: false
-    #     video_key: ~
-    # hal-json:
-    #     is_finished: false
-    #     video_key: ~
-    # hal-embedded:
-    #     is_finished: false
-    #     video_key: ~
-    # customize-link-format:
-    #     is_finished: false
-    #     video_key: ~
-    # subordinate-url-structure:
-    #     is_finished: false
-    #     video_key: ~
-    # consistent-collection-resources:
-    #     is_finished: false
-    #     video_key: ~
-    # weird-tagline-endpoint:
-    #     is_finished: false
-    #     video_key: ~
-    # weird-powerup-endpoint:
-    #     is_finished: false
-    #     video_key: ~
+chapters:
+    battle-resource:
+        is_finished: false
+        video_key: ~
+    create-battle-test:
+        is_finished: false
+        video_key: ~
+    saving-related-resources-via-form:
+        is_finished: false
+        video_key: ~
+    virtual-property:
+        is_finished: false
+        video_key: ~
+    property-path:
+        is_finished: false
+        video_key: ~
+    restrict-valid-programmer-input:
+        is_finished: false
+        video_key: ~
+    hateoas-hypermedia-buzzwords:
+        is_finished: false
+        video_key: ~
+    hal-json:
+        is_finished: false
+        video_key: ~
+    hal-embedded:
+        is_finished: false
+        video_key: ~
+    customize-link-format:
+        is_finished: false
+        video_key: ~
+    subordinate-url-structure:
+        is_finished: false
+        video_key: ~
+    consistent-collection-resources:
+        is_finished: false
+        video_key: ~
+    weird-tagline-endpoint:
+        is_finished: false
+        video_key: ~
+    weird-powerup-endpoint:
+        is_finished: false
+        video_key: ~
