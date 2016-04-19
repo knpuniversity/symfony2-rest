@@ -1,6 +1,6 @@
 # Saving Related Resources in a Form
 
-In the `Controller\Api` directory, create a new `BattleController`. Make it extend
+In the `Controller/Api` directory, create a new `BattleController`. Make it extend
 the same `BaseController` as before: we've put a lot of shortcuts in this. Then,
 add `public function newAction()`. Set the route above it with `@Route` - make sure
 you hit tab to autocomplete this: it adds the necessary `use` statement. Finish the

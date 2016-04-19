@@ -37,7 +37,7 @@ But when it sets the final data on `BattleModel`, it will call `setProject` and
 `setProgrammer`.
 
 This is a little known way to have a field name that's different than the property
-name on your calss. Bring on the test!
+name on your class. Bring on the test!
 
 ```bash
 ./vendor/bin/phpunit --filter testPOSTCreateBattle

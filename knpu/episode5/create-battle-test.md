@@ -7,7 +7,7 @@ it extend the fancy `ApiTestCase` we've been working on. Start with
 Go steal some code from `ProgrammerControllerTest`. Copy the setup method that creates
 a user so that we can send the Authorization header.
 
-## Create a Proejct & Programmer
+## Create a Project & Programmer
 
 For this endpoint, there are only two pieces of information we need to send: which
 programmer and which project will battle. So before we start, we need to create these.

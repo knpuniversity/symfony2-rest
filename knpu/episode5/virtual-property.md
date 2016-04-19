@@ -19,13 +19,13 @@ depend on *who* you're making the API for. If you're building your API for an iP
 app, will having these extra fields be helpful? Or, if you're API is for a JavaScript
 frontend like ReactJS, then build your API to make React happy.
 
-## Adding an ExlcusionPolicy
+## Adding an ExclusionPolicy
 
 Let's assume that we do *not* want those embedded objects. First, hide them! In
 the `Battle` entity, we need to add some serialization exclusion rules. Since we
 do this via annotations, we need a `use` statement. Here's an easy way to get the
 correct `use` statement without reading the docs. I know that one of the annotations
-is called `ExclusionPolicy`. Add `use ExlusionPolicy` and let it autocomplete. Now,
+is called `ExclusionPolicy`. Add `use ExclusionPolicy` and let it autocomplete. Now,
 remove the `ExclusionPolicy` ending and add `as Serializer`.
 
 Now, above the class, add `@Serializer\ExclusionPolicy("all")`: now *no* properties will
