@@ -10,7 +10,7 @@ new `BadCredentialsException` and that kicks us out.
 
 It turns out that doing this this *also* triggers the entry point. And if you think
 about it, that makes sense: any time an anonymous user is able to get into your
-application and then you an exception to deny access, that will trigger the entry
+application and then you throw an exception to deny access, that will trigger the entry
 point. And our entry point is *not* yet returning the nice API problem structure.
 
 ## Testing for the API Problem Response
@@ -34,7 +34,7 @@ a second.
 Head to the `JWTTokenAuthenticator`. In `start()`, create a new `$apiProblem = new ApiProblem()`.
 Pass it a 401 status code with no `type`.
 
-The `details` key should tell the API client *any* other information about what went
+The `detail` key should tell the API client *any* other information about what went
 wrong. And check this out: when the `start()` method is called, it has an optional
 `$authException` argument. Most of the time, when Symfony calls `start()` its because
 an `AuthenticationException` has been thrown. And *this* class gives us some information
@@ -49,7 +49,7 @@ The `AuthenticationException` - and its sub-classes - are special: each has a
 `getMessageKey()` method that you can safely return to the user to help *hint* as
 to what went wrong.
 
-Add `$message = $authException ? $authException->getMessageKey() : 'Missing Credentials'`;
+Add `$message = $authException ? $authException->getMessageKey() : 'Missing Credentials';`.
 If no `$authException` is passed, this is the best message we can return to the client.
 Finish this with `$apiProblem->set('details', $message)`. 
 

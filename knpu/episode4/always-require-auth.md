@@ -48,7 +48,7 @@ With any luck, we should get a bunch of *beautiful* passes.
 ./vendor/bin/phpunit tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 ```
 
-And we are! Ooh, until we hit the last test! When we *don't* send an Authorization
+And we do! Ooh, until we hit the last test! When we *don't* send an Authorization
 header to an endpoint that requires authentication... it's *still* returning a 200
 status code instead of 401. When we kick out non-authenticated API requests, they
 are *still* being redirected to the login page... which is clearly *not* a cool way
