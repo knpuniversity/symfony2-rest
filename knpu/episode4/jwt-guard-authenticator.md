@@ -1,21 +1,106 @@
-# JWT Guard Authenticator
+# JWT Guard Authenticator (Part 1)
 
-For our authentication system, we’re going to use guard.  I’m just going to make it really fun to set all this up.  [Inaudible] [00:00:08] the screen.  And in AppBundle grab new security directory.  And then assign a new PHP class called jwtTokenAuthenticator.  Now, all authenticators always start the same way.  We’re going to extend the AbstractGuardAuthenticator class.  And then I’m going to go to the code it generates menu, or command-M on a Mac.  And go to implement methods, and I’m going to implement all the methods that I need to.  And then I’ll go back and do that one more time to get the start method.  I’ll keep that one on the bottom.  Okay, great.  So, let’s walk through the process of guard authentication and if you’re new to guard authentication, we have separate tutorials about that, so go check those out.  But it’s pretty simple.  
+To create our token authentication system, we'll use Guard. On guard!
 
-So, get credentials – our job is to get the credentials off of the request and in Api, the credential is the Api token.  So, all we need to do is read that authorization header and then do a little string parsing because we have the bearer being sent along with it.  The jwt bundle actually comes with a helper for that, so we can say $extractor = new AuthorizationHeaderTokenExtractor and then we pass it the word Bearer, that’s our prefix, and then the name of the header, which is Authorization.  And then that will get the token for us by saying $token = $extractor–>extract, and we just pass it the request object.  So, [inaudible] take care of all that stuff for us.  And now, if there is no token, just return null, and then that will cause authentication to stop.  Not fail, just stop.  Because there is no authentication information being sent on this request.  
+Guard is part of Symfony's core security system and makes setting up custom auth
+so easy it's actually fun. 
 
-And we’re going to talk a lot more about what happens next.  So, what happens if there is no token sent, but the page requires a token.  But for now, we need our authentication to just quit.  Now, if there is a token, let’s return that. Perfect.  So next, if we return something from this method, that token is passed to getUser as credentials.  Our job is to use that token to find the user that relates to that token.  And here’s the cool thing about JSON web tokens.  Remember, our token contains information.  It contains the username.  So, we’re going to be able to actually JSON decode that token, and then get this information right back out of it and we’ll use that to query for the user.  Now, in order to do that, we’re going to need two services.  So, I’m going to go back to the top of this class and make a construct function.  And we are going to need the lexik encoder service again.  
+## Creating the Authenticator
 
-So, I’ll go back and run ./bin/console debug: container lexik, and then select the jwt authentication encoder.  And you can see this is just an alias for the first one.  So, I’ll run that command again.  And this tells me what class it is – jwt encoder.  So, I’ll type in my argument with JWTEncoder.  Now, actually as I do that, you can see there is also an interface, which I’m guessing that class implements.  So, let’s try to use the interface instead.  $jwtEncoder, and then I also need the EntityManager, so we can query for the user object, $em.  Now, I’ll use a shortcut on [inaudible] storm, which is option enter on a Mac, to initialize those fields.  And all that did is create the two properties up to and assign them down in the construct function.  So, you could just do that by hand if you wanted to.  
+In AppBundle, create a new `Security` directory. Inside add a new class: `JWTTokenAuthenticator`.
 
-Okay, down in getUser, step 1.  We need to decode that token.  So, say $data = $this–>jwtEncoder, and it’s super simple.  It’s decode and then pass it credentials, which, remember, is our token string.  And that’s it.  It takes the token string and decodes it into plain data.  Just like a normal JSON encode.  Behind the scenes, when it does that, it’s checking two things: it’s checking first that package of information hasn’t been tampered with, and it’s using the private key on our side to make sure that no one has messed with anything.  So, we can guarantee that nobody has changed the username to be some other username to gain access so the site.  It’s also checking and expires, because we set a maximum time of six hours in our config.yml file, so if the token’s expired, it will also fail at this step.
+Every authenticator starts the same way: extend `AbstractGuardAuthenticator`. Now,
+all we need to do is fill in the logic for some abstract methods. To get us started
+quickly, go to the Code->Generate menu - command+N on a Mac - and select
+"Implement Methods". Select the ones under Guard. Now, do that *one* more time and
+also select the `start()` method. That'll put `start()` on the bottom, which will
+be more natural.
 
-So, if $data === false, then we know that there’s a problem with the token, and so we can throw a new CustomUserMessageAuthenticationException of Invalid token.  And again, we’ll talk more about error handling in a second.  But assuming everything is good, we have a username.  $username = data[‘username’].  And now, we’re simply going to query for that.  $this–>em, –>getRepository(‘AppBundle:User’), –>findOneBy([‘username’]) set to that username, and that’s it.  If that’s a valid username, that will return a user object.  If not, authentication is going to fail.  And that’s it, guys.  In checkCredentials, the token itself is credentials.  You can just return true for this, so that doesn’t fail.  
+If this is your first Guard authenticator... welcome! The process is pretty easy:
+we'll walk through each method and just fill in the logic. But if you want to know
+more - check out the Symfony security course.
 
-We’re going to talk about onAuthenticationFailure in a second.  And onAuthenticationSuccess, just do nothing, because we want the request once it’s authenticated to continue to the controller, so that our controller can do the normal work.  Then for supportsRememberMe, this is not important at all, so just return false.  And we’re going to talk about start method in a second.  But really, you just need to have getCredentials and getUser filled in.  Now, once this is done, go into app config services.yml, and let’s register this as a service.  How about jwt_token_authenticator.  Give it a class of jwt token authenticator.  
+## getCredentials()
 
-And, instead of the arguments, I’m actually going to be lazy and just autowire those arguments.  That’s a new feature in Symfony 2.8 that works most of the time.  But you could specify the arguments manually like the service above it, if you wanted to.  The last step is to copy that service name.  Go to security.yml, add a new guard key.  Authenticator is keyed below that and then paste that service in.  As soon as you do that, on every request in Symfony, our token authenticator is going to be looking for the authorization header and it should just work.  So, go back, let’s run our original testPOSTprogrammer as it exists, and this time, with any luck – it passes.  Which is maybe more amazing than you realize.  
+First: `getCredentials()`. Our job is to read the `Authorization` header and return
+the token - if any - that's being passed. To help with this, we can use an object
+from the JWT bundle we installed later: `$extractor = new AuthorizationHeaderTokenExtractor()`.
+Pass it `Bearer` - the prefix we're expecing before the actual token - and `Authorization`,
+the header to look on.
 
-This means our system is actually decoding that token.  It is actually authenticating the user, so that in ProgrammerController, when we asked for to make sure that the user is authenticated, the user is authenticated.  In fact, there’s one other spot we can fix.  Down on line 37, we’ve so far been hard coding it so that every new programmer is automatically owned by weaverryan.  Well, that’s not what we want anymore.  We want whoever the user is for the token that was just sent.  So, that’s simple enough.  We can replace it with $this–>getUser, and that’s it.  Our controller can’t tell how we were authenticated.  It doesn’t care that it was authenticated via jwt_token.  It just cares that somebody is logged in.  
+Grab the token with `$token = $extractor–>extract()` and pass it the `$request`.
+If there is *no* token, return `null`. This will cause authentication to stop. Not
+*fail*, just stop trying to authenticate the user via this method.
 
-So, run the test again.  And it passes.  And if you don’t believe me, you can run ./bin/console doctrine: query: sql ‘SELECT * FROM battle_programmer, the name of our table.  And we’ll add a –env=test to use the test database.  And there’s our one programmer that was just created, who’s related to user ID of 58, which I’m guessing is our user.  There it is.  So, welcome to our beautiful jwt authentication system.  Now, let’s lock down our entire api to require users.
+***TIP
+In Symfony 3.1, there is a new `supports()` method and *its* job is to decide whether
+or not authentication should continue. It's a very minor difference - just watch
+out for it!
+***
+
+## getUser()
+
+If there *is* a token, return it! Next, Symfony will call `getUser()` and pass this
+token string as the `$credentials` argument. Our job is to use that token to find
+the user it relates to.
+
+And this is where JSON web tokens shine. Because if we simple decode the token, it
+will *contain* the username. Then, we can just look it up in the database.
+
+To do this, we'll need two services. On top of the class, add a `__construct()`
+method so we can inject tehse. First, we need the lexik encoder service. Go back
+to your terminal and run:
+
+```bash
+bin/console debug:container lexik
+```
+
+Select the `lexik_jwt_authentication.encoder` service. Ah, this is just an alias
+for the first service - `lexik_jwt_authentication.jwt_encoder`. And it's an instance
+of `JWTEncoder`. Back in the authenticator, use this as the type-hint. Or, since
+it looks like there's an interface this probably implements, you can use it instead.
+Give this one more argument: `EntityManager $em` so we can query for the user.
+
+I'll use a shortcut - option+enter on a mac - to initialize these fields. This created
+the two properties and set them for me. Nice!
+
+Head back down to `getUser()`. Step 1: we need to deice the token. To do that,
+`$data = $this–>jwtEncoder->decode()` and pass it `$credentials` - that's our token
+string. 
+
+That's it! `$data` is now an array of whatever information we originally put into
+the token. Fundamentally, this works just like a normal `json_decode`, except that
+the library is also checking to make sure that the contents of our token weren't
+changed. It does this by using our *private* key. This guarantees that nobody has
+changed the username to some *other* username because they're a jerk. Encryption
+is amazing.
+
+It also checks the token's expires: our tokens last 1 hour because that's what we
+setup in `config.yml`.
+
+So, `if ($data === false`, then we know that there's a problem with the token. If
+there is, throw a `new CustomUserMessageAuthenticationException` with `Invalid token`.
+We'll talk about what that does in a second.
+
+But if everything is good, get the username with `$username = $data['username']`.
+Then, query for and return the uesr with
+`return $this–>em–>getRepository('AppBundle:User')–>findOneBy()` passing
+that `username` set to `$username`.
+
+## checkCredentials()
+
+If the user isn't found, this will return `null` and authentication will fail. But
+if a user *is* found, then Symfony finally calls `checkCredentials()`. Just return
+`true`: there's no password or anything else we need to check at this point.
+
+That's it for the important stuff!
+
+## Skip Everything Else (for now)
+
+Skip `onAuthenticationFailure()` for now: we'll talk about that in a minute. And
+for `onAuthenticationSuccess()`, purposefully do nothing: we want the authenticated
+request to continue to the controller so we can do our normal work.
+
+For `supportsRememberMe` - this doesn't apply to us - so return `false`. And keep
+`start()` blank for another minute. With just `getCredentials()` and `getUser()`
+filled in, our authenticator is ready to go. Let's hook it up!

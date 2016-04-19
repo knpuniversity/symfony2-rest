@@ -1,11 +1,53 @@
-# Always Require Auth
+# Lock down:Require Authentication Everywhere
 
-So, the only place that we’re requiring authentication right now is on our new Action.  But in our api, we want to require authentication everywhere for programmers.  So, whether I’m creating a new programmer, or editing a programmer, or even viewing a programmer, we need a properly authenticated user.  So, I could put this deny Access Unless Granted on every controller, but instead I use a trick from Sensio Framework Extra Bundle, and that is to add some [inaudible] [00:00:25] documentation above my class and use an @Security annotation.  So, hit tab, use auto completion, and then use “is_granted(‘ROLE_USER’)”).  We’re now requiring authentication on every end point inside of here.  
+The *only* endpoint that requires authentication is `newAction()`. But to use our
+API, we want to require authentication to use *any* endpoint related to programmers.
 
-So, if we rerun the test with ./vendor/bin/phpunit/ tests/AppBundle/Controller/Api/ Programmer Controller Test. php, we should see a lot of failures.  Fail, fail, fail, fail, fail, fail.  Because we’re not sending the authorization header on anything except for that very first end point.  So, now we need to fix that.  And we want to fix it in as little work as possible, because I don’t want to have to write all this code every single time.  So, let’s copy the token = code.  Get rid of that.  And to save ourselves a little bit of a headache, I’m going to click into ApiTestCase, find the create programmer method, and make a new protected function below it called get Authorized Headers, with two arguments, a username and an optional existing array of headers that you might want to send with your request.  
+Ok, just add `$this->denyAccessUnlessGranted()` to every controller. OR, use a cool
+trick from SensioFrameworkExtraBundle. Give the controller class a doc-block and
+give it a new annotation: `@Security`. Auto-complete that to get the `use` statement.
+Then, add `"is_granted('ROLE_USER')"`. Now we're requiring a valid user on *every*
+endpoint.
 
-And this is very simple.  We’re just going to paste our token = here, add a new authorization header equal to Bearer, space, and then the token and then return the headers.  So now, without too much effort, we can copy that method name.  Oh, and don’t forget to actually use the username argument.  In Programmer Controller Test, let’s just use this.  ‘headers’ =>$this–>get Authorized Headers(‘weaverryan’).  And we just need to repeat this on every single method inside of this test.  So, I’m going to look for this–>client–> to look at all of the requests.  And this is just going to be a bit of busy work, so let’s do it pretty quickly here.  We’ll add headers onto each of our calls to our api.  I’m not going to do this automatically because I might not want to do authorization on all of my calls.  
+If we re-run the tests with:
 
-In fact, there’s a test at the bottom of this where we actually test what happens when we don’t send the authorization header.  So, for now, for security purposes, I’m just making sure my tests just make as much sense as possible.  I’m going to keep things nice and manual.  And this last one we do not send headers.  Perfect.  Okay.  So, let’s go back.  With any luck, we should get a bunch of beautiful passes.  And we are.  Ooh, until we hit the last test.  Test requires authentication.  Which is still returning a 200 status code, instead of a 401.  So, when we kick people out, the one problem we have is that we’re 
- 
-still redirecting them to the login page, which is not what we want inside of our api.  So, let’s handle that next.  
+```bash
+./vendor/bin/phpunit tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+```
+
+we should see a *lot* of failures. Fail, fail, fail, fail! Try not to take it personally.
+We're *not* sending an Authorization header yet in most tests.
+
+So, now we need to fix that, And we want to fix it with as little work as possible.
+Copy the `$token = ` code and delete it. Let's make our lives easy: click into `ApiTestCase`.
+Add a new `protected function` called `getAuthorizedHeaders` with two arguments:
+a `$username` and an optional array of other `$headers` you want to send on the request.
+
+Paste the `$token = ` ocde here and add a new `Authorization` header that's equal
+to `Bearer ` and then the token. Return the whole array of headers.
+
+Now, copy the method name. Oh, and don't forget to actually *use* the `$username`
+argument! In `ProgrammerControllerTest`, add a `headers` key set to
+`$this->getAuthorizedHeaders('weaverryan')`.
+
+And we just need to repeat this on every single method inside of this test. I'll
+look for `$this->client` to find all of these... and do it as fast as I can! By
+hooking into Guzzle, we *could* add the `Authorization` header to every request
+automatically... but there might be *some* requests where we do *not* want this header.
+
+In fact, at the bottom, we actually test what happens when we don’t send the `Authorization`
+header. Skip adding the header here.
+
+With any luck, we should get a bunch of *beautiful* passes.
+
+```bash
+./vendor/bin/phpunit tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+```
+
+And we are! Ooh, until we hit the last test! When we *don't* send an Authorization
+header to an endpoing that requires authentication... it's *still* returning a 200
+status code instead of 401. When we kick out non-authenticated API requests, they
+are *still* being redirected to the login page... which is clearly *not* a cool way
+for an API to behave.
+
+Let's fix that.

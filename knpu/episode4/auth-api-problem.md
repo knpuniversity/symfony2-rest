@@ -1,25 +1,65 @@
-# Auth API Problem
+# Authentication API Problem
 
-The real great [inaudible] is how well we’re handling our errors.  Whenever anything goes wrong, you get back this really nice application problem plus JSON content type with these very specific feels that tells us about exactly what’s going wrong.  So I want to do the same thing when something goes wrong with authentication; keep this very, very nice system that we have going.  Open up the token controller test.  And down here when we send invalid credentials, remember that actually hits our token controller, and then we throw this new bad credentials exception and that kicks us out.
+Whenever something goes wrong in our API, we have a *great* setup: we always get
+back a descriptive JSON structure with keys that describe what went wrong. I want
+to do the exact same thing when something goes wrong with authentication.
 
-So it turns out that this also triggers the entry point inside of our authenticators. This also triggers the start method inside of our JWT token authenticator.  And if you think about it, that makes sense.  Any time an anonymous user is able to get into your application and then you throw an exception from within your controller to deny access, that’s going to trigger the entry points.  And of course the entry point right now is just returning a simple JSON response; it’s not our very pretty applications last problem plus Jason stuff so I want it to be.  So I'm going to copy the last four lines from one of the test and program controller test and let’s add that to our test post token invalid credentials.
+Open up the token controller test. Here, we puposefully send an *invalid* username
+and password combination. This actually hits `TokenController`, we throw this
+new `BadCredentialsException` and that kicks us out.
 
-The header should be application/problem plus JSON.  The type is going to be about corn blank.  That’s what we use when we have kind of generic errors that are just related to the status code, so in this case the 401 status code.  Then the official – the title that should be used for the 401 is unauthorized.  And I'm just getting that from our API problem class itself.  One of the things it does is when you pass in the type – in this case the about blank – it actually looks up the status code and looks for the official title of the status code.  So the 401 status code means unauthorized.  So it’s going to automatically look that up behind the scene and it’s going to be really cool.
+It turns out that doing this this *also* triggers the entry point. And if you think
+about it, that makes sense: any time an anonymous user is able to get into your
+application and then you an exception to deny access, that will trigger the entry
+point. Our entry point is *not* yet returning the nice API problem structure.
 
-And then for detail, which is an option field, we’re going to make this invalid credentials with a period.  And I will show you why in a second.  But first, we know that this triggers the JWT token authenticator.  So let’s make a proper API problem here.  So dollar sign API problem equals new API problem; that’s the helper class that helps us with this stuff, and it will be a 401 status code and we won’t pass a type in.
+Copy the last four lines from one of the tests in `ProgrammerControllerTest` and
+add that to `testPostTokenInvalidCredentials`.
 
-Next for that details cue which is optional, you’ll notice when the start method is called, sometimes there’s an off exception that’s passed to it.  Don’t worry too much about that but basically know this.  Sometimes when you end up with the start method, you actually know the reason why.  And in fact, that’s what’s happening inside of our token controller.  Because we’re throwing this bad credentials exception, that’s actually hinting to our authenticator what went wrong.  And if you hold command and look inside of this class, you’ll see that it has a get message key of invalid credentials period.  And you’ll notice that’s what I added inside my token credentials task.  In fact, make sure yours matches – your task matches that key exactly.
+The header should be `application/problem+json`. The type should be `about:blank`:
+that's what you should use when the status code - 401 for us - already fully describes
+what went wrong. For the `title` use `Unauthorized` - that's the standard text that
+always goes with a 401 status code. The `ApiProblem` class will set that for us:
+when we pass a `null` type, it sets `type` to `about:blank` and looks up the correct
+`title`.
 
-So without going into the detail of the security system too much in this tutorial, the basic idea is that inside of your start method, if you’re past a auth exception, the authentication exception is a special class; it has a get message key method on it, and you can use that to get a safe message to show the user.  So in this case, because we threw in the bad credentials exception, we’re going to have a safe key of invalid credentials.  So down below API problem equals new API problem, add message equals auth exception, question mark, auth exception error get message key, colon – we’ll just say missing credentials.  Because we’re not always past an auth exception.  If we’re not past one, we just know that no credentials were passed to us and we don't have any more information about that.  And then we’ll set API problem arrow set, and we’ll add a new details property to things.  Okay?
+Finally, for `detail` - which is an optional field for an API problem response - use
+`Invalid Credentials.` with a period. I'll show you *why* we're expecting that in
+a second.
 
-So the moral of the story is that in the start method, you might have information about what went wrong to end up here, or you might not.  Finally, let’s return a new JSON response with API problem 2RA and then a 401.  Perfect.  Well, not quite perfect but it’s going to get closer.  So copy the token controller test method.  Let’s go back and run vendor vin peach P unit, dash dash filter and then paste that method.  And you can see it’s pretty close.  It looks like we want but we’re still getting the application slash JSON instead of the application slash problem plus JSON header.  So that’s no problem; we just need to set the header inside of our start method.  But wait, don’t do that.  Because we have done all of this work before.
+Head to the `JWTTokenAuthenticator`. In `start()`, create a new `$apiProblem = new ApiProblem()`.
+Pass it a 401 status code wiht no `type`.
 
-In the event list in our directory, there’s an API exception subscriber.  This is something that handles all of the exceptions that are thrown under the slash API UR honor application, something we made in a previous tutorial.  And it already has all of the logic we need to turn an API problem object into a response.  So what we really need to do is centralize this code so we can reuse it here, and inside of our authenticator.  So copy the last ten lines or so out of the API exceptions subscriber.  And the API directory, let’s create a new class called response factory.  And inside there, a new public function called create response.  We will pass it in API problem and it will take care of all of the logic for turning that into our proper JSON response.  And I will auto complete on JSON response to get the U statement.  Perfect.
+The `details` key should tell the API client *any* other information about what went
+wrong. And check this out: when the `start()` method is called, it has an optional
+`$authException` argument. Most of the time, when Symfony calls `start()` its because
+an `AuthenticationException` has been thrown. And *this* class gives us some information
+about *what* caused this situation.
 
-Next, it’s going to service as that YML and register this as a service.  So API dot response underscore factory, set the class to response factory and there are no arguments so will leave that blank.  And we already know we’re going to need this inside of our API exception subscriber so I'll add a second argument here, which will be at API dot response factory.  Perfect.  And then in API exceptions subscriber, you can add a second constructive argument for the response factory.  I use the option enter shortcut to initialize that field.  That just adds the property for me.  And then down below, very simple, response equals this arrow, response factory arrow, create response, pass it the API problem.  Easy.
+And in fact, in `TokenController`, we're throwing a `BadCredentialsException`, which
+is a sub-class of `AuthenticationException`. Hold command to look inside the class.
+It has a `getMessageKey()` method set to `Invalid Credentials.`: make sure you test
+matches this string exactly.
 
-And now, a last step we can celebrate by using this inside of our JWT authenticator and it will take care of some of the logic for us.  So same thing.  I'll add a third argument in this case for a response factory, and I'll use the same shortcut, option enter, to initialize the field.  That added the property for me.  Looks good.  And then down below, instead of creating the response by hand, it’s a return this error response factory, arrow great response and pass it, our API problem and that’s it.  And I don’t need to update the services dot YML for the authenticator because you’ll remember; we’re using auto wiring so it’s going to take care of adding that third argument automatically for us.  
+The `AuthenticationException` - and its sub-classes - are special: each has a
+`getMessageKey()` method that you can safely return to the user to help *hint* as
+to what went wrong.
 
-So if everything went well, should be able to rerun a test.  And it fails, but let’s see, here.  You see some problems about get detail, detail?  Neither the property detail nor one of the methods is there.  Error reading property detail from available keys details; that sounds like a Ryan mistake.  Open up your token controller test and make sure that this key is called details.  And here we’re looking for detail, and that was actually correct.  Inside of my JWT token authenticator, change that key to detail.  That key can really be anything but detail is a service standard field that’s often used.
+Add `$message = $authException ? $authException->getMessageKey() : 'Missing Credentials'`;
+If no `$authException` is passed, this is the best message we can return to the client.
+Finish this with `$apiProblem->set('details', $message)`. 
 
-So rerun that test.  That looks perfect.  In fact, if we rerun our entire test suite, we didn’t break any of our exception handling.  Awesome.  So the only error situation that we haven’t handled is what happens if somebody sends a bad JWT?  Or, for example, it’s been corrupted or maybe it’s just expired.  So let’s try that next.
+Finally, return a `new JsonResponse` with `$apiProblem->toArray()` and then a 401.
+Perfect! Well, not *actually* perfectm but it's getting close.
+
+Copy the invalid credentials test method and run:
+
+```bash
+./vendor/bin/phpunit -c --filter testPOSTTokenInvalidCredentials
+```
+
+It's close! The response looks right, but the `Content-Type` header is `application/json`
+instead of the more descriptive `application/problem+json`.
+
+Well that's no problem! We just need to set the header inside of the `start()`
+method. But wait! Don't do that! Because we've done all of this work before.
