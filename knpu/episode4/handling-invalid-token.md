@@ -22,7 +22,6 @@ the token might be corrupted or expired *or* - somehow -  the decoded username d
 exist in our database. In both cases, we are *not* returning a User object, and this
 triggers `onAuthenticationFailure`.
 
-
 To start, just return a new `Response` that says `Hello`, but with the proper 401
 status code. Copy the `testBadToken` method name and give it a try!
 
@@ -55,12 +54,12 @@ at the end of `testBadToken`. Now, re-run the test!
 ```
 
 Check that out - it's beautiful! It has all the fields it needs, including `detail`,
-which is set to `Invalid Token`.
+which is set to `Invalid token`.
 
 ## Controlling Error Message
 
 That text is coming from *our* code, when we throw the `CustomUserMessageAuthenticationException`.
-The text - `Invalid Token` - becomes the "message key" and this exception is passed
+The text - `Invalid token` - becomes the "message key" and this exception is passed
 to `onAuthenticationFailure`.
 
 This gives you complete control over how your errors look.

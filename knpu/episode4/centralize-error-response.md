@@ -1,6 +1,6 @@
 # Centralize the Error Response
 
-In the `EventListener` directory, we created an `APIExceptionSubscriber` whose job
+In the `EventListener` directory, we created an `ApiExceptionSubscriber` whose job
 is to catch all exceptions and turn them into nice API problem responses. And it
 already has all of the logic we need to turn an `ApiProblem` object into a proper
 response.
@@ -26,15 +26,15 @@ create that property and set it for me. Below, it's very simple:
 LOVE it. Let's celebrate by doing the same in the authenticator. Add a third constructor
 argument and then create the property and set it.
 
-Down in `start()`, instead of creating the response by hand,
-`return $this->responseFactory->createResponse()` and pass it `$apiProblem`. Finally,
-go back to `services.yml` to update the arguments. Just kidding! We're using autowiring,
-so it will automatically add the third argument for us.
+Down in `start()`, `return $this->responseFactory->createResponse()` and pass it
+`$apiProblem`. Finally, go back to `services.yml` to update the arguments. Just
+kidding! We're using autowiring, so it will automatically add the third argument
+for us.
 
-If everything went well, we shoudl be able to re-run the test with great success:
+If everything went well, we should be able to re-run the test with great success:
 
 ```bash
-./vendor/bin/phpunit -c --filter testPOSTTokenInvalidCredentials
+./vendor/bin/phpunit --filter testPOSTTokenInvalidCredentials
 ```
 
 ## detail(s) Make tests Fails
@@ -45,13 +45,13 @@ Oh, boy - it failed. Let's see - something is wrong with the `detail` field:
 
 That sounds like a Ryan mistake! Open up `TokenControllerTest`: the test is looking
 for `detail` - with *no* `s`. That's correct. Inside `JWTTokenAuthenticator`, change
-that key to `detail`. Ok, techncially we can call this field whatever we want, but
+that key to `detail`. Ok, technically we can call this field whatever we want, but
 `detail` is kind of a standard.
 
 Try the test again.
 
 ```bash
-./vendor/bin/phpunit -c --filter testPOSTTokenInvalidCredentials
+./vendor/bin/phpunit --filter testPOSTTokenInvalidCredentials
 ```
 
 That looks perfect. In fact, run our *entire* test suite:
@@ -63,4 +63,4 @@ That looks perfect. In fact, run our *entire* test suite:
 Hey! We didn't break any of our existing error handling. Awesome!
 
 But there is *one* more case we haven't covered: what happens if somebody sends
-a *bad* JSON web token - maybe it's expired. Let's handle that next.
+a *bad* JSON web token - maybe it's expired. Let's handle that final case next.
