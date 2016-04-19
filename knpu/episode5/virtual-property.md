@@ -1,21 +1,85 @@
-# Virtual Property
+# VirtualProperty: Add Crazy JSON Fields
 
-So the test passes, and that means it at least has the did programmer win field. So, let's debug this and see what it looks like. We can use the debug response shortcut, past the response object, go back, and rerun the test. Check it out. It has the fields we expect, but also as expected, it's imbedding the programmer in project resources – which includes all of their fields.
+The test passes, but let's see what the response looks like. Add `$this->debugResponse()`
+and re-run the test:
 
-That's what happens when you have an object as a property and you serialize that. This might be cool, or you might not want this. For me, this looks for now a little bit like overkill. Instead of having the programmer data and project data here, it might be enough to just have the programmer's nickname and the project's ID. And if you want more information, your API client can go and look for it. 
+```bash
+./vendor/bin/phpunit --filter testPOSTCreateBattle
+```
 
-Ultimately, this decision depends on who you're making your API for. If you're making your API for third-party API clients, you have to think about what they're going to be trying to do with your API. If you're creating an API for a java script front end that you're using, like ReactJS, then you need to build your API to work best with that. 
+Check it out! It has the fields we expect, but it's *also* embedding the entire programmer
+and project resources. That's what the serializer does when a property is an object.
+This might be cool with you, or maybe not. For me, this looks like overkill. Instead
+of having the `Programmer` and `Project` data right here, it's probably enough to
+just have the programmer's *nickname* and the project's id.
 
-So let's assume now that we don't want an entire programmer and project imbedded object. So first, let's hide those. In the battle entity, which is what we're returning from our API end points, we need to add some serialization exclusion stops. Remember, we do this by adding annotations. But every time you add an annotation, you need a U-statement for it. I'm going to a little cheat here to get it. I know that one of the annotations I need is called exclusion policy, so I'm going to use that, autocomplete it, get rid of the last part, and then say as serializer. 
+But hold on: I want to mention something *really* important. Whenever you need to
+make a decision about *how* your API should work, the *right* decision should always
+depend on *who* you're making the API for. If you're building your API for an iPhone
+app, will having these extra fields be helpful? Or, if you're API is for a JavaScript
+frontend like ReactJS, then build your API to make React happy.
 
-That will now allow me to use any of the annotations from that library by saying @serializer\ and then whatever annotation I need. So above the class, put exclusion policy all – so that means don't expose any of my properties unless I expose them. So let's expose the ID, skip programmer, skip project, and then expose did programmers win, bought at, and also notes. 
+## Adding an ExlcusionPolicy
 
-We'll go back, rerun the test, and see what the dump looks like now. Okay, awesome. Just has the four fields exposed. Now let's go to the next level. I want to add a programmer and a project key, but the programmer will just have the nickname of the programmer and the project will just have the ID.
+Let's assume that we do *not* want those embedded objects. First, hide them! In
+the `Battle` entity, we need to add some serialization exclusion rules. Since we
+do this via annotations, we need a `use` statement. Here's an easy way to get the
+correct `use` statement without reading the docs. I know that one of the annotations
+is called `ExclusionPolicy`. Add `use ExlusionPolicy` and let it autocomplete. Now,
+remove the `ExclusionPolicy` ending and add `as Serializer`.
 
-Before we start, let's update our test to look for these. We'll use this arrow asserter – arrow assert response property equals and pass it the response. We'll look for a project field and that should be set to whatever the project's ID is. So project arrow, get ID. I'll copy that line and we'll do the same thing for programmer. We'll look for a programmer field. In this case, we know the programmer field is going to be set to our programmer, which is Fred – the nickname of the programmer. And we can also make that the ID. It's up to us and whatever works best for whoever's using your API. 
+Now, above the class, add `@Serializer\ExclusionPolicy("all")`: now *no* properties will
+be used in the JSON, until we expose them. Expose `id`, skip `programmer` and `project`,
+and expose `didProgrammerWin`, `foughtAt` and `notes`.
 
-Cool. How can we expose a project in a programmer field? We have project and programmer properties, but they're objects. We just want them to be the ID and the nickname. We're in kind of a weird spot because the serializer doesn't work well with this. The answer to this is by creating a virtual property. First, create a new public function, get programmer nickname. It may get return – this programmer arrow, get nickname. Simple. That will be not used by the serializer yet, but that's a valid function to write. 
+Run the same test
 
-Here's the key. Above that, add @serializer\virtualproperty. As soon as you add that, this will be exposed in your API. It'll be in a field called programmer nickname because it will just basically take the name of your method and strip of the get and try to figure out what you want it to be called. Now, we don't want it to be called programmer nickname, we just want it to be called programmer so we can control its name with @serializer\serializedname and pass it to programmer. It's now in the programmer field that is set to return value for this method. 
+```bash
+./vendor/bin/phpunit --filter testPOSTCreateBattle
+```
 
-Below that you have the same thing for the project. Get project ID – this will return this arrow, project arrow get ID – above that, we'll add the virtual property to activate that and then the serialized name set to project. And that's it. Head back, rerun the test, and we've got it. That's a wonderful way to take control of exactly how you want your representation to look. 
+Ok, awesome - the JSON has *just* these 4 fields.
+
+## Adding Fake Properties
+
+Let's go to the next level. Now, I *do* want to have a `programmer`, but set to
+the username instead of the whole object. And I also *do* want a `project` field,
+set to its id.
+
+Update the test to look for these. Use `$this->asserter()->assertResponsePropertyEquals()`
+and pass it `$response`. Look for a `project` field that's set to `$project->getId()`.
+
+Copy that line and do the same thing for `programmer`: it should equal `Fred`. We could
+also have this return the `id` - it's up to you and what's best for your client.
+
+But, how can we bring this to life? We're in a weird spot, because these fields *do*
+exist on `Battle`, but they have the wrong values. How can we do something custom?
+
+By using something called a virtual property. First, create a new `public function`
+called `getProgrammerNickname()`. It should return `$this->programmer->getNickname()`.
+
+## VirtualProperty
+
+Simple. But that will *not* be used by the serializer yet. To make that happen, add
+`@Serializer\VirtualProperty` above the method. As soon as you do this, it will be
+exposed in your API. But it will be called `programmerNickname`: the serializer generates
+the field name by taking the method name and removing `get`.
+
+## SerializedName
+
+Since we want this to be called `programmer` add another annotation:
+`@Serializer\SerializedName()` and pass it `programmer`. *Now* we have a `programmer`
+field set to the return value of this method.
+
+Do the same thing for project: `public function getProjectId()`. This will return
+`$this->project->getId()`. Above this, add the `@Serializer\VirtualProperty` to activate
+the new field and `@Serializer\SerializedName("project")` to control its name.
+
+Head to the terminal and try the test:
+
+```bash
+./vendor/bin/phpunit --filter testPOSTCreateBattle
+```
+
+We've got it! This trick is a *wonderful* way to take control of exactly how you
+want your representation to look.

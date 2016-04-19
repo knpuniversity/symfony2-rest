@@ -1,13 +1,13 @@
 # The Battle Resource
 
-WOW. Is it part 5 of the Symfony REST series already? Ok then, let's do this!
+WOW. Is it part 5 of the Symfony REST series already? Let's do this!
 
 And this is a special course for me. When I started into all this REST API stuff,
 there were tons of neat-sounding ideas and philosophies like hypermedia & HATEOAS.
-Wowzer! Defining these terms is pretty easy... but putting them into practice? It
-was a Ryan disaster.
+What a magical time. Defining these terms is easy... but putting them into practice?
+It was a Ryan disaster.
 
-So let's take those ideas on directly in this tutorial, and clear up what's hype,
+Let's take those ideas on directly in this tutorial, and clear up what's hype,
 and what is actually an evil ploy to prevent your awesome API from being released.
 
 ## Code Setup
@@ -29,8 +29,8 @@ bin/console server:run
 
 ## Resources: Programmer + Project = (epic) Battle
 
-Go to the frontend at `http://localhost:8000`  and login with `weaverryan`, password
-`foo`. The API for programmer resource is done: you can create, edit, view and do
+Go to the frontend at `http://localhost:8000` and login with `weaverryan`, password
+`foo`. The API for the programmer resource is done: you can create, edit, view and do
 other cool programmery things.
 
 But the *real* point of the site is to create epic *battles*, and here's how: choose
@@ -40,11 +40,11 @@ There are *three* resources in play: the programmer, the project and a battle, w
 entire existence is based on being related to these other two resources. And it turns
 out, relating things in an API can get tricky.
 
-The resources in your API don't always match up with tables in your database, but
+The resources in your API don't always need to match up with tables in your database, but
 they often do. Our `Entity` directory holds a `Programmer` entity *and* a `Project`
-entity, which just has a `name` and `difficultyLevel`. Now check out `Battle`: it
+entity, which just has `name` and `difficultyLevel` fields. Now check out `Battle`: it
 has a `ManyToOne` relationship to `Programmer` and `Project`, plus a few other fields
 like `didProgrammerWin`, `foughtAt` and `notes`.
 
-Here's the goal: add an endpoint that will create new battle resources. How should
+Here's the goal: add an endpoint that will create a new battle resource. How should
 this endpoint look and act? You know the drill: let's design it first with a test.

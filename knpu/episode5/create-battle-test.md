@@ -23,10 +23,10 @@ need to restrict this endpoint so that we can only start battles with *our* prog
 
 ## Sending the Related Fields
 
-Ok, let's send a POST request! In `ProgrammerControllerTest`, it was easy: we sent
-3 scalar fields: `nickname`, `avatarNumber` and `tagLine`. But now, it's a little
-different: we want to send data that identifies the related programmer and project
-*resources*. Should we send the id? Or the programmer's nickname?
+Next, send a POST request! In `ProgrammerControllerTest`, it was easy: we sent
+3 scalar fields. But now, it's a little different: we want to send data that identifies
+the related programmer and project *resources*. Should we send the id? Or the programmer's
+nickname?
 
 Well, like normal with API's... it doesn't matter. But sending the id's makes sense.
 Create a new `$data` array with two fields: `project` set to `$project->getId()`
@@ -45,13 +45,13 @@ web token for the `weaverryan` user - we created that in the previous course.
 
 Whew, okay. That's it. So even though Battle is dependent on two other resources,
 it works pretty much the same. Add some basic asserts: `$this->assertEquals()` that
-the 201 will be the response status code. In `Battle`, one of the fields that should
+201 will be the response status code. In `Battle`, one of the fields that should
 be returned is `didProgrammerWin`. Make sure that exists with
-`$this->asserter->responsePropertyExists` and look for the `didProgrammerWin`. 
+`$this->asserter()->responsePropertyExists` and look for `didProgrammerWin`.
 
 I'll also add a todo to check for the `Location` header later. Remember, when you
 create a resource, you're *supposed* to return a `Location` header to the URL where
 the client can view the new resource. We don't have a GET endpoint for a battle yet,
 so we'll skip this.
 
-The hard work is done: we've designed the new endpoint. Let's bring this to life!
+The hard work is done: we've designed the new endpoint. Let's bring it to life!

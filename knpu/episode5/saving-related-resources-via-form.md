@@ -11,8 +11,8 @@ This form modifies the `Programmer` entity directly and we save it. Simple.
 
 ## BattleManager Complicates Things...
 
-Well, not so simple in this case. What? It's always more interesting if we take on
-the tough stuff!
+Well, not so simple in this case. What? I know, I like to make things as difficult
+as possible.
 
 To create battles on the frontend, our controller uses a service class called `BattleManager`.
 It's kind of nice: it has a `battle()` function: we pass it a `Programmer` and `Project`
@@ -36,8 +36,8 @@ you have a form that stops looking like or working nicely with your entity class
 
 In the `Form` directory, create a `Model` directory to keep things organized. Inside,
 add a new class called `BattleModel`. Give *it* the two properties we're expecting
-as API input: `$project` and `$programmer`. Now hit command+N - or go to the`Code->Generate`
-menu option - and generate the getter and setter methods for both properties.
+as API input: `$project` and `$programmer`. Hit command+N - or go to the`Code->Generate`
+menu - and generate the getter and setter methods for both properties.
 
 To be extra safe and make your code more hipster, type-hint `setProgrammer` with
 the `Programmer` class and `setProject` with `Project`. The form system will *love*
@@ -69,51 +69,7 @@ by querying for it. That's *exactly* what we want.
 
 In `configureOptions()`, add `$resolver->setDefaults()` and pass it two things: first
 the `data_class` set to `BattleModel::class`. Make sure PhpStorm adds the `use` statement
-for that class. Then, add `csrf_protection` to `false` because we can't use normal
+for that class. Then, set `csrf_protection` to `false` because we can't use normal
 CSRF protection in an API.
 
-
-
-
-
-
-Alright. Form is ready. So finally, let's hop into our controller and do the
-same flow that we always do. Step one, create a battle model object. Battle
-model equals new battle model – and then create a form object. The form equals
-this arrow, create form – and we will use battle type::class. And the same
-thing. I'm going to go back and retype the E and autocomplete that so it adds
-the use statement on top. That's not super smooth right now. The second
-argument to create form, give it the actual battle model object.
-
-Second, this arrow process form, we need to pass up the request object and the
-form object. As a reminder, if you hold command and go into process form, this
-is something that lives in our base controller. It decodes the body off of the
-request and it submits those fields into the form. So it's just a nice little
-shortcut. Type in the request object from HTB [07:19] foundation to get that as
-an argument and then pass request and then pass it the form object.
-
-So at this point, the form is bound. If it's not valid, then we need to send it
-back in read errors, and we also have a method for doing that already. We're
-going to say this arrow, throw API problem validation exception. And if you
-pass it the form object – we've already done the work for this in previous
-episodes – that will return a nice JSON response with the form errors.
-
-Okay, we're killing it. Let's finish this up. We now have a battle model object
-which is populated with the programmer object and the project object that's
-related to it. Now we can finally use that battle manager I was showing you
-before, to have it create and save the battle entity for us. So, say this arrow
-get battle manager – again, a hold command – just a shortcut to get that
-service out of the container, arrow, battle. And pass it battle model arrow get
-programmer and battle model arrow get project – and that's it. Put a little
-battle equals in the beginning of this because that is our saved battle object.
-
-And that is what we want to return from our API response. So return this arrow
-create API response – yet another shortcut method we've created in previous
-episodes, and pass that battle in the 201 status code. We'll even add a little
-note above this that says to do set the location header once we have an end
-point that shows a single battle. And that is it. Controller model form.
-Everything else is reusing logic from before. So let's try our test. Run it –
-it passes. Awesome.
-
-So now let's start playing around with this end point and the relations and see
-some other cool stuff we can do.
+Form, ready! Now let's hit the controller.

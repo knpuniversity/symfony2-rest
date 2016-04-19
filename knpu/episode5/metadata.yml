@@ -36,6 +36,9 @@ chapters:
     saving-related-resources-via-form:
         is_finished: false
         video_key: ~
+    finishing-the-battle:
+        is_finished: false
+        video_key: ~
     virtual-property:
         is_finished: false
         video_key: ~
