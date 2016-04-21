@@ -1,27 +1,78 @@
-# HATEOAS Hypermedia Buzzwords
+# HATEOAS, Hypermedia & Buzzwords
 
-These days you kind of expect a tutorial on REST to immediately talk about a few buzzwords like hypermedia and HATEOAS. I've avoided these so far because, honestly, they're more trouble than they're worth. But finally, it has come time to talk about these very important terms so we can learn to use the parts that are good for our API and feel safe leaving all the garbage. 
+These days, you expect a tutorial on REST to immediately throw out some buzzwords:
+like hypermedia and HATEOAS. But I've tried *not* to mention these because honestly,
+in practice: they're more trouble than good.
 
-First, hypermedia – what does that mean? Basically, it means this. JSON is known as a media type. If I tell you I'm giving you a JSON string, you understand the format of that string. You could decode that string and do data. The same thing with XML. XML is a media type. I can give you XML and you understand the format. The difference between hypermedia and media is that a hypermedia format is a format that includes links – for example, take a JSON structure that just has data and now add a few links to it that point to other resources. 
+But, there are some cool parts! It's time to learn what these mean, what parts are
+good, and what parts made me almost pull my hair out.
 
-If you took a JSON structure in your API and consistently put links in the exact same spot, you could claim that you just created your own hypermedia – a JSON structure that has a few rules to it, like content goes on the root level and links always go under and underscore links key. 
+## Hypermedia: Really Caffeinated DVD's
 
-The most famous hypermedia format is HTML. It's a format that is certainly a media type because we all understand what it means and a browser can render it, but natively it includes links. Your hypermedia format is just a way of saying, "Hey, when we return data from our JSON, what if we added some rules so that there were some links in that structure that always appeared in the same way?"
+First, hypermedia! This does *not* involve drinking red bull and binge-watching
+Netflix. Here's the deail: JSON is known as a media type. If I tell you that I'm
+giving you a JSON string, you understand how to parse it. XML is another media type:
+if I give you XML, you can understand its format.
 
-In HTML, we always know that anchor tags are links. Form tags are another type of link. They are actually a link on how to make a post request back to the server. So though we haven't really talked about it, in a sense we already have a hypermedia format coming back from our server because we always use the underscored links as our link key. We'll talk more about hypermedia later, because they are official hypermedia formats you can adopt if you want to. 
+The difference between media and *hypermedia* is that hypermedia is a format that
+includes links. For example, if you used a JSON structure for your API that consistently
+put links under a `_links` key, well, you could claim that you just created your
+own *hypermedia* format: a JSON structure where I know - semantically - that a `_links`
+key doesn't hold data about a resource: it links to *other* resources.
 
-Now, HATEOAS – that stands for hypermedia as the engine of application state. Whoa. Now we talk a lot more about application state in our REST tutorial that's built on Silex. So if you want to know about application state and resource state and what those things mean, go check that out. But in a nutshell, the idea behind HATEOAS is this. Taken to its extreme, HATEOAS says, "What if we didn't write API documentation, and instead all of our responses – all of the representations – we send back self-document?" For example, when I send back a programmer resource, what if it contains links for every other resource that you can get related to that programmer?
+The most famous hypermedia format is ... drumroll HTML! It's basically an XML media
+type that has built-in tags for links: the `a` tag. Actually, `<form>`, `<img>`
+`<link>` and `<script>` are also considered "links" to other resources.
 
-In a perfect world, you could actually stop writing API documentation and just say, "Hey, use my API. And every time you make a request of the API, the response is going to contain details about what you can do next." I would no longer have to hard code URLs as a client, like make a post request to \api\battles. I can instead just make a request to be homepage of your API and then parse it to find a link and follow that, and parse that to find another link and follow that, and so on and so forth. 
+So calling somethign a hypermedia format is just a way of saying:
 
-In reality, HATEOAS is bullshit. To truly get HATEOAS, you would need to have very detailed description of your API like what methods you can make to the links and what fields to send to those links and what those fields mean and all of that kind of stuff. So when you hear HATEOAS, it's bullshit. But that doesn't mean we need to throw it away altogether. Here's basically the idea. Instead of saying, I'm going to include so many links in my representations that I don't have to write API documentation anymore. Instead, say I'm going to write API documentation, but I'm also going to add links when those links are helpful. 
+> Hey, when we return the JSON data, what if we added some rules
+> that say any links we want to include always live in the same place?
 
-So let's start to do that. We're going to take this to a new level. For example, right now when we create a battle, we set it up so we are returned a programmer field that's set to Fred. If you want more information about Fred, you can just make a request to \api\programmers\fred and get that information. But it would be even easier if we just imbedded a link to that URL so the client wouldn't have to hard code that URL. They could just read the link and follow that link if they wanted more information. 
+And even though I avoided the word - *hypermedia* - in a sense, we're already returning
+a hypermedia format because we always include links under an `_links` key. We'll
+talk more about this a little later: there are actually "official" hypermedia formats
+you can adopt for your API.
 
-If this type of thing is helpful, then add it to your API. So let's do this. First, in the test, let's look for it. This arrow, assert response property equals past response, and then remember we already have a links system set up. We'll see it here in a second. Look for underscore links.programmer. And this should be equal to this arrow adjusturi\api\programmers\fred. And the adjust URI is a helper function we created in an earlier course. All that does is pre-pen the URL app, underscore test.php, because we're in the test environment. So the URLs are actually generating with that part in the URL. We don't want that to confuse our tests. 
+## HATEOAS
 
-Perfect. Now, let's go add that link. First, open up the programmer entity. Remember, we actually added a link before – a self-link, which is a really common link to put on your resources that just say link back to yourself. It seems kind of worthless, but it's a common thing to do. We created this cool annotation link system and there's a whole system that reads these and includes these in the serialization. So let's do the same thing to battle. Up top, add @link and let that auto complete so we get the use statement. Let's add programmer that will be the name of the link. You want to be consistent with those. That's called the rel. That's meant to be the significance of the link. So whenever you link to a programmer, just make sure you use the programmer key so you have consistency. 
+Time for buzz word #2: HATEOAS... or HAT-E-OAS... or H-ATE-OAS... nobody is really
+sure. This throat-clearing acroynm stands for:
 
-For the route, use api_programmers_show. That's the route name that lists a single programmer. The last thing we need is params – parameters we're going to pass to that route. That route has a nickname – curly brace wild card in it. And we're going to set that to an expression, which is object that would be this battle object.getprogrammernickname. We'll call this get programmer nickname method that we created down here and we'll pass that as the nickname value. And that should take care of it. So copy the method name again, test post create battle, and go over and let's run vendor/bin/phpunit—filter and past that. And it works. 
+> hypermedia as the engine of application state
 
-Now, let me show you an awesome library that's going to let us add links. In fact, it's the library that I stole the @link idea from. 
+Whoa. Let's unpack that monster. It's actually a cool idea.
+
+Application state refers to *which* endpoint a client is currently using. As the
+client does more things - like creating a programmer and then starting a battle -
+they're moving through different "application" states, the same way that someone
+moves through the pages on your web site.
+
+Normally, the client figures out *which* endpoint - or state - they need next by
+reading some API documentation. But HATEOAS says:
+
+> What if we didn't write API documentation and instead, every response
+> we send back self-documents what endpoints you might want next via links?
+
+So when we send back a programmer resource, what if it contained a link for every
+other possible thing the client might want to do next - like starting a battle
+with that programmer?
+
+In an ideal world, you would stop writing documentation and just say:
+
+> Hey, use my API! Every time you make a request, I'll include details about
+> what do to next.
+
+In reality, HATEOAS is a fantasy. Well, at least for now. For it to work, links
+would need to be able to contain what HTTP method to use, what fields to send, and
+what those fields mean. It's hard, way too hard for most people right now.
+
+Here's the right way to navigate this mine field. Instead of saying:
+
+> I'm going to include so many links that I don't have to document anything!
+
+You should say:
+
+> I'm going to add links that might be helpful, but also write documentation.
+
+So let's do that: and take this idea in our app up to a new level.

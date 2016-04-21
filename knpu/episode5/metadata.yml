@@ -45,10 +45,16 @@ chapters:
     property-path:
         is_finished: false
         video_key: ~
+    battle-validation:
+        is_finished: false
+        video_key: ~
     restrict-valid-programmer-input:
         is_finished: false
         video_key: ~
     hateoas-hypermedia-buzzwords:
+        is_finished: false
+        video_key: ~
+    link-battle-programmer:
         is_finished: false
         video_key: ~
     hal-json:
