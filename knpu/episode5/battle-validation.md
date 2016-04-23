@@ -43,7 +43,7 @@ bound to the form: so the annotations should go here. First, add the `use` state
 Type `use NotBlank`, let it auto-complete, delete the last part and add the normal
 `as Assert`. That's my shortcut to get the `use` statement.
 
-Now, above `project`, add `@Assert\NotBlank()`. do the same above `programmer`:
+Now, above `project`, add `@Assert\NotBlank()`. Do the same above `programmer`:
 `@Assert\NotBlank()`. 
 
 Done! Now run the test:

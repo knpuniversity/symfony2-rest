@@ -11,7 +11,7 @@ URL, the client could simply read and follow the link.
 Whenever a link like this would be helpful, add it! First, look for it in the test:
 `$this->asserter()->assertResponsePropertyEquals()`. For consistency, we decided to
 put links under an `_links` key. So, look for `_links.programmer`. This should equal
-`$this->adjustUri('/api/programmers/fred)`. All this method does is help account
+`$this->adjustUri('/api/programmers/Fred)`. All this method does is help account
 for the extra `app_test.php` that's in the URL when testing.
 
 Perfect! Now, let's go add that link. First, open up the `Programmer` entity. We

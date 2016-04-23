@@ -18,7 +18,7 @@ The difference between media and *hypermedia* is that hypermedia is a format tha
 includes links. For example, if you used a JSON structure that consistently
 put links under a `_links` key, well, you could claim that you just created your
 own *hypermedia* format: a JSON structure where I know - semantically - what `_links`
-means: it's not day: it links to *other* resources.
+means: it's not data: it's links to *other* resources.
 
 The most famous hypermedia format is ... drumroll HTML! It's basically an XML media
 type that has built-in tags for links: the `a` tag. Actually, `<form>`, `<img>`
