@@ -5,26 +5,26 @@ like hypermedia and HATEOAS. But I've tried *not* to mention these because hones
 in practice: they're more trouble than good.
 
 But, there are some cool parts! It's time to learn what these mean, what parts are
-good, and what parts made me almost pull my hair out.
+good, and what parts almost drove me to drinking.
 
 ## Hypermedia: Really Caffeinated DVD's
 
-First, hypermedia! This does *not* involve drinking red bull and binge-watching
-Netflix. Here's the deail: JSON is known as a media type. If I tell you that I'm
+First, hypermedia! This does *not* involve slamming red bulls and binge-watching
+Netflix. Here's the story: JSON is known as a media type. If I tell you that I'm
 giving you a JSON string, you understand how to parse it. XML is another media type:
 if I give you XML, you can understand its format.
 
 The difference between media and *hypermedia* is that hypermedia is a format that
-includes links. For example, if you used a JSON structure for your API that consistently
+includes links. For example, if you used a JSON structure that consistently
 put links under a `_links` key, well, you could claim that you just created your
-own *hypermedia* format: a JSON structure where I know - semantically - that a `_links`
-key doesn't hold data about a resource: it links to *other* resources.
+own *hypermedia* format: a JSON structure where I know - semantically - what `_links`
+means: it's not day: it links to *other* resources.
 
 The most famous hypermedia format is ... drumroll HTML! It's basically an XML media
 type that has built-in tags for links: the `a` tag. Actually, `<form>`, `<img>`
 `<link>` and `<script>` are also considered "links" to other resources.
 
-So calling somethign a hypermedia format is just a way of saying:
+So calling something a hypermedia format is just a way of saying:
 
 > Hey, when we return the JSON data, what if we added some rules
 > that say any links we want to include always live in the same place?
@@ -36,8 +36,8 @@ you can adopt for your API.
 
 ## HATEOAS
 
-Time for buzz word #2: HATEOAS... or HAT-E-OAS... or H-ATE-OAS... nobody is really
-sure. This throat-clearing acroynm stands for:
+Ready for buzzword #2? HATEOAS... or HAT-E-OAS... or H-ATE-OAS... nobody really knows
+how to say it. Anyways, the throat-clearing acronym stands for:
 
 > hypermedia as the engine of application state
 
@@ -54,18 +54,19 @@ reading some API documentation. But HATEOAS says:
 > What if we didn't write API documentation and instead, every response
 > we send back self-documents what endpoints you might want next via links?
 
-So when we send back a programmer resource, what if it contained a link for every
+So when we send back a programmer resource, it would contain a link for every
 other possible thing the client might want to do next - like starting a battle
-with that programmer?
+with that programmer.
 
 In an ideal world, you would stop writing documentation and just say:
 
 > Hey, use my API! Every time you make a request, I'll include details about
 > what do to next.
 
-In reality, HATEOAS is a fantasy. Well, at least for now. For it to work, links
+In reality, HATEOAS is a fantasy, at least for now. For it to work, links
 would need to be able to contain what HTTP method to use, what fields to send, and
-what those fields mean. It's hard, way too hard for most people right now.
+what those fields mean. It's hard, way too hard for most people right now, including
+me.
 
 Here's the right way to navigate this mine field. Instead of saying:
 
