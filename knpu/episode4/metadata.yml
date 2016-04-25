@@ -31,14 +31,12 @@ chapters:
     lexikjwt-authentication-bundle:
         video_key: 164104456
     token-test:
-        is_finished: false
-        video_key: ~
+        video_key: 164107773
     create-json-web-token:
         is_finished: false
         video_key: ~
     send-token-in-request:
-        is_finished: false
-        video_key: ~
+        video_key: 164107584
     jwt-guard-authenticator:
         is_finished: false
         video_key: ~
