@@ -37,8 +37,7 @@ chapters:
     send-token-in-request:
         video_key: 164107584
     jwt-guard-authenticator:
-        is_finished: false
-        video_key: ~
+        video_key: 164327147
     authenticator-comes-to-life:
         video_key: 164326257
     always-require-auth:
