@@ -33,8 +33,7 @@ chapters:
     token-test:
         video_key: 164107773
     create-json-web-token:
-        is_finished: false
-        video_key: ~
+        video_key: 164188245
     send-token-in-request:
         video_key: 164107584
     jwt-guard-authenticator:
