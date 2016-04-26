@@ -1,25 +1,67 @@
 # HAL JSON
 
-Google for HATEOAS PHP to find a really sweet library that a friend of mine made. Actually, this library has a bundle that integrates it, so click to view the Bazinga HATEOAS bundle and let's go straight to its documentation and get it installed before we talk about what it does. 
+Google for "How to remove a mustard stain from a white shirt". I mean, Google for
+"HAL JSON" - sorry, I'm dealing with some things over here.
 
-Copy the composed require statement and then flip over to your terminal and paste that to get it rolling. Since this is a bundle, grab the new bundle statement, open up AppKernal and pop that on the bottom. Perfect. Previously, we had added our own sweet annotation system for adding links. In battle, we have @link and then we can create a programmer link that points over to where we can view that programmer. It's even using cool expressions to make a dynamic route. 
+This is one of a few competing *hypermedia* formats. And remember, *hypermedia* is
+one of our favorite buzzwords: it's a media type, or format, - like JSON - plus some
+rules about how you should semantically organize things inside that format. In human
+speak, HAL JSON says:
 
-Actually, I completely stole this idea from this library. To make our application a little simpler and get some new features, we're going to place our @link with this official functionality. Go back to the library itself, and scroll down to the first coding example. As you can see, this uses an annotation system that looks very similar to the one that we had. So copy the use statement on top and go to battle and paste that. 
+> Hi I'm HAL! If you want to embed links in your JSON, you should put them under
+> an `_links` key and point to the URL with `href`. Have a great day!
 
-Then, update your @link to look a little bit different. Replace it with @HATEOAS\route\relation. Keep programmer – that will be the rel of the link, just like before. Then add HREF equals @HATEOAS\route. To that pass the name of the route, API programmer show, and then change params to parameters. And inside, set it to nickname equals and then wrap the expression in an EXPR function. That's how the bundle's set up to know that you want to use an expression inside of that value. And then finish things off with the closing parenthesis. And that's it. 
+If you think about it, that's kind of similar to HTML. In HTML, there's the XML-like
+format, but then there are rules that say:
 
-This is very similar to our @link. In fact, the result is almost the same. Open up battle controller test and copy the first method name because we have a test near the bottom for that link. Flip over to the terminal and, as long as composer's done, run vendor/bin/phpunit--filter and paste that method. And check this out. It fails, but barely. Notice this library – and we're not using our @link annotation system at all anymore – still adds an underscore links key just like ours. It still uses programmer beneath that. But instead of putting the URL directly as the value to programmer, it wraps it in another object with an HREF key. And that's why our test is failing. 
+> Hi, I'm HTML! If you want a link, but it in an `<a>` tag under an `href` attribute.
 
-So let's fix that first by updating the test to look for underscore links.programmer.HREF. We run the test and now we're green. So here's the really important thing. That format was not on accident. It was not invented by this library. Google for HAL JSON. This is one of a few competing hypermedia formats. And remember, hypermedia is a format like JSON plus semantic information about what keys you should put inside of that JSON. Basically, that means HAL JSON says that if you're going to have JSON that has links, you should put them beneath an underscore links key and then each link should have an HREF. 
+The advantage of having standards is that - since the entire Internet follows them -
+we can create a browser that understands the significance of the `<a>` tag, and
+renders them clickable. In theory, if all API's followed a standard, we could create
+clients more easily deal with the data.
 
-If you think about it, that's kind of similar to HTML. In HTML, there are rules. First you have the XML-like format, but then we all know if you want to have a link you put it in an aTag with an HREF property. So the advantage of having standards like this is that, if the entire Internet used this standard, then we would all instantly understand that if you talked to an API and it returns underscore links property, those are links to other resources. 
+## Updating Programmer to use the new Links
 
-So let's also update our programmer entity to use the new system. Copy the relation from battle and replace @link inside of programmer with that. But make sure you keep your relation called self and change the expression to object.getnickname since this is the programmer. Make sure you have all of your closing parenthesis. Since we just added an annotation, don't forget to also paste over the use statement. 
+So let's also update the `Programmer` entity to use the new system. Copy the whole
+`@Relation` from `Battle` and replace the `@Link` inside of `Programmer`. Change
+the `rel` back to `self` and update the expression to `object.getNickname()`. Make
+sure you've got all your parenthesis in place. Oh, and don't forget to bring over
+the `use` statement from `Battle`.
 
-On programmer controller test, our second test get programmer also tests for this link – underscore links.self – so update that as well to .HREF. And then let's go back and run vendor/phpunit--filter and just that method. And perfect. It passes. 
+In `ProgrammerControllerTest`, the `testGetProgrammer` method looks for `_links.self`.
+Add `.href` to this to match the new format.
 
-The real benefit of using an official format is it just helps your API clients get a little bit more sense of how your API works. Now we can tell somebody, "Hey, our API returns HAL JSON responses and they can go read this documentation and at least get some information about what that means. In fact, now that we are using this format, we can advertise this with the content type header in the response. In fact, that's what this application\hal+json is up here. That's a custom content type. You can see the format's basically like application\json but this HAL+ basically says there's additional semantic meaning in this JSON and if you want to know more about it, then Google its format. 
+Let's try it out!
 
-So go back to programmer controller tests. In the original tests, where we create the programmer, we can assert now that application\hal+json is equal to response, get header, content type. And then because guzzle's weird and that returns right, hit the zero key on that. So we're basically testing that our API is going to advertise that whenever it returns a resource, it returns it with this header. And to get that to work, open up the base controller and search for create API response, which is what we're calling from all of our controllers, to create the response. And just change this key down here to be application\hal+json. Good for us. We're advertising our new content site. 
+```bash
+vendor/bin/phpunit --filter testGetProgrammer
+```
 
-So copy the test name and rerun PHP unit to make sure that's working. Congratulations, you're no longer and island. You're using an official format. 
+Yes!
+
+## Should I Use HAL JSON?
+
+The real benefit of using an official format is it just helps your API clients
+get a little bit more sense of how your API works. Now we can tell somebody,
+"Hey, our API returns HAL JSON responses and they can go read this
+documentation and at least get some information about what that means. In fact,
+now that we are using this format, we can advertise this with the content type
+header in the response. In fact, that's what this application\hal+json is up
+here. That's a custom content type. You can see the format's basically like
+application\json but this HAL+ basically says there's additional semantic
+meaning in this JSON and if you want to know more about it, then Google its
+format.
+
+So go back to programmer controller tests. In the original tests, where we
+create the programmer, we can assert now that application\hal+json is equal to
+response, get header, content type. And then because guzzle's weird and that
+returns right, hit the zero key on that. So we're basically testing that our
+API is going to advertise that whenever it returns a resource, it returns it
+with this header. And to get that to work, open up the base controller and
+search for create API response, which is what we're calling from all of our
+controllers, to create the response. And just change this key down here to be
+application\hal+json. Good for us. We're advertising our new content site.
+
+So copy the test name and rerun PHP unit to make sure that's working.
+Congratulations, you're no longer and island. You're using an official format.

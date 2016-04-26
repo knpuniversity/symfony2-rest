@@ -57,6 +57,9 @@ chapters:
     link-battle-programmer:
         is_finished: false
         video_key: ~
+    hateoas-php-library:
+        is_finished: false
+        video_key: ~
     hal-json:
         is_finished: false
         video_key: ~
