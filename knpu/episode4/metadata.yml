@@ -20,8 +20,8 @@ summary: |
 
 illustration: rest-sf-4.png
 tuts_hero:
-    start_step: "upgrade-to-symfony-3"
-    finish_step: "Errors: Making type a URL"
+    start_step: upgrade-to-symfony-3
+    finish_step: errors-making-type-a-url
 
 chapters:
     deny-access:
