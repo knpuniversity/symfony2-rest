@@ -20,34 +20,26 @@ summary: |
 
 illustration: rest-sf-4.png
 tuts_hero:
-    start_step: "upgrade-to-symfony-3"
-    finish_step: "Errors: Making type a URL"
+    start_step: upgrade-to-symfony-3
+    finish_step: errors-making-type-a-url
 
 chapters:
     deny-access:
-        is_finished: false
-        video_key: ~
+        video_key: 164097303
     json-web-token:
-        is_finished: false
-        video_key: ~
+        video_key: 164103012
     lexikjwt-authentication-bundle:
-        is_finished: false
-        video_key: ~ 
+        video_key: 164104456
     token-test:
-        is_finished: false
-        video_key: ~
+        video_key: 164107773
     create-json-web-token:
-        is_finished: false
-        video_key: ~
+        video_key: 164188245
     send-token-in-request:
-        is_finished: false
-        video_key: ~
+        video_key: 164107584
     jwt-guard-authenticator:
-        is_finished: false
-        video_key: ~
+        video_key: 164327147
     authenticator-comes-to-life:
-        is_finished: false
-        video_key: ~
+        video_key: 164326257
     always-require-auth:
         is_finished: false
         video_key: ~

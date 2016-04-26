@@ -1,6 +1,6 @@
 # LexikJWTAuthenticationBundle
 
-Google for LexikJWTAuthenticationBundle. This bundle is going to make creating and
+Google for `LexikJWTAuthenticationBundle`. This bundle is going to make creating and
 validating JSON web tokens as much fun as eating ice cream. Click to read the
 documentation. And now, you guys know the drill. Copy the library name from the
 `composer require` line and run:
@@ -10,7 +10,9 @@ composer require lexik/jwt-authentication-bundle
 ```
 
 While we're waiting for Jordi, I mean Composer to download that for us, let's keep
-busy. Copy the new bundle line and put that into `AppKernel`.
+busy. Copy the new bundle line and put that into `AppKernel`:
+
+[[[ code('331bd601b2') ]]]
 
 Great!
 
@@ -68,15 +70,20 @@ clients have.
 ## Configuring the Bundle
 
 Ok, last step: tell the bundle about our keys. Copy the configuration from the docs
-and open up `app/config/config.yml`. Paste this at the bottom. Instead of using
-all these fancy parameters, it's fine to set the path directly: `private_key_path: %kernel.root_dir%` -
-that's the `app/` directory - `/../var/jwt/private.pem`. Do the same for the public
-key, with `public.pem`. Set the `token_ttl` to whatever you want: I'll use 3600:
-this means every token will be valid for only 1 hour.
+and open up `app/config/config.yml`. Paste this at the bottom:
+
+[[[ code('da5ca87bc3') ]]]
+
+Instead of using all these fancy parameters, it's fine to set the path directly:
+`private_key_path: %kernel.root_dir%` - that's the `app/` directory - `/../var/jwt/private.pem`.
+Do the same for the public key, with `public.pem`. Set the `token_ttl` to whatever
+you want: I'll use 3600: this means every token will be valid for only 1 hour.
 
 Finally, open `parameters.yml` and add the `jwt_key_pass_phrase`, which for me is
-`happyapi`. Don't forget to add an empty setting also in `parameters.yml.dist` for
-future developers.
+`happyapi`. Don't forget to add an empty setting also in `parameters.yml.dist`
+for future developers:
+
+[[[ code('78111e8f4b') ]]]
 
 Phew! That's it! We had to generate a public and private key, but now, life is going
 to be sweet. Run:
