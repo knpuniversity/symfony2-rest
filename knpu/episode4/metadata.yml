@@ -40,8 +40,7 @@ chapters:
         is_finished: false
         video_key: ~
     authenticator-comes-to-life:
-        is_finished: false
-        video_key: ~
+        video_key: 164326257
     always-require-auth:
         is_finished: false
         video_key: ~
