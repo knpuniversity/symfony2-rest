@@ -1,4 +1,4 @@
-# Lexikjwt Authentication Bundle
+# LexikJWTAuthenticationBundle
 
 Google for LexikJWTAuthenticationBundle. This bundle is going to make creating and
 validating JSON web tokens as much fun as eating ice cream. Click to read the

@@ -1,4 +1,4 @@
-# The Fetch a Token Endpoint Test
+# The "Fetch a Token" Endpoint Test
 
 Almost every API authentication system - whether you're using JWT, OAuth or something
 different - works basically the same. *Somehow*, your API client gets an access token.

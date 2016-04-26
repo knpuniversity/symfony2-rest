@@ -1,4 +1,4 @@
-# Bring the JWT Authenticator to Life
+# Registering the Authenticator
 
 The authenticator class is done - well done *enough* to see it working. Next, we
 need to register it as a service. Open up `app/config/services.yml` to add it:

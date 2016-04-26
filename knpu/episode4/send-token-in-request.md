@@ -1,4 +1,4 @@
-# Send the Token in the Request
+# Authentication a Request with JWT
 
 We already added a `denyAccessUnlessGranted()` line to `ProgrammerController::newAction()`.
 That means this endpoint is broken: we don't have an API authentication system hooked
