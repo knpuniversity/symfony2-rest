@@ -21,7 +21,7 @@ or *scopes*.
 By the way, some of you might be wondering how OAuth fits into all of this. Well,
 OAuth is basically just a pattern for *how* your API client *gets* the token in
 the first place. And it's not the only method for obtaining tokens - we'll use a
-simpler method. If OAuth still befuddles you, watch our [OAuth2 Tutorial](knpuniversity.com/screencast/oauth).
+simpler method. If OAuth still befuddles you, watch our [OAuth2 Tutorial][1].
 I'll mention OAuth a few more times, but mostly - stop thinking about it!
 
 Anyways, that's token authentication in a nut shell: you pass around a secret token
@@ -30,7 +30,7 @@ string instead of your username and password.
 ## A Better way? JSON Web Tokens
 
 But what if we could create a simpler system? What if the API client could simply
-send us their user ID - like 123 - on each request, instead of a token. Well,
+send us their user ID - like `123` - on each request, instead of a token. Well,
 that would be awesome! Our application could just read that number, instead of needing
 to keep a big database of tokens and what they mean.
 
@@ -38,7 +38,7 @@ Alas, we can't do that. Because then *anyone* could send *any* user ID
 and easily authenticate as other users in the system. Right? Actually, no! We
 *can* do this.
 
-In your browser, open [jwt.io](http://jwt.io): the main website for JSON web tokens.
+In your browser, open [jwt.io][2]: the main website for JSON web tokens.
 These are the key to my dream. Basically, a JSON web token is nothing more than a
 big JSON string that contains whatever data you want to put into it - like a user's
 id or their favorite color. But then, the JSON is cryptographically signed and encoded
@@ -51,7 +51,7 @@ secret inside a JSON web token, like a credit card number - because - it turns o
 anyone can read what's inside a JSON web token.
 
 But here's the key: *nobody* can *modify* a JSON web token without us knowing. So
-if I give you a JSON web token that says your user ID is 123, someone else *could*
+if I give you a JSON web token that says your user ID is `123`, someone else *could*
 steal this token and use it to authenticate as you. But, they *cannot* change the
 user ID to something else. If they do, we'll know the token has been tampered with.
 
@@ -63,3 +63,7 @@ Oh, and by the way - once you eventually deploy your API, make sure it only work
 over SSL. No matter how you do authentication, tokens can be stolen. So, use HTTPS!
 
 Now that we know why JSON web tokens - or JWT - rock my world, let's use them!
+
+
+[1]: http://knpuniversity.com/screencast/oauth
+[2]: http://jwt.io
