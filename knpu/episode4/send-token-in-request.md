@@ -4,11 +4,11 @@ We already added a `denyAccessUnlessGranted()` line to `ProgrammerController::ne
 That means this endpoint is broken: we don't have an API authentication system hooked
 up yet.
 
-Open up `ProgrammerControllerTest` and find `testPOST()`: the test for this endpoint:
+Open up `ProgrammerControllerTest()` and find `testPOST()`: the test for this endpoint:
 
 [[[ code('643303d04f') ]]]
 
-Rename this to `testPOSTProgrammerWorks` - this will make its name unique enough
+Rename this to `testPOSTProgrammerWorks()` - this will make its name unique enough
 that we can run it alone:
 
 [[[ code('1260802705') ]]]
