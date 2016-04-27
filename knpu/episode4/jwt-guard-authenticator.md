@@ -48,11 +48,11 @@ If there is *no* token, return `null`:
 This will cause authentication to stop. Not *fail*, just stop trying to authenticate
 the user via this method.
 
-## getUser()
-
 If there *is* a token, return it!
 
 [[[ code('bf0c449a59') ]]]
+
+## getUser()
 
 Next, Symfony will call `getUser()` and pass this token string as the `$credentials`
 argument. Our job here is to use that token to find the user it relates to.
