@@ -41,20 +41,14 @@ chapters:
     authenticator-comes-to-life:
         video_key: 164326257
     always-require-auth:
-        is_finished: false
-        video_key: ~
+        video_key: 164568064
     entry-point-multiple-firewalls:
-        is_finished: false
-        video_key: ~
+        video_key: 164568758
     auth-api-problem:
-        is_finished: false
-        video_key: ~
+        video_key: 164569601
     centralize-error-response:
-        is_finished: false
-        video_key: ~
+        video_key: 164570788
     handling-invalid-token:
-        is_finished: false
-        video_key: ~
+        video_key: 164572475
     jwt-other-things:
-        is_finished: false
-        video_key: ~
+        video_key: 164572877
