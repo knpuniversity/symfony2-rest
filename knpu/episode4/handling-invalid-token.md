@@ -1,4 +1,4 @@
-# Gracefull Erros for an Invalid JWT
+# Graceful Errors for an Invalid JWT
 
 We already know that if the client *forgets* to send a token, Symfony calls the
 `start()` method. But what happens if authentication fails?
@@ -17,7 +17,7 @@ for now.
 
 When JWT authentication fails, what handles that? Well, `onAuthenticationFailure`
 of course! The `getUser()` method *must* return a `User` object. If it doesn't,
-then `onAuthenticationFailure` is called. In our case, there are two possible reaons:
+then `onAuthenticationFailure` is called. In our case, there are two possible reasons:
 the token might be corrupted or expired *or* - somehow -  the decoded username doesn't
 exist in our database. In both cases, we are *not* returning a User object, and this
 triggers `onAuthenticationFailure`.

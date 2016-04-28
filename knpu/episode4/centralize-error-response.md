@@ -1,4 +1,4 @@
-# Centralize the Error Response
+# ResponseFactory: Centralize Error Responses
 
 In the `EventListener` directory, we created an `ApiExceptionSubscriber` whose job
 is to catch all exceptions and turn them into nice API problem responses. And it

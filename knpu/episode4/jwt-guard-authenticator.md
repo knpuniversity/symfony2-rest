@@ -32,7 +32,7 @@ more - check out the [Symfony security course][1].
 First: `getCredentials()`. Our job is to read the `Authorization` header and return
 the token - if any - that's being passed. To help with this, we can use an object
 from the JWT bundle we installed earlier: `$extractor = new AuthorizationHeaderTokenExtractor()`.
-Pass it `Bearer` - the prefix we're expecing before the actual token - and `Authorization`,
+Pass it `Bearer` - the prefix we're expecting before the actual token - and `Authorization`,
 the header to look on:
 
 [[[ code('b89e52ae9c') ]]]

@@ -21,7 +21,7 @@ summary: |
 illustration: rest-sf-4.png
 tuts_hero:
     start_step: upgrade-to-symfony-3
-    finish_step: errors-making-type-a-url
+    finish_step: auth-error-remove-debug
 
 chapters:
     deny-access:

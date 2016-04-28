@@ -15,7 +15,7 @@ add a `guard` key, add `authenticators` below that and paste the service name:
 [[[ code('0cc621f6f0') ]]]
 
 As *soon* as you do that, Symfony will call `getCredentials()` on the authenticator
-on *every* requst. If we send a request that has an `Authorization` header, it should
+on *every* request. If we send a request that has an `Authorization` header, it should
 work its magic.
 
 Let's try it! Run our original `testPOSTProgrammerWorks()` test: this *is* sending

@@ -1,10 +1,10 @@
-# Authentication API Problem
+# JSON Errors in your API
 
 Whenever something goes wrong in our API, we have a *great* setup: we always get
 back a descriptive JSON structure with keys that describe what went wrong. I want
 to do the exact same thing when something goes wrong with authentication.
 
-Open up the `TokenControllerTest`. Here, we puposefully send an *invalid* username
+Open up the `TokenControllerTest`. Here, we purposefully send an *invalid* username
 and password combination. This actually hits `TokenController`, we throw this
 new `BadCredentialsException` and that kicks us out.
 
