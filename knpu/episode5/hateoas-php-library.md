@@ -16,7 +16,7 @@ composer require willdurand/hateoas-bundle
 This is a bundle, so grab the new bundle statement, open `AppKernel` and pop that
 at the bottom.
 
-Perfect. Currently, we had added our own super sweet annotation system for adding links.
+Perfect. Currently, we have our own super sweet annotation system for adding links.
 In `Battle`, we use `@Link` to create a `programmer` link.
 
 Guess what! I completely stole that idea from this library. But now, to make our app
@@ -43,7 +43,7 @@ as long as Composer is done, run:
 vendor/bin/phpunit --filter testPOSTCreateBattle
 ```
 
-Check it out! It fails - but *barely*. ThiThes library *still* puts links under an
+Check it out! It fails - but *barely*. This library *still* puts links under an
 `_links` key, but instead of listing the URLs directly, it wraps each inside an object
 with an `href` key. That's causes the failure.
 

@@ -14,7 +14,7 @@ Why? Basically, it doesn't easily fit into REST. We're not sending or editing
 a resource. No, we're more issuing a command: "Power Up!".
 
 Let's design this in a test: `public function testPowerUp`. Grab the `$programmer`
-and `Reesponse` lines from above, but replace `tagLine` with a `powerLevel` set to
+and `Response` lines from above, but replace `tagLine` with a `powerLevel` set to
 10. Now we know that the programmer *starts* with this amount of power.
 
 ## The URL Structure of a Command

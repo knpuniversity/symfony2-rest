@@ -32,8 +32,8 @@ Ah! It explodes!
 > Class Battle does not have a method getProgrammerNickname.
 
 
-Whoops! I this I was too aggressive. Remember, at the top of `Battle.php`, we have an
-expression that reference this method. So... let's undo that change: put back
+Whoops! I think I was too aggressive. Remember, at the top of `Battle.php`, we have an
+expression that references this method. So... let's undo that change: put back
 `getProgrammerNickname()`, but remove the `@VirtualProperty`.
 
 All right, try it again:

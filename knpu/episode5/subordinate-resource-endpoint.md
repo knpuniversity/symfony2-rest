@@ -23,7 +23,7 @@ Now, life is easy. Add, `$battleManager->battle()` and pass it `$programmer`. An
 whoops - make sure you have a `$programmer` variable set above. Now, add `$project`.
 Copy that and paste it 2 more times.
 
-And we *are* setup! After we make the requuest for the programmer, we *should* get back
+And we *are* setup! After we make the request for the programmer, we *should* get back
 a link we can follow. Get that link with `$uri = $this->asserter()->readResponseProperty`.
 Read `_links.battles`. Make sure you pass `$response` as the first argument.
 

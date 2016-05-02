@@ -14,7 +14,7 @@ speak, HAL JSON says:
 If you think about it, this idea is similar to HTML. In HTML, there's the XML-like
 format, but then there are rules that say:
 
-> Hi, I'm HTML! If you want a link, but it in an `<a>` tag under an `href` attribute.
+> Hi, I'm HTML! If you want a link, put it in an `<a>` tag under an `href` attribute.
 
 The advantage of having standards is that - since the entire Internet follows them -
 we can create a browser that understands the significance of the `<a>` tag, and

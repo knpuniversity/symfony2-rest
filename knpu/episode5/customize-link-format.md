@@ -45,7 +45,7 @@ With any luck, that should give us a simpler format without that `href`.
 
 ## Registering the Serializer
 
-To hook this up. You guys can probably guys step 1: in `app/config/services.yml`,
+To hook this up. You guys can probably guess step 1: in `app/config/services.yml`,
 register this as a service. How about: `custom_hateoas_json_serializer`. Set its
 class to that same thing. And we don't have any constructor args yet.
 

@@ -1,7 +1,7 @@
 # Weird Endpoint: The tagline as a Resource?
 
 Most of our endpoints are pretty straightforward: We create a programmer, we update
-a program, we create a battle, we get a collection of battles.
+a programmer, we create a battle, we get a collection of battles.
 
 Reality check! In the wild: endpoints get weird. Learning how to handle these was
 one of the most *frustrating* parts of REST for me. So let's code through two examples.
@@ -11,7 +11,7 @@ one of the most *frustrating* parts of REST for me. So let's code through two ex
 Here's the first: suppose you decide that it would be really nice to have an endpoint
 where your client can edit the `tagline` of a programmer directly.
 
-Now, technically, that's already possible; send a `PATCH` request to the programmer
+Now, technically, that's already possible: send a `PATCH` request to the programmer
 endpoint and only send the `tagline`.
 
 But remember: we're building the API for our API clients, and if they want an endpoint
@@ -58,8 +58,9 @@ But you don't *need* to do it this way: you might say:
 > resource, so I'm going to return that.
 
 And that's fine! This is an interesting *option* for how to think about things.
-Just as long as you don't spend your days dreaming philosophically about your API.
-Make a decision and feel good about it. In fact, that's good life advice.
+Just as long as you don't spend your days dreaming philosophically about your API,
+you'll be fine. Make a decision and feel good about it. In fact, that's good life
+advice.
 
 ## Adding the String Resource Endpoint
 
