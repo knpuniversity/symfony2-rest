@@ -69,7 +69,13 @@ chapters:
     customize-link-format:
         is_finished: false
         video_key: ~
+    customize-embedded-rels:
+        is_finished: false
+        video_key: ~
     subordinate-url-structure:
+        is_finished: false
+        video_key: ~
+    subordinate-resource-endpoint:
         is_finished: false
         video_key: ~
     consistent-collection-resources:

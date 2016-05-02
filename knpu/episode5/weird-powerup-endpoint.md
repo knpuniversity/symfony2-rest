@@ -1,29 +1,95 @@
-# Weird Powerup Endpoint
+# Weird Endpoint: Command: Power-Up a Programmer
 
-On the Web, when we're dealing with a programmer, we can start a battle up, but we can also hit this power up button. You see different things happen. Sometimes our power goes up, sometimes our power goes down, and the higher our power level is the easier it's going to be for our programmer to win battles. 
+On our web interface, if you select a programmer, you can start a battle, *or* you
+can hit this "Power Up" button. Sometimes our power goes up, sometimes it goes down.
+And isn't that just like life.
 
-Notice the user just clicks power up. It's not like they fill in a box and enter their desired power level. They just power up. Behind the scenes, there's a service that randomly figures out how much the power level on the programmer should change due to powering up. So how could we do this on the end point? The tricky thing is, it's not like we're creating an end point to edit the power level. That's not true. It's just an end point where we say power up. And then the system figures out what to do with that. 
+The higher the programmer's power level, the more likely they will win future battles.
 
-This is a really common, but difficult to understand, REST end point. Basically, it doesn't fit into REST very well. This is less about us sending a resource, like a programmer resource and saying edit, and more of us just issuing a command. Do a power up. Here's the right way to structure this end point. Start the test, public function, test power up, grab the great programmer and response lines from above, replace tag line because you don't really care about that with power level, and we'll create a power level. In the database it starts the power level of 10. 
+Notice: all we need to do is click one button: Power Up. We don't fill in a box with
+the desired power level and hit submit, we just "Power Up"! And that makes this a
+weird endpoint to build for our API.
 
-Okay. Now, we have two decisions to make here – what the URL should look like and what HTB [02:07] methods to put. Obviously, we want to apply our power up to a specific programmer, so make the URL \api\programmer\unitester\powerup. Now here's the tricky part. That's technically a new URL, so that's technically a new resource. So following what we just did a second ago with the tag line, we should think of power up as a resource. So are we editing the power up resource, in which case we should use put, or are we doing something different? 
+Why? Basically, it doesn't easily fit into REST. We're not sending or editing
+a resource. No, we're more issuing a command: "Power Up!".
 
-Well, you can see the problem. Talking about editing the power up resource doesn't make sense. Power up isn't really a resource, even though REST wants to say it is. So when you have end points like this and you're deciding between put and post, use post. Post should be used as the fallback when REST falls apart and nothing else seems to make sense. 
+Let's design this in a test: `public function testPowerUp`. Grab the `$programmer`
+and `Reesponse` lines from above, but replace `tagLine` with a `powerLevel` set to
+10. Now we know that the programmer *starts* with this amount of power.
 
-One of the properties of put versus post that we talked about earlier was item potency. Put is said to be item potent, meaning if you make the same request 10 times, it has the same effect as if you made it one time. And post is not item potent, meaning if you make a post request 10 times, something different will happen. That makes sense. We used post to create programmer, so if you make one post request to create a programmer, you get one programmer. If you make it 10 times, you get 10 programmers. But with put, what you've been using for an update – if you make a put request to update a programmer 10 times, it just updates it. It doesn't have different effects every time. 
+## The URL Structure of a Command
 
-Now thinking about this point, this power up, this is not item potent. Every time I hit the power up end point, something different is going to happen. So that's one of the reasons we're using post here. But even if this end point were item potent, I would still use post. Post is your HTB method for when you have end points in your API that just aren't very RESTful in the resource sense of things. In fact, to prove that, remove the body entirely. We are sending a post request, but we're not actually sending any data. We're not editing a resource. We're just saying do this. 
+From here, we have *two* decisions to make: what the URL should look like and what HTTP method
+to use. Well, we're issuing a command for a specific programmer, so make the URL
+`/api/programmers/UnitTester/powerup`. Here's where things get ugly. This is a new
+URI... so philosophically, this represents a new resource. Following what we did
+with the tag line, we should think of this as the "power up" resource. So, are we
+editing the "power up" resource... or are we doing something different?
 
-Assert that the status code is 200. And then what should our end point return – again, we're not in a normal REST API situation, so it doesn't matter. You could return nothing. You could return the power level. But to be as predictable as possible, let's return the entire programmer resource, which will of course include the new power level. So let's read the power level. This arrow asserter, arrow read response property – we're expecting to get back the entire programmer resource and that will have a power level property on it because that's what we have in our programmer and we're exposing that. 
+## The "Power Up?" Resource???
 
-Now we don't know what the power level is going to be, but whenever you use a power up it either goes down or up. So we can actually do an assert not equals that the new power level should at least be different than the existing power level because it always moves somewhere. 
+Are you confused? I'm confused. It just doesn't make sense to talk about some
+"power up" resource. "Power up" is *not* a resource, even though the rules of REST
+want it to be. We just had to create *some* URL... and this made sense.
 
-So the hardest part of this is just not stressing out too much about the URL structure or the HTB method. Implementing it is actually really easy. Public function, power up action, using @route\api\programmers\nickname\powerup – and a method of post. Type in the programmer argument here, so it gets queried for us and then very simply – the way you power up is we have a service in the system that takes care of all of the logic of figuring out if the power should go up or down and by how much. 
+So if this isn't a resource, how do we decide whether to use PUT or POST? Here's
+the key: when REST falls apart and your endpoint doesn't fit into it anymore, use
+POST.
 
-So just say this arrow get battle.powermanager\powerup and pass the programmer. And that takes care of everything. So we can just return this arrow, create APR response, and pass it our programmer. And that's it. Copy the test power up method name, vendor\bin\phpunit—filter, and paste that. And it passes. 
+## POST for Weird Endpoints
 
-Okay, guys. That is everything. Hope you enjoyed this course where I really wanted to touch on the things that most frustrated me when I was building my first REST APIs, which is paying attention to much to HATEOAS and expecting it to solve all of your problems. Don't worry about that. Instead, just focus on adding links to your API where they are useful. And remember, you're building your API not for yourself. You're building your API for whoever your client is – whether that's a java script front end you're writing or an iPhone app. So they are really the ones in charge and you need to let them help you make the right design decisions so their life is a little bit easier. 
+Earlier, we talked about how PUT is idempotent, meaning if you make the same request
+10 times, it has the same effect as if you made it just once. POST is *not* idempotent:
+if you make a request 10 times, each request *may* have additional side effects.
 
-And that's why we have these last two weird end points. You're going to be asked to make weird end points like this. Don't stress out too much about making them perfect. Just make a sensible decision based on what we're learning here and make a great API that works well. 
+Usually, this is how we decide between POST and PUT. And it fits here! The "power up"
+endpoint is *not* idempotent: hence POST.
 
-Alright, guys. That's it for now. I hope you enjoyed it. See you guys next time. 
+But wait! Things are *not* that simple. Here's the rule I want you to follow. *If*
+you're building an endpoint that fits into the rules of REST: choose between POST
+and PUT by asking yourself if it is idempotent.
+
+But, if your endpoint does *not* fit into REST - like this one - always use POST.
+So even if the "power up" endpoint *were* idempotent, I would use POST. In reality,
+a PUT endpoint *must* be idempotent, but a POST endpoint is allowed to be either.
+
+So, use `->post`. And now, remove the `body`: we are not sending any data. This is
+why `POST` fits better: we're not really *updating* a resource.
+
+## And the Endpoint Returns....?
+
+Assert that 200 matches the status code. And now, what should the endpoint return?
+We're not in a normal REST API situation, so it matters less. You could return nothing,
+or you could return the power level. But to be as predictable as possible, let's
+return the entire programmer resource. Read the new power level from this with
+`$this->asserter()->readResponseProperty` and look for `powerLevel`. This *is* a
+property that we're exposing.
+
+We don't know what this value will be, but it *should* change. Use `assertNotEquals`
+to make sure the new `powerLevel` is no longer 10.
+
+## Implement the Endpoint
+
+Figuring out the URL and HTTP method was the hard part. Let's finish this. In
+`ProgrammerController`, add a new `public function powerUpAction`. Add a route with
+`/api/programmers/{nickname}/powerup` and an `@Method` set to `POST`. Once again,
+type-hint the `Programmer` argument.
+
+To power up, we have a service already made for this. Just say: `$this->get('battle.power_manager')`
+`->powerUp()` and pass it the `$programmer`.
+
+That takes care of everything. Now, return `$this->createApiResponse($programmer)`.
+
+Done! Copy the `testPowerUp` method name and run that test:
+
+```bash
+./vendor/bin/phpunit -—filter testPowerUp
+```
+
+Success!
+
+And that's it - that's everything. I *really* hope this course will save you
+from some frustrations that I had. Ultimately, don't over-think things, add links
+when they're helpful and build your API for whoever will actually use it.
+
+Ok guys - seeya next time!

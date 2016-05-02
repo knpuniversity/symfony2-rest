@@ -1,7 +1,7 @@
-# HAL JSON
+# The HAL  JSON Standard
 
 Google for "How to remove a mustard stain from a white shirt". I mean, Google for
-"HAL JSON" - sorry, I'm dealing with some things over here.
+"HAL JSON" - sorry, it's after lunch.
 
 This is one of a few competing *hypermedia* formats. And remember, *hypermedia* is
 one of our favorite buzzwords: it's a media type, or format, - like JSON - plus some
@@ -9,9 +9,9 @@ rules about how you should semantically organize things inside that format. In h
 speak, HAL JSON says:
 
 > Hi I'm HAL! If you want to embed links in your JSON, you should put them under
-> an `_links` key and point to the URL with `href`. Have a great day!
+> an `_links` key and point to the URL with `href`. Have a lovely day!
 
-If you think about it, that's kind of similar to HTML. In HTML, there's the XML-like
+If you think about it, this idea is similar to HTML. In HTML, there's the XML-like
 format, but then there are rules that say:
 
 > Hi, I'm HTML! If you want a link, but it in an `<a>` tag under an `href` attribute.
@@ -19,7 +19,7 @@ format, but then there are rules that say:
 The advantage of having standards is that - since the entire Internet follows them -
 we can create a browser that understands the significance of the `<a>` tag, and
 renders them clickable. In theory, if all API's followed a standard, we could create
-clients more easily deal with the data.
+clients that easily deal with the data.
 
 ## Updating Programmer to use the new Links
 
@@ -32,7 +32,7 @@ the `use` statement from `Battle`.
 In `ProgrammerControllerTest`, the `testGetProgrammer` method looks for `_links.self`.
 Add `.href` to this to match the new format.
 
-Let's try it out!
+Try it out!
 
 ```bash
 vendor/bin/phpunit --filter testGetProgrammer
@@ -42,26 +42,32 @@ Yes!
 
 ## Should I Use HAL JSON?
 
-The real benefit of using an official format is it just helps your API clients
-get a little bit more sense of how your API works. Now we can tell somebody,
-"Hey, our API returns HAL JSON responses and they can go read this
-documentation and at least get some information about what that means. In fact,
-now that we are using this format, we can advertise this with the content type
-header in the response. In fact, that's what this application\hal+json is up
-here. That's a custom content type. You can see the format's basically like
-application\json but this HAL+ basically says there's additional semantic
-meaning in this JSON and if you want to know more about it, then Google its
-format.
+So why use a standardized format like Hal? Because now, we can say:
 
-So go back to programmer controller tests. In the original tests, where we
-create the programmer, we can assert now that application\hal+json is equal to
-response, get header, content type. And then because guzzle's weird and that
-returns right, hit the zero key on that. So we're basically testing that our
-API is going to advertise that whenever it returns a resource, it returns it
-with this header. And to get that to work, open up the base controller and
-search for create API response, which is what we're calling from all of our
-controllers, to create the response. And just change this key down here to be
-application\hal+json. Good for us. We're advertising our new content site.
+> Hey, our API returns HAL JSON responses!
 
-So copy the test name and rerun PHP unit to make sure that's working.
-Congratulations, you're no longer and island. You're using an official format.
+Then, they can go read its documentation to find out what it looks like. Or better,
+they might already be familiar with it!
+
+## Advertising that you're using Hal
+
+So now that we are using Hal, we should advertise it! In fact, that's what this
+`application/hal+json` means in their documentation: it's a custom `Content-Type`.
+It means that the format is JSON, but there's some extra rules called Hal. If a
+client sees this, they can Google for it.
+
+In `ProgrammerControllerTest`, assert that `application/hal+json` is equal to
+`$response->getHeader('Content-Type')[0]`. Guzzle returns an array for each header -
+there's a reason for that, but yea, I know it looks ugly.
+
+To actually advertise that our API returns HAL, open `BaseController` and search
+for `createApiResponse` - the method we're calling at the bottom of *every* controller.
+Change the header to be `application/hal+json`. 
+
+Nice! Copy the test name and re-run the test:
+
+```bash
+./vendor/bin/phpunit --filter testPOSTProgrammerWorks
+```
+
+Congratulations! Your API is no longer an island: welcome to the club.

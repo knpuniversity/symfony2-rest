@@ -1,21 +1,51 @@
 # Subordinate URL Structure
 
-With three resources, we have programmers, battles, and projects, and they’re all kind of on the same level. Think of them as sort of top level, very important resources, and they link together. Sometimes, you have resources that are almost more like children of other shores resources, and we call these subordinate resources.
+When an API client fetches information about a programmer, they might also want
+a quick way to get details about all of the battles the programmer has fought. Ok,
+we could add a link on programmer to an endpoint that returns all of that programmer's
+battles.
 
-Let me give you an example. Suppose it would be convenient for our API to return a link on a programmer resources to all of the battles for just that programmer. Now, so far, it would be very easy for us to create an endpoint that returns all of the battles in the system. That would be something like /api/battles, but now I just want the battles for a specific programmer.
+This collection of battles is called a subordinate resource because we're looking
+at the battles that belong to a programmer. It *feels* like a parent-child relationship.
+Truthfully, this whole idea of "subordinate" resources isn't that important - and
+it's usually subjective. But, if you're creating an endpoint and you realize that
+it *feels* like a subordinate resource, a few things usually change.
 
-How do we set that up, and how does the URL structure look? Remember, if you read about all this REST API stuff, they’re gonna tell you the URL structure doesn’t matter. In other words, if I want to make an endpoint that returns all of the battles for a specific programmer, I could make it look like /foo/bar/ the programmer’s nickname, /hamburger, but that’s ridiculous. Let me though you the right way to handle subordinate resources.
+To start: how should we setup the URL? Is it `/api/battles?username=` or `/api/battles/{nickname}`?
+If you read up on REST API stuff, they'll tell you the URL structure never matters.
+Ok, let's use `/hamburger`! No, that's stupid... unless your app is about delicious
+hamburgers. For the rest of us, there *are* some sensible rules we should follow.
 
-First, in Programmer, let’s add a new link from the programmer to the battles for the programmer, and then we’ll hook up that endpoint. For the rel, let’s use battles, and that could be anything, just make sure that’s consistent. Whenever you link to a collection of battles, use battles.
+## Adding the Link
 
-Everything else looks good. Our route will probably need the nickname of the programmer. The only question is what route name do we use here because we don’t have an endpoint yet that returns the battles for a specific programmer.
+First, in `Programmer`, let's add a new link from the programmer to the battles
+for that programmer, and then we'll create that endpoint. For the `rel`, let's
+use `battles`. That could be anything: just be consistent. Whenever you link to a
+collection of battles, use `battles`.
 
-Leave this for now. The next question is, what controller should this go into? Should it go into battle controller, or should it go into programmer controller? Because it’s kind of a mixture of those. There’s no right answer to this, but because we’re thinking of these as battles for a specific programmer, the battle in this case is a subordinate to the programmer, and I tend to see this most commonly live inside of the programmer controller.
+Everything else looks good. The route will *probably* need the nickname of the
+programmer... we're not sure yet - because this endpoint doesn't exist. Let's create
+it.
 
-The biggest reason why I say this is because of how we’re gonna structure the URL. Let’s make a public function, battlesListAction. This will be listing the battles from within a programmer. Above that, add the route, @route, and the URL, which, of course, could be anything, we’re gonna make it /api/programmers to be consistent with every other endpoint in this controller, / the nickname of the controller, and then /battles.
+## The URL Structure
 
-This is the way you wanna set up the URL because you can see, the first three parts basically identify a specific program resources, and then /battles almost looks like it’s a property on programmer, which is kinda cool.
+But wait Which controller should it go into: `ProgrammerController` or `BattleController`?
+There's no right answer to this, but because these are battles for a specific programmer,
+the battle is subordinate to the programmer. In these situations, I tend to put the
+code in the parent resource's controller: `ProgrammerController`.
 
-Give this a name. Let’s use api_programmers, which is consistent with the rest of this controller, _battles_ list, and copy that. Awesome. If you structure your URLs in this way, you’re gonna keep things very consistent, very happy, that basically documents itself. This is very obviously gonna return battles for this specific programmer.
+And actually, the biggest reason I do this is because of how we're going to structure
+the URL. Make a `public fucntion battlesListAction()`. Above that, add `@Route()`
+and the URL, which of course, *could* be anything. Make it `/api/programmers/{nickname}/battles`.
 
-Then go back to programmer, and let’s stick in that route name. Lesson No. 1 with subordinate sources is it’s okay to have them, and this is probably the best URL structure to use. But if you didn’t wanna do this, you could do something else. Don’t stress out about it too much. Alright, let’s hook up this new collection resource.
+Check this out: the first three parts of the URL identify a specific programmer
+resource. Then, `/battles` looks almost like a `battles` *property* on programmers.
+That *feels* right... and that's all that matters.
+
+For the name, use `api_programmers_battles_list` and copy that. Every part of this
+is consistent and almost self-documenting.
+
+Head back to `Programmer` and paste the route name. The big lesson about subordinate
+resources is that it's ok to have them and that this is the best URL structure to
+use. But if some other organization feels better to you, do it. This is one of those
+REST topics you should *not* lose time thinking about.

@@ -1,29 +1,91 @@
-# Weird Tagline Endpoint
+# Weird Endpoint: The tagline as a Resource?
 
-Most of our endpoints have been pretty straightforward. We’re creating a program, we’re updating a program, or creating a battle, but in the real world, sometimes you just get weird endpoints, and for me, this was one of the most confusing parts, when you have so many endpoints that is not really editing something, but almost maybe performing an action.
+Most of our endpoints are pretty straightforward: We create a programmer, we update
+a program, we create a battle, we get a collection of battles.
 
-There are all kinds of different weird scenarios that you run into, and I want to talk about those directly, so here’s the first challenge. Suppose that you decide that it would be really nice to have an endpoint where your client can edit the tagline of a programmer directly.
+Reality check! In the wild: endpoints get weird. Learning how to handle these was
+one of the most *frustrating* parts of REST for me. So let's code through two examples.
 
-Now, technically, in our API, that’s already possible. You can send a patch request to the programmer endpoint and only send the tagline, and you’ll be fine. Again, we’re building our API for our clients, and it might be more convenient if you can actually do something a little bit different. Let me show you what I mean.
+## Updating *just* the Tagline?
 
-In ProgrammerControllerTest, let’s design this new endpoint first. Make a public function, sorry, test Edit Tagline. Now scroll up to the top and grab our $this->createProgrammer line that we’ve been using, and let’s give this a specific tag line of the original UnitTester. Okay, so if we were gonna have an endpoint where literally the only thing you can do is edit the tag line, how would that look?
+Here's the first: suppose you decide that it would be really nice to have an endpoint
+where your client can edit the `tagline` of a programmer directly.
 
-Well, you’re not really editing the programmer anymore because if you have an endpoint where you’re able to edit the programmer, you should be able to edit any of the fields on the programmer. One way to think about this is that the tagline is a subordinate resource, or also kind of a property, on the programmer.
+Now, technically, that's already possible; send a `PATCH` request to the programmer
+endpoint and only send the `tagline`.
 
-Remember, every URI is for a resource, so what would be URI look like directly to the tagline resource for a programmer? Well, to would probably look like /api/programmers/unittester/tagline. In fact, if you think of that as its own resource, then all of a sudden, you could decide to create a git endpoint to just retrieve just the tagline, or a put endpoint to update just the tagline because that is its own little resource.
+But remember: we're building the API for our API clients, and if they want an endpoint
+*specifically* for updating a tagline, give it to them.
 
-This isn’t always done, but this is one of the weird things that you can start doing with your API. That means that we’re gonna to actually make a request to this $this->client->put () because we’re gonna to be doing an update; we’re going to be sending all of the data we need this endpoint, /api/programmers/ UnitTester/tagline.
+Open `ProgrammerControllerTest`: let's design the endpoint first. Make a
+`public function testEditTagline`. Scroll to the top and copy the `$this->createProgrammer()`
+line that we've been using. Give this a specific tag line: `The original UnitTester`.
 
-It will pass the normal authorization header, and then we also need to pass the new tagline. Normally, what we do is we send a json-encoded body of all of the fields, but technically now, we’re just editing the tag line resource. The tagline resource is nothing but text, so there’s nothing wrong with sending a json-encoded array here with the tagline in it, but to be most semantically correct with REST, you could just send it as plain text. We are sending a plain text message to modify this plain text tagline resource.
+## The URL Structure
 
-Alright, finish this off with $this->assertEquals 200 for the status code, and then let’s assert what we get back. Whenever we edit or create something, we always get back at the resource that we just edited or created. Again, this tagline resource is just a string. Instead of expecting json back, which you could do, we’re just going to look for that literal text, so $this->assertEquals that new tagline is what we get back, or the $response->getBody, so literally, it’s going to send us text back.
+Now, if we want an endpoint where the *only* thing you can do is edit the `tagLine`,
+how should that look?
 
-Now, you don’t have to do it that way. We could say, “Look, you’re really editing the unit tester programmer resource, so you could decide to actually send back the entire programmer resource, and that would be totally fine,” but this is just a really interesting way to think about, but ultimately, whatever you do, don’t think about it too much,  just do whatever is gonna be easiest for your API client.
+One way to think about this is that the `tagLine` is a *subordinate* *string* resource
+of the programmer. Remember also that every URI is supposed to represent a different
+resource. If you put those 2 ideas together, a great URI becomes obvious:
+`/api/programmers/UnitTester/tagline`. In fact, if you think of this as its own
+resource, then all of a sudden, you could imagine creating a `GET` endpoint to fetch
+*only* the tagline or a `PUT` endpoint to update *just* the tagline. It's a cool
+idea!
 
-Alright, let’s hook this up. At the bottom of ProgrammerController, let’s add a public function testEditTagline. We already know that the route is going to be /api/programmers/{nickname}/tagline. Also, let’s add a @method because we know this is gonna be a put request.
+And that's what we'll do: make an update request with `$this->client->put()` to this
+URL: `/api/programmers/UnitTester/tagline`.
 
-Like before, let’s go straight and type in the programmer so that Doctrine will query for that programmer based on the nickname automatically, and obviously, we’re gonna need the request object as well.
+## How to send the Data?
 
-I could use a form on this like I’ve been doing before, but this is just so simple, let’s just get it done quickly. $programmer->setTagLine ($request->getContent ()), and that’s it. Literally read that text from the request content and set that on the programmer. Now, we’re just gonna do this. $em = $this->getDoctrine ()->getManager(), $em->persist ($programmer), and $em->flush(). That’s it.
+Send the normal `Authorization` header. But how should we pass the new tagline data?
+Normally, we send a json-encoded array of fields. But this resource isn't a collection
+of fields: it's just *one* string. There's nothing wrong with sending some JSON data
+up like before, but you could also set the `body` to the plain-text new tagline itself.
+And I think this is pretty cool.
 
-Now, the return statement is not gonna be any json structure, we’re just gonna return a plain Jane new response object with programmer->getTagLine, that new tag line, a 200 status code, and a content type header because if we don’t set the content type header, Symphony’s gonna default to text/html, but in this case, we actually know this is just a plain text message, so if we’re really responsible, we would set this it text/plain. That is a good-looking, weird endpoint. Copy the test method name. Let’s run ./vendor/bin/phpunit --filter, paste that. Very nice. Now, let me show you a weirder endpoint.
+Finish this off with `$this->assertEquals()` 200 for the status code. But
+what should be returned? Well, whenever we edit or create a resource, we return the
+resource that we just edited or created. In this context, the tagline *is* its own
+resource... even though it's just a string. So instead of expecting JSON, let's look
+for the literal text: `$this->assertEquals()` that `New Tag Line` is equal to the
+string representation of `$response->getBody()`.
+
+But you don't *need* to do it this way: you might say:
+
+> Look, we all know that you're *really* editing the UnitTester programmer
+> resource, so I'm going to return that.
+
+And that's fine! This is an interesting *option* for how to think about things.
+Just as long as you don't spend your days dreaming philosophically about your API.
+Make a decision and feel good about it. In fact, that's good life advice.
+
+## Adding the String Resource Endpoint
+
+Let's finish this endpoint. At the bottom of `ProgrammerController`, add a new
+`public function editTagline`. We already know that the route should be
+`/api/programmers/{nickname}/tagline`. To be super hip, add an `@Method` annotation:
+we know this should only match `PUT` requests.
+
+Like before, type-hint the `Programmer` argument so that Doctrine will query for
+it *for* us, using the `nickname` value. And, we'll also need the `Request` argument.
+
+I *could* use a form like before... but this is just *so* simple.
+`$programmer->setTagLine($request->getContent())`. Literally: read the text from
+the request body and set that on the programmer.
+
+Now, save: `$em = $this->getDoctrine()->getManager()`, `$em->persist($programmer)`
+and `$em->flush()`.
+
+For the return, it's not JSON! Return a plain `new Response()` with `$programmer->getTagLine()`,
+a 200 status code, and a `Content-Type` header of `text/plain`.
+
+Now, this is a good-looking, weird endpoint. Copy the test method name and try
+it out:
+
+```bash
+./vendor/bin/phpunit --filter testEditTagLine
+```
+
+We're green! Next, let's look at a *weirder* endpoint.
