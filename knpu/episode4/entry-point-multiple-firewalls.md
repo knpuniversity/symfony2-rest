@@ -17,7 +17,9 @@ you control it with the `start()` method.
 ## The start() Method
 
 Return a new `JsonResponse` and we'll just say `error => 'auth required'` as a start.
-Then, set the status code to 401.
+Then, set the status code to 401:
+
+[[[ code('2e035e5403') ]]]
 
 To see if it's working, copy the `testRequiresAuthentication` method name and run
 that test:
@@ -31,39 +33,55 @@ Symfony was supposed to call our `start()` method in this situation? So what giv
 
 ## One Entry Point per Firewall
 
-Open up `security.yml`. Here's the problem: we have a single firewall. When an anonymous
-request accesses the site and hits a page that requires a valid user, Symfony has
-to figure out what *one* thing to do. If this were a traditional app, we should redirect
-the user to `/login`. If this were an API, we should return a 401 response. But our
-app is *both*: we have an HTML frontend and API endpoints. Symfony doesn't really
-know what *one* thing to do. The `form_login` authentication mechanism has a built-in
-entry point and *it* is taking priority. Our cute `start()` entry point function
-is being totally ignored.
+Open up `security.yml`:
+
+[[[ code('cd5a53ad46') ]]]
+
+Here's the problem: we have a single firewall. When an anonymous request accesses
+the site and hits a page that requires a valid user, Symfony has to figure out what
+*one* thing to do. If this were a traditional app, we should redirect the user to `/login`.
+If this were an API, we should return a 401 response. But our app is *both*: we have
+an HTML frontend and API endpoints. Symfony doesn't really know what *one* thing to do.
+
+[[[ code('e835f88a1c') ]]]
+
+The `form_login` authentication mechanism has a built-in entry point and *it* is taking
+priority. Our cute `start()` entry point function is being totally ignored.
 
 But no worries, you can control this! You could add an `entry_point` key under your
 firewall and point to the authenticator service to say "No no no: I want to use my
 authenticator as the *one* entry point". But then, our HTML app would break: we *still*
 want users on the frontend to be redirected.
 
-Normally, I'm a big advocate of having a single fireall. But this is a *perfect*
+Normally, I'm a big advocate of having a single firewall. But this is a *perfect*
 use-case for splitting into two firewalls: we really do have two very different
 authentication systems at work.
 
 ## Adding the Second Firewall
 
 Above, the main firewall, add a new key called `api`: the name is not important.
-And set `pattern: ^/api/`. That's a regular expression, so it'll match anything
-starting with `/api/`. Oh, and when Symfony boots, it only matches and uses *one*
-firewall. Going to `/api/something` will use the `api` firewall. Everything else
-will match the `main` firewall. And this is *exactly* what we want.
+And set `pattern: ^/api/`:
 
-Add the `anonymous` key: we may still want some endpoints to not require authentication.
+[[[ code('0f46ebff1f') ]]]
+
+That's a regular expression, so it'll match anything starting with `/api/`. Oh,
+and when Symfony boots, it only matches and uses *one* firewall. Going to `/api/something`
+will use the `api` firewall. Everything else will match the `main` firewall. And this
+is *exactly* what we want.
+
+Add the `anonymous` key: we may still want some endpoints to not require authentication:
+
+[[[ code('2351334e00') ]]]
+
 I'll also add `stateless: true`. This is kind of cool: it tells Symfony to *not*
 store the user in the session. That's perfect: we expect the client to send a valid
 `Authorization` header on *every* request.
 
-Move the guard authenticator up into the `api` firewall. And that should do it! Now,
-it will use the `start()` method from *our* authenticator.
+Move the guard authenticator up into the `api` firewall:
+
+[[[ code('321b88f957') ]]]
+
+And that should do it! Now, it will use the `start()` method from *our* authenticator.
 
 Give it a try!
 

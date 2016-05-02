@@ -39,3 +39,38 @@ index 0101b1b..d860e1e 100644
 +        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'Invalid credentials.');
      }
  }
+diff --git a/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php b/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php
+new file mode 100644
+index 0000000..be061c7
+--- /dev/null
++++ b/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php
+@@ -0,0 +1,29 @@
++<?php
++
++/*
++ * This file is part of the Symfony package.
++ *
++ * (c) Fabien Potencier <fabien@symfony.com>
++ *
++ * For the full copyright and license information, please view the LICENSE
++ * file that was distributed with this source code.
++ */
++
++namespace Symfony\Component\Security\Core\Exception;
++
++/**
++ * BadCredentialsException is thrown when the user credentials are invalid.
++ *
++ * @author Fabien Potencier <fabien@symfony.com>
++ * @author Alexander <iam.asm89@gmail.com>
++ */
++class BadCredentialsException extends AuthenticationException
++{
++    /**
++     * {@inheritdoc}
++     */
++    public function getMessageKey()
++    {
++        return 'Invalid credentials.';
++    }
++}
