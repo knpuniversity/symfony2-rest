@@ -1,10 +1,10 @@
 # The Battle Resource
 
-Yeeaaaa! Symfony REST - part 5! This course is *special* - we're going to de-mystify
-some magical-sounding ideas and buzzwords like hypermedia & HATEOAS.
+Hey guys! Finally part 5 - and it's *special*! It's my chance to take on some buzzwords
+directly: like hypermedia & HATEOAS.
 
 Now, defining these terms is easy... but putting them into practice? For me, it was a
-Ryan disaster.
+disaster.
 
 Let's take those ideas on directly in this tutorial, and clear up what's hype,
 and what is actually an evil ploy to prevent your awesome API from being released.
