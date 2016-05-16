@@ -1,11 +1,10 @@
 # The Battle Resource
 
-WOW. Is it part 5 of the Symfony REST series already? Let's do this!
+Yeeaaaa! Symfony REST - part 5! This course is *special* - we're going to de-mystify
+some magical-sounding ideas and buzzwords like hypermedia & HATEOAS.
 
-And this is a special course for me. When I started into all this REST API stuff,
-there were tons of neat-sounding ideas and philosophies like hypermedia & HATEOAS.
-What a magical time. Defining these terms is easy... but putting them into practice?
-It was a Ryan disaster.
+Now, defining these terms is easy... but putting them into practice? For me, it was a
+Ryan disaster.
 
 Let's take those ideas on directly in this tutorial, and clear up what's hype,
 and what is actually an evil ploy to prevent your awesome API from being released.
@@ -16,7 +15,9 @@ And hey, I just had an idea! You should code along with me! We've gone to all th
 trouble already to add a download for the code, so you might as well get it. Plus,
 there are some kitten gifs in the archive.. ok, not really. Once you've unzipped
 the code, move into the `start/` directory, you'll have the exact code I already
-have here. Open the README for the setup instructions.
+have here.
+
+There's also a README file that has a few other setup instructions you'll need.
 
 And if you've been coding along with previous courses, you're my favorite. But...
 download the new code: I made a few small changes to the project.
