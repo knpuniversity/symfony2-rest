@@ -18,7 +18,7 @@ If the form is *not* valid, we need to send back errors. Use another method from
 earlier: `$this->throwApiProblemValidationException()` and pass it the `$form` object.
 This will grab the validation errors off and create that response.
 
-Finally, we have a `BattleModel` object that's populated with the `Programmer` and
+At this point, we have a `BattleModel` object that's populated with the `Programmer` and
 `Project` objects sent in the request. To create the battle, we need to use the
 `BattleManager`. Do that with `$this->getBattleManager()` - that's just a shortcut
 to get the service - `->battle()` and pass it `$battleModel->getProgrammer()` and
