@@ -30,26 +30,19 @@ chapters:
     battle-resource:
         video_key: 167123939
     create-battle-test:
-        is_finished: false
-        video_key: ~
+        video_key: 167131648
     saving-related-resources-via-form:
-        is_finished: false
-        video_key: ~
+        video_key: 167136677
     finishing-the-battle:
-        is_finished: false
-        video_key: ~
+        video_key: 167137905
     virtual-property:
-        is_finished: false
-        video_key: ~
+        video_key: 167138516
     property-path:
-        is_finished: false
-        video_key: ~
+        video_key: 167138773
     battle-validation:
-        is_finished: false
-        video_key: ~
+        video_key: 167140624
     restrict-valid-programmer-input:
-        is_finished: false
-        video_key: ~
+        video_key: 167141214
     hateoas-hypermedia-buzzwords:
         is_finished: false
         video_key: ~
