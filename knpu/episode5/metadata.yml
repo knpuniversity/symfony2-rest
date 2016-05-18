@@ -28,8 +28,7 @@ tuts_hero:
 
 chapters:
     battle-resource:
-        is_finished: false
-        video_key: ~
+        video_key: 167123939
     create-battle-test:
         is_finished: false
         video_key: ~
