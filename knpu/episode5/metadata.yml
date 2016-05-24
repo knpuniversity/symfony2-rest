@@ -66,5 +66,4 @@ chapters:
     weird-tagline-endpoint:
         video_key: 167831908
     weird-powerup-endpoint:
-        is_finished: false
-        video_key: ~
+        video_key: 167893839
