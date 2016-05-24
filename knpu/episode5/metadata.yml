@@ -44,29 +44,21 @@ chapters:
     restrict-valid-programmer-input:
         video_key: 167141214
     hateoas-hypermedia-buzzwords:
-        is_finished: false
-        video_key: ~
+        video_key: 167782466
     link-battle-programmer:
-        is_finished: false
-        video_key: ~
+        video_key: 167787512
     hateoas-php-library:
-        is_finished: false
-        video_key: ~
+        video_key: 167793217
     hal-json:
-        is_finished: false
-        video_key: ~
+        video_key: 167794007
     hal-embedded:
-        is_finished: false
-        video_key: ~
+        video_key: 167792042
     customize-link-format:
-        is_finished: false
-        video_key: ~
+        video_key: 167795324
     customize-embedded-rels:
-        is_finished: false
-        video_key: ~
+        video_key: 167813214
     subordinate-url-structure:
-        is_finished: false
-        video_key: ~
+        video_key: 167812047
     subordinate-resource-endpoint:
         is_finished: false
         video_key: ~
