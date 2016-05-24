@@ -60,14 +60,11 @@ chapters:
     subordinate-url-structure:
         video_key: 167812047
     subordinate-resource-endpoint:
-        is_finished: false
-        video_key: ~
+        video_key: 167831663
     consistent-collection-resources:
-        is_finished: false
-        video_key: ~
+        video_key: 167831247
     weird-tagline-endpoint:
-        is_finished: false
-        video_key: ~
+        video_key: 167831908
     weird-powerup-endpoint:
         is_finished: false
         video_key: ~
