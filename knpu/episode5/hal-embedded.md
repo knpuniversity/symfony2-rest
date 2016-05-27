@@ -19,9 +19,14 @@ entirely.
 
 ## Adding an Embedded Relation
 
-To do that, after `href`, add an `embedded="expr()"` with `object.getProgrammer()`.
+To do that, after `href`, add an `embedded="expr()"` with `object.getProgrammer()`:
+
+[[[ code('d279be8d36') ]]]
+
 Let's see what this looks like! Open `BattleControllerTest` and right at the bottom,
-add our handy `$this->debugResponse($response)`.
+add our handy `$this->debugResponse($response)`:
+
+[[[ code('64a366deaf') ]]]
 
 Perfect! Copy that method name and run it:
 
@@ -31,12 +36,18 @@ Perfect! Copy that method name and run it:
 
 Oh, cool: we still have the relation in `_links`, but now we *also* have an entire
 programmer resource in `_embedded`. So when you setup these `@Hateoas\Relation`
-annotations, you can choose whether you want this to be a link or an embedded object.
+annotations:
 
-And ok, we cheated on this test by looking at it first, but *now* I guess we should
+[[[ code('bec8d50e6d') ]]]
+
+You can choose whether you want this to be a link or an embedded object.
+
+And OK, we cheated on this test by looking at it first, but *now* I guess we should
 specifically have a test for it. Add: `$this->asserter()->assertResponsePropertyEquals()`
 with `$response`. Look for `_embedded.programmer.nickname` to be equal to our friend
-`Fred`.
+`Fred`:
+
+[[[ code('042031728a') ]]]
 
 Run that!
 
