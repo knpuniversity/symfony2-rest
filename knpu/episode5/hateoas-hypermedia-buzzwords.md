@@ -1,7 +1,7 @@
 # HATEOAS, Hypermedia & Buzzwords
 
 These days, you expect a tutorial on REST to immediately throw out some buzzwords:
-like hypermedia and HATEOAS. But I've tried *not* to mention these because honestly,
+like *hypermedia* and *HATEOAS*. But I've tried *not* to mention these because honestly,
 in practice: they're more trouble than good.
 
 But, there are some cool parts! It's time to learn what these mean, what parts are
@@ -21,13 +21,13 @@ own *hypermedia* format: a JSON structure where I know - semantically - what `_l
 means: it's not data: it's links to *other* resources.
 
 The most famous hypermedia format is ... drumroll HTML! It's basically an XML media
-type that has built-in tags for links: the `a` tag. Actually, `<form>`, `<img>`
+type that has built-in tags for links: the `<a>` tag. Actually, `<form>`, `<img>`
 `<link>` and `<script>` are also considered "links" to other resources.
 
 So calling something a hypermedia format is just a way of saying:
 
 > Hey, when we return the JSON data, what if we added some rules
-> that say any links we want to include always live in the same place?
+  that say any links we want to include always live in the same place?
 
 And even though I avoided the word - *hypermedia* - in a sense, we're already returning
 a hypermedia format because we always include links under an `_links` key. We'll
@@ -39,7 +39,7 @@ you can adopt for your API.
 Ready for buzzword #2? HATEOAS... or HAT-E-OAS... or H-ATE-OAS... nobody really knows
 how to say it. Anyways, the throat-clearing acronym stands for:
 
-> hypermedia as the engine of application state
+> Hypermedia As The Engine Of Application State
 
 Whoa. Let's unpack that monster. It's actually a cool idea.
 
@@ -52,7 +52,7 @@ Normally, the client figures out *which* endpoint - or state - they need next by
 reading some API documentation. But HATEOAS says:
 
 > What if we didn't write API documentation and instead, every response
-> we send back self-documents what endpoints you might want next via links?
+  we send back self-documents what endpoints you might want next via links?
 
 So when we send back a programmer resource, it would contain a link for every
 other possible thing the client might want to do next - like starting a battle
@@ -61,7 +61,7 @@ with that programmer.
 In an ideal world, you would stop writing documentation and just say:
 
 > Hey, use my API! Every time you make a request, I'll include details about
-> what do to next.
+  what do to next.
 
 In reality, HATEOAS is a fantasy, at least for now. For it to work, links
 would need to be able to contain what HTTP method to use, what fields to send, and
