@@ -9,7 +9,7 @@ rules about how you should semantically organize things inside that format. In h
 speak, HAL JSON says:
 
 > Hi I'm HAL! If you want to embed links in your JSON, you should put them under
-> an `_links` key and point to the URL with `href`. Have a lovely day!
+  an `_links` key and point to the URL with `href`. Have a lovely day!
 
 If you think about it, this idea is similar to HTML. In HTML, there's the XML-like
 format, but then there are rules that say:
@@ -24,13 +24,25 @@ clients that easily deal with the data.
 ## Updating Programmer to use the new Links
 
 So let's also update the `Programmer` entity to use the new system. Copy the whole
-`@Relation` from `Battle` and replace the `@Link` inside of `Programmer`. Change
-the `rel` back to `self` and update the expression to `object.getNickname()`. Make
-sure you've got all your parenthesis in place. Oh, and don't forget to bring over
-the `use` statement from `Battle`.
+`@Relation` from `Battle`:
 
-In `ProgrammerControllerTest`, the `testGetProgrammer` method looks for `_links.self`.
-Add `.href` to this to match the new format.
+[[[ code('f55af4496a') ]]]
+
+And replace the `@Link` inside of `Programmer`. Change the `rel` back to `self`
+and update the expression to `object.getNickname()`:
+
+[[[ code('5980ec64b3') ]]]
+
+Make sure you've got all your parenthesis in place. Oh, and don't forget to bring
+over the `use` statement from `Battle`.
+
+In `ProgrammerControllerTest`, the `testGetProgrammer` method looks for `_links.self`:
+
+[[[ code('310f8b3079') ]]]
+
+Add `.href` to this to match the new format:
+
+[[[ code('') ]]]
 
 Try it out!
 
@@ -57,12 +69,18 @@ It means that the format is JSON, but there's some extra rules called Hal. If a
 client sees this, they can Google for it.
 
 In `ProgrammerControllerTest`, assert that `application/hal+json` is equal to
-`$response->getHeader('Content-Type')[0]`. Guzzle returns an array for each header -
-there's a reason for that, but yea, I know it looks ugly.
+`$response->getHeader('Content-Type')[0]`:
+
+[[[ code('3055f2e1e3') ]]]
+
+Guzzle returns an array for each header - there's a reason for that, but yea,
+I know it looks ugly.
 
 To actually advertise that our API returns HAL, open `BaseController` and search
-for `createApiResponse` - the method we're calling at the bottom of *every* controller.
-Change the header to be `application/hal+json`. 
+for `createApiResponse()` - the method we're calling at the bottom of *every* controller.
+Change the header to be `application/hal+json`:
+
+[[[ code('ec5a2aa39d') ]]]
 
 Nice! Copy the test name and re-run the test:
 
