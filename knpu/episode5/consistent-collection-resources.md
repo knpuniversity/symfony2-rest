@@ -2,19 +2,26 @@
 
 Go back to the test we're working on right now. First, every collection should have an
 `items` key for consistency. Assert that with `$this->asserter()->assertResponsePropertyExists()`
-for `items`.
+for `items`:
+
+[[[ code('642ca355bc') ]]]
 
 ## Pagination in the Past
 
 Next, open `ProgrammerController`. The *whole* reason the other endpoint had an
-`items` key was because - in `listAction` - we went through our fancy pagination
+`items` key was because - in `listAction()` - we went through our fancy pagination
 system. Click into the `pagination_factory`. The *key* part is that this method
-eventually creates a `PaginatedCollection` object. *This* is what we feed to the
-serializer.
+eventually creates a `PaginatedCollection` object:
+
+[[[ code('47a0a97767') ]]]
+
+*This* is what we feed to the serializer.
 
 The `PaginatedCollection` object is something *we* created. And hey! It has an `$items`
 property! So this isn't rocket science. It also has a few other properties: `total`,
-`count` and the pagination links.
+`count` and the pagination links:
+
+[[[ code('df7fd737ea') ]]]
 
 So if we want *every* collection endpoint to be identical, every endpoint should
 return a `PaginatedCollection`. 
@@ -22,10 +29,15 @@ return a `PaginatedCollection`.
 ## Creating a PaginatedCollection
 
 We could do this the simple way: `$collection = new PaginatedCollection()`
-and pass it `$battles` and the total items - which right now is `count($battles)`.
+and pass it `$battles` and the total items - which right now is `count($battles)`:
+
+[[[ code('5a0b99469a') ]]]
+
 There's not *actually* any pagination going on.
 
-At the bottom, pass that `$collection` to `createApiResponse`.
+At the bottom, pass that `$collection` to `createApiResponse()`:
+
+[[[ code('18999bff3c') ]]]
 
 Done! Run that test:
 
@@ -42,27 +54,44 @@ And really: if we're going to all of this trouble to use the `PaginatedCollectio
 shouldn't we go one extra half-step and actually add pagination? After all, it'll
 make this endpoint even more consistent by having those pagination links.
 
-Change the `$collection =` line to `$this->get('pagination_factory')->createCollection()`.
+Change the `$collection =` line to `$this->get('pagination_factory')->createCollection()`:
+
+[[[ code('3a6b379237') ]]]
+
 This needs a few arguments. The first is a query builder. So instead of making this
 full query for battles, we need to *just* return the query builder. Rename this to
 a new method called - `createQueryBuilderForProgrammer()` and pass it the `$programmer`
-object.
+object:
+
+[[[ code('3ddefb1667') ]]]
 
 I'll hold command and I'll click `Battle` to jump into `BattleRepository`. Add that
-method: `public function createQueryBuilderForProgrammer` with a `Programmer $programmer`
-argument.
+method: `public function createQueryBuilderForProgrammer()` with a `Programmer $programmer`
+argument:
+
+[[[ code('f780d0ea1f') ]]]
 
 Fortunately, the query is easy: `return $this->createQueryBuilder('battle')`, then
-`->andWhere('battle.programmer = :programmer')` with `setParameter('programmer', $programmer)`.
+`->andWhere('battle.programmer = :programmer')` with `setParameter('programmer', $programmer)`:
 
-Perfect! Back in `ProgrammerController`, rename the variable to `battlesQb` and pass
-it to `createCollection`. The second argument is the request object. You guys know
-what to do: type-hint a new argument with `Request` and pass that in.
+[[[ code('620526d58c') ]]]
+
+Perfect! Back in `ProgrammerController`, rename the variable to `$battlesQb` and pass
+it to `createCollection()`:
+
+[[[ code('eef583355c') ]]]
+
+The second argument is the request object. You guys know what to do: type-hint
+a new argument with `Request` and pass that in:
+
+[[[ code('7113c1e11c') ]]]
 
 The third argument is the name of the route the pagination links should point to.
 That's *this* route: `api_programmers_battles_list`. Finally, the last argument is
 any route parameters that need to be passed to the route. This route has a `nickname`,
-so pass `nickname => $programmer->getNickname()`.
+so pass `nickname => $programmer->getNickname()`:
+
+[[[ code('ed1727d70b') ]]]
 
 Done. We basically changed one line to create a *real* paginated collection. And
 now, we celebrate. Run the test:
