@@ -42,7 +42,7 @@ In `ProgrammerControllerTest`, the `testGetProgrammer` method looks for `_links.
 
 Add `.href` to this to match the new format:
 
-[[[ code('') ]]]
+[[[ code('6af5a22b07') ]]]
 
 Try it out!
 
