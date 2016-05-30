@@ -85,7 +85,7 @@ advice.
 ## Adding the String Resource Endpoint
 
 Let's finish this endpoint. At the bottom of `ProgrammerController`, add a new
-`public function editTagline()`:
+`public function editTaglineAction()`:
 
 [[[ code('cf7e202da6') ]]]
 
