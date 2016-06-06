@@ -1,4 +1,4 @@
-# HATEOAS, Hypermedia & Buzzwords
+# HATEOAS & Hypermedia: The Buzzwords Level
 
 These days, you expect a tutorial on REST to immediately throw out some buzzwords:
 like hypermedia and HATEOAS. But I've tried *not* to mention these because honestly,

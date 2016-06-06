@@ -1,4 +1,4 @@
-# Subordinate Resource Endpoint
+# Coding the Subordinate Resource Endpoint
 
 Before we code up the endpoint, start with the test. But wait! This test is going
 to be *pretty* cool: we'll make a request for a programmer resource and *follow*
