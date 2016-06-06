@@ -28,62 +28,42 @@ tuts_hero:
 
 chapters:
     battle-resource:
-        is_finished: false
-        video_key: ~
+        video_key: 167123939
     create-battle-test:
-        is_finished: false
-        video_key: ~
+        video_key: 167131648
     saving-related-resources-via-form:
-        is_finished: false
-        video_key: ~
+        video_key: 167136677
     finishing-the-battle:
-        is_finished: false
-        video_key: ~
+        video_key: 167137905
     virtual-property:
-        is_finished: false
-        video_key: ~
+        video_key: 167138516
     property-path:
-        is_finished: false
-        video_key: ~
+        video_key: 167138773
     battle-validation:
-        is_finished: false
-        video_key: ~
+        video_key: 167140624
     restrict-valid-programmer-input:
-        is_finished: false
-        video_key: ~
+        video_key: 167141214
     hateoas-hypermedia-buzzwords:
-        is_finished: false
-        video_key: ~
+        video_key: 167782466
     link-battle-programmer:
-        is_finished: false
-        video_key: ~
+        video_key: 167787512
     hateoas-php-library:
-        is_finished: false
-        video_key: ~
+        video_key: 167793217
     hal-json:
-        is_finished: false
-        video_key: ~
+        video_key: 167794007
     hal-embedded:
-        is_finished: false
-        video_key: ~
+        video_key: 167792042
     customize-link-format:
-        is_finished: false
-        video_key: ~
+        video_key: 167795324
     customize-embedded-rels:
-        is_finished: false
-        video_key: ~
+        video_key: 167813214
     subordinate-url-structure:
-        is_finished: false
-        video_key: ~
+        video_key: 167812047
     subordinate-resource-endpoint:
-        is_finished: false
-        video_key: ~
+        video_key: 167831663
     consistent-collection-resources:
-        is_finished: false
-        video_key: ~
+        video_key: 167831247
     weird-tagline-endpoint:
-        is_finished: false
-        video_key: ~
+        video_key: 167831908
     weird-powerup-endpoint:
-        is_finished: false
-        video_key: ~
+        video_key: 167893839

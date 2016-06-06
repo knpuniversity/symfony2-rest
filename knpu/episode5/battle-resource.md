@@ -25,7 +25,7 @@ download the new code: I made a few small changes to the project.
 Once you're ready, start the built-in web server with:
 
 ```bash
-bin/console server:run
+./bin/console server:run
 ```
 
 ## Resources: Programmer + Project = (epic) Battle
@@ -42,10 +42,21 @@ entire existence is based on being related to these other two resources. And it 
 out, relating things in an API can get tricky.
 
 The resources in your API don't always need to match up with tables in your database, but
-they often do. Our `Entity` directory holds a `Programmer` entity *and* a `Project`
-entity, which just has `name` and `difficultyLevel` fields. Now check out `Battle`: it
-has a `ManyToOne` relationship to `Programmer` and `Project`, plus a few other fields
-like `didProgrammerWin`, `foughtAt` and `notes`.
+they often do. Our `Entity` directory holds a `Programmer` entity:
+
+[[[ code('dc2608901a') ]]]
+
+*and* a `Project` entity, which just has `name` and `difficultyLevel` fields:
+
+[[[ code('cf19ff3ff9') ]]]
+
+Now check out `Battle`: it has a `ManyToOne` relationship to `Programmer` and `Project`:
+
+[[[ code('a3863ee3e3') ]]]
+
+plus a few other fields like `didProgrammerWin`, `foughtAt` and `notes`:
+
+[[[ code('c227a2711a') ]]]
 
 Here's the goal: add an endpoint that will create a new battle resource. How should
 this endpoint look and act? You know the drill: let's design it first with a test.
