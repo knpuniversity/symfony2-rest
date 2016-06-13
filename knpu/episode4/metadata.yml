@@ -10,14 +10,6 @@ summary: |
     * Proper API errors for invalid credentials and missing credentials
     * Choosing to split into 2 firewalls
 
-    The REST of the Symfony Series:
-    
-    * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
-    * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Part 4: Authentication](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
-
 illustration: rest-sf-4.png
 tuts_hero:
     start_step: upgrade-to-symfony-3

@@ -12,14 +12,6 @@ summary: |
     * Evaluating expressions
     * Making embedded resources configurable/conditional
 
-    The REST of the Symfony Series:
-
-    * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
-    * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Part 4: Authentication](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
-
 illustration: rest-sf-3.png
 tuts_hero:
     start_step: "errors-only-affect-api"

@@ -16,14 +16,6 @@ summary: |
     * Consistent errors *everywhere*: 404's, 500's, oh my!
     * Handling "extra fields" in your form
 
-    The REST of the Symfony Series:
-    
-    * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
-    * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Part 4: Authentication](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
-
 illustration: rest-ep2.png
 tuts_hero:
     start_step: "Serialize: Whitelisting properties"

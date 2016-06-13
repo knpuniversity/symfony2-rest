@@ -17,14 +17,6 @@ summary: |
     * GET, PUT, DELETE and PATCH endpoints
     * Using the JMS Serializer
 
-    The REST of the Symfony Series:
-    
-    * [Part 1: Basics](http://knpuniversity.com/screencast/symfony-rest)
-    * [Part 2: Errors](http://knpuniversity.com/screencast/symfony-rest2)
-    * [Part 3: Basics++](http://knpuniversity.com/screencast/symfony-rest3)
-    * [Part 4: Authentication](http://knpuniversity.com/screencast/symfony-rest4)
-    * [Part 5: Hypermedia](http://knpuniversity.com/screencast/symfony-rest5)
-
 illustration: rest-sf.png
 tuts_hero:
     start_step: "start"
