@@ -21,7 +21,9 @@ And give `Client` a proper `use` statement:
 
 [[[ code('9263e01200') ]]]
 
-In case you are using Guzzle 6, you would need to pass the base to `base_uri` instead of `base_url`.
+***TIP
+In case you are using Guzzle 6, you would need to use the `base_uri` key instead of `base_url` to configure Guzzle client properly.
+***
 Cool. So now the `Client` is created once per test suite. Now, create a
 `protected $client` property that is *not* static with some nice PHPDoc above
 it. Woops - make sure you actually make this `protected`: this is what we'll
