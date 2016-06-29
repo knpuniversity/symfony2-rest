@@ -9,7 +9,7 @@ cookie, and looks it up in some database to figure out who we are.
 ## How all (most) API Authentication Works
 
 Guess what? An API isn't much different. One way or another, an API client will
-will obtain a unique *token*, which - like the cookie - acts as their *key* to the
+obtain a unique *token*, which - like the cookie - acts as their *key* to the
 API. On every request, the client will send this token and the server will use that
 token to figure out *who* the client is and *what* they're allowed to do.
 
