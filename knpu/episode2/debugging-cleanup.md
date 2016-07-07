@@ -33,6 +33,15 @@ Let's rerun `testPOST` and it should fail, but I'm hoping I can get some extra d
 the `JSON` response still because I changed the request format but we also get the full long stack
 trace. That is looking really nice, so let's just go ahead and remove the exception. 
 
+***TIP
+There is one thing missing from our listener: logging! In your application, you should
+inject the `logger` service and log that an exception occurred. This is important
+so that you are aware of errors on production. The "finish" download code contains
+this change.
+
+Thanks to Sylvain for pointing this out in the comments!
+***
+
 ## type is a URL
 
 Onto the second thing we need to clean up! Inside the spec, under `type` it says that `type` should
