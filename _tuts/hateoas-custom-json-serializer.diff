@@ -14,7 +14,7 @@ index c7d7163..83196b5 100644
 +    serializer:
 +        json: custom_hateoas_json_serializer
 diff --git a/app/config/services.yml b/app/config/services.yml
-index f822af6..a935b0a 100644
+index 8c88704..5d15fbe 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -33,3 +33,6 @@ services:

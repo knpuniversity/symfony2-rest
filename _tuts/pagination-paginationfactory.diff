@@ -1,9 +1,9 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index dd7aeb7..e23c719 100644
+index d34a2d6..2f15274 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -22,3 +22,7 @@ services:
-         arguments: ['%kernel.debug%']
+         arguments: ['%kernel.debug%', '@logger']
          tags:
              - { name: kernel.event_subscriber }
 +

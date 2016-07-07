@@ -1,13 +1,13 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index b6c90b8..3759073 100644
+index cb56c8b..2358222 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -19,7 +19,7 @@ services:
  
      api_exception_subscriber:
          class: AppBundle\EventListener\ApiExceptionSubscriber
--        arguments: ['%kernel.debug%']
-+        arguments: ['%kernel.debug%', '@api.response_factory']
+-        arguments: ['%kernel.debug%', '@logger']
++        arguments: ['%kernel.debug%', '@api.response_factory', '@logger']
          tags:
              - { name: kernel.event_subscriber }
  
@@ -51,7 +51,7 @@ index 0000000..f514582
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
-index 592d0d7..ea5627f 100644
+index 8f4dbff..84d78c2 100644
 --- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 +++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -4,6 +4,7 @@ namespace AppBundle\EventListener;
@@ -59,24 +59,27 @@ index 592d0d7..ea5627f 100644
  use AppBundle\Api\ApiProblem;
  use AppBundle\Api\ApiProblemException;
 +use AppBundle\Api\ResponseFactory;
+ use Psr\Log\LoggerInterface;
  use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
- use Symfony\Component\HttpKernel\KernelEvents;
-@@ -13,10 +14,12 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+@@ -14,11 +15,15 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
  class ApiExceptionSubscriber implements EventSubscriberInterface
  {
      private $debug;
++
 +    private $responseFactory;
++
+     private $logger;
  
--    public function __construct($debug)
-+    public function __construct($debug, ResponseFactory $responseFactory)
+-    public function __construct($debug, LoggerInterface $logger)
++    public function __construct($debug, ResponseFactory $responseFactory, LoggerInterface $logger)
      {
          $this->debug = $debug;
 +        $this->responseFactory = $responseFactory;
+         $this->logger = $logger;
      }
  
-     public function onKernelException(GetResponseForExceptionEvent $event)
-@@ -55,17 +58,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
+@@ -60,17 +65,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
              }
          }
  

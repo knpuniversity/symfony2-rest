@@ -1,0 +1,69 @@
+diff --git a/app/config/services.yml b/app/config/services.yml
+index dd7aeb7..d34a2d6 100644
+--- a/app/config/services.yml
++++ b/app/config/services.yml
+@@ -19,6 +19,6 @@ services:
+ 
+     api_exception_subscriber:
+         class: AppBundle\EventListener\ApiExceptionSubscriber
+-        arguments: ['%kernel.debug%']
++        arguments: ['%kernel.debug%', '@logger']
+         tags:
+             - { name: kernel.event_subscriber }
+diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
+index 592d0d7..8f4dbff 100644
+--- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
++++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
+@@ -4,6 +4,7 @@ namespace AppBundle\EventListener;
+ 
+ use AppBundle\Api\ApiProblem;
+ use AppBundle\Api\ApiProblemException;
++use Psr\Log\LoggerInterface;
+ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+ use Symfony\Component\HttpKernel\KernelEvents;
+@@ -13,10 +14,12 @@ use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+ class ApiExceptionSubscriber implements EventSubscriberInterface
+ {
+     private $debug;
++    private $logger;
+ 
+-    public function __construct($debug)
++    public function __construct($debug, LoggerInterface $logger)
+     {
+         $this->debug = $debug;
++        $this->logger = $logger;
+     }
+ 
+     public function onKernelException(GetResponseForExceptionEvent $event)
+@@ -35,6 +38,8 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
+             return;
+         }
+ 
++        $this->logException($e);
++
+         if ($e instanceof ApiProblemException) {
+             $apiProblem = $e->getApiProblem();
+         } else {
+@@ -76,4 +81,21 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
+             KernelEvents::EXCEPTION => 'onKernelException'
+         );
+     }
++
++    /**
++     * Adapted from the core Symfony exception handling in ExceptionListener
++     *
++     * @param \Exception $exception
++     */
++    private function logException(\Exception $exception)
++    {
++        $message = sprintf('Uncaught PHP Exception %s: "%s" at %s line %s', get_class($exception), $exception->getMessage(), $exception->getFile(), $exception->getLine());
++        $isCritical = !$exception instanceof HttpExceptionInterface || $exception->getStatusCode() >= 500;
++        $context = array('exception' => $exception);
++        if ($isCritical) {
++            $this->logger->critical($message, $context);
++        } else {
++            $this->logger->error($message, $context);
++        }
++    }
+ }

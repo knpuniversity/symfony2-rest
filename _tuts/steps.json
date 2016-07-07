@@ -386,6 +386,11 @@
             "description": null
         },
         {
+            "id": "errors-adding-logging-to-subscriber",
+            "name": "Errors: Adding logging to subscriber",
+            "description": null
+        },
+        {
             "id": "pagination-starting-test",
             "name": "Pagination: Starting test",
             "description": null
@@ -781,5 +786,5 @@
             "description": null
         }
     ],
-    "sha": "88c74a3b99eee1c8b2a6f4fd3b60e4eab3ea6111"
+    "sha": "2298bf3418971978255b8b39a1f3bc0093c9cdd9"
 }
