@@ -5726,7 +5726,7 @@ index ed7195a..ff49ee2 100644
 -    }
  }
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 3b05a84..0cb4ca4 100644
+index 3b05a84..250a50a 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -8,10 +8,10 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -5775,7 +5775,7 @@ index 3b05a84..0cb4ca4 100644
 +
          $baseUrl = getenv('TEST_BASE_URL');
 +        if ($baseUrl) {
-+
++            static::fail('No TEST_BASE_URL environmental variable set in phpunit.xml.');
 +        }
          self::$staticClient = new Client([
 -            'base_url' => $baseUrl,
