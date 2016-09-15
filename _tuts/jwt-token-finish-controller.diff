@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/TokenController.php b/src/AppBundle/Controller/Api/TokenController.php
-index 790213b..ca6d70e 100644
+index 790213b..402ade1 100644
 --- a/src/AppBundle/Controller/Api/TokenController.php
 +++ b/src/AppBundle/Controller/Api/TokenController.php
 @@ -5,7 +5,10 @@ namespace AppBundle\Controller\Api;
@@ -13,7 +13,7 @@ index 790213b..ca6d70e 100644
  
  class TokenController extends BaseController
  {
-@@ -13,8 +16,26 @@ class TokenController extends BaseController
+@@ -13,8 +16,29 @@ class TokenController extends BaseController
       * @Route("/api/tokens")
       * @Method("POST")
       */
@@ -37,7 +37,10 @@ index 790213b..ca6d70e 100644
 +        }
 +
 +        $token = $this->get('lexik_jwt_authentication.encoder')
-+            ->encode(['username' => $user->getUsername()]);
++            ->encode([
++                'username' => $user->getUsername(),
++                'exp' => time() + 3600 // 1 hour expiration
++            ]);
 +
 +        return new JsonResponse(['token' => $token]);
      }
