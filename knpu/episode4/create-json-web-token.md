@@ -68,6 +68,11 @@ set it to `$this->get('lexik_jwt_authentication.encoder')->encode()` and pass th
 
 [[[ code('5b2a065f04') ]]]
 
+***TIP
+Don't forget to pass an `exp` key to the token, otherwise the token will *never*
+expire! We forgot to do this in the video!
+***
+
 But you can store anything here, like roles, user information, some poetry - whatever!
 
 And that's it! This is a string, so return a new `JsonResponse` with a token field
