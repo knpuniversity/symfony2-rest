@@ -157,7 +157,9 @@ class ApiTestCase extends KernelTestCase
                 /*
                  * When using the test environment, the profiler is not active
                  * for performance. To help debug, turn it on temporarily in
-                 * the config_test.yml file (framework.profiler.collect)
+                 * the config_test.yml file:
+                 *   A) Update framework.profiler.collect to true
+                 *   B) Update web_profiler.toolbar to true
                  */
                 $profilerUrl = $response->getHeader('X-Debug-Token-Link');
                 if ($profilerUrl) {
