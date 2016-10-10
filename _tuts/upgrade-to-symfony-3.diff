@@ -5534,6 +5534,19 @@ index 0000000..1e463f5
 +        </whitelist>
 +    </filter>
 +</phpunit>
+diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
+index c88ba66..8cc9c60 100644
+--- a/resources/ApiTestCase.php
++++ b/resources/ApiTestCase.php
+@@ -163,7 +163,7 @@ class ApiTestCase extends KernelTestCase
+                  */
+                 $profilerUrl = $response->getHeader('X-Debug-Token-Link');
+                 if ($profilerUrl) {
+-                    $fullProfilerUrl = $response->getHeader('Host').$profilerUrl;
++                    $fullProfilerUrl = $response->getHeader('Host')[0].$profilerUrl[0];
+                     $this->printDebug('');
+                     $this->printDebug(sprintf(
+                         'Profiler URL: <comment>%s</comment>',
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
 index 30a9391..df092a5 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
@@ -5726,7 +5739,7 @@ index ed7195a..ff49ee2 100644
 -    }
  }
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 3b05a84..ccf1d21 100644
+index 2c90931..3bbe67e 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -8,10 +8,10 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -5847,16 +5860,16 @@ index 3b05a84..ccf1d21 100644
          if ($contentType == 'application/json' || strpos($contentType, '+json') !== false) {
              $data = json_decode($body);
              if ($data === null) {
-@@ -178,7 +186,7 @@ class ApiTestCase extends KernelTestCase
- 
+@@ -183,7 +191,7 @@ class ApiTestCase extends KernelTestCase
+                  */
                  $profilerUrl = $response->getHeader('X-Debug-Token-Link');
                  if ($profilerUrl) {
 -                    $fullProfilerUrl = $response->getHeader('Host').$profilerUrl;
-+                    $fullProfilerUrl = $response->getHeader('Host').$profilerUrl[0];
++                    $fullProfilerUrl = $response->getHeader('Host')[0].$profilerUrl[0];
                      $this->printDebug('');
                      $this->printDebug(sprintf(
                          'Profiler URL: <comment>%s</comment>',
-@@ -223,6 +231,38 @@ class ApiTestCase extends KernelTestCase
+@@ -228,6 +236,38 @@ class ApiTestCase extends KernelTestCase
          $this->printDebug($output);
      }
  

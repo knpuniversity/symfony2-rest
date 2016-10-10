@@ -47,10 +47,10 @@ index e87c177..8c96789 100644
  
      public static function getSubscribedEvents()
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index be61811..3b05a84 100644
+index 785846e..2c90931 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
-@@ -279,4 +279,18 @@ class ApiTestCase extends KernelTestCase
+@@ -284,4 +284,18 @@ class ApiTestCase extends KernelTestCase
      {
          return $this->getService('doctrine.orm.entity_manager');
      }
