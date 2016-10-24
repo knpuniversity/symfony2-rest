@@ -19,7 +19,7 @@ chapters:
     deny-access:
         video_key: 164097303
     json-web-token:
-        video_key: 164103012
+        video_key: 188730902
     lexikjwt-authentication-bundle:
         video_key: 164104456
     token-test:
