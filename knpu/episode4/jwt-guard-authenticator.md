@@ -3,7 +3,7 @@
 To create our token authentication system, we'll use Guard.
 
 Guard is part of Symfony's core security system and makes setting up custom auth
-so easy it's actually fun. 
+so easy it's actually fun.
 
 ## Creating the Authenticator
 
@@ -17,6 +17,12 @@ quickly, go to the "Code"->"Generate" menu - `command`+`N` on a Mac - and select
 "Implement Methods". Select the ones under Guard:
 
 [[[ code('5b3b199654') ]]]
+
+***TIP
+Version 2 of LexikJWTAuthenticationBundle comes with an authenticator that's
+based off of the one we're about to build. Feel free to use it instead of
+building your own... once you learn how it works.
+***
 
 Now, do that *one* more time and also select the `start()` method. That'll put `start()`
 on the bottom, which will be more natural:
@@ -104,6 +110,30 @@ So, `if ($data === false)`, then we know that there's a problem with the token. 
 there is, throw a `new CustomUserMessageAuthenticationException()` with `Invalid token`:
 
 [[[ code('d3952ece00') ]]]
+
+***TIP
+In version 2 of the bundle, you should instead use a try-catch around this line:
+
+```php
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
+// ...
+
+public function getUser($credentials, UserProviderInterface $userProvider)
+{
+    try {
+        $data = $this->jwtEncoder->decode($credentials);
+    } catch (JWTDecodeFailureException $e) {
+        // if you want to, use can use $e->getReason() to find out which of the 3 possible things went wrong
+        // and tweak the message accordingly
+        // https://github.com/lexik/LexikJWTAuthenticationBundle/blob/05e15967f4dab94c8a75b275692d928a2fbf6d18/Exception/JWTDecodeFailureException.php
+
+        throw new CustomUserMessageAuthenticationException('Invalid Token');
+    }
+
+    // ...
+}
+```
+***
 
 We'll talk about what that does in a second.
 

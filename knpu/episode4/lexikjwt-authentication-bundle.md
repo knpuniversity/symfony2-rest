@@ -9,6 +9,11 @@ documentation. And now, you guys know the drill. Copy the library name from the
 composer require lexik/jwt-authentication-bundle
 ```
 
+***TIP
+Version 2 of this bundle is now out! Not much has changed, but we'll tell you
+when something is different!
+***
+
 While we're waiting for Jordi, I mean Composer to download that for us, let's keep
 busy. Copy the new bundle line and put that into `AppKernel`:
 
