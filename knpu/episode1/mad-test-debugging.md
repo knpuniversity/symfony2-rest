@@ -39,7 +39,7 @@ I think we can make that way cooler. But first, with this in place, it *should*
 print out the last response so we can see the error:
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Ah hah!
@@ -72,7 +72,7 @@ This means we can say `$this->output->writeln()` and pass it the `$string`:
 I'm coloring some things already, so let's see this beautiful art! Re-run the test:
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Hey! That error is hard to miss!
