@@ -48,7 +48,7 @@ did:
 Make sure we didn't break anything:
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Hey, still green!
