@@ -141,7 +141,7 @@ To create the `ApiResponse` pass it the `$paginatedCollection` variable directly
 Try the test!
 
 ```bash
-./bin/phpunit -c app --filter testGETProgrammersCollectionPaginated
+./bin/phpunit -c app --filter testGETProgrammersCollectionPagination
 ```
 
 It still fails, but only once it looks for the links. The first response
