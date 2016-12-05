@@ -20,7 +20,7 @@ index 3bbe67e..43e55f3 100644
      {
          $data = array_merge(array(
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index bf903f8..660e1d2 100644
+index 41cf2bb..2ba2033 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -21,15 +21,10 @@ class ProgrammerControllerTest extends ApiTestCase

@@ -38,12 +38,12 @@ index ed7ff64..2692cbe 100644
      }
  }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index de12b7f..6a89c5a 100644
+index c6942de..6d48545 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -71,6 +71,11 @@ class ProgrammerControllerTest extends ApiTestCase
  
-     public function testGETProgrammersCollectionPagination()
+     public function testGETProgrammersCollectionPaginated()
      {
 +        $this->createProgrammer(array(
 +            'nickname' => 'willnotmatch',

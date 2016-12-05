@@ -12,7 +12,7 @@ index df092a5..264e261 100644
          $form = $this->createForm(ProgrammerType::class, $programmer);
          $this->processForm($request, $form);
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index e0167a8..95cea6e 100644
+index 62e75b5..99dc35e 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -244,4 +244,12 @@ EOF;
