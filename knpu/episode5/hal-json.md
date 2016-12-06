@@ -36,7 +36,7 @@ and update the expression to `object.getNickname()`:
 Make sure you've got all your parenthesis in place. Oh, and don't forget to bring
 over the `use` statement from `Battle`.
 
-In `ProgrammerControllerTest`, the `testGetProgrammer` method looks for `_links.self`:
+In `ProgrammerControllerTest`, the `testGETProgrammer` method looks for `_links.self`:
 
 [[[ code('310f8b3079') ]]]
 
