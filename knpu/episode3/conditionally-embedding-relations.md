@@ -95,7 +95,7 @@ useful methods.
 
 And just like that, we're able to conditionally show fields. Sweet!
 
-Re-run our test for `testGetProgrammerDeep()`:
+Re-run our test for `testGETProgrammerDeep()`:
 
 ```bash
 ./bin/phpunit -c app --filter testGETProgrammer

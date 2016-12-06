@@ -99,7 +99,7 @@ But don't run the tests *quite* yet: we *know* some things will be broken. In
 
 [[[ code('f7ec885223') ]]]
 
-And in `ProgrammerControllerTest`, under `testGetProgrammer`, do the same:
+And in `ProgrammerControllerTest`, under `testGETProgrammer`, do the same:
 
 [[[ code('9a206221c6') ]]]
 
