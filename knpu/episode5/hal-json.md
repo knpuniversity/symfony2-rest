@@ -47,7 +47,7 @@ Add `.href` to this to match the new format:
 Try it out!
 
 ```bash
-vendor/bin/phpunit --filter testGetProgrammer
+vendor/bin/phpunit --filter testGETProgrammer
 ```
 
 Yes!
