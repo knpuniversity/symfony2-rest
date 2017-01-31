@@ -1,5 +1,12 @@
 # Pagination Design and Test
 
+***TIP
+In this course we're using Symfony 2, but starting in [episode 4][episode_4],
+we use Symfony 3. If you'd like to see the finished code for this tutorial
+in Symfony 3, [download the code from episode 4][first_chapter_of_episode_4]
+and check out the start directory!
+***
+
 Hey, Guys! Welcome to Episode 3 of our REST in Symfony Series. In this episode,
 we're going to cover some really important details we haven't talked about yet, like
 pagination, filtering, and taking the serializer and doing really cool and custom
@@ -120,3 +127,7 @@ it exists but is set to `null`. That's why I'm checking for the `nickname` key.
 
 That's it! Our pagination system is now *really* well-defined. Next, we'll bring
 this all to life.
+
+
+[episode_4]: https://knpuniversity.com/screencast/symfony-rest4
+[first_chapter_of_episode_4]: https://knpuniversity.com/screencast/symfony-rest4/deny-access
