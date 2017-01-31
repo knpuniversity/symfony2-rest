@@ -1,5 +1,12 @@
 # POST To Create
 
+***TIP
+In this course we're using Symfony 2, but starting in [episode 4][episode_4],
+we use Symfony 3. If you'd like to see the finished code for this tutorial
+in Symfony 3, [download the code from episode 4][first_chapter_of_episode_4]
+and check out the start directory!
+***
+
 Well hey guys! I've wanted to write this series for *years*, and now that
 it's here, I'm so *pumped*! That's because even though building an API can be
 really tough, the system we're about to build feels simple, and really a bit
@@ -157,3 +164,7 @@ php testing.php
 ```
 
 Ok, let's fill in the guts and make this work!
+
+
+[episode_4]: https://knpuniversity.com/screencast/symfony-rest4
+[first_chapter_of_episode_4]: https://knpuniversity.com/screencast/symfony-rest4/deny-access
