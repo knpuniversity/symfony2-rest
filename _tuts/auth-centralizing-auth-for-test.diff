@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 3bbe67e..43e55f3 100644
+index 3bbe67e9..43e55f34 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -284,6 +284,16 @@ class ApiTestCase extends KernelTestCase
@@ -20,7 +20,7 @@ index 3bbe67e..43e55f3 100644
      {
          $data = array_merge(array(
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 41cf2bb..2ba2033 100644
+index 41cf2bb4..2ba20336 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -21,15 +21,10 @@ class ProgrammerControllerTest extends ApiTestCase

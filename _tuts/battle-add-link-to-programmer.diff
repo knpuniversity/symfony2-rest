@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
-index 5d032d1..93ff962 100644
+index 5d032d1d..93ff962c 100644
 --- a/src/AppBundle/Entity/Battle.php
 +++ b/src/AppBundle/Entity/Battle.php
 @@ -2,6 +2,7 @@
@@ -23,7 +23,7 @@ index 5d032d1..93ff962 100644
  class Battle
  {
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 1890777..0cbdac9 100644
+index 18907777..0cbdac91 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -38,6 +38,12 @@ class BattleControllerTest extends ApiTestCase

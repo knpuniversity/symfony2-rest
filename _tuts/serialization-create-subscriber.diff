@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/Serializer/LinkSerializationSubscriber.php b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
 new file mode 100644
-index 0000000..9fb0577
+index 00000000..9fb05776
 --- /dev/null
 +++ b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
 @@ -0,0 +1,12 @@

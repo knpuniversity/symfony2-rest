@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
-index 8fa8911..228d95e 100644
+index 8fa89115..228d95ef 100644
 --- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 +++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -50,8 +50,14 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
@@ -19,7 +19,7 @@ index 8fa8911..228d95e 100644
          );
          $response->headers->set('Content-Type', 'application/problem+json');
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index a4ede58..26ee832 100644
+index a4ede58a..26ee8324 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -160,7 +160,7 @@ EOF;

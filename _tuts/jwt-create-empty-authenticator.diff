@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
 new file mode 100644
-index 0000000..6d02142
+index 00000000..6d021425
 --- /dev/null
 +++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
 @@ -0,0 +1,62 @@

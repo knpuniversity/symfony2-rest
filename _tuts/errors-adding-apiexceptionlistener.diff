@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 new file mode 100644
-index 0000000..facfea8
+index 00000000..facfea8d
 --- /dev/null
 +++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -0,0 +1,7 @@
@@ -12,7 +12,7 @@ index 0000000..facfea8
 +{
 +}
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index d5112fd..8ae72e5 100644
+index d5112fd3..8ae72e54 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -158,7 +158,6 @@ EOF;

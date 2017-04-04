@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 new file mode 100644
-index 0000000..9144784
+index 00000000..9144784a
 --- /dev/null
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -0,0 +1,27 @@

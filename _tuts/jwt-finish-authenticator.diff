@@ -1,5 +1,5 @@
 diff --git a/app/config/security.yml b/app/config/security.yml
-index 4ce17ef..a6aefa3 100644
+index 4ce17ef0..a6aefa30 100644
 --- a/app/config/security.yml
 +++ b/app/config/security.yml
 @@ -18,6 +18,9 @@ security:
@@ -13,7 +13,7 @@ index 4ce17ef..a6aefa3 100644
      access_control:
          - { path: ^/_wdt|_profiler, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 diff --git a/app/config/services.yml b/app/config/services.yml
-index e4e8d08..cb56c8b 100644
+index e4e8d08c..cb56c8bd 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -32,3 +32,7 @@ services:
@@ -25,7 +25,7 @@ index e4e8d08..cb56c8b 100644
 +        class: AppBundle\Security\JwtTokenAuthenticator
 +        autowire: true
 diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
-index 6d02142..8413385 100644
+index 6d021425..8413385b 100644
 --- a/src/AppBundle/Security/JwtTokenAuthenticator.php
 +++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
 @@ -2,17 +2,29 @@

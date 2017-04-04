@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index dda6c71..c63535b 100644
+index dda6c716..c63535b6 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -35,4 +35,13 @@ class ProgrammerController extends BaseController
@@ -17,7 +17,7 @@ index dda6c71..c63535b 100644
 +    }
  }
 diff --git a/testing.php b/testing.php
-index f935694..b9dbd1d 100644
+index f935694c..b9dbd1d1 100644
 --- a/testing.php
 +++ b/testing.php
 @@ -16,9 +16,13 @@ $data = array(

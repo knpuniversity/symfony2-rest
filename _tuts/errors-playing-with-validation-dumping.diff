@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 415c2f2..1a35769 100644
+index 415c2f2b..1a35769c 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -25,6 +25,11 @@ class ProgrammerController extends BaseController
@@ -15,7 +15,7 @@ index 415c2f2..1a35769 100644
  
          $em = $this->getDoctrine()->getManager();
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index 84c131a..b601dfa 100644
+index 84c131a6..b601dfa2 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
 @@ -4,6 +4,7 @@ namespace AppBundle\Entity;

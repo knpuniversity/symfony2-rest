@@ -1,5 +1,5 @@
 diff --git a/.gitignore b/.gitignore
-index c279389..93821ad 100644
+index c2793890..93821ad1 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -1,11 +1,16 @@
@@ -28,7 +28,7 @@ index c279389..93821ad 100644
  /vendor/
  /web/bundles/
 diff --git a/README.md b/README.md
-index 7b83e94..f4832a3 100644
+index 7b83e946..f4832a39 100644
 --- a/README.md
 +++ b/README.md
 @@ -32,15 +32,15 @@ Make sure `app/config/parameters.yml` is correct for your database
@@ -52,7 +52,7 @@ index 7b83e94..f4832a3 100644
  
  Then find the site at http://localhost:8000.
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index e68516c..8b33918 100644
+index e68516ce..8b33918c 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
 @@ -13,7 +13,6 @@ class AppKernel extends Kernel
@@ -92,7 +92,7 @@ index e68516c..8b33918 100644
      {
          $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
 diff --git a/app/Resources/views/layout.twig b/app/Resources/views/layout.twig
-index 674acd6..327da5c 100644
+index 674acd62..327da5c8 100644
 --- a/app/Resources/views/layout.twig
 +++ b/app/Resources/views/layout.twig
 @@ -43,7 +43,7 @@
@@ -105,7 +105,7 @@ index 674acd6..327da5c 100644
                                          <tbody>
                                          <tr>
 diff --git a/app/autoload.php b/app/autoload.php
-index 70526bb..fa582ec 100644
+index 70526bb5..fa582ecd 100644
 --- a/app/autoload.php
 +++ b/app/autoload.php
 @@ -8,6 +8,6 @@ use Composer\Autoload\ClassLoader;
@@ -118,9 +118,9 @@ index 70526bb..fa582ec 100644
  return $loader;
 diff --git a/app/cache/.gitkeep b/app/cache/.gitkeep
 deleted file mode 100644
-index e69de29..0000000
+index e69de29b..00000000
 diff --git a/app/config/config.yml b/app/config/config.yml
-index c4a85b2..0711b8e 100644
+index c4a85b20..0711b8e5 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
 @@ -3,10 +3,13 @@ imports:
@@ -193,7 +193,7 @@ index c4a85b2..0711b8e 100644
  
  # Swiftmailer Configuration
 diff --git a/app/config/config_dev.yml b/app/config/config_dev.yml
-index efaf396..4b7d472 100644
+index efaf396e..4b7d4724 100644
 --- a/app/config/config_dev.yml
 +++ b/app/config/config_dev.yml
 @@ -14,24 +14,13 @@ web_profiler:
@@ -238,7 +238,7 @@ index efaf396..4b7d472 100644
 +#    delivery_address: me@example.com
 \ No newline at end of file
 diff --git a/app/config/config_prod.yml b/app/config/config_prod.yml
-index 342837a..83ef6d6 100644
+index 342837a0..83ef6d6e 100644
 --- a/app/config/config_prod.yml
 +++ b/app/config/config_prod.yml
 @@ -3,7 +3,9 @@ imports:
@@ -253,7 +253,7 @@ index 342837a..83ef6d6 100644
  #doctrine:
  #    orm:
 diff --git a/app/config/parameters.yml.dist b/app/config/parameters.yml.dist
-index 137d5a5..f5ba553 100644
+index 137d5a5d..f5ba5535 100644
 --- a/app/config/parameters.yml.dist
 +++ b/app/config/parameters.yml.dist
 @@ -1,6 +1,5 @@
@@ -264,7 +264,7 @@ index 137d5a5..f5ba553 100644
      database_port:     ~
      database_name:     symfony_rest
 diff --git a/app/config/routing_dev.yml b/app/config/routing_dev.yml
-index 0f0afb6..404f6a3 100644
+index 0f0afb61..404f6a3b 100644
 --- a/app/config/routing_dev.yml
 +++ b/app/config/routing_dev.yml
 @@ -6,10 +6,6 @@ _profiler:
@@ -280,10 +280,10 @@ index 0f0afb6..404f6a3 100644
      prefix:   /_error
 diff --git a/app/logs/.gitkeep b/app/logs/.gitkeep
 deleted file mode 100644
-index e69de29..0000000
+index e69de29b..00000000
 diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
 deleted file mode 100644
-index 6090fdd..0000000
+index 6090fddc..00000000
 --- a/app/phpunit.xml.dist
 +++ /dev/null
 @@ -1,35 +0,0 @@
@@ -322,110 +322,193 @@ index 6090fdd..0000000
 -        </whitelist>
 -    </filter>
 -</phpunit>
-diff --git a/app/console b/bin/console
-similarity index 73%
-rename from app/console
-rename to bin/console
-index fa6a36e..96a8036 100755
---- a/app/console
+diff --git a/bin/console b/bin/console
+new file mode 100755
+index 00000000..96a80367
+--- /dev/null
 +++ b/bin/console
-@@ -1,22 +1,24 @@
- #!/usr/bin/env php
- <?php
- 
+@@ -0,0 +1,30 @@
++#!/usr/bin/env php
++<?php
++
 +use Symfony\Bundle\FrameworkBundle\Console\Application;
 +use Symfony\Component\Console\Input\ArgvInput;
 +use Symfony\Component\Debug\Debug;
 +
- // if you don't want to setup permissions the proper way, just uncomment the following PHP line
- // read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
- //umask(0000);
- 
- set_time_limit(0);
- 
--require_once __DIR__.'/bootstrap.php.cache';
--require_once __DIR__.'/AppKernel.php';
--
--use Symfony\Bundle\FrameworkBundle\Console\Application;
--use Symfony\Component\Console\Input\ArgvInput;
--use Symfony\Component\Debug\Debug;
++// if you don't want to setup permissions the proper way, just uncomment the following PHP line
++// read http://symfony.com/doc/current/book/installation.html#configuration-and-setup for more information
++//umask(0000);
++
++set_time_limit(0);
++
 +/**
 + * @var Composer\Autoload\ClassLoader $loader
 + */
 +$loader = require __DIR__.'/../app/autoload.php';
- 
- $input = new ArgvInput();
--$env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
--$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', '')) && $env !== 'prod';
++
++$input = new ArgvInput();
 +$env = $input->getParameterOption(['--env', '-e'], getenv('SYMFONY_ENV') ?: 'dev');
 +$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
- 
- if ($debug) {
-     Debug::enable();
-@@ -25,3 +27,4 @@ if ($debug) {
- $kernel = new AppKernel($env, $debug);
- $application = new Application($kernel);
- $application->run($input);
 +
-diff --git a/app/check.php b/bin/symfony_requirements
-old mode 100644
-new mode 100755
-similarity index 89%
-rename from app/check.php
-rename to bin/symfony_requirements
-index 90bad4a..7cd559a
---- a/app/check.php
++if ($debug) {
++    Debug::enable();
++}
++
++$kernel = new AppKernel($env, $debug);
++$application = new Application($kernel);
++$application->run($input);
++
+diff --git a/bin/symfony_requirements b/bin/symfony_requirements
+new file mode 100755
+index 00000000..7cd559a4
+--- /dev/null
 +++ b/bin/symfony_requirements
-@@ -1,12 +1,13 @@
+@@ -0,0 +1,143 @@
 +#!/usr/bin/env php
- <?php
- 
--require_once dirname(__FILE__).'/SymfonyRequirements.php';
++<?php
++
 +require_once dirname(__FILE__).'/../var/SymfonyRequirements.php';
- 
- $lineSize = 70;
- $symfonyRequirements = new SymfonyRequirements();
- $iniPath = $symfonyRequirements->getPhpIniConfigPath();
- 
--echo_title('Symfony2 Requirements Checker');
++
++$lineSize = 70;
++$symfonyRequirements = new SymfonyRequirements();
++$iniPath = $symfonyRequirements->getPhpIniConfigPath();
++
 +echo_title('Symfony Requirements Checker');
- 
- echo '> PHP is using the following php.ini file:'.PHP_EOL;
- if ($iniPath) {
-@@ -42,9 +43,9 @@ foreach ($symfonyRequirements->getRecommendations() as $req) {
- }
- 
- if ($checkPassed) {
--    echo_block('success', 'OK', 'Your system is ready to run Symfony2 projects', true);
++
++echo '> PHP is using the following php.ini file:'.PHP_EOL;
++if ($iniPath) {
++    echo_style('green', '  '.$iniPath);
++} else {
++    echo_style('warning', '  WARNING: No configuration file (php.ini) used by PHP!');
++}
++
++echo PHP_EOL.PHP_EOL;
++
++echo '> Checking Symfony requirements:'.PHP_EOL.'  ';
++
++$messages = array();
++foreach ($symfonyRequirements->getRequirements() as $req) {
++    /** @var $req Requirement */
++    if ($helpText = get_error_message($req, $lineSize)) {
++        echo_style('red', 'E');
++        $messages['error'][] = $helpText;
++    } else {
++        echo_style('green', '.');
++    }
++}
++
++$checkPassed = empty($messages['error']);
++
++foreach ($symfonyRequirements->getRecommendations() as $req) {
++    if ($helpText = get_error_message($req, $lineSize)) {
++        echo_style('yellow', 'W');
++        $messages['warning'][] = $helpText;
++    } else {
++        echo_style('green', '.');
++    }
++}
++
++if ($checkPassed) {
 +    echo_block('success', 'OK', 'Your system is ready to run Symfony projects');
- } else {
--    echo_block('error', 'ERROR', 'Your system is not ready to run Symfony2 projects', true);
++} else {
 +    echo_block('error', 'ERROR', 'Your system is not ready to run Symfony projects');
- 
-     echo_title('Fix the following mandatory requirements', 'red');
- 
-@@ -80,7 +81,7 @@ function get_error_message(Requirement $requirement, $lineSize)
-         return;
-     }
- 
--    $errorMessage  = wordwrap($requirement->getTestMessage(), $lineSize - 3, PHP_EOL.'   ').PHP_EOL;
++
++    echo_title('Fix the following mandatory requirements', 'red');
++
++    foreach ($messages['error'] as $helpText) {
++        echo ' * '.$helpText.PHP_EOL;
++    }
++}
++
++if (!empty($messages['warning'])) {
++    echo_title('Optional recommendations to improve your setup', 'yellow');
++
++    foreach ($messages['warning'] as $helpText) {
++        echo ' * '.$helpText.PHP_EOL;
++    }
++}
++
++echo PHP_EOL;
++echo_style('title', 'Note');
++echo '  The command console could use a different php.ini file'.PHP_EOL;
++echo_style('title', '~~~~');
++echo '  than the one used with your web server. To be on the'.PHP_EOL;
++echo '      safe side, please check the requirements from your web'.PHP_EOL;
++echo '      server using the ';
++echo_style('yellow', 'web/config.php');
++echo ' script.'.PHP_EOL;
++echo PHP_EOL;
++
++exit($checkPassed ? 0 : 1);
++
++function get_error_message(Requirement $requirement, $lineSize)
++{
++    if ($requirement->isFulfilled()) {
++        return;
++    }
++
 +    $errorMessage = wordwrap($requirement->getTestMessage(), $lineSize - 3, PHP_EOL.'   ').PHP_EOL;
-     $errorMessage .= '   > '.wordwrap($requirement->getHelpText(), $lineSize - 5, PHP_EOL.'   > ').PHP_EOL;
- 
-     return $errorMessage;
-@@ -121,8 +122,8 @@ function echo_block($style, $title, $message)
-     echo PHP_EOL.PHP_EOL;
- 
-     echo_style($style, str_repeat(' ', $width).PHP_EOL);
--    echo_style($style, str_pad(' ['.$title.']',  $width, ' ', STR_PAD_RIGHT).PHP_EOL);
--    echo_style($style, str_pad($message,  $width, ' ', STR_PAD_RIGHT).PHP_EOL);
++    $errorMessage .= '   > '.wordwrap($requirement->getHelpText(), $lineSize - 5, PHP_EOL.'   > ').PHP_EOL;
++
++    return $errorMessage;
++}
++
++function echo_title($title, $style = null)
++{
++    $style = $style ?: 'title';
++
++    echo PHP_EOL;
++    echo_style($style, $title.PHP_EOL);
++    echo_style($style, str_repeat('~', strlen($title)).PHP_EOL);
++    echo PHP_EOL;
++}
++
++function echo_style($style, $message)
++{
++    // ANSI color codes
++    $styles = array(
++        'reset' => "\033[0m",
++        'red' => "\033[31m",
++        'green' => "\033[32m",
++        'yellow' => "\033[33m",
++        'error' => "\033[37;41m",
++        'success' => "\033[37;42m",
++        'title' => "\033[34m",
++    );
++    $supports = has_color_support();
++
++    echo($supports ? $styles[$style] : '').$message.($supports ? $styles['reset'] : '');
++}
++
++function echo_block($style, $title, $message)
++{
++    $message = ' '.trim($message).' ';
++    $width = strlen($message);
++
++    echo PHP_EOL.PHP_EOL;
++
++    echo_style($style, str_repeat(' ', $width).PHP_EOL);
 +    echo_style($style, str_pad(' ['.$title.']', $width, ' ', STR_PAD_RIGHT).PHP_EOL);
 +    echo_style($style, str_pad($message, $width, ' ', STR_PAD_RIGHT).PHP_EOL);
-     echo_style($style, str_repeat(' ', $width).PHP_EOL);
- }
- 
++    echo_style($style, str_repeat(' ', $width).PHP_EOL);
++}
++
++function has_color_support()
++{
++    static $support;
++
++    if (null === $support) {
++        if (DIRECTORY_SEPARATOR == '\\') {
++            $support = false !== getenv('ANSICON') || 'ON' === getenv('ConEmuANSI');
++        } else {
++            $support = function_exists('posix_isatty') && @posix_isatty(STDOUT);
++        }
++    }
++
++    return $support;
++}
 diff --git a/composer.json b/composer.json
-index 311bff0..02c9800 100644
+index 311bff0e..02c98000 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -3,50 +3,46 @@
@@ -533,7 +616,7 @@ index 311bff0..02c9800 100644
      }
  }
 diff --git a/composer.lock b/composer.lock
-index 0384acc..7cc98ba 100644
+index 0384accc..7cc98ba4 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,21 +4,21 @@
@@ -4489,7 +4572,7 @@ index 0384acc..7cc98ba 100644
  }
 diff --git a/phpunit.xml.dist b/phpunit.xml.dist
 new file mode 100644
-index 0000000..1e463f5
+index 00000000..1e463f51
 --- /dev/null
 +++ b/phpunit.xml.dist
 @@ -0,0 +1,32 @@
@@ -4526,7 +4609,7 @@ index 0000000..1e463f5
 +    </filter>
 +</phpunit>
 diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index c88ba66..8cc9c60 100644
+index c88ba662..8cc9c607 100644
 --- a/resources/ApiTestCase.php
 +++ b/resources/ApiTestCase.php
 @@ -163,7 +163,7 @@ class ApiTestCase extends KernelTestCase
@@ -4539,7 +4622,7 @@ index c88ba66..8cc9c60 100644
                      $this->printDebug(sprintf(
                          'Profiler URL: <comment>%s</comment>',
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 30a9391..df092a5 100644
+index 30a93910..df092a5d 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -25,7 +25,7 @@ class ProgrammerController extends BaseController
@@ -4561,7 +4644,7 @@ index 30a9391..df092a5 100644
  
          if (!$form->isValid()) {
 diff --git a/src/AppBundle/DataFixtures/ORM/LoadFixtures.php b/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
-index 07639e6..ea64bc7 100644
+index 07639e67..ea64bc7f 100644
 --- a/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
 +++ b/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
 @@ -2,15 +2,20 @@
@@ -4592,7 +4675,7 @@ index 07639e6..ea64bc7 100644
  }
 \ No newline at end of file
 diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
-index 411deff..1961d5a 100644
+index 411deff1..1961d5ab 100644
 --- a/src/AppBundle/Form/ProgrammerType.php
 +++ b/src/AppBundle/Form/ProgrammerType.php
 @@ -3,36 +3,39 @@
@@ -4659,7 +4742,7 @@ index 411deff..1961d5a 100644
 \ No newline at end of file
 +}
 diff --git a/src/AppBundle/Form/UpdateProgrammerType.php b/src/AppBundle/Form/UpdateProgrammerType.php
-index 964a00e..2be8b1a 100644
+index 964a00e2..2be8b1a5 100644
 --- a/src/AppBundle/Form/UpdateProgrammerType.php
 +++ b/src/AppBundle/Form/UpdateProgrammerType.php
 @@ -2,22 +2,15 @@
@@ -4691,7 +4774,7 @@ index 964a00e..2be8b1a 100644
 \ No newline at end of file
 +}
 diff --git a/src/AppBundle/Repository/UserRepository.php b/src/AppBundle/Repository/UserRepository.php
-index ed7195a..ff49ee2 100644
+index ed7195a3..ff49ee22 100644
 --- a/src/AppBundle/Repository/UserRepository.php
 +++ b/src/AppBundle/Repository/UserRepository.php
 @@ -3,13 +3,14 @@
@@ -4730,7 +4813,7 @@ index ed7195a..ff49ee2 100644
 -    }
  }
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 2c90931..3bbe67e 100644
+index 2c90931f..3bbe67e9 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -8,10 +8,10 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -4900,7 +4983,7 @@ index 2c90931..3bbe67e 100644
      {
          $user = new User();
 diff --git a/src/AppBundle/Test/ResponseAsserter.php b/src/AppBundle/Test/ResponseAsserter.php
-index 628bc17..dba73fa 100644
+index 628bc17d..dba73fa2 100644
 --- a/src/AppBundle/Test/ResponseAsserter.php
 +++ b/src/AppBundle/Test/ResponseAsserter.php
 @@ -2,7 +2,7 @@
@@ -4912,77 +4995,815 @@ index 628bc17..dba73fa 100644
  use Symfony\Component\PropertyAccess\Exception\RuntimeException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\Exception\AccessException;
-diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-similarity index 98%
-rename from src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-rename to tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 306fbec..62e75b5 100644
---- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+new file mode 100644
+index 00000000..62e75b59
+--- /dev/null
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-@@ -1,5 +1,6 @@
- <?php
--namespace AppBundle\Tests\Controller\Api;
+@@ -0,0 +1,247 @@
++<?php
 +
 +namespace Tests\AppBundle\Controller\Api;
- 
- use AppBundle\Test\ApiTestCase;
- 
-@@ -27,7 +28,7 @@ class ProgrammerControllerTest extends ApiTestCase
- 
-         $this->assertEquals(201, $response->getStatusCode());
-         $this->assertTrue($response->hasHeader('Location'));
--        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
++
++use AppBundle\Test\ApiTestCase;
++
++class ProgrammerControllerTest extends ApiTestCase
++{
++    protected function setUp()
++    {
++        parent::setUp();
++
++        $this->createUser('weaverryan');
++    }
++
++    public function testPOST()
++    {
++        $data = array(
++            'nickname' => 'ObjectOrienter',
++            'avatarNumber' => 5,
++            'tagLine' => 'a test dev!'
++        );
++
++        // 1) Create a programmer resource
++        $response = $this->client->post('/api/programmers', [
++            'body' => json_encode($data)
++        ]);
++
++        $this->assertEquals(201, $response->getStatusCode());
++        $this->assertTrue($response->hasHeader('Location'));
 +        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location')[0]);
-         $finishedData = json_decode($response->getBody(true), true);
-         $this->assertArrayHasKey('nickname', $finishedData);
-         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
-@@ -212,7 +213,7 @@ class ProgrammerControllerTest extends ApiTestCase
-         $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
-         $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
-         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
--        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
++        $finishedData = json_decode($response->getBody(true), true);
++        $this->assertArrayHasKey('nickname', $finishedData);
++        $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
++    }
++
++    public function testGETProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++
++        $response = $this->client->get('/api/programmers/UnitTester');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertiesExist($response, array(
++            'nickname',
++            'avatarNumber',
++            'powerLevel',
++            'tagLine'
++        ));
++        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            '_links.self',
++            $this->adjustUri('/api/programmers/UnitTester')
++        );
++    }
++
++    public function testGETProgrammerDeep()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++
++        $response = $this->client->get('/api/programmers/UnitTester?deep=1');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertiesExist($response, array(
++            'user.username'
++        ));
++    }
++
++    public function testGETProgrammersCollection()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++        $this->createProgrammer(array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 5,
++        ));
++
++        $response = $this->client->get('/api/programmers');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyIsArray($response, 'items');
++        $this->asserter()->assertResponsePropertyCount($response, 'items', 2);
++        $this->asserter()->assertResponsePropertyEquals($response, 'items[1].nickname', 'CowboyCoder');
++    }
++
++    public function testGETProgrammersCollectionPaginated()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'willnotmatch',
++            'avatarNumber' => 5,
++        ));
++
++        for ($i = 0; $i < 25; $i++) {
++            $this->createProgrammer(array(
++                'nickname' => 'Programmer'.$i,
++                'avatarNumber' => 3,
++            ));
++        }
++
++        // page 1
++        $response = $this->client->get('/api/programmers?filter=programmer');
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'items[5].nickname',
++            'Programmer5'
++        );
++
++        $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
++        $this->asserter()->assertResponsePropertyEquals($response, 'total', 25);
++        $this->asserter()->assertResponsePropertyExists($response, '_links.next');
++
++        // page 2
++        $nextLink = $this->asserter()->readResponseProperty($response, '_links.next');
++        $response = $this->client->get($nextLink);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'items[5].nickname',
++            'Programmer15'
++        );
++        $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
++
++        $lastLink = $this->asserter()->readResponseProperty($response, '_links.last');
++        $response = $this->client->get($lastLink);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals(
++            $response,
++            'items[4].nickname',
++            'Programmer24'
++        );
++
++        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'items[5].name');
++        $this->asserter()->assertResponsePropertyEquals($response, 'count', 5);
++    }
++
++    public function testPUTProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 5,
++            'tagLine' => 'foo',
++        ));
++
++        $data = array(
++            'nickname' => 'CowgirlCoder',
++            'avatarNumber' => 2,
++            'tagLine' => 'foo',
++        );
++        $response = $this->client->put('/api/programmers/CowboyCoder', [
++            'body' => json_encode($data)
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals($response, 'avatarNumber', 2);
++        // the nickname is immutable on edit
++        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
++    }
++
++    public function testPATCHProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'CowboyCoder',
++            'avatarNumber' => 5,
++            'tagLine' => 'foo',
++        ));
++
++        $data = array(
++            'tagLine' => 'bar',
++        );
++        $response = $this->client->patch('/api/programmers/CowboyCoder', [
++            'body' => json_encode($data)
++        ]);
++        $this->assertEquals(200, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyEquals($response, 'avatarNumber', 5);
++        $this->asserter()->assertResponsePropertyEquals($response, 'tagLine', 'bar');
++    }
++
++    public function testDELETEProgrammer()
++    {
++        $this->createProgrammer(array(
++            'nickname' => 'UnitTester',
++            'avatarNumber' => 3,
++        ));
++
++        $response = $this->client->delete('/api/programmers/UnitTester');
++        $this->assertEquals(204, $response->getStatusCode());
++    }
++
++    public function testValidationErrors()
++    {
++        $data = array(
++            'avatarNumber' => 2,
++            'tagLine' => 'I\'m from a test!'
++        );
++
++        // 1) Create a programmer resource
++        $response = $this->client->post('/api/programmers', [
++            'body' => json_encode($data)
++        ]);
++
++        $this->assertEquals(400, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertiesExist($response, array(
++            'type',
++            'title',
++            'errors',
++        ));
++        $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
++        $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
++        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
 +        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
-     }
- 
-     public function testInvalidJson()
-@@ -238,7 +239,7 @@ EOF;
-         $response = $this->client->get('/api/programmers/fake');
- 
-         $this->assertEquals(404, $response->getStatusCode());
--        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
++    }
++
++    public function testInvalidJson()
++    {
++        $invalidBody = <<<EOF
++{
++    "nickname": "JohnnyRobot",
++    "avatarNumber" : "2
++    "tagLine": "I'm from a test!"
++}
++EOF;
++
++        $response = $this->client->post('/api/programmers', [
++            'body' => $invalidBody
++        ]);
++
++        $this->assertEquals(400, $response->getStatusCode());
++        $this->asserter()->assertResponsePropertyContains($response, 'type', 'invalid_body_format');
++    }
++
++    public function test404Exception()
++    {
++        $response = $this->client->get('/api/programmers/fake');
++
++        $this->assertEquals(404, $response->getStatusCode());
 +        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
-         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
-         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
-         $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
-diff --git a/app/SymfonyRequirements.php b/var/SymfonyRequirements.php
-similarity index 94%
-rename from app/SymfonyRequirements.php
-rename to var/SymfonyRequirements.php
-index dbaafa8..28b0dcd 100644
---- a/app/SymfonyRequirements.php
++        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
++        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
++        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
++    }
++}
+diff --git a/var/SymfonyRequirements.php b/var/SymfonyRequirements.php
+new file mode 100644
+index 00000000..28b0dcdb
+--- /dev/null
 +++ b/var/SymfonyRequirements.php
-@@ -447,6 +447,12 @@ class SymfonyRequirements extends RequirementCollection
-         }
- 
-         $this->addRequirement(
+@@ -0,0 +1,764 @@
++<?php
++
++/*
++ * This file is part of the Symfony package.
++ *
++ * (c) Fabien Potencier <fabien@symfony.com>
++ *
++ * For the full copyright and license information, please view the LICENSE
++ * file that was distributed with this source code.
++ */
++
++/*
++ * Users of PHP 5.2 should be able to run the requirements checks.
++ * This is why the file and all classes must be compatible with PHP 5.2+
++ * (e.g. not using namespaces and closures).
++ *
++ * ************** CAUTION **************
++ *
++ * DO NOT EDIT THIS FILE as it will be overridden by Composer as part of
++ * the installation/update process. The original file resides in the
++ * SensioDistributionBundle.
++ *
++ * ************** CAUTION **************
++ */
++
++/**
++ * Represents a single PHP requirement, e.g. an installed extension.
++ * It can be a mandatory requirement or an optional recommendation.
++ * There is a special subclass, named PhpIniRequirement, to check a php.ini configuration.
++ *
++ * @author Tobias Schultze <http://tobion.de>
++ */
++class Requirement
++{
++    private $fulfilled;
++    private $testMessage;
++    private $helpText;
++    private $helpHtml;
++    private $optional;
++
++    /**
++     * Constructor that initializes the requirement.
++     *
++     * @param bool        $fulfilled   Whether the requirement is fulfilled
++     * @param string      $testMessage The message for testing the requirement
++     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem
++     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
++     * @param bool        $optional    Whether this is only an optional recommendation not a mandatory requirement
++     */
++    public function __construct($fulfilled, $testMessage, $helpHtml, $helpText = null, $optional = false)
++    {
++        $this->fulfilled = (bool) $fulfilled;
++        $this->testMessage = (string) $testMessage;
++        $this->helpHtml = (string) $helpHtml;
++        $this->helpText = null === $helpText ? strip_tags($this->helpHtml) : (string) $helpText;
++        $this->optional = (bool) $optional;
++    }
++
++    /**
++     * Returns whether the requirement is fulfilled.
++     *
++     * @return bool true if fulfilled, otherwise false
++     */
++    public function isFulfilled()
++    {
++        return $this->fulfilled;
++    }
++
++    /**
++     * Returns the message for testing the requirement.
++     *
++     * @return string The test message
++     */
++    public function getTestMessage()
++    {
++        return $this->testMessage;
++    }
++
++    /**
++     * Returns the help text for resolving the problem.
++     *
++     * @return string The help text
++     */
++    public function getHelpText()
++    {
++        return $this->helpText;
++    }
++
++    /**
++     * Returns the help text formatted in HTML.
++     *
++     * @return string The HTML help
++     */
++    public function getHelpHtml()
++    {
++        return $this->helpHtml;
++    }
++
++    /**
++     * Returns whether this is only an optional recommendation and not a mandatory requirement.
++     *
++     * @return bool true if optional, false if mandatory
++     */
++    public function isOptional()
++    {
++        return $this->optional;
++    }
++}
++
++/**
++ * Represents a PHP requirement in form of a php.ini configuration.
++ *
++ * @author Tobias Schultze <http://tobion.de>
++ */
++class PhpIniRequirement extends Requirement
++{
++    /**
++     * Constructor that initializes the requirement.
++     *
++     * @param string        $cfgName           The configuration name used for ini_get()
++     * @param bool|callback $evaluation        Either a boolean indicating whether the configuration should evaluate to true or false,
++     *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
++     * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
++     *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
++     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
++     * @param string|null   $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
++     * @param string|null   $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
++     * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
++     * @param bool          $optional          Whether this is only an optional recommendation not a mandatory requirement
++     */
++    public function __construct($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null, $optional = false)
++    {
++        $cfgValue = ini_get($cfgName);
++
++        if (is_callable($evaluation)) {
++            if (null === $testMessage || null === $helpHtml) {
++                throw new InvalidArgumentException('You must provide the parameters testMessage and helpHtml for a callback evaluation.');
++            }
++
++            $fulfilled = call_user_func($evaluation, $cfgValue);
++        } else {
++            if (null === $testMessage) {
++                $testMessage = sprintf('%s %s be %s in php.ini',
++                    $cfgName,
++                    $optional ? 'should' : 'must',
++                    $evaluation ? 'enabled' : 'disabled'
++                );
++            }
++
++            if (null === $helpHtml) {
++                $helpHtml = sprintf('Set <strong>%s</strong> to <strong>%s</strong> in php.ini<a href="#phpini">*</a>.',
++                    $cfgName,
++                    $evaluation ? 'on' : 'off'
++                );
++            }
++
++            $fulfilled = $evaluation == $cfgValue;
++        }
++
++        parent::__construct($fulfilled || ($approveCfgAbsence && false === $cfgValue), $testMessage, $helpHtml, $helpText, $optional);
++    }
++}
++
++/**
++ * A RequirementCollection represents a set of Requirement instances.
++ *
++ * @author Tobias Schultze <http://tobion.de>
++ */
++class RequirementCollection implements IteratorAggregate
++{
++    private $requirements = array();
++
++    /**
++     * Gets the current RequirementCollection as an Iterator.
++     *
++     * @return Traversable A Traversable interface
++     */
++    public function getIterator()
++    {
++        return new ArrayIterator($this->requirements);
++    }
++
++    /**
++     * Adds a Requirement.
++     *
++     * @param Requirement $requirement A Requirement instance
++     */
++    public function add(Requirement $requirement)
++    {
++        $this->requirements[] = $requirement;
++    }
++
++    /**
++     * Adds a mandatory requirement.
++     *
++     * @param bool        $fulfilled   Whether the requirement is fulfilled
++     * @param string      $testMessage The message for testing the requirement
++     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem
++     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
++     */
++    public function addRequirement($fulfilled, $testMessage, $helpHtml, $helpText = null)
++    {
++        $this->add(new Requirement($fulfilled, $testMessage, $helpHtml, $helpText, false));
++    }
++
++    /**
++     * Adds an optional recommendation.
++     *
++     * @param bool        $fulfilled   Whether the recommendation is fulfilled
++     * @param string      $testMessage The message for testing the recommendation
++     * @param string      $helpHtml    The help text formatted in HTML for resolving the problem
++     * @param string|null $helpText    The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
++     */
++    public function addRecommendation($fulfilled, $testMessage, $helpHtml, $helpText = null)
++    {
++        $this->add(new Requirement($fulfilled, $testMessage, $helpHtml, $helpText, true));
++    }
++
++    /**
++     * Adds a mandatory requirement in form of a php.ini configuration.
++     *
++     * @param string        $cfgName           The configuration name used for ini_get()
++     * @param bool|callback $evaluation        Either a boolean indicating whether the configuration should evaluate to true or false,
++     *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
++     * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
++     *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
++     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
++     * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
++     * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
++     * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
++     */
++    public function addPhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null)
++    {
++        $this->add(new PhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence, $testMessage, $helpHtml, $helpText, false));
++    }
++
++    /**
++     * Adds an optional recommendation in form of a php.ini configuration.
++     *
++     * @param string        $cfgName           The configuration name used for ini_get()
++     * @param bool|callback $evaluation        Either a boolean indicating whether the configuration should evaluate to true or false,
++     *                                         or a callback function receiving the configuration value as parameter to determine the fulfillment of the requirement
++     * @param bool          $approveCfgAbsence If true the Requirement will be fulfilled even if the configuration option does not exist, i.e. ini_get() returns false.
++     *                                         This is helpful for abandoned configs in later PHP versions or configs of an optional extension, like Suhosin.
++     *                                         Example: You require a config to be true but PHP later removes this config and defaults it to true internally.
++     * @param string        $testMessage       The message for testing the requirement (when null and $evaluation is a boolean a default message is derived)
++     * @param string        $helpHtml          The help text formatted in HTML for resolving the problem (when null and $evaluation is a boolean a default help is derived)
++     * @param string|null   $helpText          The help text (when null, it will be inferred from $helpHtml, i.e. stripped from HTML tags)
++     */
++    public function addPhpIniRecommendation($cfgName, $evaluation, $approveCfgAbsence = false, $testMessage = null, $helpHtml = null, $helpText = null)
++    {
++        $this->add(new PhpIniRequirement($cfgName, $evaluation, $approveCfgAbsence, $testMessage, $helpHtml, $helpText, true));
++    }
++
++    /**
++     * Adds a requirement collection to the current set of requirements.
++     *
++     * @param RequirementCollection $collection A RequirementCollection instance
++     */
++    public function addCollection(RequirementCollection $collection)
++    {
++        $this->requirements = array_merge($this->requirements, $collection->all());
++    }
++
++    /**
++     * Returns both requirements and recommendations.
++     *
++     * @return array Array of Requirement instances
++     */
++    public function all()
++    {
++        return $this->requirements;
++    }
++
++    /**
++     * Returns all mandatory requirements.
++     *
++     * @return array Array of Requirement instances
++     */
++    public function getRequirements()
++    {
++        $array = array();
++        foreach ($this->requirements as $req) {
++            if (!$req->isOptional()) {
++                $array[] = $req;
++            }
++        }
++
++        return $array;
++    }
++
++    /**
++     * Returns the mandatory requirements that were not met.
++     *
++     * @return array Array of Requirement instances
++     */
++    public function getFailedRequirements()
++    {
++        $array = array();
++        foreach ($this->requirements as $req) {
++            if (!$req->isFulfilled() && !$req->isOptional()) {
++                $array[] = $req;
++            }
++        }
++
++        return $array;
++    }
++
++    /**
++     * Returns all optional recommendations.
++     *
++     * @return array Array of Requirement instances
++     */
++    public function getRecommendations()
++    {
++        $array = array();
++        foreach ($this->requirements as $req) {
++            if ($req->isOptional()) {
++                $array[] = $req;
++            }
++        }
++
++        return $array;
++    }
++
++    /**
++     * Returns the recommendations that were not met.
++     *
++     * @return array Array of Requirement instances
++     */
++    public function getFailedRecommendations()
++    {
++        $array = array();
++        foreach ($this->requirements as $req) {
++            if (!$req->isFulfilled() && $req->isOptional()) {
++                $array[] = $req;
++            }
++        }
++
++        return $array;
++    }
++
++    /**
++     * Returns whether a php.ini configuration is not correct.
++     *
++     * @return bool php.ini configuration problem?
++     */
++    public function hasPhpIniConfigIssue()
++    {
++        foreach ($this->requirements as $req) {
++            if (!$req->isFulfilled() && $req instanceof PhpIniRequirement) {
++                return true;
++            }
++        }
++
++        return false;
++    }
++
++    /**
++     * Returns the PHP configuration file (php.ini) path.
++     *
++     * @return string|false php.ini file path
++     */
++    public function getPhpIniConfigPath()
++    {
++        return get_cfg_var('cfg_file_path');
++    }
++}
++
++/**
++ * This class specifies all requirements and optional recommendations that
++ * are necessary to run the Symfony Standard Edition.
++ *
++ * @author Tobias Schultze <http://tobion.de>
++ * @author Fabien Potencier <fabien@symfony.com>
++ */
++class SymfonyRequirements extends RequirementCollection
++{
++    const REQUIRED_PHP_VERSION = '5.3.3';
++
++    /**
++     * Constructor that initializes the requirements.
++     */
++    public function __construct()
++    {
++        /* mandatory requirements follow */
++
++        $installedPhpVersion = phpversion();
++
++        $this->addRequirement(
++            version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>='),
++            sprintf('PHP version must be at least %s (%s installed)', self::REQUIRED_PHP_VERSION, $installedPhpVersion),
++            sprintf('You are running PHP version "<strong>%s</strong>", but Symfony needs at least PHP "<strong>%s</strong>" to run.
++                Before using Symfony, upgrade your PHP installation, preferably to the latest version.',
++                $installedPhpVersion, self::REQUIRED_PHP_VERSION),
++            sprintf('Install PHP %s or newer (installed version is %s)', self::REQUIRED_PHP_VERSION, $installedPhpVersion)
++        );
++
++        $this->addRequirement(
++            version_compare($installedPhpVersion, '5.3.16', '!='),
++            'PHP version must not be 5.3.16 as Symfony won\'t work properly with it',
++            'Install PHP 5.3.17 or newer (or downgrade to an earlier PHP version)'
++        );
++
++        $this->addRequirement(
++            is_dir(__DIR__.'/../vendor/composer'),
++            'Vendor libraries must be installed',
++            'Vendor libraries are missing. Install composer following instructions from <a href="http://getcomposer.org/">http://getcomposer.org/</a>. '.
++                'Then run "<strong>php composer.phar install</strong>" to install them.'
++        );
++
++        $cacheDir = is_dir(__DIR__.'/../var/cache') ? __DIR__.'/../var/cache' : __DIR__.'/cache';
++
++        $this->addRequirement(
++            is_writable($cacheDir),
++            'app/cache/ or var/cache/ directory must be writable',
++            'Change the permissions of either "<strong>app/cache/</strong>" or  "<strong>var/cache/</strong>" directory so that the web server can write into it.'
++        );
++
++        $logsDir = is_dir(__DIR__.'/../var/logs') ? __DIR__.'/../var/logs' : __DIR__.'/logs';
++
++        $this->addRequirement(
++            is_writable($logsDir),
++            'app/logs/ or var/logs/ directory must be writable',
++            'Change the permissions of either "<strong>app/logs/</strong>" or  "<strong>var/logs/</strong>" directory so that the web server can write into it.'
++        );
++
++        $this->addPhpIniRequirement(
++            'date.timezone', true, false,
++            'date.timezone setting must be set',
++            'Set the "<strong>date.timezone</strong>" setting in php.ini<a href="#phpini">*</a> (like Europe/Paris).'
++        );
++
++        if (version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>=')) {
++            $timezones = array();
++            foreach (DateTimeZone::listAbbreviations() as $abbreviations) {
++                foreach ($abbreviations as $abbreviation) {
++                    $timezones[$abbreviation['timezone_id']] = true;
++                }
++            }
++
++            $this->addRequirement(
++                isset($timezones[@date_default_timezone_get()]),
++                sprintf('Configured default timezone "%s" must be supported by your installation of PHP', @date_default_timezone_get()),
++                'Your default timezone is not supported by PHP. Check for typos in your <strong>php.ini</strong> file and have a look at the list of deprecated timezones at <a href="http://php.net/manual/en/timezones.others.php">http://php.net/manual/en/timezones.others.php</a>.'
++            );
++        }
++
++        $this->addRequirement(
 +            function_exists('iconv'),
 +            'iconv() must be available',
 +            'Install and enable the <strong>iconv</strong> extension.'
 +        );
 +
 +        $this->addRequirement(
-             function_exists('json_encode'),
-             'json_encode() must be available',
-             'Install and enable the <strong>JSON</strong> extension.'
-@@ -542,11 +548,22 @@ class SymfonyRequirements extends RequirementCollection
- 
-         /* optional recommendations follow */
- 
--        $this->addRecommendation(
--            file_get_contents(__FILE__) === file_get_contents(__DIR__.'/../vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/skeleton/app/SymfonyRequirements.php'),
--            'Requirements file should be up-to-date',
--            'Your requirements file is outdated. Run composer install and re-check your configuration.'
--        );
++            function_exists('json_encode'),
++            'json_encode() must be available',
++            'Install and enable the <strong>JSON</strong> extension.'
++        );
++
++        $this->addRequirement(
++            function_exists('session_start'),
++            'session_start() must be available',
++            'Install and enable the <strong>session</strong> extension.'
++        );
++
++        $this->addRequirement(
++            function_exists('ctype_alpha'),
++            'ctype_alpha() must be available',
++            'Install and enable the <strong>ctype</strong> extension.'
++        );
++
++        $this->addRequirement(
++            function_exists('token_get_all'),
++            'token_get_all() must be available',
++            'Install and enable the <strong>Tokenizer</strong> extension.'
++        );
++
++        $this->addRequirement(
++            function_exists('simplexml_import_dom'),
++            'simplexml_import_dom() must be available',
++            'Install and enable the <strong>SimpleXML</strong> extension.'
++        );
++
++        if (function_exists('apc_store') && ini_get('apc.enabled')) {
++            if (version_compare($installedPhpVersion, '5.4.0', '>=')) {
++                $this->addRequirement(
++                    version_compare(phpversion('apc'), '3.1.13', '>='),
++                    'APC version must be at least 3.1.13 when using PHP 5.4',
++                    'Upgrade your <strong>APC</strong> extension (3.1.13+).'
++                );
++            } else {
++                $this->addRequirement(
++                    version_compare(phpversion('apc'), '3.0.17', '>='),
++                    'APC version must be at least 3.0.17',
++                    'Upgrade your <strong>APC</strong> extension (3.0.17+).'
++                );
++            }
++        }
++
++        $this->addPhpIniRequirement('detect_unicode', false);
++
++        if (extension_loaded('suhosin')) {
++            $this->addPhpIniRequirement(
++                'suhosin.executor.include.whitelist',
++                create_function('$cfgValue', 'return false !== stripos($cfgValue, "phar");'),
++                false,
++                'suhosin.executor.include.whitelist must be configured correctly in php.ini',
++                'Add "<strong>phar</strong>" to <strong>suhosin.executor.include.whitelist</strong> in php.ini<a href="#phpini">*</a>.'
++            );
++        }
++
++        if (extension_loaded('xdebug')) {
++            $this->addPhpIniRequirement(
++                'xdebug.show_exception_trace', false, true
++            );
++
++            $this->addPhpIniRequirement(
++                'xdebug.scream', false, true
++            );
++
++            $this->addPhpIniRecommendation(
++                'xdebug.max_nesting_level',
++                create_function('$cfgValue', 'return $cfgValue > 100;'),
++                true,
++                'xdebug.max_nesting_level should be above 100 in php.ini',
++                'Set "<strong>xdebug.max_nesting_level</strong>" to e.g. "<strong>250</strong>" in php.ini<a href="#phpini">*</a> to stop Xdebug\'s infinite recursion protection erroneously throwing a fatal error in your project.'
++            );
++        }
++
++        $pcreVersion = defined('PCRE_VERSION') ? (float) PCRE_VERSION : null;
++
++        $this->addRequirement(
++            null !== $pcreVersion,
++            'PCRE extension must be available',
++            'Install the <strong>PCRE</strong> extension (version 8.0+).'
++        );
++
++        if (extension_loaded('mbstring')) {
++            $this->addPhpIniRequirement(
++                'mbstring.func_overload',
++                create_function('$cfgValue', 'return (int) $cfgValue === 0;'),
++                true,
++                'string functions should not be overloaded',
++                'Set "<strong>mbstring.func_overload</strong>" to <strong>0</strong> in php.ini<a href="#phpini">*</a> to disable function overloading by the mbstring extension.'
++            );
++        }
++
++        /* optional recommendations follow */
++
 +        if (file_exists(__DIR__.'/../vendor/composer')) {
 +            require_once __DIR__.'/../vendor/autoload.php';
 +
@@ -4999,38 +5820,118 @@ index dbaafa8..28b0dcd 100644
 +                'Your requirements file is outdated. Run composer install and re-check your configuration.'
 +            );
 +        }
- 
-         $this->addRecommendation(
-             version_compare($installedPhpVersion, '5.3.4', '>='),
-@@ -627,20 +644,20 @@ class SymfonyRequirements extends RequirementCollection
-         }
- 
-         $this->addRecommendation(
--            class_exists('Locale'),
++
++        $this->addRecommendation(
++            version_compare($installedPhpVersion, '5.3.4', '>='),
++            'You should use at least PHP 5.3.4 due to PHP bug #52083 in earlier versions',
++            'Your project might malfunction randomly due to PHP bug #52083 ("Notice: Trying to get property of non-object"). Install PHP 5.3.4 or newer.'
++        );
++
++        $this->addRecommendation(
++            version_compare($installedPhpVersion, '5.3.8', '>='),
++            'When using annotations you should have at least PHP 5.3.8 due to PHP bug #55156',
++            'Install PHP 5.3.8 or newer if your project uses annotations.'
++        );
++
++        $this->addRecommendation(
++            version_compare($installedPhpVersion, '5.4.0', '!='),
++            'You should not use PHP 5.4.0 due to the PHP bug #61453',
++            'Your project might not work properly due to the PHP bug #61453 ("Cannot dump definitions which have method calls"). Install PHP 5.4.1 or newer.'
++        );
++
++        $this->addRecommendation(
++            version_compare($installedPhpVersion, '5.4.11', '>='),
++            'When using the logout handler from the Symfony Security Component, you should have at least PHP 5.4.11 due to PHP bug #63379 (as a workaround, you can also set invalidate_session to false in the security logout handler configuration)',
++            'Install PHP 5.4.11 or newer if your project uses the logout handler from the Symfony Security Component.'
++        );
++
++        $this->addRecommendation(
++            (version_compare($installedPhpVersion, '5.3.18', '>=') && version_compare($installedPhpVersion, '5.4.0', '<'))
++            ||
++            version_compare($installedPhpVersion, '5.4.8', '>='),
++            'You should use PHP 5.3.18+ or PHP 5.4.8+ to always get nice error messages for fatal errors in the development environment due to PHP bug #61767/#60909',
++            'Install PHP 5.3.18+ or PHP 5.4.8+ if you want nice error messages for all fatal errors in the development environment.'
++        );
++
++        if (null !== $pcreVersion) {
++            $this->addRecommendation(
++                $pcreVersion >= 8.0,
++                sprintf('PCRE extension should be at least version 8.0 (%s installed)', $pcreVersion),
++                '<strong>PCRE 8.0+</strong> is preconfigured in PHP since 5.3.2 but you are using an outdated version of it. Symfony probably works anyway but it is recommended to upgrade your PCRE extension.'
++            );
++        }
++
++        $this->addRecommendation(
++            class_exists('DomDocument'),
++            'PHP-DOM and PHP-XML modules should be installed',
++            'Install and enable the <strong>PHP-DOM</strong> and the <strong>PHP-XML</strong> modules.'
++        );
++
++        $this->addRecommendation(
++            function_exists('mb_strlen'),
++            'mb_strlen() should be available',
++            'Install and enable the <strong>mbstring</strong> extension.'
++        );
++
++        $this->addRecommendation(
++            function_exists('iconv'),
++            'iconv() should be available',
++            'Install and enable the <strong>iconv</strong> extension.'
++        );
++
++        $this->addRecommendation(
++            function_exists('utf8_decode'),
++            'utf8_decode() should be available',
++            'Install and enable the <strong>XML</strong> extension.'
++        );
++
++        $this->addRecommendation(
++            function_exists('filter_var'),
++            'filter_var() should be available',
++            'Install and enable the <strong>filter</strong> extension.'
++        );
++
++        if (!defined('PHP_WINDOWS_VERSION_BUILD')) {
++            $this->addRecommendation(
++                function_exists('posix_isatty'),
++                'posix_isatty() should be available',
++                'Install and enable the <strong>php_posix</strong> extension (used to colorize the CLI output).'
++            );
++        }
++
++        $this->addRecommendation(
 +            extension_loaded('intl'),
-             'intl extension should be available',
-             'Install and enable the <strong>intl</strong> extension (used for validators).'
-         );
- 
--        if (class_exists('Collator')) {
++            'intl extension should be available',
++            'Install and enable the <strong>intl</strong> extension (used for validators).'
++        );
++
 +        if (extension_loaded('intl')) {
 +            // in some WAMP server installations, new Collator() returns null
-             $this->addRecommendation(
-                 null !== new Collator('fr_FR'),
-                 'intl extension should be correctly configured',
-                 'The intl extension does not behave properly. This problem is typical on PHP 5.3.X x64 WIN builds.'
-             );
--        }
- 
--        if (class_exists('Locale')) {
++            $this->addRecommendation(
++                null !== new Collator('fr_FR'),
++                'intl extension should be correctly configured',
++                'The intl extension does not behave properly. This problem is typical on PHP 5.3.X x64 WIN builds.'
++            );
++
 +            // check for compatible ICU versions (only done when you have the intl extension)
-             if (defined('INTL_ICU_VERSION')) {
-                 $version = INTL_ICU_VERSION;
-             } else {
-@@ -659,6 +676,14 @@ class SymfonyRequirements extends RequirementCollection
-                 'intl ICU version should be at least 4+',
-                 'Upgrade your <strong>intl</strong> extension with a newer ICU version (4+).'
-             );
++            if (defined('INTL_ICU_VERSION')) {
++                $version = INTL_ICU_VERSION;
++            } else {
++                $reflector = new ReflectionExtension('intl');
++
++                ob_start();
++                $reflector->info();
++                $output = strip_tags(ob_get_clean());
++
++                preg_match('/^ICU version +(?:=> )?(.*)$/m', $output, $matches);
++                $version = $matches[1];
++            }
++
++            $this->addRecommendation(
++                version_compare($version, '4.0', '>='),
++                'intl ICU version should be at least 4+',
++                'Upgrade your <strong>intl</strong> extension with a newer ICU version (4+).'
++            );
 +
 +            $this->addPhpIniRecommendation(
 +                'intl.error_level',
@@ -5039,11 +5940,86 @@ index dbaafa8..28b0dcd 100644
 +                'intl.error_level should be 0 in php.ini',
 +                'Set "<strong>intl.error_level</strong>" to "<strong>0</strong>" in php.ini<a href="#phpini">*</a> to inhibit the messages when an error occurs in ICU functions.'
 +            );
-         }
- 
-         $accelerator =
++        }
++
++        $accelerator =
++            (extension_loaded('eaccelerator') && ini_get('eaccelerator.enable'))
++            ||
++            (extension_loaded('apc') && ini_get('apc.enabled'))
++            ||
++            (extension_loaded('Zend Optimizer+') && ini_get('zend_optimizerplus.enable'))
++            ||
++            (extension_loaded('Zend OPcache') && ini_get('opcache.enable'))
++            ||
++            (extension_loaded('xcache') && ini_get('xcache.cacher'))
++            ||
++            (extension_loaded('wincache') && ini_get('wincache.ocenabled'))
++        ;
++
++        $this->addRecommendation(
++            $accelerator,
++            'a PHP accelerator should be installed',
++            'Install and/or enable a <strong>PHP accelerator</strong> (highly recommended).'
++        );
++
++        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
++            $this->addRecommendation(
++                $this->getRealpathCacheSize() > 1000,
++                'realpath_cache_size should be above 1024 in php.ini',
++                'Set "<strong>realpath_cache_size</strong>" to e.g. "<strong>1024</strong>" in php.ini<a href="#phpini">*</a> to improve performance on windows.'
++            );
++        }
++
++        $this->addPhpIniRecommendation('short_open_tag', false);
++
++        $this->addPhpIniRecommendation('magic_quotes_gpc', false, true);
++
++        $this->addPhpIniRecommendation('register_globals', false, true);
++
++        $this->addPhpIniRecommendation('session.auto_start', false);
++
++        $this->addRecommendation(
++            class_exists('PDO'),
++            'PDO should be installed',
++            'Install <strong>PDO</strong> (mandatory for Doctrine).'
++        );
++
++        if (class_exists('PDO')) {
++            $drivers = PDO::getAvailableDrivers();
++            $this->addRecommendation(
++                count($drivers) > 0,
++                sprintf('PDO should have some drivers installed (currently available: %s)', count($drivers) ? implode(', ', $drivers) : 'none'),
++                'Install <strong>PDO drivers</strong> (mandatory for Doctrine).'
++            );
++        }
++    }
++
++    /**
++     * Loads realpath_cache_size from php.ini and converts it to int.
++     *
++     * (e.g. 16k is converted to 16384 int)
++     *
++     * @return int
++     */
++    protected function getRealpathCacheSize()
++    {
++        $size = ini_get('realpath_cache_size');
++        $size = trim($size);
++        $unit = strtolower(substr($size, -1, 1));
++        switch ($unit) {
++            case 'g':
++                return $size * 1024 * 1024 * 1024;
++            case 'm':
++                return $size * 1024 * 1024;
++            case 'k':
++                return $size * 1024;
++            default:
++                return (int) $size;
++        }
++    }
++}
 diff --git a/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php b/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php
-index 17fb981..71c729d 100644
+index 17fb9810..71c729d9 100644
 --- a/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php
 +++ b/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php
 @@ -15,8 +15,6 @@ namespace Symfony\Component\HttpFoundation;
@@ -5608,7 +6584,7 @@ index 17fb981..71c729d 100644
  
          while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || $flags === ($s['flags'] & $flags) : $s['del'])) {
 diff --git a/web/app.php b/web/app.php
-index c5c2640..584e602 100644
+index c5c26409..584e6028 100644
 --- a/web/app.php
 +++ b/web/app.php
 @@ -1,23 +1,23 @@
@@ -5649,7 +6625,7 @@ index c5c2640..584e602 100644
 +$kernel->terminate($request, $response);
 \ No newline at end of file
 diff --git a/web/app_dev.php b/web/app_dev.php
-index e0279c2..95e0477 100644
+index e0279c2a..95e0477d 100644
 --- a/web/app_dev.php
 +++ b/web/app_dev.php
 @@ -4,27 +4,29 @@ use Symfony\Component\HttpFoundation\Request;
@@ -5690,7 +6666,7 @@ index e0279c2..95e0477 100644
 +$kernel->terminate($request, $response);
 \ No newline at end of file
 diff --git a/web/app_test.php b/web/app_test.php
-index 0bed2d7..7c891f2 100644
+index 0bed2d74..7c891f27 100644
 --- a/web/app_test.php
 +++ b/web/app_test.php
 @@ -4,27 +4,29 @@ use Symfony\Component\HttpFoundation\Request;
@@ -5731,7 +6707,7 @@ index 0bed2d7..7c891f2 100644
 +$kernel->terminate($request, $response);
 \ No newline at end of file
 diff --git a/web/config.php b/web/config.php
-index 162acfc..08a418d 100644
+index 162acfc7..08a418d2 100644
 --- a/web/config.php
 +++ b/web/config.php
 @@ -1,5 +1,15 @@

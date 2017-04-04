@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Api/ApiProblemException.php b/src/AppBundle/Api/ApiProblemException.php
-index f12de49..b8f4d69 100644
+index f12de498..b8f4d694 100644
 --- a/src/AppBundle/Api/ApiProblemException.php
 +++ b/src/AppBundle/Api/ApiProblemException.php
 @@ -6,4 +6,12 @@ use Symfony\Component\HttpKernel\Exception\HttpException;

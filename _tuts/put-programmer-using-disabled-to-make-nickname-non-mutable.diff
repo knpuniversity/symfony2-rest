@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 8115f56..6d65f65 100644
+index 8115f56f..6d65f653 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -101,7 +101,9 @@ class ProgrammerController extends BaseController
@@ -14,7 +14,7 @@ index 8115f56..6d65f65 100644
  
          $em = $this->getDoctrine()->getManager();
 diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
-index 60a85c3..0d1cd85 100644
+index 60a85c30..0d1cd85d 100644
 --- a/src/AppBundle/Form/ProgrammerType.php
 +++ b/src/AppBundle/Form/ProgrammerType.php
 @@ -11,7 +11,10 @@ class ProgrammerType extends AbstractType
@@ -40,7 +40,7 @@ index 60a85c3..0d1cd85 100644
      }
  
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 62270c7..4bf53f0 100644
+index 62270c76..4bf53f07 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -78,7 +78,7 @@ class ProgrammerControllerTest extends ApiTestCase

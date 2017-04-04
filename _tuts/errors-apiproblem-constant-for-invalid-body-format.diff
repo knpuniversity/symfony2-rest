@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
-index 2aa72a7..fba2739 100644
+index 2aa72a78..fba2739a 100644
 --- a/src/AppBundle/Api/ApiProblem.php
 +++ b/src/AppBundle/Api/ApiProblem.php
 @@ -8,9 +8,11 @@ namespace AppBundle\Api;
@@ -16,7 +16,7 @@ index 2aa72a7..fba2739 100644
  
      private $statusCode;
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 63b0210..ade8a62 100644
+index 63b0210d..ade8a62b 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -143,7 +143,9 @@ class ProgrammerController extends BaseController
@@ -31,7 +31,7 @@ index 63b0210..ade8a62 100644
  
          $clearMissing = $request->getMethod() != 'PATCH';
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index c673504..d5112fd 100644
+index c673504d..d5112fd3 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -161,6 +161,7 @@ EOF;

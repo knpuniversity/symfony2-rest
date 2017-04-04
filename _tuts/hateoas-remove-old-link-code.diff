@@ -1,5 +1,5 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index 2358222..8c88704 100644
+index 23582224..8c88704f 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -27,12 +27,6 @@ services:
@@ -17,7 +17,7 @@ index 2358222..8c88704 100644
          autowire: true
 diff --git a/src/AppBundle/Annotation/Link.php b/src/AppBundle/Annotation/Link.php
 deleted file mode 100644
-index 2bcf902..0000000
+index 2bcf902a..00000000
 --- a/src/AppBundle/Annotation/Link.php
 +++ /dev/null
 @@ -1,26 +0,0 @@
@@ -49,7 +49,7 @@ index 2bcf902..0000000
 -}
 diff --git a/src/AppBundle/Serializer/LinkSerializationSubscriber.php b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
 deleted file mode 100644
-index 0324280..0000000
+index 03242804..00000000
 --- a/src/AppBundle/Serializer/LinkSerializationSubscriber.php
 +++ /dev/null
 @@ -1,73 +0,0 @@

@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Form/Model/BattleModel.php b/src/AppBundle/Form/Model/BattleModel.php
-index 2f2ab93..04f9ae2 100644
+index 2f2ab939..04f9ae26 100644
 --- a/src/AppBundle/Form/Model/BattleModel.php
 +++ b/src/AppBundle/Form/Model/BattleModel.php
 @@ -4,11 +4,18 @@ namespace AppBundle\Form\Model;
@@ -22,7 +22,7 @@ index 2f2ab93..04f9ae2 100644
  
      public function getProject()
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 723f3ec..56ed55d 100644
+index 723f3ecd..56ed55d4 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -41,4 +41,26 @@ class BattleControllerTest extends ApiTestCase

@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index 5ef4b79..520d1d2 100644
+index 5ef4b798..520d1d2a 100644
 --- a/src/AppBundle/Controller/BaseController.php
 +++ b/src/AppBundle/Controller/BaseController.php
 @@ -126,6 +126,13 @@ abstract class BaseController extends Controller
@@ -17,7 +17,7 @@ index 5ef4b79..520d1d2 100644
              ->serialize($data, $format, $context);
      }
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index 357a053..ee358f4 100644
+index 357a0537..ee358f4c 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
 @@ -66,6 +66,8 @@ class Programmer
@@ -30,7 +30,7 @@ index 357a053..ee358f4 100644
      private $user;
  
 diff --git a/src/AppBundle/Entity/User.php b/src/AppBundle/Entity/User.php
-index 29fcaac..00df5b2 100644
+index 29fcaaca..00df5b29 100644
 --- a/src/AppBundle/Entity/User.php
 +++ b/src/AppBundle/Entity/User.php
 @@ -5,7 +5,10 @@ namespace AppBundle\Entity;
@@ -53,7 +53,7 @@ index 29fcaac..00df5b2 100644
       */
      private $username;
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index ae866eb..306fbec 100644
+index ae866eb2..306fbec1 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -56,6 +56,20 @@ class ProgrammerControllerTest extends ApiTestCase

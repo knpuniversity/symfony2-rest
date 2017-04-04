@@ -1,5 +1,5 @@
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index 8b33918..c7d123b 100644
+index 8b33918c..c7d123bd 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
 @@ -18,6 +18,7 @@ class AppKernel extends Kernel
@@ -11,7 +11,7 @@ index 8b33918..c7d123b 100644
  
          if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 0711b8e..c7d7163 100644
+index 0711b8e5..c7d71638 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
 @@ -69,3 +69,9 @@ swiftmailer:
@@ -26,7 +26,7 @@ index 0711b8e..c7d7163 100644
 +    token_ttl:        3600
 \ No newline at end of file
 diff --git a/app/config/parameters.yml.dist b/app/config/parameters.yml.dist
-index f5ba553..80271d9 100644
+index f5ba5535..8173d542 100644
 --- a/app/config/parameters.yml.dist
 +++ b/app/config/parameters.yml.dist
 @@ -17,3 +17,5 @@ parameters:
@@ -34,9 +34,9 @@ index f5ba553..80271d9 100644
      # A secret key that's used to generate certain security-related tokens
      secret:            ThisTokenIsNotSoSecretChangeIt
 +
-+    jwt_key_pass_phrase: ~
++    jwt_key_pass_phrase: happyapi
 diff --git a/composer.json b/composer.json
-index 02c9800..7b91969 100644
+index 02c98000..7b91969d 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -24,7 +24,8 @@
@@ -50,7 +50,7 @@ index 02c9800..7b91969 100644
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index 7cc98ba..5d074d5 100644
+index 7cc98ba4..5d074d5a 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,8 @@
@@ -311,7 +311,7 @@ index 7cc98ba..5d074d5 100644
              "source": {
 diff --git a/var/jwt/private.pem b/var/jwt/private.pem
 new file mode 100644
-index 0000000..770f268
+index 00000000..770f268c
 --- /dev/null
 +++ b/var/jwt/private.pem
 @@ -0,0 +1,54 @@
@@ -371,7 +371,7 @@ index 0000000..770f268
 +-----END RSA PRIVATE KEY-----
 diff --git a/var/jwt/public.pem b/var/jwt/public.pem
 new file mode 100644
-index 0000000..7dc87ea
+index 00000000..7dc87ea7
 --- /dev/null
 +++ b/var/jwt/public.pem
 @@ -0,0 +1,14 @@

@@ -1,5 +1,5 @@
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 64dac60..22082bb 100644
+index 64dac60b..22082bbc 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
 @@ -84,3 +84,5 @@ nelmio_api_doc:
