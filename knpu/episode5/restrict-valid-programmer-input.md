@@ -38,7 +38,7 @@ should equal some dummy message:
 Run the test to see the failure:
 
 ```bash
-./vendor/bin/phpunit --filter testPostBattleValidationErrors
+./vendor/bin/phpunit --filter testPOSTBattleValidationErrors
 ```
 
 Yep: there's no error for `programmerId` yet.
@@ -108,7 +108,7 @@ is built-in.
 Head back to the terminal to try it!
 
 ```bash
-./vendor/bin/phpunit --filter testPostBattleValidationErrors
+./vendor/bin/phpunit --filter testPOSTBattleValidationErrors
 ```
 
 Awesome! Well, it failed - but look! It's just because we don't have the real message
@@ -126,7 +126,7 @@ Copy that string and paste it into the test:
 Run it!
 
 ```bash
-./vendor/bin/phpunit --filter testPostBattleValidationErrors
+./vendor/bin/phpunit --filter testPOSTBattleValidationErrors
 ```
 
 So that's "sanity" validation: it's form fields watching your back to make sure

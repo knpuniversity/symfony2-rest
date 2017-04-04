@@ -1,5 +1,12 @@
 # Validation Errors Test
 
+***TIP
+In this course we're using Symfony 2, but starting in [episode 4][episode_4],
+we use Symfony 3. If you'd like to see the finished code for this tutorial
+in Symfony 3, [download the code from episode 4][first_chapter_of_episode_4]
+and check out the start directory!
+***
+
 Errors! A lot of things can go wrong - like 500 errors when your database server
 is on fire, 404 errors, validation errors, authentication errors and errors in
 judgement, like wearing a khaki shirt with khaki shorts, unless you're on Safari.
@@ -76,3 +83,7 @@ And since we *are* sending a valid `avatarNumber`, let's make sure that there is
 
 Love it! We've just planned how we want our validation errors to work. That'll make
 coding this a lot easier. 
+
+
+[episode_4]: https://knpuniversity.com/screencast/symfony-rest4
+[first_chapter_of_episode_4]: https://knpuniversity.com/screencast/symfony-rest4/deny-access

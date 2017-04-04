@@ -37,7 +37,7 @@ PHPUnit into this project, so run `php bin/phpunit -c app` then the path to
 the test:
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Pretty green! No assertions yet, but also no explosions. Solid start team!
@@ -65,7 +65,7 @@ In a second, we'll assert the actual value. It's not a super-tight test yet,
 but let's give it a shot:
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Yes! This time we deserve that green.

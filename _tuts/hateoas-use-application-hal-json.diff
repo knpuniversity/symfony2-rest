@@ -12,7 +12,7 @@ index 29051d4..e6349c7 100644
      }
  
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 80c2ba6..0deea1f 100644
+index 0aebb25..2d2f4ec 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -28,6 +28,7 @@ class ProgrammerControllerTest extends ApiTestCase

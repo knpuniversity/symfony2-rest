@@ -20,7 +20,7 @@ index 144d7bc..26a90d6 100644
 +    }
  }
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 867c989..1148f48 100644
+index 1d98142..ca3039f 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -330,4 +330,21 @@ EOF;

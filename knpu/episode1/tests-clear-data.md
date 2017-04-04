@@ -17,13 +17,13 @@ to `ObjectOrienter`:
 This test makes me happier. But does it pass? Run it!
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Sawheet! All green. Untilllllll you try it again:
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Now it explodes - 500 status code and we can't even see the error. But I
@@ -94,7 +94,7 @@ This should clear the `ObjectOrienter` out of the database and hopefully
 get things passing. Try the test!
 
 ```bash
-php bin/phunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
+php bin/phpunit -c app src/AppBundle/Tests/Controller/API/ProgrammerControllerTest.php
 ```
 
 Drumroll! Oh no - still a 500 error. And we still can't see the error. Time

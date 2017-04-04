@@ -50,7 +50,7 @@ index 0000000..8b84d7d
 +    }
 +}
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index eb5f868..de12b7f 100644
+index e8c028f..c6942de 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -64,9 +64,9 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -65,7 +65,7 @@ index eb5f868..de12b7f 100644
 +        $this->asserter()->assertResponsePropertyEquals($response, 'items[1].nickname', 'CowboyCoder');
      }
  
-     public function testGETProgrammersCollectionPagination()
+     public function testGETProgrammersCollectionPaginated()
 @@ -83,7 +83,7 @@ class ProgrammerControllerTest extends ApiTestCase
          $this->assertEquals(200, $response->getStatusCode());
          $this->asserter()->assertResponsePropertyEquals(

@@ -64,7 +64,7 @@ index 3989420..5ab2ea4 100644
          );
          $this->asserter()->assertResponsePropertyEquals(
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 0deea1f..5524427 100644
+index 2d2f4ec..4ed93c2 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -56,7 +56,7 @@ class ProgrammerControllerTest extends ApiTestCase

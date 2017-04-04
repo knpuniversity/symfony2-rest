@@ -1,4 +1,4 @@
-title:  Symfony RESTful API: Authentication with JWT (Course 4)
+title: "Symfony RESTful API: Authentication with JWT (Course 4)"
 summary: |
     After 3 tutorials, we've got a nice API, But we've been completely ignoring
     authentication. Thanks to some modern tools, this will be *such* a treat:
@@ -19,7 +19,7 @@ chapters:
     deny-access:
         video_key: 164097303
     json-web-token:
-        video_key: 164103012
+        video_key: 188730902
     lexikjwt-authentication-bundle:
         video_key: 164104456
     token-test:
