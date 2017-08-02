@@ -38,7 +38,15 @@ Back inside `createCollection()`, change `$this->generateUrl()` to `$this->route
 
 Our work in this class is done! Next, register this as service in
 `app/config/services.yml` - let's call it `pagination_factory`. How creative! Set
-the class to `PaginationFactory` and pass one key for `arguments`: `@router`.
+the class to `PaginationFactory` and pass one key for `arguments`: `@router`:
+
+[[[ code('b4d0f520e4') ]]]
+
+***TIP
+If you're using Symfony 3.3, your `app/config/services.yml` contains some extra code
+that may break things when following this tutorial! To keep things working - and learn
+about what this code does - see https://knpuniversity.com/symfony-3.3-changes
+***
 
 Copy the service name and open `ProgrammerController` to hook this all up. Now, just
 use `$paginatedCollection = $this->get('pagination_factory')->createCollection()`
