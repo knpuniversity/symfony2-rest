@@ -137,12 +137,9 @@ configuration:
 [[[ code('8eb7e0227d') ]]]
 
 ***TIP
-To install this same version of Guzzle into your project, use Composer to fetch
-version 5.*:
-
-```bash
-composer require guzzlehttp/guzzle:~5.0
-```
+We are using Guzzle 5. If you are using Guzzle 6 (or newer), there are (at least) 2 important changes:
+- The `base_url` option has changed to `base_uri`
+- echo'ing a response object doesn't work anymore. Instead, use `echo $response->getBody();`
 ***
 
 The first is `base_url` set to `localhost:8000`. Next, pass it a `defaults`
