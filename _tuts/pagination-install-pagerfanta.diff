@@ -25,21 +25,20 @@ index 1cae1b7d..311bff0e 100644
      "require-dev": {
          "sensio/generator-bundle": "~2.3",
 diff --git a/composer.lock b/composer.lock
-index 4575e69f..0384accc 100644
+index 48c8e721..00bf5d22 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -4,8 +4,8 @@
+@@ -4,7 +4,8 @@
          "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
          "This file is @generated automatically"
      ],
--    "hash": "f4dd3009ec9345a1800cc7eb17534562",
--    "content-hash": "d5dc2484f442d30cd4c00ef199766e94",
+-    "content-hash": "2fd1ddbb974da9b17998dc9920e733de",
 +    "hash": "dc58e51553cf821eb04cedd8d1716d14",
 +    "content-hash": "0f32e7b8a79246645cbe2ee0c6043a1d",
      "packages": [
          {
              "name": "doctrine/annotations",
-@@ -1459,6 +1459,73 @@
+@@ -1458,6 +1459,73 @@
              "time": "2014-10-10 13:07:37"
          },
          {
@@ -113,7 +112,7 @@ index 4575e69f..0384accc 100644
              "name": "phpcollection/phpcollection",
              "version": "0.4.0",
              "source": {
-@@ -2213,6 +2280,58 @@
+@@ -2212,6 +2280,58 @@
                  "templating"
              ],
              "time": "2015-01-25 17:32:08"

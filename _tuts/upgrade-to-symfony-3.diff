@@ -616,7 +616,7 @@ index 311bff0e..02c98000 100644
      }
  }
 diff --git a/composer.lock b/composer.lock
-index 0384accc..7cc98ba4 100644
+index 00bf5d22..74550039 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,21 +4,21 @@
@@ -630,29 +630,24 @@ index 0384accc..7cc98ba4 100644
      "packages": [
          {
              "name": "doctrine/annotations",
--            "version": "v1.2.4",
+-            "version": "v1.2.5",
 +            "version": "v1.2.7",
              "source": {
                  "type": "git",
                  "url": "https://github.com/doctrine/annotations.git",
--                "reference": "b5202eb9e83f8db52e0e58867e0a46e63be8332e"
+-                "reference": "6eeadf5fd5d714065a59d5da8cbcd24196da667a"
 +                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535"
              },
              "dist": {
                  "type": "zip",
--                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b5202eb9e83f8db52e0e58867e0a46e63be8332e",
--                "reference": "b5202eb9e83f8db52e0e58867e0a46e63be8332e",
+-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/6eeadf5fd5d714065a59d5da8cbcd24196da667a",
+-                "reference": "6eeadf5fd5d714065a59d5da8cbcd24196da667a",
 +                "url": "https://api.github.com/repos/doctrine/annotations/zipball/f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
 +                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
                  "shasum": ""
              },
              "require": {
-@@ -73,42 +73,42 @@
-                 "docblock",
-                 "parser"
-             ],
--            "time": "2014-12-23 22:40:37"
-+            "time": "2015-08-31 12:32:49"
+@@ -77,38 +77,38 @@
          },
          {
              "name": "doctrine/cache",
