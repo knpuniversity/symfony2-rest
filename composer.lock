@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f4dd3009ec9345a1800cc7eb17534562",
-    "content-hash": "d5dc2484f442d30cd4c00ef199766e94",
+    "content-hash": "2fd1ddbb974da9b17998dc9920e733de",
     "packages": [
         {
             "name": "doctrine/annotations",
-            "version": "v1.2.4",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "b5202eb9e83f8db52e0e58867e0a46e63be8332e"
+                "reference": "6eeadf5fd5d714065a59d5da8cbcd24196da667a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/b5202eb9e83f8db52e0e58867e0a46e63be8332e",
-                "reference": "b5202eb9e83f8db52e0e58867e0a46e63be8332e",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/6eeadf5fd5d714065a59d5da8cbcd24196da667a",
+                "reference": "6eeadf5fd5d714065a59d5da8cbcd24196da667a",
                 "shasum": ""
             },
             "require": {
@@ -73,7 +72,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2014-12-23 22:40:37"
+            "time": "2015-06-17T12:13:27+00:00"
         },
         {
             "name": "doctrine/cache",
