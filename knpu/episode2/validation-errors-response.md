@@ -31,6 +31,12 @@ an `if` statement with the normal `if (!$form->isValid())`:
 
 [[[ code('669057db31') ]]]
 
+***TIP
+Calling just `$form->isValid()` before submitting the form is deprecated and will raise
+an exception in Symfony 4.0. Use `$form->isSubmitted() && $form->isValid()` instead
+to avoid the exception.
+***
+
 If we find ourselves here, it means we have validation errors. Let's see if this
 is working. Use the `dump()` function and the `$form->getErrors()` function, passing
 it `true` and `false` as arguments. That'll give us all the errors in a big tree.
