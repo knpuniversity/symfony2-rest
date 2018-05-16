@@ -139,6 +139,7 @@ configuration:
 ***TIP
 We are using Guzzle 5. If you are using Guzzle 6 (or newer), there are (at least) 2 important changes:
 - The `base_url` option has changed to `base_uri`
+- The `defaults.exceptions` option has changed to `http_errors`
 - echo'ing a response object doesn't work anymore. Instead, use `echo $response->getBody();`
 ***
 
