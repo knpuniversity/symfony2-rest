@@ -10,8 +10,10 @@ composer require lexik/jwt-authentication-bundle
 ```
 
 ***TIP
-This command will now give you a new version (2) of this bundle is now out! Not much
-has changed, but we'll tell you when something is different!
+Since 2.5 branch of `lexik/jwt-authentication-bundle` the minimum requred version of
+Symfony is `^3.4|^4.0`. Run `composer require 'lexik/jwt-authentication-bundle:v2.4'`
+in order to install this bundle for lower versions of Symfony like one that is used in
+this screencast or upgrade your project dependencies.
 ***
 
 While we're waiting for Jordi, I mean Composer to download that for us, let's keep
