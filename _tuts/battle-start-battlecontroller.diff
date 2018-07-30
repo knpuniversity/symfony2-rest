@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/Controller/Api/BattleController.php b/src/AppBundle/Controller/Api/BattleController.php
 new file mode 100644
-index 00000000..c63bb6da
+index 0000000..c63bb6d
 --- /dev/null
 +++ b/src/AppBundle/Controller/Api/BattleController.php
 @@ -0,0 +1,18 @@

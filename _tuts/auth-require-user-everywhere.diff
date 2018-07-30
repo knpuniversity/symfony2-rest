@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index d4b80e62..ed12e527 100644
+index d4b80e6..ed12e52 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -10,12 +10,16 @@ use AppBundle\Form\ProgrammerType;
@@ -29,7 +29,7 @@ index d4b80e62..ed12e527 100644
          $form = $this->createForm(ProgrammerType::class, $programmer);
          $this->processForm($request, $form);
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 2ba20336..cc5675ad 100644
+index 2ba2033..cc5675a 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -42,7 +42,9 @@ class ProgrammerControllerTest extends ApiTestCase

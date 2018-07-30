@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
 new file mode 100644
-index 00000000..618df9fc
+index 0000000..618df9f
 --- /dev/null
 +++ b/src/AppBundle/Api/ApiProblem.php
 @@ -0,0 +1,46 @@
@@ -51,7 +51,7 @@ index 00000000..618df9fc
 +    }
 +}
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 4070e0ad..a98a51bc 100644
+index 4070e0a..a98a51b 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -2,6 +2,7 @@

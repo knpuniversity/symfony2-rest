@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 108b51fd..26dbaed6 100644
+index 108b51f..26dbaed 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -74,7 +74,7 @@ class ProgrammerController extends BaseController
@@ -39,7 +39,7 @@ index 108b51fd..26dbaed6 100644
  
          return $response;
 diff --git a/src/AppBundle/Pagination/PaginatedCollection.php b/src/AppBundle/Pagination/PaginatedCollection.php
-index 8b84d7d6..23d1ba1d 100644
+index 8b84d7d..23d1ba1 100644
 --- a/src/AppBundle/Pagination/PaginatedCollection.php
 +++ b/src/AppBundle/Pagination/PaginatedCollection.php
 @@ -10,10 +10,17 @@ class PaginatedCollection

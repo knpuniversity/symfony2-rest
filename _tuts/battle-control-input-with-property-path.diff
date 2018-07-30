@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
-index 47184826..3933bc78 100644
+index 4718482..3933bc7 100644
 --- a/src/AppBundle/Form/BattleType.php
 +++ b/src/AppBundle/Form/BattleType.php
 @@ -13,11 +13,13 @@ class BattleType extends AbstractType
@@ -21,7 +21,7 @@ index 47184826..3933bc78 100644
          ;
      }
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 9b8082e5..723f3ecd 100644
+index 9b8082e..723f3ec 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -21,8 +21,8 @@ class BattleControllerTest extends ApiTestCase

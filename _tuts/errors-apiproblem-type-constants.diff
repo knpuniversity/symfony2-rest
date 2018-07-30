@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
-index 618df9fc..d4e24a2d 100644
+index 618df9f..d4e24a2 100644
 --- a/src/AppBundle/Api/ApiProblem.php
 +++ b/src/AppBundle/Api/ApiProblem.php
 @@ -7,6 +7,8 @@ namespace AppBundle\Api;
@@ -12,7 +12,7 @@ index 618df9fc..d4e24a2d 100644
  
      private $type;
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index a98a51bc..4f78a9e2 100644
+index a98a51b..4f78a9e 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -170,7 +170,7 @@ class ProgrammerController extends BaseController

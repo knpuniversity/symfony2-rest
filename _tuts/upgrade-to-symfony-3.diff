@@ -1,5 +1,5 @@
 diff --git a/.gitignore b/.gitignore
-index c2793890..93821ad1 100644
+index c279389..93821ad 100644
 --- a/.gitignore
 +++ b/.gitignore
 @@ -1,11 +1,16 @@
@@ -28,7 +28,7 @@ index c2793890..93821ad1 100644
  /vendor/
  /web/bundles/
 diff --git a/README.md b/README.md
-index 7b83e946..f4832a39 100644
+index 7b83e94..f4832a3 100644
 --- a/README.md
 +++ b/README.md
 @@ -32,15 +32,15 @@ Make sure `app/config/parameters.yml` is correct for your database
@@ -52,7 +52,7 @@ index 7b83e946..f4832a39 100644
  
  Then find the site at http://localhost:8000.
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index e68516ce..8b33918c 100644
+index e68516c..8b33918 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
 @@ -13,7 +13,6 @@ class AppKernel extends Kernel
@@ -92,7 +92,7 @@ index e68516ce..8b33918c 100644
      {
          $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
 diff --git a/app/Resources/views/layout.twig b/app/Resources/views/layout.twig
-index 674acd62..327da5c8 100644
+index 674acd6..327da5c 100644
 --- a/app/Resources/views/layout.twig
 +++ b/app/Resources/views/layout.twig
 @@ -43,7 +43,7 @@
@@ -105,7 +105,7 @@ index 674acd62..327da5c8 100644
                                          <tbody>
                                          <tr>
 diff --git a/app/autoload.php b/app/autoload.php
-index 70526bb5..fa582ecd 100644
+index 70526bb..fa582ec 100644
 --- a/app/autoload.php
 +++ b/app/autoload.php
 @@ -8,6 +8,6 @@ use Composer\Autoload\ClassLoader;
@@ -118,9 +118,9 @@ index 70526bb5..fa582ecd 100644
  return $loader;
 diff --git a/app/cache/.gitkeep b/app/cache/.gitkeep
 deleted file mode 100644
-index e69de29b..00000000
+index e69de29..0000000
 diff --git a/app/config/config.yml b/app/config/config.yml
-index c4a85b20..0711b8e5 100644
+index c4a85b2..0711b8e 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
 @@ -3,10 +3,13 @@ imports:
@@ -193,7 +193,7 @@ index c4a85b20..0711b8e5 100644
  
  # Swiftmailer Configuration
 diff --git a/app/config/config_dev.yml b/app/config/config_dev.yml
-index efaf396e..4b7d4724 100644
+index efaf396..4b7d472 100644
 --- a/app/config/config_dev.yml
 +++ b/app/config/config_dev.yml
 @@ -14,24 +14,13 @@ web_profiler:
@@ -238,7 +238,7 @@ index efaf396e..4b7d4724 100644
 +#    delivery_address: me@example.com
 \ No newline at end of file
 diff --git a/app/config/config_prod.yml b/app/config/config_prod.yml
-index 342837a0..83ef6d6e 100644
+index 342837a..83ef6d6 100644
 --- a/app/config/config_prod.yml
 +++ b/app/config/config_prod.yml
 @@ -3,7 +3,9 @@ imports:
@@ -253,7 +253,7 @@ index 342837a0..83ef6d6e 100644
  #doctrine:
  #    orm:
 diff --git a/app/config/parameters.yml.dist b/app/config/parameters.yml.dist
-index 137d5a5d..f5ba5535 100644
+index 137d5a5..f5ba553 100644
 --- a/app/config/parameters.yml.dist
 +++ b/app/config/parameters.yml.dist
 @@ -1,6 +1,5 @@
@@ -264,7 +264,7 @@ index 137d5a5d..f5ba5535 100644
      database_port:     ~
      database_name:     symfony_rest
 diff --git a/app/config/routing_dev.yml b/app/config/routing_dev.yml
-index 0f0afb61..404f6a3b 100644
+index 0f0afb6..404f6a3 100644
 --- a/app/config/routing_dev.yml
 +++ b/app/config/routing_dev.yml
 @@ -6,10 +6,6 @@ _profiler:
@@ -280,10 +280,10 @@ index 0f0afb61..404f6a3b 100644
      prefix:   /_error
 diff --git a/app/logs/.gitkeep b/app/logs/.gitkeep
 deleted file mode 100644
-index e69de29b..00000000
+index e69de29..0000000
 diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
 deleted file mode 100644
-index 6090fddc..00000000
+index 6090fdd..0000000
 --- a/app/phpunit.xml.dist
 +++ /dev/null
 @@ -1,35 +0,0 @@
@@ -324,7 +324,7 @@ index 6090fddc..00000000
 -</phpunit>
 diff --git a/bin/console b/bin/console
 new file mode 100755
-index 00000000..96a80367
+index 0000000..96a8036
 --- /dev/null
 +++ b/bin/console
 @@ -0,0 +1,30 @@
@@ -360,7 +360,7 @@ index 00000000..96a80367
 +
 diff --git a/bin/symfony_requirements b/bin/symfony_requirements
 new file mode 100755
-index 00000000..7cd559a4
+index 0000000..7cd559a
 --- /dev/null
 +++ b/bin/symfony_requirements
 @@ -0,0 +1,143 @@
@@ -508,7 +508,7 @@ index 00000000..7cd559a4
 +    return $support;
 +}
 diff --git a/composer.json b/composer.json
-index 311bff0e..02c98000 100644
+index 311bff0..02c9800 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -3,50 +3,46 @@
@@ -616,7 +616,7 @@ index 311bff0e..02c98000 100644
      }
  }
 diff --git a/composer.lock b/composer.lock
-index 00bf5d22..74550039 100644
+index 00bf5d2..7455003 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,21 +4,21 @@
@@ -1864,10 +1864,11 @@ index 00bf5d22..74550039 100644
          },
          {
              "name": "pagerfanta/pagerfanta",
-@@ -1526,6 +1250,54 @@
+@@ -1525,6 +1249,54 @@
+             ],
              "time": "2014-10-06 10:57:25"
          },
-         {
++        {
 +            "name": "paragonie/random_compat",
 +            "version": "v1.2.2",
 +            "source": {
@@ -1915,10 +1916,9 @@ index 00bf5d22..74550039 100644
 +            ],
 +            "time": "2016-03-11 19:54:08"
 +        },
-+        {
+         {
              "name": "phpcollection/phpcollection",
              "version": "0.4.0",
-             "source": {
 @@ -1577,21 +1349,24 @@
          },
          {
@@ -4567,7 +4567,7 @@ index 00bf5d22..74550039 100644
  }
 diff --git a/phpunit.xml.dist b/phpunit.xml.dist
 new file mode 100644
-index 00000000..1e463f51
+index 0000000..1e463f5
 --- /dev/null
 +++ b/phpunit.xml.dist
 @@ -0,0 +1,32 @@
@@ -4604,7 +4604,7 @@ index 00000000..1e463f51
 +    </filter>
 +</phpunit>
 diff --git a/resources/ApiTestCase.php b/resources/ApiTestCase.php
-index c88ba662..8cc9c607 100644
+index c88ba66..8cc9c60 100644
 --- a/resources/ApiTestCase.php
 +++ b/resources/ApiTestCase.php
 @@ -163,7 +163,7 @@ class ApiTestCase extends KernelTestCase
@@ -4617,7 +4617,7 @@ index c88ba662..8cc9c607 100644
                      $this->printDebug(sprintf(
                          'Profiler URL: <comment>%s</comment>',
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 30a93910..df092a5d 100644
+index 30a9391..df092a5 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -25,7 +25,7 @@ class ProgrammerController extends BaseController
@@ -4639,7 +4639,7 @@ index 30a93910..df092a5d 100644
  
          if (!$form->isValid()) {
 diff --git a/src/AppBundle/DataFixtures/ORM/LoadFixtures.php b/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
-index 07639e67..ea64bc7f 100644
+index 07639e6..ea64bc7 100644
 --- a/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
 +++ b/src/AppBundle/DataFixtures/ORM/LoadFixtures.php
 @@ -2,15 +2,20 @@
@@ -4670,7 +4670,7 @@ index 07639e67..ea64bc7f 100644
  }
 \ No newline at end of file
 diff --git a/src/AppBundle/Form/ProgrammerType.php b/src/AppBundle/Form/ProgrammerType.php
-index 411deff1..1961d5ab 100644
+index 411deff..1961d5a 100644
 --- a/src/AppBundle/Form/ProgrammerType.php
 +++ b/src/AppBundle/Form/ProgrammerType.php
 @@ -3,36 +3,39 @@
@@ -4737,7 +4737,7 @@ index 411deff1..1961d5ab 100644
 \ No newline at end of file
 +}
 diff --git a/src/AppBundle/Form/UpdateProgrammerType.php b/src/AppBundle/Form/UpdateProgrammerType.php
-index 964a00e2..2be8b1a5 100644
+index 964a00e..2be8b1a 100644
 --- a/src/AppBundle/Form/UpdateProgrammerType.php
 +++ b/src/AppBundle/Form/UpdateProgrammerType.php
 @@ -2,22 +2,15 @@
@@ -4769,7 +4769,7 @@ index 964a00e2..2be8b1a5 100644
 \ No newline at end of file
 +}
 diff --git a/src/AppBundle/Repository/UserRepository.php b/src/AppBundle/Repository/UserRepository.php
-index ed7195a3..ff49ee22 100644
+index ed7195a..ff49ee2 100644
 --- a/src/AppBundle/Repository/UserRepository.php
 +++ b/src/AppBundle/Repository/UserRepository.php
 @@ -3,13 +3,14 @@
@@ -4808,7 +4808,7 @@ index ed7195a3..ff49ee22 100644
 -    }
  }
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 2c90931f..3bbe67e9 100644
+index 2c90931..3bbe67e 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -8,10 +8,10 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
@@ -4978,7 +4978,7 @@ index 2c90931f..3bbe67e9 100644
      {
          $user = new User();
 diff --git a/src/AppBundle/Test/ResponseAsserter.php b/src/AppBundle/Test/ResponseAsserter.php
-index 628bc17d..dba73fa2 100644
+index 628bc17..dba73fa 100644
 --- a/src/AppBundle/Test/ResponseAsserter.php
 +++ b/src/AppBundle/Test/ResponseAsserter.php
 @@ -2,7 +2,7 @@
@@ -4990,262 +4990,51 @@ index 628bc17d..dba73fa2 100644
  use Symfony\Component\PropertyAccess\Exception\RuntimeException;
  use Symfony\Component\PropertyAccess\PropertyAccess;
  use Symfony\Component\PropertyAccess\Exception\AccessException;
-diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-new file mode 100644
-index 00000000..62e75b59
---- /dev/null
+diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+similarity index 98%
+rename from src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
+rename to tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
+index 306fbec..62e75b5 100644
+--- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-@@ -0,0 +1,247 @@
-+<?php
+@@ -1,5 +1,6 @@
+ <?php
+-namespace AppBundle\Tests\Controller\Api;
 +
 +namespace Tests\AppBundle\Controller\Api;
-+
-+use AppBundle\Test\ApiTestCase;
-+
-+class ProgrammerControllerTest extends ApiTestCase
-+{
-+    protected function setUp()
-+    {
-+        parent::setUp();
-+
-+        $this->createUser('weaverryan');
-+    }
-+
-+    public function testPOST()
-+    {
-+        $data = array(
-+            'nickname' => 'ObjectOrienter',
-+            'avatarNumber' => 5,
-+            'tagLine' => 'a test dev!'
-+        );
-+
-+        // 1) Create a programmer resource
-+        $response = $this->client->post('/api/programmers', [
-+            'body' => json_encode($data)
-+        ]);
-+
-+        $this->assertEquals(201, $response->getStatusCode());
-+        $this->assertTrue($response->hasHeader('Location'));
+ 
+ use AppBundle\Test\ApiTestCase;
+ 
+@@ -27,7 +28,7 @@ class ProgrammerControllerTest extends ApiTestCase
+ 
+         $this->assertEquals(201, $response->getStatusCode());
+         $this->assertTrue($response->hasHeader('Location'));
+-        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location'));
 +        $this->assertStringEndsWith('/api/programmers/ObjectOrienter', $response->getHeader('Location')[0]);
-+        $finishedData = json_decode($response->getBody(true), true);
-+        $this->assertArrayHasKey('nickname', $finishedData);
-+        $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
-+    }
-+
-+    public function testGETProgrammer()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'UnitTester',
-+            'avatarNumber' => 3,
-+        ));
-+
-+        $response = $this->client->get('/api/programmers/UnitTester');
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertiesExist($response, array(
-+            'nickname',
-+            'avatarNumber',
-+            'powerLevel',
-+            'tagLine'
-+        ));
-+        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
-+        $this->asserter()->assertResponsePropertyEquals(
-+            $response,
-+            '_links.self',
-+            $this->adjustUri('/api/programmers/UnitTester')
-+        );
-+    }
-+
-+    public function testGETProgrammerDeep()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'UnitTester',
-+            'avatarNumber' => 3,
-+        ));
-+
-+        $response = $this->client->get('/api/programmers/UnitTester?deep=1');
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertiesExist($response, array(
-+            'user.username'
-+        ));
-+    }
-+
-+    public function testGETProgrammersCollection()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'UnitTester',
-+            'avatarNumber' => 3,
-+        ));
-+        $this->createProgrammer(array(
-+            'nickname' => 'CowboyCoder',
-+            'avatarNumber' => 5,
-+        ));
-+
-+        $response = $this->client->get('/api/programmers');
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyIsArray($response, 'items');
-+        $this->asserter()->assertResponsePropertyCount($response, 'items', 2);
-+        $this->asserter()->assertResponsePropertyEquals($response, 'items[1].nickname', 'CowboyCoder');
-+    }
-+
-+    public function testGETProgrammersCollectionPaginated()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'willnotmatch',
-+            'avatarNumber' => 5,
-+        ));
-+
-+        for ($i = 0; $i < 25; $i++) {
-+            $this->createProgrammer(array(
-+                'nickname' => 'Programmer'.$i,
-+                'avatarNumber' => 3,
-+            ));
-+        }
-+
-+        // page 1
-+        $response = $this->client->get('/api/programmers?filter=programmer');
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyEquals(
-+            $response,
-+            'items[5].nickname',
-+            'Programmer5'
-+        );
-+
-+        $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
-+        $this->asserter()->assertResponsePropertyEquals($response, 'total', 25);
-+        $this->asserter()->assertResponsePropertyExists($response, '_links.next');
-+
-+        // page 2
-+        $nextLink = $this->asserter()->readResponseProperty($response, '_links.next');
-+        $response = $this->client->get($nextLink);
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyEquals(
-+            $response,
-+            'items[5].nickname',
-+            'Programmer15'
-+        );
-+        $this->asserter()->assertResponsePropertyEquals($response, 'count', 10);
-+
-+        $lastLink = $this->asserter()->readResponseProperty($response, '_links.last');
-+        $response = $this->client->get($lastLink);
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyEquals(
-+            $response,
-+            'items[4].nickname',
-+            'Programmer24'
-+        );
-+
-+        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'items[5].name');
-+        $this->asserter()->assertResponsePropertyEquals($response, 'count', 5);
-+    }
-+
-+    public function testPUTProgrammer()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'CowboyCoder',
-+            'avatarNumber' => 5,
-+            'tagLine' => 'foo',
-+        ));
-+
-+        $data = array(
-+            'nickname' => 'CowgirlCoder',
-+            'avatarNumber' => 2,
-+            'tagLine' => 'foo',
-+        );
-+        $response = $this->client->put('/api/programmers/CowboyCoder', [
-+            'body' => json_encode($data)
-+        ]);
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyEquals($response, 'avatarNumber', 2);
-+        // the nickname is immutable on edit
-+        $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'CowboyCoder');
-+    }
-+
-+    public function testPATCHProgrammer()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'CowboyCoder',
-+            'avatarNumber' => 5,
-+            'tagLine' => 'foo',
-+        ));
-+
-+        $data = array(
-+            'tagLine' => 'bar',
-+        );
-+        $response = $this->client->patch('/api/programmers/CowboyCoder', [
-+            'body' => json_encode($data)
-+        ]);
-+        $this->assertEquals(200, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyEquals($response, 'avatarNumber', 5);
-+        $this->asserter()->assertResponsePropertyEquals($response, 'tagLine', 'bar');
-+    }
-+
-+    public function testDELETEProgrammer()
-+    {
-+        $this->createProgrammer(array(
-+            'nickname' => 'UnitTester',
-+            'avatarNumber' => 3,
-+        ));
-+
-+        $response = $this->client->delete('/api/programmers/UnitTester');
-+        $this->assertEquals(204, $response->getStatusCode());
-+    }
-+
-+    public function testValidationErrors()
-+    {
-+        $data = array(
-+            'avatarNumber' => 2,
-+            'tagLine' => 'I\'m from a test!'
-+        );
-+
-+        // 1) Create a programmer resource
-+        $response = $this->client->post('/api/programmers', [
-+            'body' => json_encode($data)
-+        ]);
-+
-+        $this->assertEquals(400, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertiesExist($response, array(
-+            'type',
-+            'title',
-+            'errors',
-+        ));
-+        $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
-+        $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
-+        $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
+         $finishedData = json_decode($response->getBody(true), true);
+         $this->assertArrayHasKey('nickname', $finishedData);
+         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
+@@ -212,7 +213,7 @@ class ProgrammerControllerTest extends ApiTestCase
+         $this->asserter()->assertResponsePropertyExists($response, 'errors.nickname');
+         $this->asserter()->assertResponsePropertyEquals($response, 'errors.nickname[0]', 'Please enter a clever nickname');
+         $this->asserter()->assertResponsePropertyDoesNotExist($response, 'errors.avatarNumber');
+-        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
 +        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
-+    }
-+
-+    public function testInvalidJson()
-+    {
-+        $invalidBody = <<<EOF
-+{
-+    "nickname": "JohnnyRobot",
-+    "avatarNumber" : "2
-+    "tagLine": "I'm from a test!"
-+}
-+EOF;
-+
-+        $response = $this->client->post('/api/programmers', [
-+            'body' => $invalidBody
-+        ]);
-+
-+        $this->assertEquals(400, $response->getStatusCode());
-+        $this->asserter()->assertResponsePropertyContains($response, 'type', 'invalid_body_format');
-+    }
-+
-+    public function test404Exception()
-+    {
-+        $response = $this->client->get('/api/programmers/fake');
-+
-+        $this->assertEquals(404, $response->getStatusCode());
+     }
+ 
+     public function testInvalidJson()
+@@ -238,7 +239,7 @@ EOF;
+         $response = $this->client->get('/api/programmers/fake');
+ 
+         $this->assertEquals(404, $response->getStatusCode());
+-        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type'));
 +        $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
-+        $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
-+        $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
-+        $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
-+    }
-+}
+         $this->asserter()->assertResponsePropertyEquals($response, 'type', 'about:blank');
+         $this->asserter()->assertResponsePropertyEquals($response, 'title', 'Not Found');
+         $this->asserter()->assertResponsePropertyEquals($response, 'detail', 'No programmer found with nickname "fake"');
 diff --git a/var/SymfonyRequirements.php b/var/SymfonyRequirements.php
 new file mode 100644
-index 00000000..28b0dcdb
+index 0000000..28b0dcd
 --- /dev/null
 +++ b/var/SymfonyRequirements.php
 @@ -0,0 +1,764 @@
@@ -6014,7 +5803,7 @@ index 00000000..28b0dcdb
 +    }
 +}
 diff --git a/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php b/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php
-index 17fb9810..71c729d9 100644
+index 17fb981..71c729d 100644
 --- a/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php
 +++ b/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php
 @@ -15,8 +15,6 @@ namespace Symfony\Component\HttpFoundation;
@@ -6579,7 +6368,7 @@ index 17fb9810..71c729d9 100644
  
          while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || $flags === ($s['flags'] & $flags) : $s['del'])) {
 diff --git a/web/app.php b/web/app.php
-index c5c26409..584e6028 100644
+index c5c2640..584e602 100644
 --- a/web/app.php
 +++ b/web/app.php
 @@ -1,23 +1,23 @@
@@ -6620,7 +6409,7 @@ index c5c26409..584e6028 100644
 +$kernel->terminate($request, $response);
 \ No newline at end of file
 diff --git a/web/app_dev.php b/web/app_dev.php
-index e0279c2a..95e0477d 100644
+index e0279c2..95e0477 100644
 --- a/web/app_dev.php
 +++ b/web/app_dev.php
 @@ -4,27 +4,29 @@ use Symfony\Component\HttpFoundation\Request;
@@ -6661,7 +6450,7 @@ index e0279c2a..95e0477d 100644
 +$kernel->terminate($request, $response);
 \ No newline at end of file
 diff --git a/web/app_test.php b/web/app_test.php
-index 0bed2d74..7c891f27 100644
+index 0bed2d7..7c891f2 100644
 --- a/web/app_test.php
 +++ b/web/app_test.php
 @@ -4,27 +4,29 @@ use Symfony\Component\HttpFoundation\Request;
@@ -6702,7 +6491,7 @@ index 0bed2d74..7c891f27 100644
 +$kernel->terminate($request, $response);
 \ No newline at end of file
 diff --git a/web/config.php b/web/config.php
-index 162acfc7..08a418d2 100644
+index 162acfc..08a418d 100644
 --- a/web/config.php
 +++ b/web/config.php
 @@ -1,5 +1,15 @@

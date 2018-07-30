@@ -1,5 +1,5 @@
 diff --git a/app/config/config_test.yml b/app/config/config_test.yml
-index 2f6d9250..33958e71 100644
+index 2f6d925..33958e7 100644
 --- a/app/config/config_test.yml
 +++ b/app/config/config_test.yml
 @@ -14,3 +14,7 @@ web_profiler:
@@ -11,7 +11,7 @@ index 2f6d9250..33958e71 100644
 +    dbal:
 +        dbname:   "%database_name%_test"
 diff --git a/app/phpunit.xml.dist b/app/phpunit.xml.dist
-index 6090fddc..b6716e62 100644
+index 6090fdd..b6716e6 100644
 --- a/app/phpunit.xml.dist
 +++ b/app/phpunit.xml.dist
 @@ -16,7 +16,7 @@
@@ -24,7 +24,7 @@ index 6090fddc..b6716e62 100644
  
      <filter>
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 6d7b9cf4..55fec0ee 100644
+index 6d7b9cf..55fec0e 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -63,6 +63,7 @@ class ProgrammerControllerTest extends ApiTestCase
@@ -37,7 +37,7 @@ index 6d7b9cf4..55fec0ee 100644
          $this->asserter()->assertResponsePropertyCount($response, 'programmers', 2);
 diff --git a/web/app_test.php b/web/app_test.php
 new file mode 100644
-index 00000000..503a56de
+index 0000000..503a56d
 --- /dev/null
 +++ b/web/app_test.php
 @@ -0,0 +1,30 @@

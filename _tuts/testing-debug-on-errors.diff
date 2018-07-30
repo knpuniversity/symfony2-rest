@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index 21b9cdb3..cd06e803 100644
+index 21b9cdb..cd06e80 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -3,18 +3,35 @@
@@ -20,12 +20,12 @@ index 21b9cdb3..cd06e803 100644
  {
      private static $staticClient;
  
-     /**
++    /**
 +     * @var History
 +     */
 +    private static $history;
 +
-+    /**
+     /**
       * @var Client
       */
      protected $client;

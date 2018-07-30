@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index ec14c5bd..9c3d846d 100644
+index ec14c5b..9c3d846 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
 @@ -2,6 +2,7 @@
@@ -47,7 +47,7 @@ index ec14c5bd..9c3d846d 100644
       * @return EntityManager
       */
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 165e8c6c..e2a0c5ff 100644
+index 165e8c6..e2a0c5f 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -32,4 +32,22 @@ class ProgrammerControllerTest extends ApiTestCase

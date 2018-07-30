@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
-index fbe16207..4c2fbc9c 100644
+index fbe1620..4c2fbc9 100644
 --- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 +++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -24,6 +24,16 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
@@ -20,7 +20,7 @@ index fbe16207..4c2fbc9c 100644
  
          $response = new JsonResponse(
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 365b36a5..a4ede58a 100644
+index 365b36a..a4ede58 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -171,5 +171,6 @@ EOF;

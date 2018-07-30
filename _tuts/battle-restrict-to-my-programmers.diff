@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/BattleController.php b/src/AppBundle/Controller/Api/BattleController.php
-index 3ac3d376..44ee65a1 100644
+index 3ac3d37..44ee65a 100644
 --- a/src/AppBundle/Controller/Api/BattleController.php
 +++ b/src/AppBundle/Controller/Api/BattleController.php
 @@ -17,8 +17,12 @@ class BattleController extends BaseController
@@ -17,7 +17,7 @@ index 3ac3d376..44ee65a1 100644
  
          if (!$form->isValid()) {
 diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
-index 3933bc78..1e3cf194 100644
+index 3933bc7..1e3cf19 100644
 --- a/src/AppBundle/Form/BattleType.php
 +++ b/src/AppBundle/Form/BattleType.php
 @@ -2,6 +2,7 @@
@@ -53,7 +53,7 @@ index 3933bc78..1e3cf194 100644
      }
  }
 diff --git a/src/AppBundle/Repository/ProgrammerRepository.php b/src/AppBundle/Repository/ProgrammerRepository.php
-index 2692cbe8..592d8856 100644
+index 2692cbe..592d885 100644
 --- a/src/AppBundle/Repository/ProgrammerRepository.php
 +++ b/src/AppBundle/Repository/ProgrammerRepository.php
 @@ -17,6 +17,13 @@ class ProgrammerRepository extends EntityRepository
@@ -71,7 +71,7 @@ index 2692cbe8..592d8856 100644
       * @param $nickname
       * @return Programmer
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 56ed55d4..906e17fa 100644
+index 56ed55d..906e17f 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -44,9 +44,11 @@ class BattleControllerTest extends ApiTestCase

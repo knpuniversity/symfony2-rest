@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
-index 2795bab1..96478395 100644
+index 2795bab..9647839 100644
 --- a/src/AppBundle/Security/JwtTokenAuthenticator.php
 +++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
 @@ -2,6 +2,7 @@
@@ -26,7 +26,7 @@ index 2795bab1..96478395 100644
      }
  }
 diff --git a/tests/AppBundle/Controller/Api/TokenControllerTest.php b/tests/AppBundle/Controller/Api/TokenControllerTest.php
-index 0101b1b0..d860e1e3 100644
+index 0101b1b..d860e1e 100644
 --- a/tests/AppBundle/Controller/Api/TokenControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/TokenControllerTest.php
 @@ -28,5 +28,9 @@ class TokenControllerTest extends ApiTestCase
@@ -41,7 +41,7 @@ index 0101b1b0..d860e1e3 100644
  }
 diff --git a/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php b/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php
 new file mode 100644
-index 00000000..be061c7b
+index 0000000..be061c7
 --- /dev/null
 +++ b/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Exception/BadCredentialsException.php
 @@ -0,0 +1,29 @@

@@ -1,5 +1,5 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index cb56c8bd..23582224 100644
+index cb56c8b..2358222 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -19,7 +19,7 @@ services:
@@ -20,7 +20,7 @@ index cb56c8bd..23582224 100644
 +        class: AppBundle\Api\ResponseFactory
 diff --git a/src/AppBundle/Api/ResponseFactory.php b/src/AppBundle/Api/ResponseFactory.php
 new file mode 100644
-index 00000000..f514582d
+index 0000000..f514582
 --- /dev/null
 +++ b/src/AppBundle/Api/ResponseFactory.php
 @@ -0,0 +1,25 @@
@@ -51,7 +51,7 @@ index 00000000..f514582d
 +}
 \ No newline at end of file
 diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
-index 8f4dbffa..84d78c2a 100644
+index 8f4dbff..84d78c2 100644
 --- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 +++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -4,6 +4,7 @@ namespace AppBundle\EventListener;
@@ -99,7 +99,7 @@ index 8f4dbffa..84d78c2a 100644
          $event->setResponse($response);
      }
 diff --git a/src/AppBundle/Security/JwtTokenAuthenticator.php b/src/AppBundle/Security/JwtTokenAuthenticator.php
-index 96478395..37d72b39 100644
+index 9647839..37d72b3 100644
 --- a/src/AppBundle/Security/JwtTokenAuthenticator.php
 +++ b/src/AppBundle/Security/JwtTokenAuthenticator.php
 @@ -3,6 +3,7 @@

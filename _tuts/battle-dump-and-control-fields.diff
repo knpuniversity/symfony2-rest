@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Entity/Battle.php b/src/AppBundle/Entity/Battle.php
-index 16a6f31d..0c7bef79 100644
+index 16a6f31..0c7bef7 100644
 --- a/src/AppBundle/Entity/Battle.php
 +++ b/src/AppBundle/Entity/Battle.php
 @@ -4,9 +4,12 @@ namespace AppBundle\Entity;
@@ -44,7 +44,7 @@ index 16a6f31d..0c7bef79 100644
      private $notes;
  
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 0f3e67bd..facfedc8 100644
+index 0f3e67b..facfedc 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -33,6 +33,7 @@ class BattleControllerTest extends ApiTestCase

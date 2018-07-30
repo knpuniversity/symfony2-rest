@@ -1,19 +1,19 @@
 diff --git a/src/AppBundle/Test/ApiTestCase.php b/src/AppBundle/Test/ApiTestCase.php
-index cd06e803..1abee373 100644
+index cd06e80..1abee37 100644
 --- a/src/AppBundle/Test/ApiTestCase.php
 +++ b/src/AppBundle/Test/ApiTestCase.php
-@@ -28,6 +28,11 @@ class ApiTestCase extends KernelTestCase
+@@ -27,6 +27,11 @@ class ApiTestCase extends KernelTestCase
+      */
      protected $client;
  
-     /**
++    /**
 +     * @var ConsoleOutput
 +     */
 +    private $output;
 +
-+    /**
+     /**
       * @var FormatterHelper
       */
-     private $formatterHelper;
 @@ -184,7 +189,11 @@ class ApiTestCase extends KernelTestCase
       */
      protected function printDebug($string)

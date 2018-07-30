@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index df092a5d..264e2612 100644
+index df092a5..264e261 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -24,6 +24,8 @@ class ProgrammerController extends BaseController
@@ -12,7 +12,7 @@ index df092a5d..264e2612 100644
          $form = $this->createForm(ProgrammerType::class, $programmer);
          $this->processForm($request, $form);
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 62e75b59..99dc35ef 100644
+index 62e75b5..99dc35e 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -244,4 +244,12 @@ EOF;

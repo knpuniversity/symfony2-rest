@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 68e67c62..30a93910 100644
+index 68e67c6..30a9391 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -76,9 +76,11 @@ class ProgrammerController extends BaseController
@@ -16,7 +16,7 @@ index 68e67c62..30a93910 100644
              ->createCollection($qb, $request, 'api_programmers_collection');
  
 diff --git a/src/AppBundle/Repository/ProgrammerRepository.php b/src/AppBundle/Repository/ProgrammerRepository.php
-index ed7ff647..2692cbe8 100644
+index ed7ff64..2692cbe 100644
 --- a/src/AppBundle/Repository/ProgrammerRepository.php
 +++ b/src/AppBundle/Repository/ProgrammerRepository.php
 @@ -26,8 +26,15 @@ class ProgrammerRepository extends EntityRepository
@@ -38,7 +38,7 @@ index ed7ff647..2692cbe8 100644
      }
  }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index c6942de9..6d48545d 100644
+index c6942de..6d48545 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -71,6 +71,11 @@ class ProgrammerControllerTest extends ApiTestCase

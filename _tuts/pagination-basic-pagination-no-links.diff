@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 4f7e7d6b..04c9ef62 100644
+index 4f7e7d6..04c9ef6 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -8,6 +8,8 @@ use AppBundle\Controller\BaseController;
@@ -45,7 +45,7 @@ index 4f7e7d6b..04c9ef62 100644
          return $response;
      }
 diff --git a/src/AppBundle/Repository/ProgrammerRepository.php b/src/AppBundle/Repository/ProgrammerRepository.php
-index ead74723..ed7ff647 100644
+index ead7472..ed7ff64 100644
 --- a/src/AppBundle/Repository/ProgrammerRepository.php
 +++ b/src/AppBundle/Repository/ProgrammerRepository.php
 @@ -25,4 +25,9 @@ class ProgrammerRepository extends EntityRepository

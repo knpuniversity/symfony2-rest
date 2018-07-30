@@ -1,6 +1,6 @@
 diff --git a/src/AppBundle/Controller/Api/TokenController.php b/src/AppBundle/Controller/Api/TokenController.php
 new file mode 100644
-index 00000000..790213b6
+index 0000000..790213b
 --- /dev/null
 +++ b/src/AppBundle/Controller/Api/TokenController.php
 @@ -0,0 +1,20 @@

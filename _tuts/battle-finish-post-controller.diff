@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/BattleController.php b/src/AppBundle/Controller/Api/BattleController.php
-index c63bb6da..3ac3d376 100644
+index c63bb6d..3ac3d37 100644
 --- a/src/AppBundle/Controller/Api/BattleController.php
 +++ b/src/AppBundle/Controller/Api/BattleController.php
 @@ -3,8 +3,11 @@
@@ -40,7 +40,7 @@ index c63bb6da..3ac3d376 100644
  }
 diff --git a/src/AppBundle/Form/BattleType.php b/src/AppBundle/Form/BattleType.php
 new file mode 100644
-index 00000000..47184826
+index 0000000..4718482
 --- /dev/null
 +++ b/src/AppBundle/Form/BattleType.php
 @@ -0,0 +1,32 @@
@@ -78,7 +78,7 @@ index 00000000..47184826
 +}
 diff --git a/src/AppBundle/Form/Model/BattleModel.php b/src/AppBundle/Form/Model/BattleModel.php
 new file mode 100644
-index 00000000..2f2ab939
+index 0000000..2f2ab93
 --- /dev/null
 +++ b/src/AppBundle/Form/Model/BattleModel.php
 @@ -0,0 +1,33 @@

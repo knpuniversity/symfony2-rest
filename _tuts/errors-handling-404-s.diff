@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Api/ApiProblem.php b/src/AppBundle/Api/ApiProblem.php
-index 90bd6d03..6594d705 100644
+index 90bd6d0..6594d70 100644
 --- a/src/AppBundle/Api/ApiProblem.php
 +++ b/src/AppBundle/Api/ApiProblem.php
 @@ -1,6 +1,7 @@
@@ -44,7 +44,7 @@ index 90bd6d03..6594d705 100644
  
      public function toArray()
 diff --git a/src/AppBundle/EventListener/ApiExceptionSubscriber.php b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
-index 5dc9e2cb..fbe16207 100644
+index 5dc9e2c..fbe1620 100644
 --- a/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 +++ b/src/AppBundle/EventListener/ApiExceptionSubscriber.php
 @@ -2,22 +2,29 @@
@@ -82,7 +82,7 @@ index 5dc9e2cb..fbe16207 100644
          $response = new JsonResponse(
              $apiProblem->toArray(),
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 8ae72e54..365b36a5 100644
+index 8ae72e5..365b36a 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -163,4 +163,13 @@ EOF;

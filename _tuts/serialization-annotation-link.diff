@@ -1,5 +1,5 @@
 diff --git a/app/config/services.yml b/app/config/services.yml
-index 4737a203..e4e8d08c 100644
+index 4737a20..e4e8d08 100644
 --- a/app/config/services.yml
 +++ b/app/config/services.yml
 @@ -29,6 +29,6 @@ services:
@@ -12,7 +12,7 @@ index 4737a203..e4e8d08c 100644
              - { name: jms_serializer.event_subscriber }
 diff --git a/src/AppBundle/Annotation/Link.php b/src/AppBundle/Annotation/Link.php
 new file mode 100644
-index 00000000..2bcf902a
+index 0000000..2bcf902
 --- /dev/null
 +++ b/src/AppBundle/Annotation/Link.php
 @@ -0,0 +1,26 @@
@@ -43,7 +43,7 @@ index 00000000..2bcf902a
 +    public $params = array();
 +}
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index b601dfa2..357a0537 100644
+index b601dfa..357a053 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
 @@ -5,6 +5,7 @@ namespace AppBundle\Entity;
@@ -67,7 +67,7 @@ index b601dfa2..357a0537 100644
  class Programmer
  {
 diff --git a/src/AppBundle/Serializer/LinkSerializationSubscriber.php b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
-index 8c967891..03242804 100644
+index 8c96789..0324280 100644
 --- a/src/AppBundle/Serializer/LinkSerializationSubscriber.php
 +++ b/src/AppBundle/Serializer/LinkSerializationSubscriber.php
 @@ -2,34 +2,62 @@
@@ -153,7 +153,7 @@ index 8c967891..03242804 100644
          );
      }
 diff --git a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
-index 4c76c530..ae866eb2 100644
+index 4c76c53..ae866eb 100644
 --- a/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 +++ b/src/AppBundle/Tests/Controller/Api/ProgrammerControllerTest.php
 @@ -51,7 +51,7 @@ class ProgrammerControllerTest extends ApiTestCase

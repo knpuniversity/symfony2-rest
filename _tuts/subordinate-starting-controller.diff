@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
-index 49449bda..1c084c53 100644
+index 49449bd..1c084c5 100644
 --- a/src/AppBundle/Controller/Api/ProgrammerController.php
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -147,4 +147,12 @@ class ProgrammerController extends BaseController
@@ -16,7 +16,7 @@ index 49449bda..1c084c53 100644
 +    }
  }
 diff --git a/src/AppBundle/Entity/Programmer.php b/src/AppBundle/Entity/Programmer.php
-index affa847f..446c773f 100644
+index affa847..446c773 100644
 --- a/src/AppBundle/Entity/Programmer.php
 +++ b/src/AppBundle/Entity/Programmer.php
 @@ -24,7 +24,7 @@ use Hateoas\Configuration\Annotation as Hateoas;

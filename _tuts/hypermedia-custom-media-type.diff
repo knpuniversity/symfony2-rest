@@ -1,5 +1,5 @@
 diff --git a/src/AppBundle/Controller/BaseController.php b/src/AppBundle/Controller/BaseController.php
-index e6349c79..ed3b8754 100644
+index e6349c7..ed3b875 100644
 --- a/src/AppBundle/Controller/BaseController.php
 +++ b/src/AppBundle/Controller/BaseController.php
 @@ -120,7 +120,7 @@ abstract class BaseController extends Controller
@@ -12,7 +12,7 @@ index e6349c79..ed3b8754 100644
      }
  
 diff --git a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
-index 4ed93c27..d30a6143 100644
+index 4ed93c2..d30a614 100644
 --- a/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/ProgrammerControllerTest.php
 @@ -28,7 +28,7 @@ class ProgrammerControllerTest extends ApiTestCase

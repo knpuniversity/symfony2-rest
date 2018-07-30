@@ -1,5 +1,5 @@
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index 5755b06a..411948e2 100644
+index 5755b06..411948e 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
 @@ -17,6 +17,7 @@ class AppKernel extends Kernel
@@ -11,7 +11,7 @@ index 5755b06a..411948e2 100644
  
          if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 diff --git a/composer.json b/composer.json
-index 9fe58c9f..1cae1b7d 100644
+index 9fe58c9..1cae1b7 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -24,7 +24,8 @@
@@ -25,13 +25,14 @@ index 9fe58c9f..1cae1b7d 100644
      "require-dev": {
          "sensio/generator-bundle": "~2.3",
 diff --git a/composer.lock b/composer.lock
-index 11338a34..48c8e721 100644
+index 11338a3..48c8e72 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -1027,6 +1027,233 @@
+@@ -1026,6 +1026,233 @@
+             ],
              "time": "2014-01-12 16:20:24"
          },
-         {
++        {
 +            "name": "jms/metadata",
 +            "version": "1.5.1",
 +            "source": {
@@ -258,14 +259,14 @@ index 11338a34..48c8e721 100644
 +            ],
 +            "time": "2013-12-05 14:36:11"
 +        },
-+        {
+         {
              "name": "kriswallsmith/assetic",
              "version": "v1.2.1",
-             "source": {
-@@ -1231,6 +1458,105 @@
+@@ -1230,6 +1457,105 @@
+             ],
              "time": "2014-10-10 13:07:37"
          },
-         {
++        {
 +            "name": "phpcollection/phpcollection",
 +            "version": "0.4.0",
 +            "source": {
@@ -364,7 +365,6 @@ index 11338a34..48c8e721 100644
 +            ],
 +            "time": "2014-01-09 22:37:17"
 +        },
-+        {
+         {
              "name": "psr/log",
              "version": "1.0.0",
-             "source": {

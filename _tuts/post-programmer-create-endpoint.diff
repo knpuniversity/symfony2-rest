@@ -1,5 +1,5 @@
 diff --git a/app/config/routing.yml b/app/config/routing.yml
-index 8eadc31a..e4bfb2a3 100644
+index 8eadc31..e4bfb2a 100644
 --- a/app/config/routing.yml
 +++ b/app/config/routing.yml
 @@ -1,3 +1,7 @@
@@ -14,7 +14,7 @@ index 8eadc31a..e4bfb2a3 100644
      type:     annotation
 diff --git a/src/AppBundle/Controller/Api/ProgrammerController.php b/src/AppBundle/Controller/Api/ProgrammerController.php
 new file mode 100644
-index 00000000..c5a0d5c2
+index 0000000..c5a0d5c
 --- /dev/null
 +++ b/src/AppBundle/Controller/Api/ProgrammerController.php
 @@ -0,0 +1,20 @@

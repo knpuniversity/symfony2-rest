@@ -1,5 +1,5 @@
 diff --git a/app/AppKernel.php b/app/AppKernel.php
-index 8b33918c..c7d123bd 100644
+index 8b33918..c7d123b 100644
 --- a/app/AppKernel.php
 +++ b/app/AppKernel.php
 @@ -18,6 +18,7 @@ class AppKernel extends Kernel
@@ -11,7 +11,7 @@ index 8b33918c..c7d123bd 100644
  
          if (in_array($this->getEnvironment(), array('dev', 'test'))) {
 diff --git a/app/config/config.yml b/app/config/config.yml
-index 0711b8e5..c7d71638 100644
+index 0711b8e..c7d7163 100644
 --- a/app/config/config.yml
 +++ b/app/config/config.yml
 @@ -69,3 +69,9 @@ swiftmailer:
@@ -26,7 +26,7 @@ index 0711b8e5..c7d71638 100644
 +    token_ttl:        3600
 \ No newline at end of file
 diff --git a/app/config/parameters.yml.dist b/app/config/parameters.yml.dist
-index f5ba5535..8173d542 100644
+index f5ba553..8173d54 100644
 --- a/app/config/parameters.yml.dist
 +++ b/app/config/parameters.yml.dist
 @@ -17,3 +17,5 @@ parameters:
@@ -36,7 +36,7 @@ index f5ba5535..8173d542 100644
 +
 +    jwt_key_pass_phrase: happyapi
 diff --git a/composer.json b/composer.json
-index 02c98000..7b91969d 100644
+index 02c9800..7b91969 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -24,7 +24,8 @@
@@ -50,7 +50,7 @@ index 02c98000..7b91969d 100644
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index 74550039..28fa7075 100644
+index 7455003..28fa707 100644
 --- a/composer.lock
 +++ b/composer.lock
 @@ -4,8 +4,8 @@
@@ -64,10 +64,11 @@ index 74550039..28fa7075 100644
      "packages": [
          {
              "name": "doctrine/annotations",
-@@ -1105,6 +1105,81 @@
+@@ -1104,6 +1104,81 @@
+             ],
              "time": "2015-11-10 12:26:42"
          },
-         {
++        {
 +            "name": "lexik/jwt-authentication-bundle",
 +            "version": "v1.4.3",
 +            "target-dir": "Lexik/Bundle/JWTAuthenticationBundle",
@@ -142,14 +143,14 @@ index 74550039..28fa7075 100644
 +            ],
 +            "time": "2016-01-30 13:02:32"
 +        },
-+        {
+         {
              "name": "monolog/monolog",
              "version": "1.18.1",
-             "source": {
-@@ -1183,6 +1258,66 @@
+@@ -1182,6 +1257,66 @@
+             ],
              "time": "2016-03-13 16:08:35"
          },
-         {
++        {
 +            "name": "namshi/jose",
 +            "version": "6.1.1",
 +            "source": {
@@ -209,14 +210,14 @@ index 74550039..28fa7075 100644
 +            ],
 +            "time": "2016-01-24 11:10:26"
 +        },
-+        {
+         {
              "name": "pagerfanta/pagerfanta",
              "version": "v1.0.3",
-             "source": {
-@@ -1398,6 +1533,95 @@
+@@ -1397,6 +1532,95 @@
+             ],
              "time": "2015-07-25 16:39:46"
          },
-         {
++        {
 +            "name": "phpseclib/phpseclib",
 +            "version": "2.0.1",
 +            "source": {
@@ -305,13 +306,12 @@ index 74550039..28fa7075 100644
 +            ],
 +            "time": "2016-01-18 17:07:21"
 +        },
-+        {
+         {
              "name": "psr/log",
              "version": "1.0.0",
-             "source": {
 diff --git a/var/jwt/private.pem b/var/jwt/private.pem
 new file mode 100644
-index 00000000..770f268c
+index 0000000..770f268
 --- /dev/null
 +++ b/var/jwt/private.pem
 @@ -0,0 +1,54 @@
@@ -371,7 +371,7 @@ index 00000000..770f268c
 +-----END RSA PRIVATE KEY-----
 diff --git a/var/jwt/public.pem b/var/jwt/public.pem
 new file mode 100644
-index 00000000..7dc87ea7
+index 0000000..7dc87ea
 --- /dev/null
 +++ b/var/jwt/public.pem
 @@ -0,0 +1,14 @@
