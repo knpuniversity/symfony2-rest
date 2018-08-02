@@ -4,7 +4,7 @@ The main HTTP methods are: GET, [POST, PUT](http://knpuniversity.com/screencast/
 and DELETE. There's another one you hear a lot about: [PATCH](http://knpuniversity.com/screencast/rest/patch).
 
 The simple, but not entirely accurate definition of PATCH is this: it's just
-like PUT, except you don't need to send up the entire resoure body. If you
+like PUT, except you don't need to send up the entire resource body. If you
 just want to update `tagLine`, just send that field.
 
 So really, PATCH is a bit nicer to work with than PUT, and we'll support
