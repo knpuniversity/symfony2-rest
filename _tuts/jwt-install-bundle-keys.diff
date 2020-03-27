@@ -36,7 +36,7 @@ index f5ba553..8173d54 100644
 +
 +    jwt_key_pass_phrase: happyapi
 diff --git a/composer.json b/composer.json
-index 02c9800..7b91969 100644
+index a0875d5..1774fe8 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -24,7 +24,8 @@
@@ -50,23 +50,21 @@ index 02c9800..7b91969 100644
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index 7455003..28fa707 100644
+index 3c03ba0..69d259e 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -4,8 +4,8 @@
-         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+@@ -4,7 +4,7 @@
+         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
          "This file is @generated automatically"
      ],
--    "hash": "4500289d34489fb1eddc02b884d8d596",
--    "content-hash": "421c6db4d578ac1870293e371d14bcb7",
-+    "hash": "050baf4005665ce87971f2183c4aa901",
-+    "content-hash": "c4f44ac5b6bc042b5e0f17fd43338f7f",
+-    "content-hash": "9d4ee99cc3b6185a90ea1a1df7bf78a8",
++    "content-hash": "4e170ca44972f175fa94ce72918ea28a",
      "packages": [
          {
              "name": "doctrine/annotations",
-@@ -1104,6 +1104,81 @@
+@@ -1103,6 +1103,81 @@
              ],
-             "time": "2015-11-10 12:26:42"
+             "time": "2015-11-10T12:26:42+00:00"
          },
 +        {
 +            "name": "lexik/jwt-authentication-bundle",
@@ -141,14 +139,14 @@ index 7455003..28fa707 100644
 +                "rest",
 +                "symfony"
 +            ],
-+            "time": "2016-01-30 13:02:32"
++            "time": "2016-01-30T13:02:32+00:00"
 +        },
          {
              "name": "monolog/monolog",
              "version": "1.18.1",
-@@ -1182,6 +1257,66 @@
+@@ -1181,6 +1256,66 @@
              ],
-             "time": "2016-03-13 16:08:35"
+             "time": "2016-03-13T16:08:35+00:00"
          },
 +        {
 +            "name": "namshi/jose",
@@ -208,14 +206,14 @@ index 7455003..28fa707 100644
 +                "jwt",
 +                "token"
 +            ],
-+            "time": "2016-01-24 11:10:26"
++            "time": "2016-01-24T11:10:26+00:00"
 +        },
          {
              "name": "pagerfanta/pagerfanta",
              "version": "v1.0.3",
-@@ -1397,6 +1532,95 @@
+@@ -1396,6 +1531,95 @@
              ],
-             "time": "2015-07-25 16:39:46"
+             "time": "2015-07-25T16:39:46+00:00"
          },
 +        {
 +            "name": "phpseclib/phpseclib",
@@ -304,7 +302,7 @@ index 7455003..28fa707 100644
 +                "x.509",
 +                "x509"
 +            ],
-+            "time": "2016-01-18 17:07:21"
++            "time": "2016-01-18T17:07:21+00:00"
 +        },
          {
              "name": "psr/log",

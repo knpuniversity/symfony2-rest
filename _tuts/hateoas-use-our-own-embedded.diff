@@ -22,7 +22,7 @@ index 21d5370..4b18871 100644
      {
          return $this->programmer->getNickname();
 diff --git a/tests/AppBundle/Controller/Api/BattleControllerTest.php b/tests/AppBundle/Controller/Api/BattleControllerTest.php
-index 5ab2ea4..ed3b9ee 100644
+index 3989420..d3f0f6e 100644
 --- a/tests/AppBundle/Controller/Api/BattleControllerTest.php
 +++ b/tests/AppBundle/Controller/Api/BattleControllerTest.php
 @@ -35,8 +35,6 @@ class BattleControllerTest extends ApiTestCase

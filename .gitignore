@@ -7,5 +7,6 @@
 /app/phpunit.xml
 /bin/
 /composer.phar
+/var/
 /vendor/
 /web/bundles/

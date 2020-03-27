@@ -23,7 +23,7 @@ index a37a6f9..c983ae6 100644
 +    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
 +    prefix:   /api/doc
 diff --git a/composer.json b/composer.json
-index ae47075..5de85d2 100644
+index 4a24f45..26cea3a 100644
 --- a/composer.json
 +++ b/composer.json
 @@ -26,7 +26,8 @@
@@ -37,12 +37,12 @@ index ae47075..5de85d2 100644
      "require-dev": {
          "sensio/generator-bundle": "^3.0",
 diff --git a/composer.lock b/composer.lock
-index fff3247..7932994 100644
+index 763b292..07ad33d 100644
 --- a/composer.lock
 +++ b/composer.lock
-@@ -1179,6 +1179,57 @@
+@@ -1178,6 +1178,57 @@
              ],
-             "time": "2016-01-30 13:02:32"
+             "time": "2016-01-30T13:02:32+00:00"
          },
 +        {
 +            "name": "michelf/php-markdown",
@@ -98,9 +98,9 @@ index fff3247..7932994 100644
          {
              "name": "monolog/monolog",
              "version": "1.18.1",
-@@ -1317,6 +1368,90 @@
+@@ -1316,6 +1367,90 @@
              ],
-             "time": "2016-01-24 11:10:26"
+             "time": "2016-01-24T11:10:26+00:00"
          },
 +        {
 +            "name": "nelmio/api-doc-bundle",
