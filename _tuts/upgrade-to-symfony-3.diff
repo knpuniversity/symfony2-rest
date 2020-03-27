@@ -1,17 +1,16 @@
 diff --git a/.gitignore b/.gitignore
-index c279389..ca53bc6 100644
+index fe5862b..abb4bea 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -1,11 +1,23 @@
+@@ -1,12 +1,27 @@
 -/app/bootstrap.php.cache
 -/app/cache/*
 -!app/cache/.gitkeep
  /app/config/parameters.yml
--/app/logs/*
--!app/logs/.gitkeep
--/app/phpunit.xml
+ /app/logs/*
+ !app/logs/.gitkeep
+ /app/phpunit.xml
 -/bin/
--/composer.phar
 +/app/bootstrap.php.cache
 +/app/cache/
 +/bin/behat
@@ -21,6 +20,8 @@ index c279389..ca53bc6 100644
 +/bin/security-checker
 +/build/
 +/phpunit.xml
+ /composer.phar
+-/var/
 +/var/*
 +!/var/cache
 +/var/cache/*
