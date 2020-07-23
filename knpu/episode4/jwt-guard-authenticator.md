@@ -97,9 +97,16 @@ string:
 That's it! `$data` is now an array of whatever information we originally put into
 the token. Fundamentally, this works just like a normal `json_decode`, except that
 the library is also checking to make sure that the contents of our token weren't
-changed. It does this by using our *private* key. This guarantees that nobody has
-changed the username to some *other* username because they're a jerk. Encryption
-is amazing.
+changed. It does this by using our *private* key.
+
+***TIP
+The private key is only used in case of symmetric signing. In the much more common
+case of assymetric signing the *private* key is used to sign the token, and the
+*public* key is used to verify the signature.
+***
+
+This guarantees that nobody has changed the username to some *other* username
+because they're a jerk. Encryption is amazing.
 
 It also checks the token's expiration: our tokens last 1 hour because that's what we
 setup in `config.yml`:
