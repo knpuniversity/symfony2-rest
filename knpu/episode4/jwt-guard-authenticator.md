@@ -100,8 +100,8 @@ the library is also checking to make sure that the contents of our token weren't
 changed. It does this by using our *private* key.
 
 ***TIP
-The private key is only used in case of symmetric signing. In the much more common
-case of assymetric signing the *private* key is used to sign the token, and the
+The private key is only used in the case of symmetric signing. In the much more common
+case of asymmetric signing, the *private* key is used to sign the token, and the
 *public* key is used to verify the signature.
 ***
 
